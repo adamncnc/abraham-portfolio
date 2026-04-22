@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abraham Portfolio Dashboard</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-left">
+    <h1>💼 Abraham Portfolio</h1>
+    <div class="subtitle">Adam 的持倉 + 觀察清單 · 自動抓資料</div>
+  </div>
+  <div class="header-right">
+    <div class="timestamp" id="timestamp">Loading…</div>
+    <div class="meta">
+      <span class="pill" id="item-count">–</span>
+      <button id="refresh-btn" class="btn-refresh" title="Reload latest data">↻</button>
+    </div>
+  </div>
+</header>
+
+<!-- Portfolio Summary -->
+<section class="portfolio-summary" id="portfolio-summary">
+  <!-- rendered by app.js -->
+</section>
+
+<!-- Holdings -->
+<section class="section">
+  <div class="section-header">
+    <h2>💰 持倉 Holdings</h2>
+    <span class="section-count" id="holdings-count">–</span>
+  </div>
+  <div class="card-grid" id="holdings-grid">
+    <div class="loading">Loading holdings…</div>
+  </div>
+</section>
+
+<!-- Watchlist -->
+<section class="section">
+  <div class="section-header">
+    <h2>👀 觀察清單 Watchlist</h2>
+    <span class="section-count" id="watchlist-count">–</span>
+  </div>
+  <div class="card-grid" id="watchlist-grid">
+    <div class="loading">Loading watchlist…</div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div>Abraham Financial Advisor Dashboard · v1.0</div>
+  <div class="footer-meta">
+    分析 ≠ 買進建議 · 決策在你 · 執行在券商<br>
+    資料來源：Yahoo Finance via yfinance · 自動更新每個交易日
+  </div>
+  <div class="footer-meta">
+    <a href="https://github.com/adamncnc/abraham-portfolio" target="_blank">Source on GitHub</a>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

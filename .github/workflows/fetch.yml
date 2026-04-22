@@ -1,0 +1,51 @@
+name: Fetch Portfolio Prices
+
+on:
+  schedule:
+    # Taiwan market close + 1.5h buffer — Mon-Fri 15:00 Taipei = 07:00 UTC
+    - cron: "0 7 * * 1-5"
+    # US market close + 2h buffer — Tue-Sat 06:00 Taipei = 22:00 UTC (prev day)
+    - cron: "0 22 * * 1-5"
+  workflow_dispatch:  # Manual trigger button in Actions tab
+  push:
+    branches: [main]
+    paths:
+      - "config/**"
+      - "scripts/**"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Fetch prices
+        run: python scripts/fetch_prices.py
+        continue-on-error: false
+
+      - name: Prune old snapshots (keep last 90 days)
+        run: |
+          cd data/snapshots
+          ls -1 *.json 2>/dev/null | sort -r | tail -n +91 | xargs -r rm -v
+          cd ../..
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: auto-update prices ${{ github.run_id }} [skip ci]"
+          file_pattern: "public/data/*.json data/snapshots/*.json"
+          commit_user_name: "Abraham Bot"
+          commit_user_email: "abraham-bot@users.noreply.github.com"

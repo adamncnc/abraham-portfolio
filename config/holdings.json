@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0",
+  "description": "Adam 的實際持倉 — 有成本基礎、數量追蹤。損益計算基於此。",
+  "holdings": [
+    {
+      "id": "gold_physical",
+      "type": "commodity",
+      "symbol": "GC=F",
+      "name": "黃金（實體）",
+      "currency": "USD",
+      "quantity_oz": 0,
+      "cost_basis_usd_per_oz": 4812,
+      "purchase_date": null,
+      "notes": "黃金實體 / 金條持有。Quantity 請 Adam 確認後填。Cost basis 4812 是之前記下的起始參考價，若實際成本不同請更新。"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schema_version": "1.0",
+  "description": "觀察清單 — 追蹤報價、配息、技術指標但未持倉（或將持倉）。新增 / 移除只要編輯此檔。",
+  "watchlist": [
+    {
+      "id": "ives",
+      "type": "us_etf",
+      "symbol": "IVES",
+      "name": "Dan Ives Wedbush AI Revolution ETF",
+      "currency": "USD",
+      "theme": "美股 AI 主題",
+      "notes": "Dan Ives 的 AI 30 Research Report 追蹤。2025-06 成立。"
+    },
+    {
+      "id": "aipo",
+      "type": "us_etf",
+      "symbol": "AIPO",
+      "name": "Defiance AI & Power Infrastructure ETF",
+      "currency": "USD",
+      "theme": "美股 AI 電力基建",
+      "notes": "77 檔 AI 電力基建主題（分散式能源、電網、資料中心、AI 硬體）。2025-07 成立。"
+    },
+    {
+      "id": "00878",
+      "type": "tw_etf",
+      "symbol": "00878.TW",
+      "name": "國泰永續高股息",
+      "currency": "TWD",
+      "theme": "台股高股息 ESG",
+      "notes": "季配息、規模 4,300 億、費用 0.285%。計畫 2026-04-27 起每月 DCA 1 張。"
+    },
+    {
+      "id": "009819",
+      "type": "tw_etf",
+      "symbol": "009819.TW",
+      "name": "中信美國數據中心與電力",
+      "currency": "TWD",
+      "theme": "美國 AI 新基建",
+      "notes": "2026-04-23 掛牌。新 ETF 首日數據可能尚未有。追蹤 NYSE TIP 數據中心及電力指數。"
+    }
+  ]
+}
