@@ -229,7 +229,10 @@ def post_discord(webhook_url: str, content: str) -> int:
     req = request.Request(
         webhook_url,
         data=data,
-        headers={"Content-Type": "application/json"},
+        headers={
+            "Content-Type": "application/json",
+            "User-Agent": "Abraham-Portfolio-Bot/1.0 (+github.com/adamncnc/abraham-portfolio)",
+        },
         method="POST",
     )
     try:

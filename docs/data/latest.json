@@ -46,8 +46,8 @@
         "history": {
           "intraday": [
             {
-              "t": "2026-04-22T00:00",
-              "c": 4776.6001
+              "t": "2026-04-23T00:00",
+              "c": 4718.2998
             },
             {
               "t": "2026-04-22T00:05",
@@ -1135,10 +1135,6 @@
             }
           ],
           "daily": [
-            {
-              "t": "2016-04-22",
-              "c": 1228.7
-            },
             {
               "t": "2016-04-25",
               "c": 1238.9
@@ -11234,7 +11230,7 @@
         "expense_ratio": 0.75,
         "ytd_return_pct": -10.10887,
         "regular_market_time": 1776888000,
-        "market_state": "POSTPOST",
+        "market_state": "PREPRE",
         "long_name": "Dan IVES Wedbush AI Revolution ETF",
         "fetched_at": "2026-04-23T03:48:37.097595+00:00",
         "history": {
@@ -12486,7 +12482,7 @@
         "expense_ratio": 0.69,
         "ytd_return_pct": 12.92801,
         "regular_market_time": 1776888001,
-        "market_state": "POSTPOST",
+        "market_state": "PREPRE",
         "long_name": "Defiance AI & Power Infrastructure ETF",
         "fetched_at": "2026-04-23T03:48:37.364937+00:00",
         "history": {
@@ -37802,7 +37798,7 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1776888001,
-        "market_state": "POSTPOST",
+        "market_state": "PREPRE",
         "long_name": "Broadcom Inc.",
         "fetched_at": "2026-04-23T03:48:39.147394+00:00",
         "history": {
