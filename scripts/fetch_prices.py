@@ -1,7 +1,7 @@
 """Main orchestrator.
 
 Loads holdings.json + watchlist.json, dispatches each item to the correct
-fetcher by `type`, and writes a combined snapshot to public/data/latest.json
+fetcher by `type`, and writes a combined snapshot to docs/data/latest.json
 plus a dated copy to data/snapshots/{YYYY-MM-DD}.json.
 
 Errors on one item never kill the whole run — the failing item gets
@@ -120,9 +120,9 @@ def main() -> int:
         "watchlist": processed_watchlist,
     }
 
-    public_data_dir = ROOT / "public" / "data"
-    public_data_dir.mkdir(parents=True, exist_ok=True)
-    latest_path = public_data_dir / "latest.json"
+    docs_data_dir = ROOT / "docs" / "data"
+    docs_data_dir.mkdir(parents=True, exist_ok=True)
+    latest_path = docs_data_dir / "latest.json"
     latest_path.write_text(
         json.dumps(snapshot, indent=2, ensure_ascii=False, default=str),
         encoding="utf-8",

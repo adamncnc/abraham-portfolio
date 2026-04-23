@@ -15,7 +15,7 @@ abraham-portfolio/
 │       ├── tw_stock.py      台股 / 台股 ETF
 │       ├── us_stock.py      美股 / 美 ETF
 │       └── gold.py          黃金（GC=F 期貨）
-├── public/                  ← GitHub Pages root
+├── docs/                    ← GitHub Pages root（GitHub UI 只支援 /(root) 或 /docs）
 │   ├── index.html           Dashboard UI
 │   └── js/app.js
 ├── data/
@@ -57,7 +57,7 @@ Commit + push → GitHub Actions 下次執行時自動納入。
 ```bash
 pip install -r requirements.txt
 python scripts/fetch_prices.py
-# 打開 public/index.html 查看
+# 打開 docs/index.html 查看
 ```
 
 ## 更新時程

@@ -46,6 +46,6 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: auto-update prices ${{ github.run_id }} [skip ci]"
-          file_pattern: "public/data/*.json data/snapshots/*.json"
+          file_pattern: "docs/data/*.json data/snapshots/*.json"
           commit_user_name: "Abraham Bot"
           commit_user_email: "abraham-bot@users.noreply.github.com"

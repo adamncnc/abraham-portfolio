@@ -35,7 +35,7 @@ git push -u origin main
 
 1. GitHub repo 頁面 → **Settings** → **Pages**（左側選單）
 2. **Source**：**Deploy from a branch**
-3. **Branch**：`main` / **folder**：`/public`
+3. **Branch**：`main` / **folder**：`/docs`
 4. **Save**
 5. 等 1-2 分鐘，頁面會顯示：
    > Your site is live at `https://adamncnc.github.io/abraham-portfolio/`
@@ -91,8 +91,8 @@ Actions tab → Run workflow → Run。
 
 ### Pages 404
 
-- 確認 Pages 設定的 folder 是 `/public`
-- 確認 `public/index.html` 存在（大小寫敏感）
+- 確認 Pages 設定的 folder 是 `/docs`
+- 確認 `docs/index.html` 存在（大小寫敏感）
 
 ### 手機 fetch 資料失敗
 
