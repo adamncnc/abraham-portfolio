@@ -254,21 +254,31 @@ def is_trading_day(today: date) -> bool:
 
 
 def main() -> int:
-    # Joseph's local Task Scheduler pattern uses ABRAHAM_WEBHOOK_URL.
-    # Fall back to DISCORD_WEBHOOK_URL for the GitHub Actions path so the
-    # same script supports both deployment modes.
-    webhook = os.environ.get("ABRAHAM_WEBHOOK_URL") or os.environ.get("DISCORD_WEBHOOK_URL")
-    if not webhook:
-        print("ERROR: ABRAHAM_WEBHOOK_URL (or DISCORD_WEBHOOK_URL) env var not set", file=sys.stderr)
-        return 2
+    # --print-only mode: just print the reminder text + skip Discord POST.
+    # Used by Pattern B (Abraham Claude session reads stdout then posts via MCP).
+    print_only = "--print-only" in sys.argv
 
     today = today_taipei()
 
     # Skip non-trading days (weekend or TWSE holiday) silently — exit 0 so
-    # Task Scheduler does not flag a failure.
+    # Task Scheduler does not flag a failure. In print-only mode the caller
+    # checks for the SKIP: prefix.
     if not is_trading_day(today):
-        print(f"Skip: {today} is not a TWSE trading day")
+        print(f"SKIP: {today} is not a TWSE trading day")
         return 0
+
+    if print_only:
+        snapshot_path = Path(__file__).resolve().parent.parent / "docs" / "data" / "latest.json"
+        snapshot = load_snapshot(snapshot_path)
+        message = build_message(today, snapshot)
+        print(message)
+        return 0
+
+    # Default mode: webhook POST (Pattern A — used by .bat / GitHub Actions).
+    webhook = os.environ.get("ABRAHAM_WEBHOOK_URL") or os.environ.get("DISCORD_WEBHOOK_URL")
+    if not webhook:
+        print("ERROR: ABRAHAM_WEBHOOK_URL (or DISCORD_WEBHOOK_URL) env var not set", file=sys.stderr)
+        return 2
     snapshot_path = Path(__file__).resolve().parent.parent / "docs" / "data" / "latest.json"
     snapshot = load_snapshot(snapshot_path)
     if snapshot is None:
