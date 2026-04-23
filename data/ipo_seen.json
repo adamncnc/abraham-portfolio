@@ -1,0 +1,34 @@
+{
+  "notified": {
+    "4195": {
+      "name": "基米",
+      "notified_at": "2026-04-23",
+      "subscription_period": "2026/04/28-2026/04/30",
+      "seeded": true
+    },
+    "7842": {
+      "name": "天能綠電",
+      "notified_at": "2026-04-23",
+      "subscription_period": "2026/04/28-2026/04/30",
+      "seeded": true
+    },
+    "7772": {
+      "name": "耀穎",
+      "notified_at": "2026-04-23",
+      "subscription_period": "2026/04/27-2026/04/29",
+      "seeded": true
+    },
+    "7768": {
+      "name": "頌勝科技",
+      "notified_at": "2026-04-23",
+      "subscription_period": "2026/04/24-2026/04/28",
+      "seeded": true
+    },
+    "3485": {
+      "name": "敘豐",
+      "notified_at": "2026-04-23",
+      "subscription_period": "2026/04/23-2026/04/27",
+      "seeded": true
+    }
+  }
+}
