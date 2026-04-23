@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 
 import yfinance as yf
 
+from ._history import fetch_history
+
 
 def _sanitize(value):
     if value is None:
@@ -65,4 +67,5 @@ def fetch_gold(symbol: str = "GC=F") -> dict:
         "long_name": info.get("longName") or info.get("shortName") or "Gold Futures",
         "unit": "USD per troy ounce",
         "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "history": fetch_history(symbol),
     }

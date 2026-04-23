@@ -235,6 +235,55 @@ body {
 .pnl-label { color: var(--text-dim); }
 .pnl-value { font-weight: 700; }
 
+/* Trend chart + scope tabs */
+.chart-block {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.chart-canvas-wrap {
+  position: relative;
+  height: 110px;
+  margin-bottom: 8px;
+}
+.chart-canvas-wrap.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 11px;
+  height: 110px;
+  background: rgba(45, 53, 72, 0.3);
+  border-radius: 6px;
+}
+.scope-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.scope-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.03em;
+  font-family: inherit;
+}
+.scope-btn:hover {
+  background: var(--card-hover);
+  color: var(--text);
+}
+.scope-btn.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
 /* Notes */
 .asset-notes {
   margin-top: 12px;

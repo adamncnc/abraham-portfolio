@@ -4,6 +4,26 @@
 
 const DATA_URL = "./data/latest.json";
 
+const DEFAULT_SCOPE = "1m";
+const SCOPES = [
+  { key: "1d", label: "1D" },
+  { key: "3d", label: "3D" },
+  { key: "1w", label: "1W" },
+  { key: "1m", label: "1M" },
+  { key: "3m", label: "3M" },
+  { key: "1y", label: "1Y" },
+  { key: "all", label: "All" },
+];
+// Days to slice from daily series. 1d is handled separately (uses intraday).
+const SCOPE_DAYS = { "3d": 3, "1w": 7, "1m": 30, "3m": 90, "1y": 365 };
+
+// Active Chart.js instances keyed by canvas id so we can destroy them before
+// recreating (auto-refresh every 5 min, scope changes).
+const CHART_INSTANCES = new Map();
+// Cache each card's history payload by canvas id so scope toggles don't need
+// to re-fetch. Populated during initializeCharts().
+const CARD_HISTORY = new Map();
+
 // ========== Formatters ==========
 function fmtNum(val, decimals = 2) {
   if (val === null || val === undefined || isNaN(val)) return "–";
@@ -75,6 +95,132 @@ function rangeBarHtml(price, low, high) {
     </div>
   `;
 }
+
+// ========== Chart helpers ==========
+function canvasIdFor(section, item) {
+  return `chart-${section}-${item.id}`;
+}
+
+function filterHistory(history, scope) {
+  if (!history) return [];
+  if (scope === "1d") return history.intraday || [];
+  const daily = history.daily || [];
+  if (scope === "all") return daily;
+  const days = SCOPE_DAYS[scope];
+  if (!days) return daily;
+  return daily.slice(-days);
+}
+
+function renderChart(canvasId, scope) {
+  const history = CARD_HISTORY.get(canvasId);
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+
+  const points = filterHistory(history, scope);
+  const wrap = canvas.parentElement;
+
+  if (!points || points.length < 2) {
+    wrap.classList.add("empty");
+    wrap.innerHTML = '<span>（該範圍無資料）</span>';
+    return;
+  }
+  wrap.classList.remove("empty");
+  if (!document.getElementById(canvasId)) {
+    wrap.innerHTML = `<canvas id="${canvasId}"></canvas>`;
+  }
+
+  const existing = CHART_INSTANCES.get(canvasId);
+  if (existing) {
+    existing.destroy();
+    CHART_INSTANCES.delete(canvasId);
+  }
+
+  const first = points[0].c;
+  const last = points[points.length - 1].c;
+  const lineColor = last >= first ? "#4ade80" : "#f87171";
+  const fillColor = last >= first ? "rgba(74, 222, 128, 0.15)" : "rgba(248, 113, 113, 0.15)";
+
+  const el = document.getElementById(canvasId);
+  const chart = new Chart(el, {
+    type: "line",
+    data: {
+      labels: points.map((p) => p.t),
+      datasets: [{
+        data: points.map((p) => p.c),
+        borderColor: lineColor,
+        backgroundColor: fillColor,
+        borderWidth: 1.8,
+        fill: true,
+        tension: 0.15,
+        pointRadius: 0,
+        pointHoverRadius: 3,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          displayColors: false,
+          backgroundColor: "rgba(15, 20, 25, 0.95)",
+          titleColor: "#8b95a7",
+          bodyColor: "#e4e8f0",
+          borderColor: "#2d3548",
+          borderWidth: 1,
+          padding: 8,
+          callbacks: {
+            title: (items) => items[0]?.label || "",
+            label: (ctx) => fmtNum(ctx.parsed.y, 2),
+          },
+        },
+      },
+      scales: {
+        x: { display: false },
+        y: { display: false },
+      },
+      animation: { duration: 200 },
+    },
+  });
+  CHART_INSTANCES.set(canvasId, chart);
+}
+
+function chartBlockHtml(canvasId) {
+  const tabs = SCOPES.map((s) => {
+    const activeCls = s.key === DEFAULT_SCOPE ? " active" : "";
+    return `<button class="scope-btn${activeCls}" data-scope="${s.key}" data-canvas="${canvasId}">${s.label}</button>`;
+  }).join("");
+  return `
+    <div class="chart-block">
+      <div class="chart-canvas-wrap">
+        <canvas id="${canvasId}"></canvas>
+      </div>
+      <div class="scope-tabs">${tabs}</div>
+    </div>
+  `;
+}
+
+function initializeCharts(items, section) {
+  for (const item of items) {
+    if (item.status === "error") continue;
+    const canvasId = canvasIdFor(section, item);
+    const history = item.data?.history;
+    CARD_HISTORY.set(canvasId, history);
+    renderChart(canvasId, DEFAULT_SCOPE);
+  }
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".scope-btn");
+  if (!btn) return;
+  const canvasId = btn.dataset.canvas;
+  const scope = btn.dataset.scope;
+  if (!canvasId || !scope) return;
+  // Update active state within the same tab group
+  const tabs = btn.parentElement.querySelectorAll(".scope-btn");
+  tabs.forEach((t) => t.classList.toggle("active", t === btn));
+  renderChart(canvasId, scope);
+});
 
 // ========== Asset Card Builder ==========
 function buildAssetCard(item, section) {
@@ -197,6 +343,10 @@ function buildAssetCard(item, section) {
     `;
   }
 
+  // Trend chart block (all non-error cards)
+  const canvasId = canvasIdFor(section, item);
+  const chartHtml = chartBlockHtml(canvasId);
+
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${item.notes}</div>` : "";
 
   return `
@@ -212,6 +362,7 @@ function buildAssetCard(item, section) {
       ${metricsHtml}
       ${rangeHtml}
       ${pnlHtml}
+      ${chartHtml}
       ${notesHtml}
     </div>
   `;
@@ -256,6 +407,14 @@ async function loadAndRender() {
   const refreshBtn = document.getElementById("refresh-btn");
   refreshBtn.textContent = "…";
 
+  // Destroy all existing charts before we re-render the grids — otherwise
+  // their canvases get detached and Chart.js leaks.
+  for (const chart of CHART_INSTANCES.values()) {
+    try { chart.destroy(); } catch (e) { /* ignore */ }
+  }
+  CHART_INSTANCES.clear();
+  CARD_HISTORY.clear();
+
   try {
     const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -290,6 +449,10 @@ async function loadAndRender() {
     } else {
       watchGrid.innerHTML = snapshot.watchlist.map(item => buildAssetCard(item, "watchlist")).join("");
     }
+
+    // Initialize charts after the DOM nodes exist
+    if (snapshot.holdings?.length) initializeCharts(snapshot.holdings, "holdings");
+    if (snapshot.watchlist?.length) initializeCharts(snapshot.watchlist, "watchlist");
   } catch (err) {
     console.error("Failed to load data:", err);
     document.getElementById("timestamp").textContent = `❌ 載入失敗：${err.message}`;

@@ -9,6 +9,8 @@ from datetime import datetime, timezone
 
 import yfinance as yf
 
+from ._history import fetch_history
+
 
 def _sanitize(value):
     if value is None:
@@ -90,4 +92,5 @@ def fetch_us_stock(symbol: str) -> dict:
         "market_state": info.get("marketState"),
         "long_name": info.get("longName") or info.get("shortName"),
         "fetched_at": datetime.now(timezone.utc).isoformat(),
+        "history": fetch_history(symbol),
     }
