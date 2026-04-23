@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "timestamp_utc": "2026-04-23T22:47:24.805967+00:00",
+  "timestamp_utc": "2026-04-23T23:41:36.445914+00:00",
   "portfolio_summary": {
     "total_market_value_usd_equiv": 0,
     "total_cost_usd_equiv": 0,
@@ -26,23 +26,23 @@
         "quote_type": "FUTURE",
         "exchange": "COMEX",
         "currency": "USD",
-        "price": 4710.5,
+        "price": 4709.5,
         "previous_close": 4724.0,
-        "change": -13.5,
-        "change_pct": -0.28577476714648603,
-        "day_low": 4707.6,
+        "change": -14.5,
+        "change_pct": -0.3069432684165961,
+        "day_low": 4702.0,
         "day_high": 4719.8,
         "fifty_two_week_high": 5586.2,
         "fifty_two_week_low": 3125.0,
-        "dist_from_high_pct": -15.676130464358595,
-        "dist_from_low_pct": 50.736000000000004,
+        "dist_from_high_pct": -15.694031721026814,
+        "dist_from_low_pct": 50.70400000000001,
         "fifty_day_avg": 4880.806,
         "two_hundred_day_avg": 4219.647,
-        "regular_market_time": 1776983835,
+        "regular_market_time": 1776987091,
         "market_state": "REGULAR",
         "long_name": "Gold Jun 26",
         "unit": "USD per troy ounce",
-        "fetched_at": "2026-04-23T22:47:18.134474+00:00",
+        "fetched_at": "2026-04-23T23:41:32.596910+00:00",
         "history": {
           "intraday": [
             {
@@ -891,7 +891,51 @@
             },
             {
               "t": "2026-04-23T18:35",
-              "c": 4710.5
+              "c": 4707.2002
+            },
+            {
+              "t": "2026-04-23T18:40",
+              "c": 4708.3999
+            },
+            {
+              "t": "2026-04-23T18:45",
+              "c": 4707.7998
+            },
+            {
+              "t": "2026-04-23T18:50",
+              "c": 4705.8999
+            },
+            {
+              "t": "2026-04-23T18:55",
+              "c": 4708.5
+            },
+            {
+              "t": "2026-04-23T19:00",
+              "c": 4709.1001
+            },
+            {
+              "t": "2026-04-23T19:05",
+              "c": 4705.6001
+            },
+            {
+              "t": "2026-04-23T19:10",
+              "c": 4704.6001
+            },
+            {
+              "t": "2026-04-23T19:15",
+              "c": 4703.3999
+            },
+            {
+              "t": "2026-04-23T19:20",
+              "c": 4704.2998
+            },
+            {
+              "t": "2026-04-23T19:25",
+              "c": 4709.7002
+            },
+            {
+              "t": "2026-04-23T19:30",
+              "c": 4709.5
             }
           ],
           "daily": [
@@ -10945,7 +10989,7 @@
             },
             {
               "t": "2026-04-23",
-              "c": 4710.5
+              "c": 4709.5
             }
           ]
         }
@@ -10974,8 +11018,8 @@
         "change_pct": -2.8732227488151625,
         "pre_market_price": null,
         "pre_market_change_pct": null,
-        "post_market_price": 32.76,
-        "post_market_change_pct": -0.09149922,
+        "post_market_price": 32.8563,
+        "post_market_change_pct": 0.20219408,
         "day_low": 32.3401,
         "day_high": 33.28,
         "nav": 33.748,
@@ -10996,7 +11040,7 @@
         "regular_market_time": 1776974400,
         "market_state": "POST",
         "long_name": "Dan IVES Wedbush AI Revolution ETF",
-        "fetched_at": "2026-04-23T22:47:19.145912+00:00",
+        "fetched_at": "2026-04-23T23:41:33.116612+00:00",
         "history": {
           "intraday": [
             {
@@ -12230,8 +12274,8 @@
         "change_pct": 1.4925373134328452,
         "pre_market_price": null,
         "pre_market_change_pct": null,
-        "post_market_price": 30.76,
-        "post_market_change_pct": 0.5228753,
+        "post_market_price": 30.87,
+        "post_market_change_pct": 0.88235444,
         "day_low": 30.1,
         "day_high": 30.94,
         "nav": 30.1312,
@@ -12252,7 +12296,7 @@
         "regular_market_time": 1776974401,
         "market_state": "POST",
         "long_name": "Defiance AI & Power Infrastructure ETF",
-        "fetched_at": "2026-04-23T22:47:19.826098+00:00",
+        "fetched_at": "2026-04-23T23:41:33.449250+00:00",
         "history": {
           "intraday": [
             {
@@ -13364,7 +13408,7 @@
         "regular_market_time": 1776922203,
         "market_state": "PREPRE",
         "long_name": "Cathay Sustainability High Dividend ETF",
-        "fetched_at": "2026-04-23T22:47:20.384238+00:00",
+        "fetched_at": "2026-04-23T23:41:33.740601+00:00",
         "history": {
           "intraday": [
             {
@@ -19240,7 +19284,7 @@
         "regular_market_time": 1776922201,
         "market_state": "PREPRE",
         "long_name": "CTBC Data Center & Electricity Infrastructure ETF",
-        "fetched_at": "2026-04-23T22:47:21.262703+00:00",
+        "fetched_at": "2026-04-23T23:41:34.201582+00:00",
         "history": {
           "intraday": [
             {
@@ -19524,7 +19568,7 @@
         "regular_market_time": 1776922210,
         "market_state": "PREPRE",
         "long_name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "fetched_at": "2026-04-23T22:47:21.831512+00:00",
+        "fetched_at": "2026-04-23T23:41:34.467806+00:00",
         "history": {
           "intraday": [
             {
@@ -29498,13 +29542,13 @@
         "average_volume": 1701082,
         "net_assets": null,
         "dividend_yield_pct": 1.74,
-        "trailing_pe": 16.01658,
+        "trailing_pe": 15.999699,
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1776922225,
         "market_state": "PREPRE",
         "long_name": "Wiwynn Corporation",
-        "fetched_at": "2026-04-23T22:47:22.776161+00:00",
+        "fetched_at": "2026-04-23T23:41:35.097028+00:00",
         "history": {
           "intraday": [
             {
@@ -37938,8 +37982,8 @@
         "change_pct": -0.6411924760440032,
         "pre_market_price": null,
         "pre_market_change_pct": null,
-        "post_market_price": 422.25,
-        "post_market_change_pct": 0.550078,
+        "post_market_price": 423.0,
+        "post_market_change_pct": 0.72867495,
         "day_low": 417.8,
         "day_high": 429.31,
         "nav": null,
@@ -37960,7 +38004,7 @@
         "regular_market_time": 1776974401,
         "market_state": "POST",
         "long_name": "Broadcom Inc.",
-        "fetched_at": "2026-04-23T22:47:23.447294+00:00",
+        "fetched_at": "2026-04-23T23:41:35.542761+00:00",
         "history": {
           "intraday": [
             {
@@ -48370,13 +48414,13 @@
         "average_volume": 2008087,
         "net_assets": null,
         "dividend_yield_pct": 92.0,
-        "trailing_pe": 58.980434,
+        "trailing_pe": 58.823524,
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1776922227,
         "market_state": "PREPRE",
         "long_name": "Alchip Technologies, Limited",
-        "fetched_at": "2026-04-23T22:47:24.249575+00:00",
+        "fetched_at": "2026-04-23T23:41:36.041189+00:00",
         "history": {
           "intraday": [
             {
