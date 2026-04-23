@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "timestamp_utc": "2026-04-23T02:28:47.082248+00:00",
+  "timestamp_utc": "2026-04-23T03:37:57.751750+00:00",
   "portfolio_summary": {
     "total_market_value_usd_equiv": 0,
     "total_cost_usd_equiv": 0,
@@ -26,23 +26,23 @@
         "quote_type": "FUTURE",
         "exchange": "COMEX",
         "currency": "USD",
-        "price": 4725.4,
+        "price": 4720.0,
         "previous_close": 4753.0,
-        "change": -27.600000000000364,
-        "change_pct": -0.5806858826004705,
+        "change": -33.0,
+        "change_pct": -0.6942983378918578,
         "day_low": 4710.4,
         "day_high": 4771.3,
         "fifty_two_week_high": 5586.2,
         "fifty_two_week_low": 3125.0,
-        "dist_from_high_pct": -15.409401740002151,
-        "dist_from_low_pct": 51.212799999999994,
+        "dist_from_high_pct": -15.506068526010521,
+        "dist_from_low_pct": 51.04,
         "fifty_day_avg": 4880.806,
         "two_hundred_day_avg": 4219.647,
-        "regular_market_time": 1776910722,
+        "regular_market_time": 1776914872,
         "market_state": "REGULAR",
         "long_name": "Gold Jun 26",
         "unit": "USD per troy ounce",
-        "fetched_at": "2026-04-23T02:28:42.901040+00:00",
+        "fetched_at": "2026-04-23T03:37:52.885115+00:00",
         "history": {
           "intraday": [
             {
@@ -1067,7 +1067,63 @@
             },
             {
               "t": "2026-04-22T22:15",
-              "c": 4725.3999
+              "c": 4726.3999
+            },
+            {
+              "t": "2026-04-22T22:20",
+              "c": 4731.2998
+            },
+            {
+              "t": "2026-04-22T22:25",
+              "c": 4729.7998
+            },
+            {
+              "t": "2026-04-22T22:30",
+              "c": 4728.8999
+            },
+            {
+              "t": "2026-04-22T22:35",
+              "c": 4727.3999
+            },
+            {
+              "t": "2026-04-22T22:40",
+              "c": 4717.6001
+            },
+            {
+              "t": "2026-04-22T22:45",
+              "c": 4722.5
+            },
+            {
+              "t": "2026-04-22T22:50",
+              "c": 4719.1001
+            },
+            {
+              "t": "2026-04-22T22:55",
+              "c": 4714.3999
+            },
+            {
+              "t": "2026-04-22T23:00",
+              "c": 4724.5
+            },
+            {
+              "t": "2026-04-22T23:05",
+              "c": 4719.8999
+            },
+            {
+              "t": "2026-04-22T23:10",
+              "c": 4717.8999
+            },
+            {
+              "t": "2026-04-22T23:15",
+              "c": 4716.2002
+            },
+            {
+              "t": "2026-04-22T23:20",
+              "c": 4719.8999
+            },
+            {
+              "t": "2026-04-22T23:25",
+              "c": 4720.0
             }
           ],
           "daily": [
@@ -11121,7 +11177,7 @@
             },
             {
               "t": "2026-04-22",
-              "c": 4725.3999
+              "c": 4720.0
             }
           ]
         }
@@ -11172,7 +11228,7 @@
         "regular_market_time": 1776888000,
         "market_state": "POSTPOST",
         "long_name": "Dan IVES Wedbush AI Revolution ETF",
-        "fetched_at": "2026-04-23T02:28:43.462012+00:00",
+        "fetched_at": "2026-04-23T03:37:53.534232+00:00",
         "history": {
           "intraday": [
             {
@@ -12424,7 +12480,7 @@
         "regular_market_time": 1776888001,
         "market_state": "POSTPOST",
         "long_name": "Defiance AI & Power Infrastructure ETF",
-        "fetched_at": "2026-04-23T02:28:43.754421+00:00",
+        "fetched_at": "2026-04-23T03:37:53.958195+00:00",
         "history": {
           "intraday": [
             {
@@ -13508,31 +13564,31 @@
         "quote_type": "ETF",
         "exchange": "Taiwan",
         "currency": "TWD",
-        "price": 24.81,
+        "price": 24.47,
         "previous_close": 25.1,
-        "change": -0.2900000000000027,
-        "change_pct": -1.1553784860557876,
-        "day_low": 24.8,
+        "change": -0.6300000000000026,
+        "change_pct": -2.50996015936256,
+        "day_low": 24.4,
         "day_high": 25.28,
         "nav": 24.86,
-        "premium_pct": -0.20112630732100045,
+        "premium_pct": -1.5687851971037836,
         "fifty_two_week_high": 25.28,
         "fifty_two_week_low": 19.71,
-        "dist_from_high_pct": -1.8591772151898829,
-        "dist_from_low_pct": 25.87519025875189,
+        "dist_from_high_pct": -3.2041139240506418,
+        "dist_from_low_pct": 24.150177574835098,
         "fifty_day_avg": 22.8942,
         "two_hundred_day_avg": 21.794,
-        "volume": 46571406,
+        "volume": 87980491,
         "average_volume": 75552337,
         "net_assets": 432978526208,
         "dividend_yield_pct": 7.8,
-        "trailing_pe": 17.28413,
+        "trailing_pe": 17.047266,
         "expense_ratio": null,
         "ytd_return_pct": 1.20133,
-        "regular_market_time": 1776910114,
+        "regular_market_time": 1776914272,
         "market_state": "REGULAR",
         "long_name": "Cathay Sustainability High Dividend ETF",
-        "fetched_at": "2026-04-23T02:28:44.187533+00:00",
+        "fetched_at": "2026-04-23T03:37:54.376379+00:00",
         "history": {
           "intraday": [
             {
@@ -13589,7 +13645,63 @@
             },
             {
               "t": "2026-04-23T10:05",
-              "c": 24.81
+              "c": 24.8
+            },
+            {
+              "t": "2026-04-23T10:10",
+              "c": 24.6
+            },
+            {
+              "t": "2026-04-23T10:15",
+              "c": 24.72
+            },
+            {
+              "t": "2026-04-23T10:20",
+              "c": 24.75
+            },
+            {
+              "t": "2026-04-23T10:25",
+              "c": 24.6
+            },
+            {
+              "t": "2026-04-23T10:30",
+              "c": 24.52
+            },
+            {
+              "t": "2026-04-23T10:35",
+              "c": 24.44
+            },
+            {
+              "t": "2026-04-23T10:40",
+              "c": 24.46
+            },
+            {
+              "t": "2026-04-23T10:45",
+              "c": 24.56
+            },
+            {
+              "t": "2026-04-23T10:50",
+              "c": 24.63
+            },
+            {
+              "t": "2026-04-23T10:55",
+              "c": 24.57
+            },
+            {
+              "t": "2026-04-23T11:00",
+              "c": 24.56
+            },
+            {
+              "t": "2026-04-23T11:05",
+              "c": 24.5
+            },
+            {
+              "t": "2026-04-23T11:10",
+              "c": 24.48
+            },
+            {
+              "t": "2026-04-23T11:15",
+              "c": 24.47
             }
           ],
           "daily": [
@@ -19207,7 +19319,7 @@
             },
             {
               "t": "2026-04-23",
-              "c": 24.81
+              "c": 24.47
             }
           ]
         }
@@ -19228,31 +19340,31 @@
         "quote_type": "EQUITY",
         "exchange": "Taiwan",
         "currency": "TWD",
-        "price": 11.62,
+        "price": 12.22,
         "previous_close": 10.45,
-        "change": 1.17,
-        "change_pct": 11.196172248803828,
+        "change": 1.7700000000000014,
+        "change_pct": 16.937799043062217,
         "day_low": 10.45,
         "day_high": 12.99,
         "nav": null,
         "premium_pct": null,
         "fifty_two_week_high": 12.99,
         "fifty_two_week_low": 10.45,
-        "dist_from_high_pct": -10.546574287913787,
-        "dist_from_low_pct": 11.196172248803828,
+        "dist_from_high_pct": -5.927636643571975,
+        "dist_from_low_pct": 16.937799043062217,
         "fifty_day_avg": null,
         "two_hundred_day_avg": null,
-        "volume": 69284469,
+        "volume": 85941565,
         "average_volume": null,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": null,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1776910112,
+        "regular_market_time": 1776914271,
         "market_state": "REGULAR",
         "long_name": null,
-        "fetched_at": "2026-04-23T02:28:44.721245+00:00",
+        "fetched_at": "2026-04-23T03:37:54.893568+00:00",
         "history": {
           "intraday": [
             {
@@ -19310,12 +19422,68 @@
             {
               "t": "2026-04-23T10:05",
               "c": 11.62
+            },
+            {
+              "t": "2026-04-23T10:10",
+              "c": 11.45
+            },
+            {
+              "t": "2026-04-23T10:15",
+              "c": 11.28
+            },
+            {
+              "t": "2026-04-23T10:20",
+              "c": 11.49
+            },
+            {
+              "t": "2026-04-23T10:25",
+              "c": 11.61
+            },
+            {
+              "t": "2026-04-23T10:30",
+              "c": 11.63
+            },
+            {
+              "t": "2026-04-23T10:35",
+              "c": 11.64
+            },
+            {
+              "t": "2026-04-23T10:40",
+              "c": 11.64
+            },
+            {
+              "t": "2026-04-23T10:45",
+              "c": 11.67
+            },
+            {
+              "t": "2026-04-23T10:50",
+              "c": 11.72
+            },
+            {
+              "t": "2026-04-23T10:55",
+              "c": 11.94
+            },
+            {
+              "t": "2026-04-23T11:00",
+              "c": 12.12
+            },
+            {
+              "t": "2026-04-23T11:05",
+              "c": 12.03
+            },
+            {
+              "t": "2026-04-23T11:10",
+              "c": 12.14
+            },
+            {
+              "t": "2026-04-23T11:15",
+              "c": 12.22
             }
           ],
           "daily": [
             {
               "t": "2026-04-23",
-              "c": 11.62
+              "c": 12.22
             }
           ]
         }
@@ -19336,31 +19504,31 @@
         "quote_type": "EQUITY",
         "exchange": "Taiwan",
         "currency": "TWD",
-        "price": 2095.0,
+        "price": 2060.0,
         "previous_close": 2050.0,
-        "change": 45.0,
-        "change_pct": 2.195121951219512,
-        "day_low": 2090.0,
+        "change": 10.0,
+        "change_pct": 0.4878048780487805,
+        "day_low": 2055.0,
         "day_high": 2135.0,
         "nav": null,
         "premium_pct": null,
         "fifty_two_week_high": 2135.0,
         "fifty_two_week_low": 859.0,
-        "dist_from_high_pct": -1.873536299765808,
-        "dist_from_low_pct": 143.8882421420256,
+        "dist_from_high_pct": -3.51288056206089,
+        "dist_from_low_pct": 139.81373690337603,
         "fifty_day_avg": 1915.1,
         "two_hundred_day_avg": 1527.75,
-        "volume": 23695391,
+        "volume": 36208422,
         "average_volume": 36247859,
         "net_assets": null,
         "dividend_yield_pct": 1.17,
-        "trailing_pe": 28.464674,
+        "trailing_pe": 27.989132,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1776910113,
+        "regular_market_time": 1776914271,
         "market_state": "REGULAR",
         "long_name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "fetched_at": "2026-04-23T02:28:45.069877+00:00",
+        "fetched_at": "2026-04-23T03:37:55.294706+00:00",
         "history": {
           "intraday": [
             {
@@ -19417,7 +19585,63 @@
             },
             {
               "t": "2026-04-23T10:05",
-              "c": 2090.0
+              "c": 2085.0
+            },
+            {
+              "t": "2026-04-23T10:10",
+              "c": 2065.0
+            },
+            {
+              "t": "2026-04-23T10:15",
+              "c": 2085.0
+            },
+            {
+              "t": "2026-04-23T10:20",
+              "c": 2085.0
+            },
+            {
+              "t": "2026-04-23T10:25",
+              "c": 2080.0
+            },
+            {
+              "t": "2026-04-23T10:30",
+              "c": 2070.0
+            },
+            {
+              "t": "2026-04-23T10:35",
+              "c": 2065.0
+            },
+            {
+              "t": "2026-04-23T10:40",
+              "c": 2060.0
+            },
+            {
+              "t": "2026-04-23T10:45",
+              "c": 2070.0
+            },
+            {
+              "t": "2026-04-23T10:50",
+              "c": 2075.0
+            },
+            {
+              "t": "2026-04-23T10:55",
+              "c": 2060.0
+            },
+            {
+              "t": "2026-04-23T11:00",
+              "c": 2070.0
+            },
+            {
+              "t": "2026-04-23T11:05",
+              "c": 2065.0
+            },
+            {
+              "t": "2026-04-23T11:10",
+              "c": 2060.0
+            },
+            {
+              "t": "2026-04-23T11:15",
+              "c": 2060.0
             }
           ],
           "daily": [
@@ -29139,7 +29363,7 @@
             },
             {
               "t": "2026-04-23",
-              "c": 2090.0
+              "c": 2060.0
             }
           ]
         }
@@ -29160,31 +29384,31 @@
         "quote_type": "EQUITY",
         "exchange": "Taiwan",
         "currency": "TWD",
-        "price": 4280.0,
+        "price": 4175.0,
         "previous_close": 4350.0,
-        "change": -70.0,
-        "change_pct": -1.6091954022988506,
-        "day_low": 4275.0,
+        "change": -175.0,
+        "change_pct": -4.022988505747127,
+        "day_low": 4130.0,
         "day_high": 4480.0,
         "nav": null,
         "premium_pct": null,
         "fifty_two_week_high": 4850.0,
         "fifty_two_week_low": 1860.0,
-        "dist_from_high_pct": -11.752577319587628,
-        "dist_from_low_pct": 130.10752688172042,
+        "dist_from_high_pct": -13.917525773195877,
+        "dist_from_low_pct": 124.46236559139786,
         "fifty_day_avg": 3808.0,
         "two_hundred_day_avg": 3664.075,
-        "volume": 1534222,
+        "volume": 2627753,
         "average_volume": 1701082,
         "net_assets": null,
         "dividend_yield_pct": 1.7,
-        "trailing_pe": 16.12964,
+        "trailing_pe": 15.733936,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1776910108,
+        "regular_market_time": 1776914250,
         "market_state": "REGULAR",
         "long_name": "Wiwynn Corporation",
-        "fetched_at": "2026-04-23T02:28:45.536078+00:00",
+        "fetched_at": "2026-04-23T03:37:56.027837+00:00",
         "history": {
           "intraday": [
             {
@@ -29241,7 +29465,63 @@
             },
             {
               "t": "2026-04-23T10:05",
-              "c": 4280.0
+              "c": 4270.0
+            },
+            {
+              "t": "2026-04-23T10:10",
+              "c": 4180.0
+            },
+            {
+              "t": "2026-04-23T10:15",
+              "c": 4240.0
+            },
+            {
+              "t": "2026-04-23T10:20",
+              "c": 4260.0
+            },
+            {
+              "t": "2026-04-23T10:25",
+              "c": 4220.0
+            },
+            {
+              "t": "2026-04-23T10:30",
+              "c": 4200.0
+            },
+            {
+              "t": "2026-04-23T10:35",
+              "c": 4165.0
+            },
+            {
+              "t": "2026-04-23T10:40",
+              "c": 4135.0
+            },
+            {
+              "t": "2026-04-23T10:45",
+              "c": 4180.0
+            },
+            {
+              "t": "2026-04-23T10:50",
+              "c": 4205.0
+            },
+            {
+              "t": "2026-04-23T10:55",
+              "c": 4205.0
+            },
+            {
+              "t": "2026-04-23T11:00",
+              "c": 4210.0
+            },
+            {
+              "t": "2026-04-23T11:05",
+              "c": 4180.0
+            },
+            {
+              "t": "2026-04-23T11:10",
+              "c": 4185.0
+            },
+            {
+              "t": "2026-04-23T11:15",
+              "c": 4175.0
             }
           ],
           "daily": [
@@ -37435,7 +37715,7 @@
             },
             {
               "t": "2026-04-23",
-              "c": 4280.0
+              "c": 4175.0
             }
           ]
         }
@@ -37477,14 +37757,14 @@
         "volume": 22604782,
         "average_volume": 25875808,
         "net_assets": null,
-        "dividend_yield_pct": 65.0,
+        "dividend_yield_pct": 62.0,
         "trailing_pe": 82.710365,
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1776888001,
         "market_state": "POSTPOST",
         "long_name": "Broadcom Inc.",
-        "fetched_at": "2026-04-23T02:28:46.218843+00:00",
+        "fetched_at": "2026-04-23T03:37:56.572593+00:00",
         "history": {
           "intraday": [
             {
@@ -47872,31 +48152,31 @@
         "quote_type": "EQUITY",
         "exchange": "Taiwan",
         "currency": "TWD",
-        "price": 4110.0,
+        "price": 3960.0,
         "previous_close": 4065.0,
-        "change": 45.0,
-        "change_pct": 1.107011070110701,
-        "day_low": 4100.0,
+        "change": -105.0,
+        "change_pct": -2.5830258302583027,
+        "day_low": 3910.0,
         "day_high": 4265.0,
         "nav": null,
         "premium_pct": null,
         "fifty_two_week_high": 4470.0,
         "fifty_two_week_low": 2100.0,
-        "dist_from_high_pct": -8.053691275167784,
-        "dist_from_low_pct": 95.71428571428572,
+        "dist_from_high_pct": -11.409395973154362,
+        "dist_from_low_pct": 88.57142857142857,
         "fifty_day_avg": 3241.3,
         "two_hundred_day_avg": 3442.125,
-        "volume": 1584502,
+        "volume": 2976240,
         "average_volume": 2008087,
         "net_assets": null,
         "dividend_yield_pct": 90.0,
-        "trailing_pe": 60.906933,
+        "trailing_pe": 58.68405,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1776910114,
+        "regular_market_time": 1776914275,
         "market_state": "REGULAR",
         "long_name": "Alchip Technologies, Limited",
-        "fetched_at": "2026-04-23T02:28:46.683608+00:00",
+        "fetched_at": "2026-04-23T03:37:57.319117+00:00",
         "history": {
           "intraday": [
             {
@@ -47954,6 +48234,62 @@
             {
               "t": "2026-04-23T10:05",
               "c": 4110.0
+            },
+            {
+              "t": "2026-04-23T10:10",
+              "c": 4005.0
+            },
+            {
+              "t": "2026-04-23T10:15",
+              "c": 4105.0
+            },
+            {
+              "t": "2026-04-23T10:20",
+              "c": 4105.0
+            },
+            {
+              "t": "2026-04-23T10:25",
+              "c": 4045.0
+            },
+            {
+              "t": "2026-04-23T10:30",
+              "c": 3995.0
+            },
+            {
+              "t": "2026-04-23T10:35",
+              "c": 3975.0
+            },
+            {
+              "t": "2026-04-23T10:40",
+              "c": 3965.0
+            },
+            {
+              "t": "2026-04-23T10:45",
+              "c": 3975.0
+            },
+            {
+              "t": "2026-04-23T10:50",
+              "c": 4050.0
+            },
+            {
+              "t": "2026-04-23T10:55",
+              "c": 4020.0
+            },
+            {
+              "t": "2026-04-23T11:00",
+              "c": 3995.0
+            },
+            {
+              "t": "2026-04-23T11:05",
+              "c": 3970.0
+            },
+            {
+              "t": "2026-04-23T11:10",
+              "c": 3955.0
+            },
+            {
+              "t": "2026-04-23T11:15",
+              "c": 3960.0
             }
           ],
           "daily": [
@@ -57675,7 +58011,7 @@
             },
             {
               "t": "2026-04-23",
-              "c": 4110.0
+              "c": 3960.0
             }
           ]
         }
