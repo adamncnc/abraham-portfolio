@@ -4,9 +4,9 @@ Fires daily at 08:50 Taipei (00:50 UTC) via GitHub Actions cron. Determines
 today's phase in the plan, reads current prices from the dashboard snapshot,
 builds a Chinese reminder, and POSTs it to the Discord webhook.
 
-Plan milestones (all Asia/Taipei):
-  W1  2026-04-27  00878 定期定額 NT$12,500 首扣
-  W2  2026-05-11  TSMC 零股定期定額 NT$12,500 首扣
+Plan milestones (all Asia/Taipei) — Adam 2026-04-23 revised (Option C 彈性):
+  W1  2026-04-24  00878 定期定股 500 股 自動扣 (~NT$12,900) — DONE 24 號自動 recurring
+  W2  2026-05-08  緯穎 Q1 法說會當天 — 看 AWS% 數據再決定 TSMC 進場 or 改其他
   W3  2026-05-25  決策日 — 4 條件觸發 [A/A'/B/C]
   W4  2026-06-08  最終部署 — 累積 PnL [X/Y/Z]
   Post-plan  month-end reminder for ongoing monthly DCA
@@ -23,8 +23,8 @@ from urllib import error, request
 TAIPEI_TZ = timezone(timedelta(hours=8))
 
 PLAN = {
-    "W1": date(2026, 4, 27),
-    "W2": date(2026, 5, 11),
+    "W1": date(2026, 4, 24),
+    "W2": date(2026, 5, 8),
     "W3": date(2026, 5, 25),
     "W4": date(2026, 6, 8),
 }
@@ -113,18 +113,25 @@ def action_block(today: date, snapshot: dict | None) -> str:
     if today == PLAN["W1"]:
         return (
             "**🚀 W1 首扣日 action**\n"
-            "- 中信亮點 APP 會自動扣款 NT$12,500 買 00878 零股累積\n"
-            "- 確認扣款帳戶餘額 ≥ NT$12,500 + 手續費 NT$1\n"
-            "- 晚上收盤後查扣款紀錄與持股變動\n"
-            "- 若 APP 沒扣，立即檢查定期定額設定"
+            "- 中信亮點會自動扣 500 股 00878 (~NT$12,900)\n"
+            "- 確認帳戶餘額 ≥ NT$13,000\n"
+            "- 收盤後查扣款紀錄 + 持股變動\n"
+            "- 之後每月 24 號自動扣（永久 recurring）"
         )
     if today == PLAN["W2"]:
         return (
-            "**🚀 W2 首扣日 action**\n"
-            "- 中信亮點 APP 會自動扣款 NT$12,500 買 **TSMC (2330) 零股**\n"
-            "- 確認你已經在 APP 設定好 TSMC 定期定額（每月 11 日扣）\n"
-            "- 餘額 ≥ NT$12,500 + 手續費 NT$1\n"
-            "- 若尚未設定，今天立即補設定 → 否則本月跳過，留待下月"
+            "**🎯 W2 緯穎 Q1 法說日 — TSMC 決策**\n\n"
+            "**1. 查緯穎 (6669) Q1 法說會結果**\n"
+            "   → mops.twse.com.tw 法說資料 OR 即時新聞\n"
+            "   → 重點：**AWS / 雲端 server 訂單 % breakdown**\n\n"
+            "**2. 決策邏輯**：\n"
+            "```\n"
+            "AWS% ≥ 50%       → TSMC 加碼 NT$12,500（AI 鏈強）\n"
+            "AWS% 40-50%      → TSMC NT$6,250 + 00878 NT$6,250 (split)\n"
+            "AWS% < 40%       → 改 00878 加碼 NT$12,500（AI 鏈弱）\n"
+            "法說延期 / 沒揭露 → 預設 split (TSMC 6,250 + 00878 6,250)\n"
+            "```\n\n"
+            "**3. 操作**：手動下單（W2 非定期定額）。中信亮點 → 台股 → 個股下單（市價單即可）。"
         )
     if today == PLAN["W3"]:
         return (
