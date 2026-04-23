@@ -37,6 +37,42 @@
       "currency": "TWD",
       "theme": "美國 AI 新基建",
       "notes": "2026-04-23 掛牌。新 ETF 首日數據可能尚未有。追蹤 NYSE TIP 數據中心及電力指數。"
+    },
+    {
+      "id": "2330",
+      "type": "tw_stock",
+      "symbol": "2330.TW",
+      "name": "台積電 TSMC",
+      "currency": "TWD",
+      "theme": "Amazon-Anthropic 供應鏈 · 核心配置",
+      "notes": "與 Joseph 辯論後最推薦：FPE 17x / Upside +22% / PEG 1.05 / ROE 36%。客戶極分散（Trainium / Nvidia / Apple / AMD / Qualcomm），Mythos exposure <3%。建議立刻 DCA 核心部位；主要 wildcard 是台海地緣政治非 Anthropic。"
+    },
+    {
+      "id": "6669",
+      "type": "tw_stock",
+      "symbol": "6669.TW",
+      "name": "緯穎 Wiwynn",
+      "currency": "TWD",
+      "theme": "Amazon-Anthropic 供應鏈 · AWS ODM",
+      "notes": "FPE 10.6x 最便宜 + Upside +38%，但 thin-margin (5.4% net) + 高度依賴 hyperscaler。建議**等 Q1 26 earnings (~5 月中) 看 AWS 客戶 breakdown + Mythos 管理層 comment 後再動**，部位控制 2-3%，分 4-5 筆跨 9-12 月 DCA。"
+    },
+    {
+      "id": "avgo",
+      "type": "us_stock",
+      "symbol": "AVGO",
+      "name": "Broadcom",
+      "currency": "USD",
+      "theme": "AI ASIC · Google TPU 合作",
+      "notes": "FPE 23.3x / Upside +12.5% / PEG 0.87。AI 主力是 Google TPU (>$10B/年) + Meta MTIA，對 Amazon-Anthropic catalyst **是間接受益**（非 Trainium 直接夥伴）。若要美股 AI 曝險，比 VRT/MRVL 安全。"
+    },
+    {
+      "id": "3661",
+      "type": "tw_stock",
+      "symbol": "3661.TW",
+      "name": "世芯-KY Alchip",
+      "currency": "TWD",
+      "theme": "Trainium backend · 警示觀察",
+      "notes": "⚠️ 觀察不追。AWS Trainium backend 設計夥伴（Annapurna Labs 才是 primary）。FPE 23.9x / Upside +10% / ROE 14% 偏低。**Revenue growth -63.8% YoY + EPS growth -19.2% YoY = 現有專案已過高峰警訊**。Marvell 是主要威脅。Mythos 違約情境下衝擊最重 (-10~25%)。"
     }
   ]
 }
