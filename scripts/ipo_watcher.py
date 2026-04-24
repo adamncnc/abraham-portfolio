@@ -53,16 +53,34 @@ class IpoCase:
     underwriter: Optional[str] = None  # 主辦券商
 
 
-def http_get_json(url: str) -> dict:
-    req = request.Request(url, headers={"User-Agent": USER_AGENT})
-    with request.urlopen(req, timeout=20) as resp:
-        return json.loads(resp.read().decode("utf-8"))
+import time
+
+
+def http_get_json(url: str, retries: int = 3, backoff: float = 2.0) -> dict:
+    """GET + JSON decode with retry on transient failures."""
+    last_exc: Optional[Exception] = None
+    for attempt in range(retries):
+        try:
+            req = request.Request(url, headers={"User-Agent": USER_AGENT})
+            with request.urlopen(req, timeout=20) as resp:
+                return json.loads(resp.read().decode("utf-8"))
+        except (error.URLError, error.HTTPError, json.JSONDecodeError, TimeoutError) as exc:
+            last_exc = exc
+            if attempt < retries - 1:
+                sleep_for = backoff ** attempt
+                print(f"WARN: http_get_json {url[:80]}... attempt {attempt+1} failed ({exc}); retry in {sleep_for}s", file=sys.stderr)
+                time.sleep(sleep_for)
+    raise last_exc if last_exc else RuntimeError("http_get_json: unknown failure")
 
 
 def fetch_ipo_cases() -> list[IpoCase]:
     body = urllib.parse.quote("{}")
     url = f"{MOPS_BASE}/IpoQueryCase?requestBody={body}&requestHeader={body}"
-    payload = http_get_json(url)
+    try:
+        payload = http_get_json(url)
+    except Exception as exc:
+        print(f"ERROR: fetch_ipo_cases failed after retries: {exc}", file=sys.stderr)
+        return []
     rows = payload.get("responseBody", {}).get("allType", [])
     cases: list[IpoCase] = []
     for row in rows:
