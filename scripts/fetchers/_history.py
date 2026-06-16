@@ -62,11 +62,20 @@ def fetch_history(symbol: str) -> dict:
         intraday_df = None
 
     try:
+        # 30-min bars over ~1 month: powers the 3d / 1w / 1M scopes with real intraday
+        # detail. (Daily resolution made 3d look like 3-4 flat points — over-smoothed.)
+        # Regular hours only (no prepost) to keep the multi-day curve clean.
+        mid_df = ticker.history(period="1mo", interval="30m", auto_adjust=False)
+    except Exception:
+        mid_df = None
+
+    try:
         daily_df = ticker.history(period="10y", interval="1d", auto_adjust=False)
     except Exception:
         daily_df = None
 
     return {
         "intraday": _serialize(intraday_df, "%Y-%m-%dT%H:%M"),
+        "intraday_mid": _serialize(mid_df, "%Y-%m-%dT%H:%M"),
         "daily": _serialize(daily_df, "%Y-%m-%d"),
     }

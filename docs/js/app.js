@@ -121,6 +121,16 @@ function canvasIdFor(section, item) {
 function filterHistory(history, scope) {
   if (!history) return [];
   if (scope === "1d") return history.intraday || [];
+  // 3d / 1w / 1M: 30-min intraday (intraday_mid) sliced to the last N calendar days,
+  // so short scopes show real intraday detail instead of 1-point-per-day (over-smoothed).
+  const mid = history.intraday_mid || [];
+  if ((scope === "3d" || scope === "1w" || scope === "1m") && mid.length) {
+    const nDays = SCOPE_DAYS[scope];
+    const cutoff = new Date(mid[mid.length - 1].t.slice(0, 10) + "T00:00:00");
+    cutoff.setDate(cutoff.getDate() - (nDays - 1));
+    const sliced = mid.filter((p) => new Date(p.t.slice(0, 10) + "T00:00:00") >= cutoff);
+    if (sliced.length >= 2) return sliced;
+  }
   const daily = history.daily || [];
   if (scope === "all") return daily;
   const days = SCOPE_DAYS[scope];
