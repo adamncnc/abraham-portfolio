@@ -1,78 +1,202 @@
 {
   "schema_version": "1.0",
-  "description": "觀察清單 — 追蹤報價、配息、技術指標但未持倉（或將持倉）。新增 / 移除只要編輯此檔。",
+  "description": "觀察清單 — 由 abraham-portfolio-sync.py 從 ~/Abraham/.focus-list.json + .hunt-list.json 自動產生。勿手改；改 focus-list / hunt-list 後重跑同步腳本即可。entry_zone_lo/hi = 進場區 (走勢圖上畫線)。",
   "watchlist": [
     {
-      "id": "ives",
-      "type": "us_etf",
-      "symbol": "IVES",
-      "name": "Dan Ives Wedbush AI Revolution ETF",
-      "currency": "USD",
-      "theme": "美股 AI 主題",
-      "notes": "Dan Ives 的 AI 30 Research Report 追蹤。2025-06 成立。"
-    },
-    {
-      "id": "aipo",
-      "type": "us_etf",
-      "symbol": "AIPO",
-      "name": "Defiance AI & Power Infrastructure ETF",
-      "currency": "USD",
-      "theme": "美股 AI 電力基建",
-      "notes": "77 檔 AI 電力基建主題（分散式能源、電網、資料中心、AI 硬體）。2025-07 成立。"
-    },
-    {
-      "id": "00878",
-      "type": "tw_etf",
-      "symbol": "00878.TW",
-      "name": "國泰永續高股息",
+      "id": "2308",
+      "type": "tw_stock",
+      "symbol": "2308.TW",
+      "name": "台達電",
       "currency": "TWD",
-      "theme": "台股高股息 ESG",
-      "notes": "季配息、規模 4,300 億、費用 0.285%。計畫 2026-04-27 起每月 DCA 1 張。"
+      "theme": "AI 電源+液冷",
+      "notes": "AI 電源+液冷; 狙擊區 1600-1800 (6/12 情境分析 msg 1514881768723972106)",
+      "entry_zone_lo": 1600,
+      "entry_zone_hi": 1800
     },
     {
-      "id": "009819",
-      "type": "tw_etf",
-      "symbol": "009819.TW",
-      "name": "中信美國數據中心與電力",
+      "id": "3017",
+      "type": "tw_stock",
+      "symbol": "3017.TW",
+      "name": "奇鋐",
       "currency": "TWD",
-      "theme": "美國 AI 新基建",
-      "notes": "2026-04-23 掛牌。新 ETF 首日數據可能尚未有。追蹤 NYSE TIP 數據中心及電力指數。"
+      "theme": "散熱/液冷龍頭",
+      "notes": "散熱/液冷龍頭; 狙擊區 1950-2150",
+      "entry_zone_lo": 1950,
+      "entry_zone_hi": 2150
     },
     {
       "id": "2330",
       "type": "tw_stock",
       "symbol": "2330.TW",
-      "name": "台積電 TSMC",
+      "name": "台積電",
       "currency": "TWD",
-      "theme": "Amazon-Anthropic 供應鏈 · 核心配置",
-      "notes": "與 Joseph 辯論後最推薦：FPE 17x / Upside +22% / PEG 1.05 / ROE 36%。客戶極分散（Trainium / Nvidia / Apple / AMD / Qualcomm），Mythos exposure <3%。建議立刻 DCA 核心部位；主要 wildcard 是台海地緣政治非 Anthropic。"
+      "theme": "核心",
+      "notes": "核心; 狙擊加碼區 2050-2150",
+      "entry_zone_lo": 2050,
+      "entry_zone_hi": 2150
     },
     {
-      "id": "6669",
-      "type": "tw_stock",
-      "symbol": "6669.TW",
-      "name": "緯穎 Wiwynn",
-      "currency": "TWD",
-      "theme": "Amazon-Anthropic 供應鏈 · AWS ODM",
-      "notes": "FPE 10.6x 最便宜 + Upside +38%，但 thin-margin (5.4% net) + 高度依賴 hyperscaler。建議**等 Q1 26 earnings (~5 月中) 看 AWS 客戶 breakdown + Mythos 管理層 comment 後再動**，部位控制 2-3%，分 4-5 筆跨 9-12 月 DCA。"
-    },
-    {
-      "id": "avgo",
+      "id": "nbis",
       "type": "us_stock",
-      "symbol": "AVGO",
-      "name": "Broadcom",
+      "symbol": "NBIS",
+      "name": "Nebius",
       "currency": "USD",
-      "theme": "AI ASIC · Google TPU 合作",
-      "notes": "FPE 23.3x / Upside +12.5% / PEG 0.87。AI 主力是 Google TPU (>$10B/年) + Meta MTIA，對 Amazon-Anthropic catalyst **是間接受益**（非 Trainium 直接夥伴）。若要美股 AI 曝險，比 VRT/MRVL 安全。"
+      "theme": "AI 雲",
+      "notes": "AI 雲; $201 價格警戒 (c) FYI-only; 6/22 入 Nasdaq 100"
     },
     {
-      "id": "3661",
+      "id": "3363",
       "type": "tw_stock",
-      "symbol": "3661.TW",
-      "name": "世芯-KY Alchip",
+      "symbol": "3363.TWO",
+      "name": "上詮",
       "currency": "TWD",
-      "theme": "Trainium backend · 警示觀察",
-      "notes": "⚠️ 觀察不追。AWS Trainium backend 設計夥伴（Annapurna Labs 才是 primary）。FPE 23.9x / Upside +10% / ROE 14% 偏低。**Revenue growth -63.8% YoY + EPS growth -19.2% YoY = 現有專案已過高峰警訊**。Marvell 是主要威脅。Mythos 違約情境下衝擊最重 (-10~25%)。"
+      "theme": "光通訊/CPO 封裝 (FOCI)",
+      "notes": "光通訊/CPO 封裝 (FOCI); 進場區 550-650 (6/13 深查, 投機級), 認錯 456; TTM 虧損+季營收 YoY−7.2%, 價值全在 2027 CPO 故事",
+      "entry_zone_lo": 550,
+      "entry_zone_hi": 650
+    },
+    {
+      "id": "6415",
+      "type": "tw_stock",
+      "symbol": "6415.TW",
+      "name": "矽力-KY",
+      "currency": "TWD",
+      "theme": "電源管理 IC",
+      "notes": "電源管理 IC; 進場區 400-460 (6/13 深查), 認錯 300; Q1 EPS+114%/毛利 50%, 16 分析師 mean 586; 中國營收為主 KY 股",
+      "entry_zone_lo": 400,
+      "entry_zone_hi": 460
+    },
+    {
+      "id": "3324",
+      "type": "tw_stock",
+      "symbol": "3324.TWO",
+      "name": "雙鴻",
+      "currency": "TWD",
+      "theme": "散熱#2",
+      "notes": "散熱#2; 狙擊區 920-1020 (月營收掃描首批)",
+      "entry_zone_lo": 920,
+      "entry_zone_hi": 1020
+    },
+    {
+      "id": "vrt",
+      "type": "us_stock",
+      "symbol": "VRT",
+      "name": "Vertiv",
+      "currency": "USD",
+      "theme": "資料中心電力+散熱 (台達電國際頭號對手)",
+      "notes": "資料中心電力+散熱 (台達電國際頭號對手); 800V HVDC 最純美股玩法; 看好結構但估值貴 (6/16 深查 fwd PE~35x/trailing 76x/DCF 合理~$193) + froth 高檔; 進場區 275-290 (6月初急殺支撐帶), 認錯 <250; 27 分析師 strong_buy mean $378; USD 計價",
+      "entry_zone_lo": 275,
+      "entry_zone_hi": 290
+    },
+    {
+      "id": "2383",
+      "type": "tw_stock",
+      "symbol": "2383.TW",
+      "name": "台光電",
+      "currency": "TWD",
+      "theme": "高速 CCL 銅箔基板龍頭 (AI server M8/",
+      "notes": "高速 CCL 銅箔基板龍頭 (AI server M8/M9 板材); 品質最高 ROE 41%/rev+53%/PEG0.23/strong_buy; BUT 52w+480%已大; 進場參考 4300-4700 (近50日線), 認錯 <3600; froth 高檔等回檔分批",
+      "entry_zone_lo": 4300,
+      "entry_zone_hi": 4700
+    },
+    {
+      "id": "2327",
+      "type": "tw_stock",
+      "symbol": "2327.TW",
+      "name": "國巨",
+      "currency": "TWD",
+      "theme": "MLCC 被動元件 upcycle (6/16 Rock",
+      "notes": "MLCC 被動元件 upcycle (6/16 Rocky 4IB+JPM 訊號); 真賺錢 ROE16%/FCF正; BUT 兩個多月近翻倍 @965>分析師mean目標771=追高; 進場參考 780-880, 認錯 <620; 等回檔",
+      "entry_zone_lo": 780,
+      "entry_zone_hi": 880
+    },
+    {
+      "id": "mu",
+      "type": "us_stock",
+      "symbol": "MU",
+      "name": "美光",
+      "currency": "USD",
+      "theme": "記憶體超級循環 (HBM/DRAM)",
+      "notes": "記憶體超級循環 (HBM/DRAM); fwd PE9.6/PEG0.34便宜 BUT 52w+804%站ATH$1088/PS21.1(Bilello 2000頂2x警告); 6/24 財報=二元事件; 進場參考 880-980 + 等6/24後, 認錯 <720; USD 計價",
+      "entry_zone_lo": 880,
+      "entry_zone_hi": 980
+    },
+    {
+      "id": "gev",
+      "type": "us_stock",
+      "symbol": "GEV",
+      "name": "GE Vernova",
+      "currency": "USD",
+      "theme": "美股電網/電力設備龍頭 (燃氣發電機供電DC + 電網含",
+      "notes": "美股電網/電力設備龍頭 (燃氣發電機供電DC + 電網含大型變壓器 + 風電); AI供電題材最強/分析師目標$1212(+24%) BUT fwd PE~40貴/52w+100%/從ATH1182回-17%; 進場區 850-950/認錯<750; USD; AI受益深(gas turbine+grid雙引擎吃DC電力)",
+      "entry_zone_lo": 850,
+      "entry_zone_hi": 950
+    },
+    {
+      "id": "hubb",
+      "type": "us_stock",
+      "symbol": "HUBB",
+      "name": "Hubbell",
+      "currency": "USD",
+      "theme": "美股電網變壓器+電氣設備 (Utility Soluti",
+      "notes": "美股電網變壓器+電氣設備 (Utility Solutions做電網變壓器 + Electrical Solutions); 估值合理fwd PE22.5/ROE26%/配息1.2%; 52w+25%溫和/從ATH565回-13%; 進場區 440-475/認錯<390; USD; AI受益較淺(data center是Electrical一塊+grid廣基)",
+      "entry_zone_lo": 440,
+      "entry_zone_hi": 475
+    },
+    {
+      "id": "ceg",
+      "type": "us_stock",
+      "symbol": "CEG",
+      "name": "Constellation",
+      "currency": "USD",
+      "theme": "全美最大核電商(31.7GW核+Calpine)",
+      "notes": "全美最大核電商(31.7GW核+Calpine); AI最純電力受益(Microsoft 20年三哩島重啟$1.6B + Meta 20年1.1GW伊州); 已從ATH$412 -36%(主因3/26 Crane重啟併網延到2031非2027); Q1 EPS$2.74 beat/fwd PE19.3/ROE16%/strong_buy目標$368(+40%); 進場區235-258(近52w低240.5)/認錯<215; USD",
+      "entry_zone_lo": 235,
+      "entry_zone_hi": 258
+    },
+    {
+      "id": "vst",
+      "type": "us_stock",
+      "symbol": "VST",
+      "name": "Vistra",
+      "currency": "USD",
+      "theme": "IPP(核+氣+電池+零售44GW, 德州ERCOT重)",
+      "notes": "IPP(核+氣+電池+零售44GW, 德州ERCOT重); AI電力(Meta+AWS 20年3800MW PPA); fwd PE14/PEG0.44便宜/ROE43%/Q1記錄EBITDA$1.49B/strong_buy目標$225(+47%); 已從ATH$220 -30%(sector de-rating非公司面); ⚠️高槓桿債股355%+merchant電價風險; 進場區130-150(近52w低133)/認錯<122; USD",
+      "entry_zone_lo": 130,
+      "entry_zone_hi": 150
+    },
+    {
+      "id": "tln",
+      "type": "us_stock",
+      "symbol": "TLN",
+      "name": "Talen",
+      "currency": "USD",
+      "theme": "IPP(核+化石13.1GW)",
+      "notes": "IPP(核+化石13.1GW); AI最純綁定=賓州Susquehanna核電→AWS DC 1920MW/$18B/到2042; rev+97%/fwd PE11.1(三檔最便宜)/目標$472(+22%,14分析師)/FCF+$1.39B BUT TTM小虧; ⚠️高槓桿債股635%(三檔最高)+小float(波動大); ⚠️距ATH$451僅-14%(6/15剛+7%噴上=非低檔, 進場時機差於CEG/VST在低檔); 進場區330-365(50日$359+6/10低$",
+      "entry_zone_lo": 330,
+      "entry_zone_hi": 365
+    },
+    {
+      "id": "6719",
+      "type": "tw_stock",
+      "symbol": "6719.TW",
+      "name": "力智uPI",
+      "currency": "TWD",
+      "theme": "電源管理IC/功率元件",
+      "notes": "電源管理IC/功率元件: CPU/GPU多相位降壓控制器+整合power stage(伺服器VRM, 台版MPWR, 這群最直接AI伺服器); 本益比37/fwd~26-28/ROE5.4%/毛利36%/現金厚幾乎無債; ⚠️月營收衰退(2026-05 YoY-9.6%/連3月負, 比Yahoo blended 0%更弱)→等月營收翻正; 獲利+39%靠毛利組合/4分析師目標222.5<現價; 富邦2026 EPS est 8.5; 進場區205-225(50日201+5月起",
+      "entry_zone_lo": 205,
+      "entry_zone_hi": 225
+    },
+    {
+      "id": "6435",
+      "type": "tw_stock",
+      "symbol": "6435.TWO",
+      "name": "大中Sinopower",
+      "currency": "TWD",
+      "theme": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功",
+      "notes": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功率部門分拆, 現泛國巨集團=國巨2327同集團); AI伺服器中壓MOSFET+風扇馬達驅動成長最強非PC應用; ROE22%(這群最佳)/本益比29/獲利+28%/幾乎無債 BUT 毛利24%(離散偏低)/僅1分析師cover目標300; 月營收動能轉強🟡(2026-05 YoY+22.2%且加速11→13.5→22.2, 優於Yahoo blended+4%); ⚠️52w+182%貼ATH306.5; 進場區225",
+      "entry_zone_lo": 225,
+      "entry_zone_hi": 255
     }
   ]
 }

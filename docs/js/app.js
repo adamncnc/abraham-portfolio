@@ -23,6 +23,9 @@ const CHART_INSTANCES = new Map();
 // Cache each card's history payload by canvas id so scope toggles don't need
 // to re-fetch. Populated during initializeCharts().
 const CARD_HISTORY = new Map();
+// Entry-zone (進場區) per canvas id: { lo, hi }. Drawn as overlay lines on the
+// trend chart so Adam sees current price vs the pre-set 進場上限/下限.
+const CARD_META = new Map();
 
 // ========== Formatters ==========
 function fmtNum(val, decimals = 2) {
@@ -140,21 +143,65 @@ function renderChart(canvasId, scope) {
   const lineColor = last >= first ? "#4ade80" : "#f87171";
   const fillColor = last >= first ? "rgba(74, 222, 128, 0.15)" : "rgba(248, 113, 113, 0.15)";
 
+  const closes = points.map((p) => p.c);
+  const datasets = [{
+    label: "價格",
+    data: closes,
+    borderColor: lineColor,
+    backgroundColor: fillColor,
+    borderWidth: 1.8,
+    fill: true,
+    tension: 0.15,
+    pointRadius: 0,
+    pointHoverRadius: 3,
+    order: 1,
+  }];
+
+  // Entry-zone overlay: 進場上限 (zone_hi, prominent amber dashed) + 進場下限
+  // (zone_lo, faint). y-axis is bounded to keep the band visible even when the
+  // price is trading well above it (= 等回檔, the common case).
+  const meta = CARD_META.get(canvasId);
+  let yMin = Math.min(...closes);
+  let yMax = Math.max(...closes);
+  if (meta && meta.hi != null) {
+    datasets.push({
+      label: "進場上限",
+      data: new Array(closes.length).fill(meta.hi),
+      borderColor: "#fbbf24",
+      borderWidth: 1.3,
+      borderDash: [5, 4],
+      fill: false,
+      pointRadius: 0,
+      pointHoverRadius: 0,
+      tension: 0,
+      order: 0,
+    });
+    yMin = Math.min(yMin, meta.hi);
+    yMax = Math.max(yMax, meta.hi);
+    if (meta.lo != null) {
+      datasets.push({
+        label: "進場下限",
+        data: new Array(closes.length).fill(meta.lo),
+        borderColor: "rgba(251, 191, 36, 0.45)",
+        borderWidth: 1,
+        borderDash: [3, 4],
+        fill: false,
+        pointRadius: 0,
+        pointHoverRadius: 0,
+        tension: 0,
+        order: 0,
+      });
+      yMin = Math.min(yMin, meta.lo);
+    }
+  }
+  const pad = (yMax - yMin) * 0.06 || 1;
+
   const el = document.getElementById(canvasId);
   const chart = new Chart(el, {
     type: "line",
     data: {
       labels: points.map((p) => p.t),
-      datasets: [{
-        data: points.map((p) => p.c),
-        borderColor: lineColor,
-        backgroundColor: fillColor,
-        borderWidth: 1.8,
-        fill: true,
-        tension: 0.15,
-        pointRadius: 0,
-        pointHoverRadius: 3,
-      }],
+      datasets,
     },
     options: {
       responsive: true,
@@ -169,6 +216,7 @@ function renderChart(canvasId, scope) {
           borderColor: "#2d3548",
           borderWidth: 1,
           padding: 8,
+          filter: (item) => item.datasetIndex === 0,
           callbacks: {
             title: (items) => items[0]?.label || "",
             label: (ctx) => fmtNum(ctx.parsed.y, 2),
@@ -177,7 +225,7 @@ function renderChart(canvasId, scope) {
       },
       scales: {
         x: { display: false },
-        y: { display: false },
+        y: { display: false, min: yMin - pad, max: yMax + pad },
       },
       animation: { duration: 200 },
     },
@@ -206,6 +254,9 @@ function initializeCharts(items, section) {
     const canvasId = canvasIdFor(section, item);
     const history = item.data?.history;
     CARD_HISTORY.set(canvasId, history);
+    if (item.entry_zone_hi != null) {
+      CARD_META.set(canvasId, { lo: item.entry_zone_lo ?? null, hi: item.entry_zone_hi });
+    }
     renderChart(canvasId, DEFAULT_SCOPE);
   }
 }
@@ -276,6 +327,17 @@ function buildAssetCard(item, section) {
 
   // Metrics grid
   const metrics = [];
+  // Entry zone (進場區) + 現價距進場上限
+  if (item.entry_zone_lo != null && item.entry_zone_hi != null) {
+    let zoneVal = `${fmtNum(item.entry_zone_lo, 0)}–${fmtNum(item.entry_zone_hi, 0)}`;
+    if (price !== null && price !== undefined) {
+      const distTop = ((price - item.entry_zone_hi) / item.entry_zone_hi) * 100;
+      if (distTop > 0.5) zoneVal += ` <span class="badge-near-high">高出 ${fmtNum(distTop, 1)}%</span>`;
+      else if (distTop < -0.5) zoneVal += ` <span class="badge-near-low">已入區/破底</span>`;
+      else zoneVal += ` <span class="badge-mid">在區頂</span>`;
+    }
+    metrics.push(["🎯 進場區", zoneVal]);
+  }
   if (data.nav !== null && data.nav !== undefined) {
     const premium = data.premium_pct;
     metrics.push(["NAV", fmtNum(data.nav, 2)]);
@@ -414,6 +476,7 @@ async function loadAndRender() {
   }
   CHART_INSTANCES.clear();
   CARD_HISTORY.clear();
+  CARD_META.clear();
 
   try {
     const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
