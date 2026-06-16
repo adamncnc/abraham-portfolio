@@ -197,6 +197,15 @@
       "notes": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功率部門分拆, 現泛國巨集團=國巨2327同集團); AI伺服器中壓MOSFET+風扇馬達驅動成長最強非PC應用; ROE22%(這群最佳)/本益比29/獲利+28%/幾乎無債 BUT 毛利24%(離散偏低)/僅1分析師cover目標300; 月營收動能轉強🟡(2026-05 YoY+22.2%且加速11→13.5→22.2, 優於Yahoo blended+4%); ⚠️52w+182%貼ATH306.5; 進場區225",
       "entry_zone_lo": 225,
       "entry_zone_hi": 255
+    },
+    {
+      "id": "gold",
+      "type": "commodity",
+      "symbol": "GC=F",
+      "name": "黃金",
+      "currency": "USD",
+      "theme": "黃金避險/抗通膨資產",
+      "notes": "黃金避險/抗通膨資產; COMEX 黃金期貨 GC=F (USD/盎司基準價); 曾持有實體金條, 現純觀察追蹤、無進場區 (非狙擊); copilot 模式不記倉位"
     }
   ]
 }

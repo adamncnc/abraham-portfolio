@@ -114,6 +114,45 @@ function filterHistory(history, scope) {
   return daily.slice(-days);
 }
 
+// Format a history point's `t` for the tooltip title.
+// intraday "2026-06-15T17:16" -> "6月15日 下午5:16"; daily "2026-06-15" -> "2026/6/15".
+function fmtChartTs(t) {
+  if (!t) return "";
+  const [datePart, timePart] = String(t).split("T");
+  const [y, m, d] = datePart.split("-");
+  if (timePart) {
+    const [h, min] = timePart.split(":").map(Number);
+    const ampm = h < 12 ? "上午" : "下午";
+    const h12 = h % 12 || 12;
+    return `${Number(m)}月${Number(d)}日 ${ampm}${h12}:${String(min).padStart(2, "0")}`;
+  }
+  return `${y}/${Number(m)}/${Number(d)}`;
+}
+
+// Crosshair: vertical dashed guide at the active (hovered/tapped) point, so
+// tapping anywhere on the trend reveals that point's date + price. Pairs with
+// interaction {mode:"index", intersect:false} below for mobile-friendly taps.
+const crosshairPlugin = {
+  id: "abrahamCrosshair",
+  afterDraw(chart) {
+    const tip = chart.tooltip;
+    const active = tip && tip.getActiveElements ? tip.getActiveElements() : [];
+    if (!active.length) return;
+    const x = active[0].element.x;
+    const { top, bottom } = chart.chartArea;
+    const ctx = chart.ctx;
+    ctx.save();
+    ctx.beginPath();
+    ctx.setLineDash([4, 4]);
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(139, 149, 167, 0.55)";
+    ctx.stroke();
+    ctx.restore();
+  },
+};
+
 function renderChart(canvasId, scope) {
   const history = CARD_HISTORY.get(canvasId);
   const canvas = document.getElementById(canvasId);
@@ -153,7 +192,10 @@ function renderChart(canvasId, scope) {
     fill: true,
     tension: 0.15,
     pointRadius: 0,
-    pointHoverRadius: 3,
+    pointHoverRadius: 4,
+    pointHoverBackgroundColor: lineColor,
+    pointHoverBorderColor: "#0f1419",
+    pointHoverBorderWidth: 2,
     order: 1,
   }];
 
@@ -196,6 +238,7 @@ function renderChart(canvasId, scope) {
   }
   const pad = (yMax - yMin) * 0.06 || 1;
 
+  const currency = (CARD_META.get(canvasId) || {}).currency || "USD";
   const el = document.getElementById(canvasId);
   const chart = new Chart(el, {
     type: "line",
@@ -203,9 +246,13 @@ function renderChart(canvasId, scope) {
       labels: points.map((p) => p.t),
       datasets,
     },
+    plugins: [crosshairPlugin],
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      // index + intersect:false => tapping anywhere on the line surfaces the
+      // nearest point (no need to hit it exactly — works on touch screens).
+      interaction: { mode: "index", intersect: false },
       plugins: {
         legend: { display: false },
         tooltip: {
@@ -218,8 +265,8 @@ function renderChart(canvasId, scope) {
           padding: 8,
           filter: (item) => item.datasetIndex === 0,
           callbacks: {
-            title: (items) => items[0]?.label || "",
-            label: (ctx) => fmtNum(ctx.parsed.y, 2),
+            title: (items) => fmtChartTs(items[0]?.label),
+            label: (ctx) => `價格 ${fmtCurrency(ctx.parsed.y, currency, 2)}`,
           },
         },
       },
@@ -254,9 +301,11 @@ function initializeCharts(items, section) {
     const canvasId = canvasIdFor(section, item);
     const history = item.data?.history;
     CARD_HISTORY.set(canvasId, history);
-    if (item.entry_zone_hi != null) {
-      CARD_META.set(canvasId, { lo: item.entry_zone_lo ?? null, hi: item.entry_zone_hi });
-    }
+    CARD_META.set(canvasId, {
+      lo: item.entry_zone_lo ?? null,
+      hi: item.entry_zone_hi ?? null,
+      currency: item.currency || item.data?.currency || "USD",
+    });
     renderChart(canvasId, DEFAULT_SCOPE);
   }
 }
@@ -433,6 +482,24 @@ function buildAssetCard(item, section) {
 // ========== Portfolio Summary ==========
 function renderSummary(summary) {
   const el = document.getElementById("portfolio-summary");
+
+  // Copilot mode: no tracked positions -> show a watchlist-focused summary
+  // instead of empty 總市值/總成本/損益 cards reading "–".
+  if (!summary || !summary.holdings_count) {
+    el.innerHTML = `
+    <div class="summary-card">
+      <div class="summary-label">觀察清單</div>
+      <div class="summary-value">${summary?.watchlist_count ?? "–"}</div>
+      <div class="summary-sub">追蹤標的</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-label">模式</div>
+      <div class="summary-value" style="font-size:18px;">Copilot</div>
+      <div class="summary-sub">標的觀點 · 不記錄持倉</div>
+    </div>`;
+    return;
+  }
+
   const mv = summary.total_market_value_usd_equiv;
   const cost = summary.total_cost_usd_equiv;
   const pnl = summary.total_unrealized_pnl_usd_equiv;
@@ -504,6 +571,9 @@ async function loadAndRender() {
     } else {
       holdingsGrid.innerHTML = snapshot.holdings.map(item => buildAssetCard(item, "holdings")).join("");
     }
+    // Copilot mode: hide the entire holdings section when there are no positions.
+    const holdingsSection = document.getElementById("holdings-section");
+    if (holdingsSection) holdingsSection.style.display = snapshot.holdings?.length ? "" : "none";
 
     // Watchlist
     const watchGrid = document.getElementById("watchlist-grid");
