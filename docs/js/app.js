@@ -245,12 +245,13 @@ function renderChart(canvasId, scope) {
     order: 1,
   }];
 
-  // Entry-zone overlay: 進場上限 (zone_hi, prominent amber dashed) + 進場下限
-  // (zone_lo, faint). y-axis is bounded to keep the band visible even when the
-  // price is trading well above it (= 等回檔, the common case).
+  // y-axis is scaled to the PRICE range only (range high/low) so the trend is
+  // always legible. Entry-zone lines are still drawn, but they do NOT expand the
+  // axis — if the band sits far outside the visible price range it simply clips
+  // out of view. (Adam 2026-06-17: 縱軸由範圍內最大最小值決定；進場區虛線不強求顯示。)
   const meta = CARD_META.get(canvasId);
-  let yMin = Math.min(...closes);
-  let yMax = Math.max(...closes);
+  const yMin = Math.min(...closes);
+  const yMax = Math.max(...closes);
   if (meta && meta.hi != null) {
     datasets.push({
       label: "進場上限",
@@ -264,8 +265,6 @@ function renderChart(canvasId, scope) {
       tension: 0,
       order: 0,
     });
-    yMin = Math.min(yMin, meta.hi);
-    yMax = Math.max(yMax, meta.hi);
     if (meta.lo != null) {
       datasets.push({
         label: "進場下限",
@@ -279,7 +278,6 @@ function renderChart(canvasId, scope) {
         tension: 0,
         order: 0,
       });
-      yMin = Math.min(yMin, meta.lo);
     }
   }
   const pad = (yMax - yMin) * 0.06 || 1;
