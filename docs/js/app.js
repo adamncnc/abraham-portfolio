@@ -160,6 +160,40 @@ const crosshairPlugin = {
   },
 };
 
+// Mark the high & low of the currently-displayed range on the price line —
+// a dot + value label at the peak (高) and trough (低) of the visible scope.
+const minMaxLabelPlugin = {
+  id: "abrahamMinMax",
+  afterDatasetsDraw(chart) {
+    const meta = chart.getDatasetMeta(0);
+    if (!meta || !meta.data || meta.data.length < 2) return;
+    const vals = chart.data.datasets[0].data;
+    let maxI = 0, minI = 0;
+    for (let i = 1; i < vals.length; i++) {
+      if (vals[i] > vals[maxI]) maxI = i;
+      if (vals[i] < vals[minI]) minI = i;
+    }
+    const ctx = chart.ctx;
+    const area = chart.chartArea;
+    const clampX = (x) => Math.max(area.left + 24, Math.min(area.right - 24, x));
+    const mark = (idx, label, dy) => {
+      const pt = meta.data[idx];
+      ctx.beginPath();
+      ctx.arc(pt.x, pt.y, 2.5, 0, 2 * Math.PI);
+      ctx.fillStyle = "#e4e8f0";
+      ctx.fill();
+      ctx.fillStyle = "#b8c0cf";
+      ctx.fillText(label, clampX(pt.x), pt.y + dy);
+    };
+    ctx.save();
+    ctx.font = "10px -apple-system, BlinkMacSystemFont, sans-serif";
+    ctx.textAlign = "center";
+    mark(maxI, "高 " + fmtNum(vals[maxI], 2), -7);
+    mark(minI, "低 " + fmtNum(vals[minI], 2), 15);
+    ctx.restore();
+  },
+};
+
 function renderChart(canvasId, scope) {
   const history = CARD_HISTORY.get(canvasId);
   const canvas = document.getElementById(canvasId);
@@ -186,8 +220,9 @@ function renderChart(canvasId, scope) {
 
   const first = points[0].c;
   const last = points[points.length - 1].c;
-  const lineColor = last >= first ? "#4ade80" : "#f87171";
-  const fillColor = last >= first ? "rgba(74, 222, 128, 0.15)" : "rgba(248, 113, 113, 0.15)";
+  // 台股/亞洲慣例: 漲=紅, 跌=藍
+  const lineColor = last >= first ? "#f87171" : "#60a5fa";
+  const fillColor = last >= first ? "rgba(248, 113, 113, 0.15)" : "rgba(96, 165, 250, 0.15)";
 
   const closes = points.map((p) => p.c);
   const datasets = [{
@@ -253,7 +288,7 @@ function renderChart(canvasId, scope) {
       labels: points.map((p) => p.t),
       datasets,
     },
-    plugins: [crosshairPlugin],
+    plugins: [crosshairPlugin, minMaxLabelPlugin],
     options: {
       responsive: true,
       maintainAspectRatio: false,
@@ -383,11 +418,12 @@ function buildAssetCard(item, section) {
 
   // Metrics grid
   const metrics = [];
-  // Entry zone (進場區) + 現價距進場上限
-  if (item.entry_zone_lo != null && item.entry_zone_hi != null) {
-    let zoneVal = `${fmtNum(item.entry_zone_lo, 0)}–${fmtNum(item.entry_zone_hi, 0)}`;
+  // Entry zone (進場區) + 現價距進場上限. Supports hi-only (single line, e.g. NBIS $201).
+  if (item.entry_zone_hi != null) {
+    const hi = item.entry_zone_hi, lo = item.entry_zone_lo;
+    let zoneVal = lo != null ? `${fmtNum(lo, 0)}–${fmtNum(hi, 0)}` : `≤ ${fmtNum(hi, 0)}`;
     if (price !== null && price !== undefined) {
-      const distTop = ((price - item.entry_zone_hi) / item.entry_zone_hi) * 100;
+      const distTop = ((price - hi) / hi) * 100;
       if (distTop > 0.5) zoneVal += ` <span class="badge-near-high">高出 ${fmtNum(distTop, 1)}%</span>`;
       else if (distTop < -0.5) zoneVal += ` <span class="badge-near-low">已入區/破底</span>`;
       else zoneVal += ` <span class="badge-mid">在區頂</span>`;

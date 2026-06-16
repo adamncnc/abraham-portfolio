@@ -191,8 +191,8 @@ body {
   font-variant-numeric: tabular-nums;
 }
 .asset-change { font-size: 14px; font-weight: 600; }
-.up { color: var(--accent); }
-.down { color: var(--danger); }
+.up { color: #f87171; }   /* 漲 = 紅 (台股/亞洲慣例) */
+.down { color: #60a5fa; } /* 跌 = 藍 */
 .flat { color: var(--text-dim); }
 
 .asset-metrics {

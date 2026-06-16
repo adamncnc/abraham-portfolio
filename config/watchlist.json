@@ -42,7 +42,8 @@
       "name": "Nebius",
       "currency": "USD",
       "theme": "AI 雲",
-      "notes": "AI 雲; $201 價格警戒 (c) FYI-only; 6/22 入 Nasdaq 100"
+      "notes": "AI 雲; $201 價格警戒 (c) FYI-only; 6/22 入 Nasdaq 100",
+      "entry_zone_hi": 201
     },
     {
       "id": "3363",
