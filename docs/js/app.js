@@ -11,7 +11,7 @@ const RELAY_BASE = "https://abraham-quotes.adamncnc.workers.dev";
 let CURRENT_SNAPSHOT = null;
 let LIVE_MODE = false;  // once user presses 抓即時, auto-refresh keeps pulling live
 
-const DEFAULT_SCOPE = "1m";
+const DEFAULT_SCOPE = "1d";
 const SCOPES = [
   { key: "1d", label: "1D" },
   { key: "3d", label: "3D" },
