@@ -4,6 +4,12 @@
 
 const DATA_URL = "./data/latest.json";
 
+// Live-quote relay (Cloudflare Worker — see relay/yahoo-relay-worker.js).
+// Set to your workers.dev URL to enable the 抓即時 button's live fetch.
+// Empty => 抓即時 falls back to reloading the snapshot file.
+const RELAY_BASE = "https://abraham-quotes.adamncnc.workers.dev";
+let CURRENT_SNAPSHOT = null;
+
 const DEFAULT_SCOPE = "1m";
 const SCOPES = [
   { key: "1d", label: "1D" },
@@ -532,12 +538,10 @@ function renderSummary(summary) {
 }
 
 // ========== Main Render ==========
-async function loadAndRender() {
-  const refreshBtn = document.getElementById("refresh-btn");
-  refreshBtn.textContent = "…";
-
-  // Destroy all existing charts before we re-render the grids — otherwise
-  // their canvases get detached and Chart.js leaks.
+// Render a snapshot object into the page. Shared by the initial snapshot load
+// and the live-refresh path so price/badges/range/chart all update uniformly.
+function renderSnapshot(snapshot, opts = {}) {
+  // Destroy existing charts before re-render — otherwise Chart.js leaks canvases.
   for (const chart of CHART_INSTANCES.values()) {
     try { chart.destroy(); } catch (e) { /* ignore */ }
   }
@@ -545,47 +549,55 @@ async function loadAndRender() {
   CARD_HISTORY.clear();
   CARD_META.clear();
 
+  // Timestamp — live refresh shows the wall-clock fetch time + a freshness note.
+  const tsEl = document.getElementById("timestamp");
+  if (opts.live) {
+    const now = new Date().toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false });
+    tsEl.textContent = `🟢 即時報價 ${now} (Taipei)` + (opts.note ? ` · ${opts.note}` : "");
+  } else {
+    const ts = new Date(snapshot.timestamp_utc);
+    tsEl.textContent = `資料時間：${ts.toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false })} (Taipei)`;
+  }
+
+  // Counts
+  const total = (snapshot.holdings?.length || 0) + (snapshot.watchlist?.length || 0);
+  document.getElementById("item-count").textContent = `${total} items`;
+  document.getElementById("holdings-count").textContent = `${snapshot.holdings?.length || 0} 檔`;
+  document.getElementById("watchlist-count").textContent = `${snapshot.watchlist?.length || 0} 檔`;
+
+  renderSummary(snapshot.portfolio_summary);
+
+  // Holdings (hidden entirely when empty — copilot mode)
+  const holdingsGrid = document.getElementById("holdings-grid");
+  if (!snapshot.holdings?.length) {
+    holdingsGrid.innerHTML = '<div class="loading">（尚無持倉）</div>';
+  } else {
+    holdingsGrid.innerHTML = snapshot.holdings.map(item => buildAssetCard(item, "holdings")).join("");
+  }
+  const holdingsSection = document.getElementById("holdings-section");
+  if (holdingsSection) holdingsSection.style.display = snapshot.holdings?.length ? "" : "none";
+
+  // Watchlist
+  const watchGrid = document.getElementById("watchlist-grid");
+  if (!snapshot.watchlist?.length) {
+    watchGrid.innerHTML = '<div class="loading">（觀察清單為空）</div>';
+  } else {
+    watchGrid.innerHTML = snapshot.watchlist.map(item => buildAssetCard(item, "watchlist")).join("");
+  }
+
+  if (snapshot.holdings?.length) initializeCharts(snapshot.holdings, "holdings");
+  if (snapshot.watchlist?.length) initializeCharts(snapshot.watchlist, "watchlist");
+}
+
+async function loadAndRender() {
+  const refreshBtn = document.getElementById("refresh-btn");
+  refreshBtn.textContent = "…";
   try {
     const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const snapshot = await res.json();
-
-    // Timestamp
-    const ts = new Date(snapshot.timestamp_utc);
-    document.getElementById("timestamp").textContent =
-      `資料時間：${ts.toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false })} (Taipei)`;
-
-    // Counts
-    const total = (snapshot.holdings?.length || 0) + (snapshot.watchlist?.length || 0);
-    document.getElementById("item-count").textContent = `${total} items`;
-    document.getElementById("holdings-count").textContent = `${snapshot.holdings?.length || 0} 檔`;
-    document.getElementById("watchlist-count").textContent = `${snapshot.watchlist?.length || 0} 檔`;
-
-    // Summary
-    renderSummary(snapshot.portfolio_summary);
-
-    // Holdings
-    const holdingsGrid = document.getElementById("holdings-grid");
-    if (!snapshot.holdings?.length) {
-      holdingsGrid.innerHTML = '<div class="loading">（尚無持倉）</div>';
-    } else {
-      holdingsGrid.innerHTML = snapshot.holdings.map(item => buildAssetCard(item, "holdings")).join("");
-    }
-    // Copilot mode: hide the entire holdings section when there are no positions.
-    const holdingsSection = document.getElementById("holdings-section");
-    if (holdingsSection) holdingsSection.style.display = snapshot.holdings?.length ? "" : "none";
-
-    // Watchlist
-    const watchGrid = document.getElementById("watchlist-grid");
-    if (!snapshot.watchlist?.length) {
-      watchGrid.innerHTML = '<div class="loading">（觀察清單為空）</div>';
-    } else {
-      watchGrid.innerHTML = snapshot.watchlist.map(item => buildAssetCard(item, "watchlist")).join("");
-    }
-
-    // Initialize charts after the DOM nodes exist
-    if (snapshot.holdings?.length) initializeCharts(snapshot.holdings, "holdings");
-    if (snapshot.watchlist?.length) initializeCharts(snapshot.watchlist, "watchlist");
+    CURRENT_SNAPSHOT = snapshot;
+    renderSnapshot(snapshot);
   } catch (err) {
     console.error("Failed to load data:", err);
     document.getElementById("timestamp").textContent = `❌ 載入失敗：${err.message}`;
@@ -597,10 +609,71 @@ async function loadAndRender() {
   }
 }
 
+// Live refresh: pull current quotes for every tracked symbol from the relay
+// (Cloudflare Worker), merge into the snapshot, and re-render. Falls back to a
+// plain snapshot reload if the relay isn't configured, and to last-close per
+// symbol if the relay call partially fails.
+async function liveRefresh() {
+  const btn = document.getElementById("live-btn");
+  if (!RELAY_BASE) { await loadAndRender(); return; }
+  if (!CURRENT_SNAPSHOT) await loadAndRender();
+  if (!CURRENT_SNAPSHOT) return;
+
+  const all = [...(CURRENT_SNAPSHOT.holdings || []), ...(CURRENT_SNAPSHOT.watchlist || [])];
+  const symbols = [...new Set(all.map(it => it.symbol).filter(Boolean))];
+  if (!symbols.length) return;
+
+  if (btn) { btn.disabled = true; btn.textContent = "抓取中…"; }
+  try {
+    const url = RELAY_BASE.replace(/\/+$/, "") + "/?symbols=" + encodeURIComponent(symbols.join(","));
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error(`relay HTTP ${res.status}`);
+    const data = await res.json();
+    const quotes = (data && data.quotes) || {};
+
+    let okCount = 0, failCount = 0;
+    const apply = (item) => {
+      const q = quotes[item.symbol];
+      const next = { ...item, data: { ...(item.data || {}) } };
+      if (q && q.ok && q.price != null) {
+        okCount++;
+        next.data.price = q.price;
+        if (q.prevClose != null) next.data.previous_close = q.prevClose;
+        if (q.change != null) next.data.change = q.change;
+        if (q.changePct != null) next.data.change_pct = q.changePct;
+        if (q.intraday && q.intraday.length) {
+          next.data.history = { ...(next.data.history || {}), intraday: q.intraday };
+        }
+      } else if (item.status !== "error") {
+        failCount++;
+      }
+      return next;
+    };
+
+    const live = {
+      ...CURRENT_SNAPSHOT,
+      holdings: (CURRENT_SNAPSHOT.holdings || []).map(apply),
+      watchlist: (CURRENT_SNAPSHOT.watchlist || []).map(apply),
+    };
+    const note = failCount
+      ? `${okCount} 檔即時 · ${failCount} 檔抓取失敗(顯示最近收盤)`
+      : `${okCount} 檔即時`;
+    renderSnapshot(live, { live: true, note });
+  } catch (err) {
+    console.error("Live refresh failed:", err);
+    document.getElementById("timestamp").textContent =
+      `⚠️ 即時抓取失敗，顯示最近收盤：${err.message}`;
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = "🔄 抓即時"; }
+  }
+}
+
 document.getElementById("refresh-btn").addEventListener("click", loadAndRender);
+const _liveBtn = document.getElementById("live-btn");
+if (_liveBtn) _liveBtn.addEventListener("click", liveRefresh);
 loadAndRender();
 
-// Auto-refresh every 5 minutes (when tab visible)
+// Auto-refresh the snapshot every 5 minutes (when tab visible)
 setInterval(() => {
   if (!document.hidden) loadAndRender();
 }, 5 * 60 * 1000);

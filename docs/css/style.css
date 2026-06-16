@@ -61,6 +61,21 @@ body {
   transition: all 0.2s;
 }
 .btn-refresh:hover { background: var(--card-hover); transform: rotate(90deg); }
+.btn-live {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--bg);
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.btn-live:hover { background: var(--accent-dim); border-color: var(--accent-dim); }
+.btn-live:disabled { opacity: 0.6; cursor: default; }
 
 /* Portfolio Summary */
 .portfolio-summary {
