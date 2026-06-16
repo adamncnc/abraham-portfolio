@@ -355,6 +355,11 @@ function initializeCharts(items, section) {
 }
 
 document.addEventListener("click", (e) => {
+  const rb = e.target.closest(".card-refresh");
+  if (rb) {
+    refreshOneCard(rb.dataset.section, rb.dataset.cardid, rb.dataset.sym, rb);
+    return;
+  }
   const btn = e.target.closest(".scope-btn");
   if (!btn) return;
   const canvasId = btn.dataset.canvas;
@@ -375,7 +380,7 @@ function buildAssetCard(item, section) {
   // Error card
   if (isError) {
     return `
-      <div class="asset-card error">
+      <div class="asset-card error" data-card="${section}-${item.id}">
         <div class="asset-head">
           <div class="asset-name-block">
             <div class="asset-name">${item.name || item.id}</div>
@@ -399,6 +404,11 @@ function buildAssetCard(item, section) {
   const cls = changeClass(changePct);
   const changeSign = changePct > 0 ? "+" : changePct < 0 ? "" : "";
 
+  // Per-card 即時 refresh button (right-aligned in the price row) — updates just this symbol.
+  const cardRefreshBtn = item.symbol
+    ? `<button class="card-refresh" title="更新此檔即時" data-sym="${item.symbol}" data-section="${section}" data-cardid="${item.id}">↻</button>`
+    : "";
+
   const priceRow = price !== null && price !== undefined
     ? `
       <div class="asset-price-row">
@@ -407,11 +417,13 @@ function buildAssetCard(item, section) {
           ${change !== null ? `${changeSign}${fmtNum(change, 2)}` : "–"}
           (${fmtPct(changePct)})
         </span>
+        ${cardRefreshBtn}
       </div>
     `
     : `
       <div class="asset-price-row">
         <span class="asset-price flat">尚無資料</span>
+        ${cardRefreshBtn}
       </div>
       <div style="font-size:12px; color:var(--text-dim); margin-bottom:12px;">
         可能原因：新掛牌尚未有交易資料 / 非交易時段 / 標的代碼錯誤
@@ -506,7 +518,7 @@ function buildAssetCard(item, section) {
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${item.notes}</div>` : "";
 
   return `
-    <div class="asset-card">
+    <div class="asset-card" data-card="${section}-${item.id}">
       <div class="asset-head">
         <div class="asset-name-block">
           <div class="asset-name">${item.name || item.id}</div>
@@ -705,6 +717,44 @@ async function liveRefresh() {
       `⚠️ 即時抓取失敗，顯示最近收盤：${err.message}`;
   } finally {
     if (btn) { btn.disabled = false; btn.textContent = "🔄 抓即時"; }
+  }
+}
+
+// Per-card ↻: refresh a single card's live quote (just that symbol) and rebuild only that card.
+async function refreshOneCard(section, id, symbol, btn) {
+  if (!RELAY_BASE || !symbol || !CURRENT_SNAPSHOT) { await liveRefresh(); return; }
+  const list = section === "holdings" ? (CURRENT_SNAPSHOT.holdings || []) : (CURRENT_SNAPSHOT.watchlist || []);
+  const item = list.find((it) => it.id === id);
+  if (!item) return;
+  if (btn) { btn.disabled = true; btn.classList.add("spin"); }
+  try {
+    const url = RELAY_BASE.replace(/\/+$/, "") + "/?symbols=" + encodeURIComponent(symbol);
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("relay " + res.status);
+    const q = ((await res.json()).quotes || {})[symbol];
+    if (!q || !q.ok || q.price == null) throw new Error((q && q.error) || "no quote");
+    item.data = item.data || {};
+    item.data.price = q.price;
+    if (q.prevClose != null) item.data.previous_close = q.prevClose;
+    if (q.change != null) item.data.change = q.change;
+    if (q.changePct != null) item.data.change_pct = q.changePct;
+    if (q.intraday && q.intraday.length) item.data.history = { ...(item.data.history || {}), intraday: q.intraday };
+    item.status = "ok";
+    const node = document.querySelector(`[data-card="${section}-${id}"]`);
+    if (node) {
+      const cid = canvasIdFor(section, item);
+      const old = CHART_INSTANCES.get(cid);
+      if (old) { try { old.destroy(); } catch (e) { /* ignore */ } CHART_INSTANCES.delete(cid); }
+      node.outerHTML = buildAssetCard(item, section);
+      initializeCharts([item], section);
+    }
+  } catch (err) {
+    console.error("card refresh failed:", symbol, err);
+    if (btn) {
+      btn.classList.remove("spin");
+      btn.textContent = "✕";
+      setTimeout(() => { btn.textContent = "↻"; btn.disabled = false; }, 1500);
+    }
   }
 }
 

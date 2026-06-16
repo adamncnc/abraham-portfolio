@@ -191,6 +191,25 @@ body {
   font-variant-numeric: tabular-nums;
 }
 .asset-change { font-size: 14px; font-weight: 600; }
+.card-refresh {
+  margin-left: auto;
+  align-self: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.card-refresh:hover { background: var(--card-hover); color: var(--text); }
+.card-refresh:disabled { opacity: 0.5; cursor: default; }
+.card-refresh.spin { animation: cardspin 0.8s linear infinite; }
+@keyframes cardspin { to { transform: rotate(360deg); } }
 .up { color: #f87171; }   /* 漲 = 紅 (台股慣例 漲紅跌綠) */
 .down { color: #4ade80; } /* 跌 = 綠 */
 .flat { color: var(--text-dim); }
