@@ -178,6 +178,7 @@ body {
 .tag-commodity { background: rgba(251, 191, 36, 0.15); color: var(--warning); }
 .tag-tw_etf, .tag-tw_stock { background: rgba(96, 165, 250, 0.15); color: var(--info); }
 .tag-us_etf, .tag-us_stock { background: rgba(167, 139, 250, 0.15); color: var(--purple); }
+.tag-index { background: rgba(94, 234, 212, 0.15); color: #5eead4; }
 
 .asset-price-row {
   display: flex;

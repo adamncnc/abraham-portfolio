@@ -662,10 +662,12 @@ function renderSnapshot(snapshot, opts = {}) {
   }
 
   // Counts
-  const total = (snapshot.holdings?.length || 0) + (snapshot.watchlist?.length || 0);
+  const total = (snapshot.holdings?.length || 0) + (snapshot.watchlist?.length || 0) + (snapshot.indices?.length || 0);
   document.getElementById("item-count").textContent = `${total} items`;
   document.getElementById("holdings-count").textContent = `${snapshot.holdings?.length || 0} 檔`;
   document.getElementById("watchlist-count").textContent = `${snapshot.watchlist?.length || 0} 檔`;
+  const idxCountEl = document.getElementById("indices-count");
+  if (idxCountEl) idxCountEl.textContent = `${snapshot.indices?.length || 0} 檔`;
 
   renderSummary(snapshot.portfolio_summary);
 
@@ -687,8 +689,19 @@ function renderSnapshot(snapshot, opts = {}) {
     watchGrid.innerHTML = snapshot.watchlist.map(item => buildAssetCard(item, "watchlist")).join("");
   }
 
+  // Indices (大盤指數) — bottom section
+  const indicesGrid = document.getElementById("indices-grid");
+  if (indicesGrid) {
+    if (!snapshot.indices?.length) {
+      indicesGrid.innerHTML = '<div class="loading">（無指數資料）</div>';
+    } else {
+      indicesGrid.innerHTML = snapshot.indices.map(item => buildAssetCard(item, "indices")).join("");
+    }
+  }
+
   if (snapshot.holdings?.length) initializeCharts(snapshot.holdings, "holdings");
   if (snapshot.watchlist?.length) initializeCharts(snapshot.watchlist, "watchlist");
+  if (snapshot.indices?.length) initializeCharts(snapshot.indices, "indices");
 }
 
 async function loadAndRender() {
@@ -721,7 +734,7 @@ async function liveRefresh() {
   if (!CURRENT_SNAPSHOT) await loadAndRender();
   if (!CURRENT_SNAPSHOT) return;
 
-  const all = [...(CURRENT_SNAPSHOT.holdings || []), ...(CURRENT_SNAPSHOT.watchlist || [])];
+  const all = [...(CURRENT_SNAPSHOT.holdings || []), ...(CURRENT_SNAPSHOT.watchlist || []), ...(CURRENT_SNAPSHOT.indices || [])];
   const symbols = [...new Set(all.map(it => it.symbol).filter(Boolean))];
   if (!symbols.length) return;
 
@@ -756,6 +769,7 @@ async function liveRefresh() {
       ...CURRENT_SNAPSHOT,
       holdings: (CURRENT_SNAPSHOT.holdings || []).map(apply),
       watchlist: (CURRENT_SNAPSHOT.watchlist || []).map(apply),
+      indices: (CURRENT_SNAPSHOT.indices || []).map(apply),
     };
     const note = failCount
       ? `${okCount} 檔即時 · ${failCount} 檔抓取失敗(顯示最近收盤)`
@@ -774,7 +788,7 @@ async function liveRefresh() {
 // Per-card ↻: refresh a single card's live quote (just that symbol) and rebuild only that card.
 async function refreshOneCard(section, id, symbol, btn) {
   if (!RELAY_BASE || !symbol || !CURRENT_SNAPSHOT) { await liveRefresh(); return; }
-  const list = section === "holdings" ? (CURRENT_SNAPSHOT.holdings || []) : (CURRENT_SNAPSHOT.watchlist || []);
+  const list = CURRENT_SNAPSHOT[section] || [];
   const item = list.find((it) => it.id === id);
   if (!item) return;
   if (btn) { btn.disabled = true; btn.classList.add("spin"); }

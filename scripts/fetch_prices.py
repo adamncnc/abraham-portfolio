@@ -87,12 +87,17 @@ def process_item(item: dict) -> dict:
 def main() -> int:
     holdings_cfg = load_config(ROOT / "config" / "holdings.json")
     watchlist_cfg = load_config(ROOT / "config" / "watchlist.json")
+    # indices.json is optional (bottom 大盤指數 section); tolerate its absence.
+    indices_path = ROOT / "config" / "indices.json"
+    indices_cfg = load_config(indices_path) if indices_path.exists() else {"indices": []}
 
     holdings = [dict(item, _section="holdings") for item in holdings_cfg.get("holdings", [])]
     watchlist = [dict(item, _section="watchlist") for item in watchlist_cfg.get("watchlist", [])]
+    indices = [dict(item, _section="indices") for item in indices_cfg.get("indices", [])]
 
     processed_holdings = [enrich_holding(process_item(item)) for item in holdings]
     processed_watchlist = [process_item(item) for item in watchlist]
+    processed_indices = [process_item(item) for item in indices]
 
     # Portfolio-level rollup (holdings only)
     total_market_value = sum(
@@ -115,9 +120,11 @@ def main() -> int:
             ),
             "holdings_count": len(processed_holdings),
             "watchlist_count": len(processed_watchlist),
+            "indices_count": len(processed_indices),
         },
         "holdings": processed_holdings,
         "watchlist": processed_watchlist,
+        "indices": processed_indices,
     }
 
     docs_data_dir = ROOT / "docs" / "data"
@@ -153,12 +160,17 @@ def main() -> int:
         price = (item.get("data") or {}).get("price")
         marker = "OK" if status == "ok" else "ERR"
         print(f"  [{marker}] {item.get('id'):20s} {item.get('symbol'):12s} price={price}")
+    print()
+    print(f"Indices ({len(processed_indices)}):")
+    for item in processed_indices:
+        status = item.get("status")
+        price = (item.get("data") or {}).get("price")
+        marker = "OK" if status == "ok" else "ERR"
+        print(f"  [{marker}] {item.get('id'):20s} {item.get('symbol'):12s} price={price}")
 
-    error_count = sum(
-        1 for item in (processed_holdings + processed_watchlist)
-        if item.get("status") == "error"
-    )
-    return 1 if error_count == len(processed_holdings) + len(processed_watchlist) else 0
+    all_items = processed_holdings + processed_watchlist + processed_indices
+    error_count = sum(1 for item in all_items if item.get("status") == "error")
+    return 1 if all_items and error_count == len(all_items) else 0
 
 
 if __name__ == "__main__":

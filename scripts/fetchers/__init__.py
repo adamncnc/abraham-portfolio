@@ -7,6 +7,7 @@ FETCHERS = {
     "tw_stock": fetch_tw_stock,
     "us_etf": fetch_us_stock,
     "us_stock": fetch_us_stock,
+    "index": fetch_us_stock,  # ^TWII/^IXIC/^SOX/^NYA — generic yfinance quote+history
     "commodity": fetch_gold,
 }
 

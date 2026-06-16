@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.0",
+  "description": "大盤指數 — 顯示在 dashboard 最下方。手動維護（不走 focus-list sync）。新增/移除指數直接改本檔後重跑 fetch_prices.py。type=index 走 yfinance 通用抓取；EWT 用 us_etf 以保留盤前盤後(=台股夜盤)白色顯示。",
+  "indices": [
+    {
+      "id": "twii",
+      "type": "index",
+      "symbol": "^TWII",
+      "name": "台股加權指數",
+      "currency": "TWD",
+      "theme": "台股大盤",
+      "notes": "TWSE 加權股價指數（台股大盤白天走勢，09:00–13:30，無夜盤）"
+    },
+    {
+      "id": "ewt",
+      "type": "us_etf",
+      "symbol": "EWT",
+      "name": "iShares 台灣 ETF",
+      "currency": "USD",
+      "theme": "台股夜盤氣氛 · 美股時段",
+      "notes": "iShares MSCI 台灣 ETF（美國 NYSEArca 掛牌）：美股時段交易=台灣的晚上，當作台股隔夜氣氛 proxy。美金計價含匯率因素。夜盤段以白色顯示。"
+    },
+    {
+      "id": "ixic",
+      "type": "index",
+      "symbol": "^IXIC",
+      "name": "納斯達克綜合指數",
+      "currency": "USD",
+      "theme": "美股科技大盤",
+      "notes": "NASDAQ Composite（科技股為主的美股大盤）"
+    },
+    {
+      "id": "sox",
+      "type": "index",
+      "symbol": "^SOX",
+      "name": "費城半導體指數",
+      "currency": "USD",
+      "theme": "半導體",
+      "notes": "PHLX Semiconductor（費半，全球半導體景氣風向）"
+    },
+    {
+      "id": "nya",
+      "type": "index",
+      "symbol": "^NYA",
+      "name": "NYSE 綜合指數",
+      "currency": "USD",
+      "theme": "紐約證交所大盤",
+      "notes": "NYSE Composite（紐約證交所全市場綜合指數）"
+    }
+  ]
+}
