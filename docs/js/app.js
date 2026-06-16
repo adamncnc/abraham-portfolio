@@ -174,22 +174,16 @@ const minMaxLabelPlugin = {
       if (vals[i] < vals[minI]) minI = i;
     }
     const ctx = chart.ctx;
-    const area = chart.chartArea;
-    const clampX = (x) => Math.max(area.left + 24, Math.min(area.right - 24, x));
-    const mark = (idx, label, dy) => {
+    const dot = (idx) => {
       const pt = meta.data[idx];
       ctx.beginPath();
-      ctx.arc(pt.x, pt.y, 2.5, 0, 2 * Math.PI);
+      ctx.arc(pt.x, pt.y, 3, 0, 2 * Math.PI);
       ctx.fillStyle = "#e4e8f0";
       ctx.fill();
-      ctx.fillStyle = "#b8c0cf";
-      ctx.fillText(label, clampX(pt.x), pt.y + dy);
     };
     ctx.save();
-    ctx.font = "10px -apple-system, BlinkMacSystemFont, sans-serif";
-    ctx.textAlign = "center";
-    mark(maxI, "高 " + fmtNum(vals[maxI], 2), -7);
-    mark(minI, "低 " + fmtNum(vals[minI], 2), 15);
+    dot(maxI);  // 高點位置 (數值顯示在圖下方 .chart-hilo)
+    dot(minI);  // 低點位置
     ctx.restore();
   },
 };
@@ -205,6 +199,8 @@ function renderChart(canvasId, scope) {
   if (!points || points.length < 2) {
     wrap.classList.add("empty");
     wrap.innerHTML = '<span>（該範圍無資料）</span>';
+    const he = document.getElementById("hilo-" + canvasId);
+    if (he) he.textContent = "";
     return;
   }
   wrap.classList.remove("empty");
@@ -220,11 +216,16 @@ function renderChart(canvasId, scope) {
 
   const first = points[0].c;
   const last = points[points.length - 1].c;
-  // 台股/亞洲慣例: 漲=紅, 跌=藍
-  const lineColor = last >= first ? "#f87171" : "#60a5fa";
-  const fillColor = last >= first ? "rgba(248, 113, 113, 0.15)" : "rgba(96, 165, 250, 0.15)";
+  // 台股慣例: 漲=紅, 跌=綠
+  const lineColor = last >= first ? "#f87171" : "#4ade80";
+  const fillColor = last >= first ? "rgba(248, 113, 113, 0.15)" : "rgba(74, 222, 128, 0.15)";
 
   const closes = points.map((p) => p.c);
+  // High/low of the displayed range -> text line below the chart (updates per scope).
+  const hiloEl = document.getElementById("hilo-" + canvasId);
+  if (hiloEl) {
+    hiloEl.textContent = `區間　高 ${fmtNum(Math.max(...closes), 2)}　低 ${fmtNum(Math.min(...closes), 2)}`;
+  }
   const datasets = [{
     label: "價格",
     data: closes,
@@ -332,6 +333,7 @@ function chartBlockHtml(canvasId) {
       <div class="chart-canvas-wrap">
         <canvas id="${canvasId}"></canvas>
       </div>
+      <div class="chart-hilo" id="hilo-${canvasId}"></div>
       <div class="scope-tabs">${tabs}</div>
     </div>
   `;
