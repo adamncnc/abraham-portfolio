@@ -110,8 +110,12 @@ function rangeBarHtml(price, low, high) {
 }
 
 // ========== Chart helpers ==========
+// Whitelist generated DOM ids to [A-Za-z0-9_-] so a config id can never inject
+// markup through id="..."/data-canvas="..." attributes. This is the single source
+// of canvasId, so DOM ids + map keys + getElementById stay mutually consistent.
+function safeDomId(s) { return String(s == null ? "" : s).replace(/[^A-Za-z0-9_-]/g, "_"); }
 function canvasIdFor(section, item) {
-  return `chart-${section}-${item.id}`;
+  return `chart-${safeDomId(section)}-${safeDomId(item.id)}`;
 }
 
 function filterHistory(history, scope) {
@@ -141,8 +145,8 @@ function classifySession(t, type) {
     return "reg";
   }
   if (type === "tw_stock" || type === "tw_etf") {
-    if (mins < 540) return "pre";   // before 09:00
-    if (mins >= 810) return "post"; // 13:30 onward
+    if (mins < 540) return "pre";  // before 09:00
+    if (mins > 810) return "post"; // after 13:30 (13:30 close print stays regular)
     return "reg";
   }
   return "reg";
@@ -217,11 +221,17 @@ const minMaxLabelPlugin = {
 
 function renderChart(canvasId, scope) {
   const history = CARD_HISTORY.get(canvasId);
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
+  // Resolve the STABLE wrapper by id — it keeps its id even when a prior empty-state
+  // message replaced the canvas, so switching to a scope WITH data recovers the canvas.
+  const wrap = document.getElementById("wrap-" + canvasId);
+  if (!wrap) return;
 
   let points = filterHistory(history, scope);
-  const wrap = canvas.parentElement;
+
+  // Destroy any chart bound to this canvas before touching the DOM (avoid leaks) —
+  // including when we fall into the empty-state branch below.
+  const existing = CHART_INSTANCES.get(canvasId);
+  if (existing) { try { existing.destroy(); } catch (e) {} CHART_INSTANCES.delete(canvasId); }
 
   if (!points || points.length < 2) {
     wrap.classList.add("empty");
@@ -231,14 +241,9 @@ function renderChart(canvasId, scope) {
     return;
   }
   wrap.classList.remove("empty");
+  // Recreate the canvas if a prior empty-state removed it (or it never existed).
   if (!document.getElementById(canvasId)) {
     wrap.innerHTML = `<canvas id="${canvasId}"></canvas>`;
-  }
-
-  const existing = CHART_INSTANCES.get(canvasId);
-  if (existing) {
-    existing.destroy();
-    CHART_INSTANCES.delete(canvasId);
   }
 
   // 夜盤 (盤前/盤後) handling — intraday (1d scope) only. Classify each bar by
@@ -380,7 +385,7 @@ function chartBlockHtml(canvasId) {
   }).join("");
   return `
     <div class="chart-block">
-      <div class="chart-canvas-wrap">
+      <div class="chart-canvas-wrap" id="wrap-${canvasId}">
         <canvas id="${canvasId}"></canvas>
       </div>
       <div class="chart-hilo" id="hilo-${canvasId}"></div>
@@ -422,28 +427,36 @@ document.addEventListener("click", (e) => {
   renderChart(canvasId, scope);
 });
 
+// Escape text destined for innerHTML. Card text comes from my config + Yahoo
+// (e.g. notes contain "認錯 <190"), so escape to avoid broken markup / injection.
+function escapeHtml(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, (c) => (
+    { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]
+  ));
+}
+
 // ========== Asset Card Builder ==========
 function buildAssetCard(item, section) {
   const data = item.data || {};
   const isError = item.status === "error";
-  const typeTag = `<span class="asset-type-tag tag-${item.type}">${(item.type || "").replace("_", " ")}</span>`;
+  const typeTag = `<span class="asset-type-tag tag-${escapeHtml(item.type)}">${escapeHtml((item.type || "").replace("_", " "))}</span>`;
 
   // Error card
   if (isError) {
     return `
-      <div class="asset-card error" data-card="${section}-${item.id}">
+      <div class="asset-card error" data-card="${escapeHtml(section + "-" + item.id)}">
         <div class="asset-head">
           <div class="asset-name-block">
-            <div class="asset-name">${item.name || item.id}</div>
-            <div class="asset-symbol">${item.symbol || "–"}</div>
+            <div class="asset-name">${escapeHtml(item.name || item.id)}</div>
+            <div class="asset-symbol">${escapeHtml(item.symbol || "–")}</div>
           </div>
           ${typeTag}
         </div>
         <div class="error-box">
           ⚠️ <strong>無法抓取資料</strong><br>
-          <span style="font-family:monospace; font-size:11px;">${item.error || "Unknown error"}</span>
+          <span style="font-family:monospace; font-size:11px;">${escapeHtml(item.error || "Unknown error")}</span>
         </div>
-        ${item.notes ? `<div class="asset-notes">${item.notes}</div>` : ""}
+        ${item.notes ? `<div class="asset-notes">${escapeHtml(item.notes)}</div>` : ""}
       </div>
     `;
   }
@@ -457,7 +470,7 @@ function buildAssetCard(item, section) {
 
   // Per-card 即時 refresh button (right-aligned in the price row) — updates just this symbol.
   const cardRefreshBtn = item.symbol
-    ? `<button class="card-refresh" title="更新此檔即時" data-sym="${item.symbol}" data-section="${section}" data-cardid="${item.id}">↻</button>`
+    ? `<button class="card-refresh" title="更新此檔即時" data-sym="${escapeHtml(item.symbol)}" data-section="${escapeHtml(section)}" data-cardid="${escapeHtml(item.id)}">↻</button>`
     : "";
 
   const priceRow = price !== null && price !== undefined
@@ -566,19 +579,19 @@ function buildAssetCard(item, section) {
   const canvasId = canvasIdFor(section, item);
   const chartHtml = chartBlockHtml(canvasId);
 
-  const notesHtml = item.notes ? `<div class="asset-notes">📝 ${item.notes}</div>` : "";
+  const notesHtml = item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
 
   // Drag handle only in sortable sections (watchlist / indices), not holdings.
   const dragHandle = (section === "watchlist" || section === "indices")
     ? '<span class="drag-handle" title="按住拖拉排序">⠿</span>' : "";
 
   return `
-    <div class="asset-card" data-card="${section}-${item.id}">
+    <div class="asset-card" data-card="${escapeHtml(section + "-" + item.id)}">
       <div class="asset-head">
         ${dragHandle}
         <div class="asset-name-block">
-          <div class="asset-name">${item.name || item.id}</div>
-          <div class="asset-symbol">${item.symbol || "–"} · ${item.theme || data.exchange || ""}</div>
+          <div class="asset-name">${escapeHtml(item.name || item.id)}</div>
+          <div class="asset-symbol">${escapeHtml(item.symbol || "–")} · ${escapeHtml(item.theme || data.exchange || "")}</div>
         </div>
         ${typeTag}
       </div>
@@ -812,7 +825,7 @@ async function refreshOneCard(section, id, symbol, btn) {
     if (q.changePct != null) item.data.change_pct = q.changePct;
     if (q.intraday && q.intraday.length) item.data.history = { ...(item.data.history || {}), intraday: q.intraday };
     item.status = "ok";
-    const node = document.querySelector(`[data-card="${section}-${id}"]`);
+    const node = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
     if (node) {
       const cid = canvasIdFor(section, item);
       const old = CHART_INSTANCES.get(cid);
