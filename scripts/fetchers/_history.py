@@ -55,7 +55,9 @@ def fetch_history(symbol: str) -> dict:
     ticker = yf.Ticker(symbol)
 
     try:
-        intraday_df = ticker.history(period="1d", interval="5m", auto_adjust=False)
+        # prepost=True includes pre-market + after-hours bars (US equities / futures);
+        # symbols without extended sessions (e.g. TW stocks) just return regular bars.
+        intraday_df = ticker.history(period="1d", interval="5m", auto_adjust=False, prepost=True)
     except Exception:
         intraday_df = None
 

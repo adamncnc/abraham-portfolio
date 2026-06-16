@@ -30,7 +30,7 @@ async function fetchOne(symbol) {
   const url =
     "https://query1.finance.yahoo.com/v8/finance/chart/" +
     encodeURIComponent(symbol) +
-    "?range=1d&interval=5m";
+    "?range=1d&interval=5m&includePrePost=true";
   try {
     const r = await fetch(url, {
       headers: { "User-Agent": "Mozilla/5.0", Accept: "application/json" },
@@ -41,7 +41,11 @@ async function fetchOne(symbol) {
     const res = j && j.chart && j.chart.result && j.chart.result[0];
     const m = res && res.meta;
     if (!m) return { ok: false, error: "no meta" };
-    const price = m.regularMarketPrice ?? null;
+    // Latest price incl. extended hours (pre/post market) when in those sessions.
+    let price = m.regularMarketPrice ?? null;
+    const ms = m.marketState || "";
+    if (ms.startsWith("PRE") && m.preMarketPrice != null) price = m.preMarketPrice;
+    else if ((ms === "POST" || ms === "POSTPOST") && m.postMarketPrice != null) price = m.postMarketPrice;
     const prev = m.chartPreviousClose ?? m.previousClose ?? null;
     const change = price != null && prev != null ? price - prev : null;
     const changePct = change != null && prev ? (change / prev) * 100 : null;
