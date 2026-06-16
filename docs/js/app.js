@@ -9,6 +9,7 @@ const DATA_URL = "./data/latest.json";
 // Empty => 抓即時 falls back to reloading the snapshot file.
 const RELAY_BASE = "https://abraham-quotes.adamncnc.workers.dev";
 let CURRENT_SNAPSHOT = null;
+let LIVE_MODE = false;  // once user presses 抓即時, auto-refresh keeps pulling live
 
 const DEFAULT_SCOPE = "1m";
 const SCOPES = [
@@ -659,6 +660,7 @@ async function liveRefresh() {
       ? `${okCount} 檔即時 · ${failCount} 檔抓取失敗(顯示最近收盤)`
       : `${okCount} 檔即時`;
     renderSnapshot(live, { live: true, note });
+    LIVE_MODE = true;
   } catch (err) {
     console.error("Live refresh failed:", err);
     document.getElementById("timestamp").textContent =
@@ -668,12 +670,15 @@ async function liveRefresh() {
   }
 }
 
-document.getElementById("refresh-btn").addEventListener("click", loadAndRender);
+// ↻ = reload snapshot file (exits live mode); 🔄 抓即時 = live quotes (enters live mode).
+document.getElementById("refresh-btn").addEventListener("click", () => { LIVE_MODE = false; loadAndRender(); });
 const _liveBtn = document.getElementById("live-btn");
 if (_liveBtn) _liveBtn.addEventListener("click", liveRefresh);
 loadAndRender();
 
-// Auto-refresh the snapshot every 5 minutes (when tab visible)
+// Auto-refresh every 5 minutes (when tab visible). Stay in whichever mode the
+// user last chose: live keeps pulling live quotes, otherwise reload snapshot.
 setInterval(() => {
-  if (!document.hidden) loadAndRender();
+  if (document.hidden) return;
+  if (LIVE_MODE) liveRefresh(); else loadAndRender();
 }, 5 * 60 * 1000);
