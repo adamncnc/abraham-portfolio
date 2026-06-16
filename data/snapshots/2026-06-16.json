@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "timestamp_utc": "2026-06-16T15:36:28.310197+00:00",
+  "timestamp_utc": "2026-06-16T15:38:23.167378+00:00",
   "portfolio_summary": {
     "total_market_value_usd_equiv": 0,
     "total_cost_usd_equiv": 0,
@@ -51,7 +51,7 @@
         "regular_market_time": 1781587813,
         "market_state": "POSTPOST",
         "long_name": "Delta Electronics, Inc.",
-        "fetched_at": "2026-06-16T15:36:17.343897+00:00",
+        "fetched_at": "2026-06-16T15:38:14.296725+00:00",
         "history": {
           "intraday": [
             {
@@ -10041,7 +10041,7 @@
         "regular_market_time": 1781587823,
         "market_state": "POSTPOST",
         "long_name": "Asia Vital Components Co., Ltd.",
-        "fetched_at": "2026-06-16T15:36:18.209482+00:00",
+        "fetched_at": "2026-06-16T15:38:14.919911+00:00",
         "history": {
           "intraday": [
             {
@@ -20031,7 +20031,7 @@
         "regular_market_time": 1781587809,
         "market_state": "POSTPOST",
         "long_name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "fetched_at": "2026-06-16T15:36:18.786684+00:00",
+        "fetched_at": "2026-06-16T15:38:15.481994+00:00",
         "history": {
           "intraday": [
             {
@@ -29996,10 +29996,10 @@
         "quote_type": "EQUITY",
         "exchange": "NasdaqGS",
         "currency": "USD",
-        "price": 265.67,
+        "price": 265.715,
         "previous_close": 260.07,
-        "change": 5.600000000000023,
-        "change_pct": 2.153266428269321,
+        "change": 5.644999999999982,
+        "change_pct": 2.1705694620678977,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -30010,21 +30010,21 @@
         "premium_pct": null,
         "fifty_two_week_high": 278.84,
         "fifty_two_week_low": 43.89,
-        "dist_from_high_pct": -4.7231387175440975,
-        "dist_from_low_pct": 505.308726361358,
+        "dist_from_high_pct": -4.707000430354325,
+        "dist_from_low_pct": 505.4112554112554,
         "fifty_day_avg": 187.6396,
         "two_hundred_day_avg": 121.913925,
-        "volume": 7114181,
+        "volume": 7173295,
         "average_volume": 17841393,
         "net_assets": null,
         "dividend_yield_pct": null,
-        "trailing_pe": 102.18078,
+        "trailing_pe": 102.19808,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624181,
+        "regular_market_time": 1781624293,
         "market_state": "REGULAR",
         "long_name": "Nebius Group N.V.",
-        "fetched_at": "2026-06-16T15:36:19.471108+00:00",
+        "fetched_at": "2026-06-16T15:38:15.958028+00:00",
         "history": {
           "intraday": [
             {
@@ -30129,7 +30129,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 265.67
+              "c": 265.715
             }
           ],
           "daily": [
@@ -31783,7 +31783,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 265.67
+              "c": 265.715
             }
           ]
         }
@@ -31830,7 +31830,7 @@
         "regular_market_time": 1781587802,
         "market_state": "POSTPOST",
         "long_name": "FOCI Fiber Optic Communications, Inc.",
-        "fetched_at": "2026-06-16T15:36:20.021512+00:00",
+        "fetched_at": "2026-06-16T15:38:16.312802+00:00",
         "history": {
           "intraday": [
             {
@@ -41820,7 +41820,7 @@
         "regular_market_time": 1781587832,
         "market_state": "POSTPOST",
         "long_name": "Silergy Corp.",
-        "fetched_at": "2026-06-16T15:36:20.530734+00:00",
+        "fetched_at": "2026-06-16T15:38:16.822699+00:00",
         "history": {
           "intraday": [
             {
@@ -51806,7 +51806,7 @@
         "regular_market_time": 1781587805,
         "market_state": "POSTPOST",
         "long_name": "Auras Technology Co., Ltd.",
-        "fetched_at": "2026-06-16T15:36:21.089369+00:00",
+        "fetched_at": "2026-06-16T15:38:17.325931+00:00",
         "history": {
           "intraday": [
             {
@@ -61772,10 +61772,10 @@
         "quote_type": "EQUITY",
         "exchange": "NYSE",
         "currency": "USD",
-        "price": 308.3,
+        "price": 308.1901,
         "previous_close": 311.93,
-        "change": -3.6299999999999955,
-        "change_pct": -1.1637226300772594,
+        "change": -3.739900000000034,
+        "change_pct": -1.1989548937261674,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -61786,21 +61786,21 @@
         "premium_pct": null,
         "fifty_two_week_high": 379.935,
         "fifty_two_week_low": 110.06,
-        "dist_from_high_pct": -18.85454090831326,
-        "dist_from_low_pct": 180.11993458113758,
+        "dist_from_high_pct": -18.883466908813357,
+        "dist_from_low_pct": 180.0200799563874,
         "fifty_day_avg": 318.5724,
         "two_hundred_day_avg": 221.1193,
-        "volume": 1410229,
+        "volume": 1420834,
         "average_volume": 7151887,
         "net_assets": null,
         "dividend_yield_pct": 8.0,
-        "trailing_pe": 77.268166,
+        "trailing_pe": 77.24062,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624182,
+        "regular_market_time": 1781624295,
         "market_state": "REGULAR",
         "long_name": "Vertiv Holdings Co",
-        "fetched_at": "2026-06-16T15:36:21.651341+00:00",
+        "fetched_at": "2026-06-16T15:38:17.831738+00:00",
         "history": {
           "intraday": [
             {
@@ -61905,7 +61905,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 308.3
+              "c": 308.1901
             }
           ],
           "daily": [
@@ -69819,7 +69819,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 308.3
+              "c": 308.1901
             }
           ]
         }
@@ -69866,7 +69866,7 @@
         "regular_market_time": 1781587825,
         "market_state": "POSTPOST",
         "long_name": "Elite Material Co., Ltd.",
-        "fetched_at": "2026-06-16T15:36:22.199573+00:00",
+        "fetched_at": "2026-06-16T15:38:18.249835+00:00",
         "history": {
           "intraday": [
             {
@@ -79856,7 +79856,7 @@
         "regular_market_time": 1781587811,
         "market_state": "POSTPOST",
         "long_name": "Yageo Corporation",
-        "fetched_at": "2026-06-16T15:36:23.045493+00:00",
+        "fetched_at": "2026-06-16T15:38:18.707554+00:00",
         "history": {
           "intraday": [
             {
@@ -89822,35 +89822,35 @@
         "quote_type": "EQUITY",
         "exchange": "NasdaqGS",
         "currency": "USD",
-        "price": 1044.515,
+        "price": 1038.735,
         "previous_close": 1087.99,
-        "change": -43.47499999999991,
-        "change_pct": -3.995900697616698,
+        "change": -49.25500000000011,
+        "change_pct": -4.527155580474095,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
         "post_market_change_pct": null,
-        "day_low": 1039.0,
+        "day_low": 1038.56,
         "day_high": 1110.3999,
         "nav": null,
         "premium_pct": null,
         "fifty_two_week_high": 1110.3999,
         "fifty_two_week_low": 103.38,
-        "dist_from_high_pct": -5.933438934927839,
-        "dist_from_low_pct": 910.3646740181855,
+        "dist_from_high_pct": -6.4539721230162215,
+        "dist_from_low_pct": 904.7736506094022,
         "fifty_day_avg": 692.0818,
         "two_hundred_day_avg": 386.56024,
-        "volume": 20761804,
+        "volume": 20958481,
         "average_volume": 51225522,
         "net_assets": null,
         "dividend_yield_pct": 6.0,
-        "trailing_pe": 49.22314,
+        "trailing_pe": 48.950756,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624186,
+        "regular_market_time": 1781624298,
         "market_state": "REGULAR",
         "long_name": "Micron Technology, Inc.",
-        "fetched_at": "2026-06-16T15:36:23.635599+00:00",
+        "fetched_at": "2026-06-16T15:38:19.265842+00:00",
         "history": {
           "intraday": [
             {
@@ -89955,7 +89955,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 1044.515
+              "c": 1038.735
             }
           ],
           "daily": [
@@ -100009,7 +100009,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 1044.75
+              "c": 1038.735
             }
           ]
         }
@@ -100032,10 +100032,10 @@
         "quote_type": "EQUITY",
         "exchange": "NYSE",
         "currency": "USD",
-        "price": 1000.0,
+        "price": 999.1896,
         "previous_close": 978.57,
-        "change": 21.42999999999995,
-        "change_pct": 2.1899302042776654,
+        "change": 20.61959999999999,
+        "change_pct": 2.107115484840123,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -100046,21 +100046,21 @@
         "premium_pct": null,
         "fifty_two_week_high": 1181.95,
         "fifty_two_week_low": 479.04,
-        "dist_from_high_pct": -15.394052201869796,
-        "dist_from_low_pct": 108.75083500334001,
+        "dist_from_high_pct": -15.462616861965394,
+        "dist_from_low_pct": 108.58166332665328,
         "fifty_day_avg": 1014.3758,
         "two_hundred_day_avg": 766.0623,
-        "volume": 987586,
+        "volume": 995348,
         "average_volume": 2632650,
         "net_assets": null,
         "dividend_yield_pct": 20.0,
-        "trailing_pe": 29.18004,
+        "trailing_pe": 29.156393,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624180,
+        "regular_market_time": 1781624288,
         "market_state": "REGULAR",
         "long_name": "GE Vernova Inc.",
-        "fetched_at": "2026-06-16T15:36:24.257518+00:00",
+        "fetched_at": "2026-06-16T15:38:19.775767+00:00",
         "history": {
           "intraday": [
             {
@@ -100165,7 +100165,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 1000.0
+              "c": 999.1896
             }
           ],
           "daily": [
@@ -102391,7 +102391,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 1000.0
+              "c": 999.04
             }
           ]
         }
@@ -102414,35 +102414,35 @@
         "quote_type": "EQUITY",
         "exchange": "NYSE",
         "currency": "USD",
-        "price": 514.67,
+        "price": 514.19,
         "previous_close": 489.73,
-        "change": 24.93999999999994,
-        "change_pct": 5.092602046025348,
+        "change": 24.460000000000036,
+        "change_pct": 4.99458885508342,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
         "post_market_change_pct": null,
         "day_low": 496.5925,
-        "day_high": 514.67,
+        "day_high": 514.885,
         "nav": null,
         "premium_pct": null,
         "fifty_two_week_high": 565.4999,
         "fifty_two_week_low": 385.91,
-        "dist_from_high_pct": -8.988489653136996,
-        "dist_from_low_pct": 33.365292425695095,
+        "dist_from_high_pct": -9.073370304751597,
+        "dist_from_low_pct": 33.24091109326009,
         "fifty_day_avg": 502.0214,
         "two_hundred_day_avg": 472.00266,
-        "volume": 276064,
+        "volume": 280802,
         "average_volume": 629735,
         "net_assets": null,
         "dividend_yield_pct": 1.16,
-        "trailing_pe": 30.453846,
+        "trailing_pe": 30.425446,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624185,
+        "regular_market_time": 1781624268,
         "market_state": "REGULAR",
         "long_name": "Hubbell Incorporated",
-        "fetched_at": "2026-06-16T15:36:24.872483+00:00",
+        "fetched_at": "2026-06-16T15:38:20.092556+00:00",
         "history": {
           "intraday": [
             {
@@ -102547,7 +102547,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 514.67
+              "c": 514.19
             }
           ],
           "daily": [
@@ -112605,7 +112605,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 514.67
+              "c": 514.19
             }
           ]
         }
@@ -112628,10 +112628,10 @@
         "quote_type": "EQUITY",
         "exchange": "NasdaqGS",
         "currency": "USD",
-        "price": 269.52,
+        "price": 269.53,
         "previous_close": 262.35,
-        "change": 7.169999999999959,
-        "change_pct": 2.7329902801600756,
+        "change": 7.17999999999995,
+        "change_pct": 2.7368019820849816,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -112642,21 +112642,21 @@
         "premium_pct": null,
         "fifty_two_week_high": 412.7,
         "fifty_two_week_low": 240.51,
-        "dist_from_high_pct": -34.693481948146356,
-        "dist_from_low_pct": 12.061868529375076,
+        "dist_from_high_pct": -34.691058880542776,
+        "dist_from_low_pct": 12.066026360650278,
         "fifty_day_avg": 284.8994,
         "two_hundred_day_avg": 319.9066,
-        "volume": 1428055,
+        "volume": 1434653,
         "average_volume": 3430811,
         "net_assets": null,
         "dividend_yield_pct": 65.0,
-        "trailing_pe": 23.395832,
+        "trailing_pe": 23.3967,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624186,
+        "regular_market_time": 1781624282,
         "market_state": "REGULAR",
         "long_name": "Constellation Energy Corporation",
-        "fetched_at": "2026-06-16T15:36:25.576615+00:00",
+        "fetched_at": "2026-06-16T15:38:20.705968+00:00",
         "history": {
           "intraday": [
             {
@@ -112761,7 +112761,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 269.52
+              "c": 269.53
             }
           ],
           "daily": [
@@ -117187,7 +117187,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 269.51
+              "c": 269.53
             }
           ]
         }
@@ -117210,10 +117210,10 @@
         "quote_type": "EQUITY",
         "exchange": "NYSE",
         "currency": "USD",
-        "price": 158.5,
+        "price": 158.425,
         "previous_close": 153.52,
-        "change": 4.97999999999999,
-        "change_pct": 3.2438770192808684,
+        "change": 4.905000000000001,
+        "change_pct": 3.195023449713393,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -117224,21 +117224,21 @@
         "premium_pct": null,
         "fifty_two_week_high": 219.82,
         "fifty_two_week_low": 132.66,
-        "dist_from_high_pct": -27.895550905286143,
-        "dist_from_low_pct": 19.478365747022465,
+        "dist_from_high_pct": -27.9296697297789,
+        "dist_from_low_pct": 19.421830242725775,
         "fifty_day_avg": 153.755,
         "two_hundred_day_avg": 170.7282,
-        "volume": 1694563,
+        "volume": 1700389,
         "average_volume": 4629050,
         "net_assets": null,
         "dividend_yield_pct": 60.0,
-        "trailing_pe": 26.46077,
+        "trailing_pe": 26.448248,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624184,
+        "regular_market_time": 1781624281,
         "market_state": "REGULAR",
         "long_name": "Vistra Corp.",
-        "fetched_at": "2026-06-16T15:36:26.019389+00:00",
+        "fetched_at": "2026-06-16T15:38:21.081863+00:00",
         "history": {
           "intraday": [
             {
@@ -117343,7 +117343,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 158.5
+              "c": 158.425
             }
           ],
           "daily": [
@@ -127093,7 +127093,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 158.5
+              "c": 158.425
             }
           ]
         }
@@ -127116,10 +127116,10 @@
         "quote_type": "EQUITY",
         "exchange": "NasdaqGS",
         "currency": "USD",
-        "price": 416.4,
+        "price": 414.85,
         "previous_close": 386.21,
-        "change": 30.189999999999998,
-        "change_pct": 7.816990756324279,
+        "change": 28.640000000000043,
+        "change_pct": 7.415654695631922,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -127130,21 +127130,21 @@
         "premium_pct": null,
         "fifty_two_week_high": 451.28,
         "fifty_two_week_low": 255.5,
-        "dist_from_high_pct": -7.729126041482007,
-        "dist_from_low_pct": 62.97455968688844,
+        "dist_from_high_pct": -8.07259351178868,
+        "dist_from_low_pct": 62.367906066536214,
         "fifty_day_avg": 359.2932,
         "two_hundred_day_avg": 371.4501,
-        "volume": 750570,
+        "volume": 754973,
         "average_volume": 720834,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": null,
         "expense_ratio": null,
         "ytd_return_pct": null,
-        "regular_market_time": 1781624185,
+        "regular_market_time": 1781624288,
         "market_state": "REGULAR",
         "long_name": "Talen Energy Corporation",
-        "fetched_at": "2026-06-16T15:36:26.502453+00:00",
+        "fetched_at": "2026-06-16T15:38:21.601897+00:00",
         "history": {
           "intraday": [
             {
@@ -127249,7 +127249,7 @@
             },
             {
               "t": "2026-06-16T11:35",
-              "c": 416.4
+              "c": 414.85
             }
           ],
           "daily": [
@@ -130299,7 +130299,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 416.4
+              "c": 414.85
             }
           ]
         }
@@ -130346,7 +130346,7 @@
         "regular_market_time": 1781587833,
         "market_state": "POSTPOST",
         "long_name": "uPI Semiconductor Corp.",
-        "fetched_at": "2026-06-16T15:36:26.898555+00:00",
+        "fetched_at": "2026-06-16T15:38:22.002527+00:00",
         "history": {
           "intraday": [
             {
@@ -134872,7 +134872,7 @@
         "regular_market_time": 1781587805,
         "market_state": "POSTPOST",
         "long_name": "Sinopower Semiconductor, Inc.",
-        "fetched_at": "2026-06-16T15:36:27.320840+00:00",
+        "fetched_at": "2026-06-16T15:38:22.350761+00:00",
         "history": {
           "intraday": [
             {
@@ -144804,23 +144804,23 @@
         "quote_type": "FUTURE",
         "exchange": "COMEX",
         "currency": "USD",
-        "price": 4343.9,
+        "price": 4344.1,
         "previous_close": 4351.6,
-        "change": -7.700000000000728,
-        "change_pct": -0.1769464105156891,
+        "change": -7.5,
+        "change_pct": -0.17235039985292766,
         "day_low": 4326.7,
         "day_high": 4376.5,
         "fifty_two_week_high": 5586.2,
         "fifty_two_week_low": 3253.8,
-        "dist_from_high_pct": -22.23873115892736,
-        "dist_from_low_pct": 33.502366463826895,
+        "dist_from_high_pct": -22.235150907593702,
+        "dist_from_low_pct": 33.50851312311759,
         "fifty_day_avg": 4579.614,
         "two_hundred_day_avg": 4438.8125,
-        "regular_market_time": 1781623586,
+        "regular_market_time": 1781623694,
         "market_state": "REGULAR",
         "long_name": "Gold Aug 26",
         "unit": "USD per troy ounce",
-        "fetched_at": "2026-06-16T15:36:27.867964+00:00",
+        "fetched_at": "2026-06-16T15:38:22.816511+00:00",
         "history": {
           "intraday": [
             {
@@ -145373,7 +145373,7 @@
             },
             {
               "t": "2026-06-16T11:25",
-              "c": 4343.8999
+              "c": 4344.1001
             }
           ],
           "daily": [
@@ -155427,7 +155427,7 @@
             },
             {
               "t": "2026-06-16",
-              "c": 4343.8999
+              "c": 4344.1001
             }
           ]
         }
