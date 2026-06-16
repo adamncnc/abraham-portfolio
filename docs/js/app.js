@@ -568,9 +568,14 @@ function buildAssetCard(item, section) {
 
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${item.notes}</div>` : "";
 
+  // Drag handle only in sortable sections (watchlist / indices), not holdings.
+  const dragHandle = (section === "watchlist" || section === "indices")
+    ? '<span class="drag-handle" title="按住拖拉排序">⠿</span>' : "";
+
   return `
     <div class="asset-card" data-card="${section}-${item.id}">
       <div class="asset-head">
+        ${dragHandle}
         <div class="asset-name-block">
           <div class="asset-name">${item.name || item.id}</div>
           <div class="asset-symbol">${item.symbol || "–"} · ${item.theme || data.exchange || ""}</div>
@@ -702,6 +707,8 @@ function renderSnapshot(snapshot, opts = {}) {
   if (snapshot.holdings?.length) initializeCharts(snapshot.holdings, "holdings");
   if (snapshot.watchlist?.length) initializeCharts(snapshot.watchlist, "watchlist");
   if (snapshot.indices?.length) initializeCharts(snapshot.indices, "indices");
+
+  setupOrdering();
 }
 
 async function loadAndRender() {
@@ -822,6 +829,104 @@ async function refreshOneCard(section, id, symbol, btn) {
     }
   }
 }
+
+// ========== Card ordering: drag-drop (A) + sort dropdown (B) ==========
+// Adam manages card order himself, persisted per-device in localStorage:
+//   A. drag a card by its ⠿ handle (SortableJS, touch-friendly) -> mode 自訂
+//   B. 排序 dropdown per section: 預設 / 漲跌幅 / 距進場區 / 名稱 / 自訂(拖拉)
+// DOM nodes are re-appended in place so charts/canvas are preserved (no rebuild).
+const ORDER_SECTIONS = ["watchlist", "indices"];
+const SORTABLE_INSTANCES = {};
+
+function lsGet(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode / quota — ignore */ } }
+
+function cardIdOf(card, section) {
+  const dc = card.getAttribute("data-card") || "";
+  return dc.startsWith(section + "-") ? dc.slice(section.length + 1) : dc;
+}
+
+function sortMetric(item, mode) {
+  const d = (item && item.data) || {};
+  if (mode === "change") return d.change_pct == null ? -Infinity : d.change_pct; // 漲跌幅 大->小
+  if (mode === "zone") {                                                          // 距進場區 近->遠
+    const hi = item && item.entry_zone_hi, p = d.price;
+    if (hi == null || p == null) return Infinity;                                 // 無進場區 -> 排最後
+    return Math.abs(p - hi) / hi;
+  }
+  return 0;
+}
+
+// Reorder the section's card nodes per its saved sort mode (appendChild = move).
+function applySort(section) {
+  const grid = document.getElementById(section + "-grid");
+  if (!grid || !CURRENT_SNAPSHOT) return;
+  const items = CURRENT_SNAPSHOT[section] || [];
+  const byId = new Map(items.map((it) => [String(it.id), it]));
+  const cards = Array.from(grid.querySelectorAll(".asset-card"));
+  if (cards.length < 2) return;
+  const mode = lsGet("abraham.sort." + section, "default");
+
+  if (mode === "name") {
+    cards
+      .map((c) => [c, (byId.get(cardIdOf(c, section)) || {}).name || ""])
+      .sort((a, b) => String(a[1]).localeCompare(String(b[1]), "zh-Hant"))
+      .forEach((pair) => grid.appendChild(pair[0]));
+    return;
+  }
+
+  let ranked;
+  if (mode === "change" || mode === "zone") {
+    const dir = mode === "change" ? -1 : 1;
+    ranked = cards.map((c) => [c, sortMetric(byId.get(cardIdOf(c, section)), mode) * dir]);
+  } else if (mode === "custom") {
+    let order = [];
+    try { order = JSON.parse(lsGet("abraham.order." + section, "[]")) || []; } catch (e) { order = []; }
+    const rank = new Map(order.map((id, i) => [String(id), i]));
+    ranked = cards.map((c, i) => [c, rank.has(cardIdOf(c, section)) ? rank.get(cardIdOf(c, section)) : 1e9 + i]);
+  } else {
+    const rank = new Map(items.map((it, i) => [String(it.id), i])); // 預設 = snapshot order
+    ranked = cards.map((c, i) => [c, rank.has(cardIdOf(c, section)) ? rank.get(cardIdOf(c, section)) : 1e9 + i]);
+  }
+  ranked.sort((a, b) => a[1] - b[1]).forEach((pair) => grid.appendChild(pair[0]));
+}
+
+// (Re)init SortableJS + sync dropdown + apply saved order. Called after every render.
+function setupOrdering() {
+  for (const section of ORDER_SECTIONS) {
+    const grid = document.getElementById(section + "-grid");
+    if (!grid) continue;
+    const sel = document.querySelector('.sort-select[data-section="' + section + '"]');
+    if (sel) sel.value = lsGet("abraham.sort." + section, "default");
+    if (SORTABLE_INSTANCES[section]) { try { SORTABLE_INSTANCES[section].destroy(); } catch (e) {} delete SORTABLE_INSTANCES[section]; }
+    if (window.Sortable && grid.querySelector(".asset-card")) {
+      SORTABLE_INSTANCES[section] = window.Sortable.create(grid, {
+        handle: ".drag-handle",
+        animation: 150,
+        ghostClass: "sortable-ghost",
+        chosenClass: "sortable-chosen",
+        dragClass: "sortable-drag",
+        onEnd: () => {
+          const ids = Array.from(grid.querySelectorAll(".asset-card")).map((c) => cardIdOf(c, section)).filter(Boolean);
+          lsSet("abraham.order." + section, JSON.stringify(ids));
+          lsSet("abraham.sort." + section, "custom");
+          const s = document.querySelector('.sort-select[data-section="' + section + '"]');
+          if (s) s.value = "custom";
+        },
+      });
+    }
+    applySort(section);
+  }
+}
+
+// Sort dropdown change (delegated — survives re-renders since headers are static).
+document.addEventListener("change", (e) => {
+  const sel = e.target && e.target.closest && e.target.closest(".sort-select");
+  if (!sel) return;
+  const section = sel.dataset.section;
+  lsSet("abraham.sort." + section, sel.value);
+  applySort(section);
+});
 
 // ↻ = reload snapshot file (exits live mode); 🔄 抓即時 = live quotes (enters live mode).
 document.getElementById("refresh-btn").addEventListener("click", () => { LIVE_MODE = false; loadAndRender(); });

@@ -6,6 +6,7 @@
 <title>Abraham Portfolio Dashboard</title>
 <link rel="stylesheet" href="css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
 <body>
 
@@ -45,6 +46,13 @@
   <div class="section-header">
     <h2>👀 觀察清單 Watchlist</h2>
     <span class="section-count" id="watchlist-count">–</span>
+    <select class="sort-select" data-section="watchlist" title="排序方式">
+      <option value="default">預設順序</option>
+      <option value="change">漲跌幅</option>
+      <option value="zone">距進場區</option>
+      <option value="name">名稱</option>
+      <option value="custom">自訂(拖拉)</option>
+    </select>
   </div>
   <div class="card-grid" id="watchlist-grid">
     <div class="loading">Loading watchlist…</div>
@@ -56,6 +64,12 @@
   <div class="section-header">
     <h2>📊 大盤指數 Indices</h2>
     <span class="section-count" id="indices-count">–</span>
+    <select class="sort-select" data-section="indices" title="排序方式">
+      <option value="default">預設順序</option>
+      <option value="change">漲跌幅</option>
+      <option value="name">名稱</option>
+      <option value="custom">自訂(拖拉)</option>
+    </select>
   </div>
   <div class="card-grid" id="indices-grid">
     <div class="loading">Loading indices…</div>
