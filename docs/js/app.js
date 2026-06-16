@@ -124,6 +124,30 @@ function filterHistory(history, scope) {
   return daily.slice(-days);
 }
 
+// Classify an intraday bar into pre-market / regular / post-market by its
+// exchange-local time. Yahoo intraday `t` is "YYYY-MM-DDTHH:MM" in the exchange's
+// own timezone, so a minute-of-day comparison is enough.
+//   US equities/ETF: regular 09:30–16:00 ET.
+//   TW equities/ETF: 09:00–13:30 (TW has no real extended session — defensive).
+//   Other types (commodities/futures): no clean split → treated as regular.
+function classifySession(t, type) {
+  const tp = String(t).split("T")[1];
+  if (!tp) return "reg"; // daily bar, no intraday session
+  const [h, m] = tp.split(":").map(Number);
+  const mins = h * 60 + m;
+  if (type === "us_stock" || type === "us_etf") {
+    if (mins < 570) return "pre";   // before 09:30
+    if (mins >= 960) return "post"; // 16:00 onward
+    return "reg";
+  }
+  if (type === "tw_stock" || type === "tw_etf") {
+    if (mins < 540) return "pre";   // before 09:00
+    if (mins >= 810) return "post"; // 13:30 onward
+    return "reg";
+  }
+  return "reg";
+}
+
 // Format a history point's `t` for the tooltip title.
 // intraday "2026-06-15T17:16" -> "6月15日 下午5:16"; daily "2026-06-15" -> "2026/6/15".
 function fmtChartTs(t) {
@@ -196,7 +220,7 @@ function renderChart(canvasId, scope) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
 
-  const points = filterHistory(history, scope);
+  let points = filterHistory(history, scope);
   const wrap = canvas.parentElement;
 
   if (!points || points.length < 2) {
@@ -217,8 +241,29 @@ function renderChart(canvasId, scope) {
     CHART_INSTANCES.delete(canvasId);
   }
 
-  const first = points[0].c;
-  const last = points[points.length - 1].c;
+  // 夜盤 (盤前/盤後) handling — intraday (1d scope) only. Classify each bar by
+  // its exchange-local time; once the regular session has opened that day, drop
+  // the leading pre-market segment (Adam 2026-06-17: 開盤後不再顯示前一段夜盤).
+  // After-hours bars stay in the series but render white via the segment callback.
+  const cardType = (CARD_META.get(canvasId) || {}).type || "";
+  let sessions = null;
+  if (scope === "1d") {
+    sessions = points.map((p) => classifySession(p.t, cardType));
+    if (sessions.includes("reg")) {
+      const keptPts = [], keptSess = [];
+      points.forEach((p, i) => {
+        if (sessions[i] !== "pre") { keptPts.push(p); keptSess.push(sessions[i]); }
+      });
+      if (keptPts.length >= 2) { points = keptPts; sessions = keptSess; }
+    }
+  }
+
+  // Regular-session bars drive the up/down (red/green) line color; after-hours
+  // segments get overridden to white by the dataset segment callback below.
+  const regCloses = sessions ? points.filter((_, i) => sessions[i] === "reg").map((p) => p.c) : null;
+  const colorRef = regCloses && regCloses.length ? regCloses : points.map((p) => p.c);
+  const first = colorRef[0];
+  const last = colorRef[colorRef.length - 1];
   // 台股慣例: 漲=紅, 跌=綠
   const lineColor = last >= first ? "#f87171" : "#4ade80";
   const fillColor = last >= first ? "rgba(248, 113, 113, 0.15)" : "rgba(74, 222, 128, 0.15)";
@@ -233,6 +278,10 @@ function renderChart(canvasId, scope) {
     label: "價格",
     data: closes,
     borderColor: lineColor,
+    segment: {
+      // 夜盤(盤前/盤後) segments render white; regular session keeps 漲紅跌綠.
+      borderColor: (ctx) => (sessions && sessions[ctx.p1DataIndex] !== "reg" ? "#ffffff" : undefined),
+    },
     backgroundColor: fillColor,
     borderWidth: 1.8,
     fill: true,
@@ -350,6 +399,7 @@ function initializeCharts(items, section) {
       lo: item.entry_zone_lo ?? null,
       hi: item.entry_zone_hi ?? null,
       currency: item.currency || item.data?.currency || "USD",
+      type: item.type || "",
     });
     renderChart(canvasId, DEFAULT_SCOPE);
   }
