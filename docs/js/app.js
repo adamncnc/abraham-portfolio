@@ -13,16 +13,19 @@ let LIVE_MODE = false;  // once user presses 抓即時, auto-refresh keeps pulli
 
 const DEFAULT_SCOPE = "1d";
 const SCOPES = [
-  { key: "1d", label: "1D" },
-  { key: "3d", label: "3D" },
-  { key: "1w", label: "1W" },
+  { key: "1d", label: "1d" },
+  { key: "3d", label: "3d" },
+  { key: "1w", label: "1w" },
   { key: "1m", label: "1M" },
   { key: "3m", label: "3M" },
-  { key: "1y", label: "1Y" },
+  { key: "6m", label: "6M" },
+  { key: "1y", label: "1y" },
+  { key: "2y", label: "2y" },
+  { key: "5y", label: "5y" },
   { key: "all", label: "All" },
 ];
 // Days to slice from daily series. 1d is handled separately (uses intraday).
-const SCOPE_DAYS = { "3d": 3, "1w": 7, "1m": 30, "3m": 90, "1y": 365 };
+const SCOPE_DAYS = { "3d": 3, "1w": 7, "1m": 30, "3m": 90, "6m": 180, "1y": 365, "2y": 730, "5y": 1825 };
 
 // Active Chart.js instances keyed by canvas id so we can destroy them before
 // recreating (auto-refresh every 5 min, scope changes).
