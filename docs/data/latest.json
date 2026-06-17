@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "timestamp_utc": "2026-06-17T10:09:36.252954+00:00",
+  "timestamp_utc": "2026-06-17T10:10:53.111327+00:00",
   "portfolio_summary": {
     "total_market_value_usd_equiv": 0,
     "total_cost_usd_equiv": 0,
@@ -52,7 +52,7 @@
         "regular_market_time": 1781674216,
         "market_state": "POSTPOST",
         "long_name": "Delta Electronics, Inc.",
-        "fetched_at": "2026-06-17T10:09:18.460374+00:00",
+        "fetched_at": "2026-06-17T10:10:35.836384+00:00",
         "history": {
           "intraday": [
             {
@@ -10872,7 +10872,7 @@
         "regular_market_time": 1781674226,
         "market_state": "POSTPOST",
         "long_name": "Asia Vital Components Co., Ltd.",
-        "fetched_at": "2026-06-17T10:09:19.317708+00:00",
+        "fetched_at": "2026-06-17T10:10:36.439840+00:00",
         "history": {
           "intraday": [
             {
@@ -21696,7 +21696,7 @@
         "regular_market_time": 1781674209,
         "market_state": "POSTPOST",
         "long_name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "fetched_at": "2026-06-17T10:09:19.904644+00:00",
+        "fetched_at": "2026-06-17T10:10:37.092535+00:00",
         "history": {
           "intraday": [
             {
@@ -32496,8 +32496,8 @@
         "previous_close": 260.07,
         "change": 5.03000000000003,
         "change_pct": 1.934094666820483,
-        "pre_market_price": 268.5001,
-        "pre_market_change_pct": 1.2825671,
+        "pre_market_price": 268.9813,
+        "pre_market_change_pct": 1.4640839,
         "post_market_price": null,
         "post_market_change_pct": null,
         "day_low": 253.4,
@@ -32520,7 +32520,7 @@
         "regular_market_time": 1781640000,
         "market_state": "PRE",
         "long_name": "Nebius Group N.V.",
-        "fetched_at": "2026-06-17T10:09:20.554780+00:00",
+        "fetched_at": "2026-06-17T10:10:37.961056+00:00",
         "history": {
           "intraday": [
             {
@@ -32625,7 +32625,11 @@
             },
             {
               "t": "2026-06-17T06:05",
-              "c": 268.5001
+              "c": 268.73
+            },
+            {
+              "t": "2026-06-17T06:10",
+              "c": 268.9813
             }
           ],
           "intraday_mid": [
@@ -35424,7 +35428,7 @@
         "regular_market_time": 1781674202,
         "market_state": "POSTPOST",
         "long_name": "FOCI Fiber Optic Communications, Inc.",
-        "fetched_at": "2026-06-17T10:09:21.070256+00:00",
+        "fetched_at": "2026-06-17T10:10:38.616595+00:00",
         "history": {
           "intraday": [
             {
@@ -46244,7 +46248,7 @@
         "regular_market_time": 1781674206,
         "market_state": "POSTPOST",
         "long_name": "Silergy Corp.",
-        "fetched_at": "2026-06-17T10:09:21.912360+00:00",
+        "fetched_at": "2026-06-17T10:10:39.499799+00:00",
         "history": {
           "intraday": [
             {
@@ -57064,7 +57068,7 @@
         "regular_market_time": 1781674205,
         "market_state": "POSTPOST",
         "long_name": "Auras Technology Co., Ltd.",
-        "fetched_at": "2026-06-17T10:09:22.521500+00:00",
+        "fetched_at": "2026-06-17T10:10:40.304307+00:00",
         "history": {
           "intraday": [
             {
@@ -67860,11 +67864,11 @@
         "previous_close": 311.93,
         "change": -12.329999999999984,
         "change_pct": -3.952809925303749,
-        "pre_market_price": 301.1,
-        "pre_market_change_pct": 0.5140902,
+        "pre_market_price": 301.0,
+        "pre_market_change_pct": 0.48070586,
         "post_market_price": null,
         "post_market_change_pct": null,
-        "day_low": 299.09,
+        "day_low": 299.11,
         "day_high": 316.3707,
         "nav": null,
         "premium_pct": null,
@@ -67884,7 +67888,7 @@
         "regular_market_time": 1781640002,
         "market_state": "PRE",
         "long_name": "Vertiv Holdings Co",
-        "fetched_at": "2026-06-17T10:09:23.077900+00:00",
+        "fetched_at": "2026-06-17T10:10:40.858064+00:00",
         "history": {
           "intraday": [
             {
@@ -67977,7 +67981,7 @@
             },
             {
               "t": "2026-06-17T05:50",
-              "c": 302.5
+              "c": 302.28
             },
             {
               "t": "2026-06-17T05:55",
@@ -67989,7 +67993,7 @@
             },
             {
               "t": "2026-06-17T06:05",
-              "c": 301.1
+              "c": 301.0
             }
           ],
           "intraday_mid": [
@@ -77040,7 +77044,7 @@
         "regular_market_time": 1781674221,
         "market_state": "POSTPOST",
         "long_name": "Elite Material Co., Ltd.",
-        "fetched_at": "2026-06-17T10:09:23.802415+00:00",
+        "fetched_at": "2026-06-17T10:10:41.547228+00:00",
         "history": {
           "intraday": [
             {
@@ -87860,7 +87864,7 @@
         "regular_market_time": 1781674201,
         "market_state": "POSTPOST",
         "long_name": "Yageo Corporation",
-        "fetched_at": "2026-06-17T10:09:24.488129+00:00",
+        "fetched_at": "2026-06-17T10:10:42.130229+00:00",
         "history": {
           "intraday": [
             {
@@ -98660,8 +98664,8 @@
         "previous_close": 1087.99,
         "change": -67.23000000000002,
         "change_pct": -6.179284736072944,
-        "pre_market_price": 1052.0,
-        "pre_market_change_pct": 3.0604637,
+        "pre_market_price": 1052.5977,
+        "pre_market_change_pct": 3.1190138,
         "post_market_price": null,
         "post_market_change_pct": null,
         "day_low": 1020.0,
@@ -98684,7 +98688,7 @@
         "regular_market_time": 1781640001,
         "market_state": "PRE",
         "long_name": "Micron Technology, Inc.",
-        "fetched_at": "2026-06-17T10:09:25.154670+00:00",
+        "fetched_at": "2026-06-17T10:10:42.847758+00:00",
         "history": {
           "intraday": [
             {
@@ -98789,7 +98793,11 @@
             },
             {
               "t": "2026-06-17T06:05",
-              "c": 1052.0
+              "c": 1052.42
+            },
+            {
+              "t": "2026-06-17T06:10",
+              "c": 1052.5977
             }
           ],
           "intraday_mid": [
@@ -109988,7 +109996,7 @@
         "regular_market_time": 1781640016,
         "market_state": "PRE",
         "long_name": "GE Vernova Inc.",
-        "fetched_at": "2026-06-17T10:09:25.842929+00:00",
+        "fetched_at": "2026-06-17T10:10:43.697025+00:00",
         "history": {
           "intraday": [
             {
@@ -113464,7 +113472,7 @@
         "regular_market_time": 1781640002,
         "market_state": "PRE",
         "long_name": "Hubbell Incorporated",
-        "fetched_at": "2026-06-17T10:09:26.455892+00:00",
+        "fetched_at": "2026-06-17T10:10:44.143975+00:00",
         "history": {
           "intraday": [
             {
@@ -124700,7 +124708,7 @@
         "regular_market_time": 1781640001,
         "market_state": "PRE",
         "long_name": "Constellation Energy Corporation",
-        "fetched_at": "2026-06-17T10:09:27.296883+00:00",
+        "fetched_at": "2026-06-17T10:10:44.872574+00:00",
         "history": {
           "intraday": [
             {
@@ -130336,8 +130344,8 @@
         "previous_close": 153.52,
         "change": 5.090000000000003,
         "change_pct": 3.3155289213131858,
-        "pre_market_price": 159.41,
-        "pre_market_change_pct": 0.49488017,
+        "pre_market_price": 159.4,
+        "pre_market_change_pct": 0.48856983,
         "post_market_price": null,
         "post_market_change_pct": null,
         "day_low": 152.96,
@@ -130360,7 +130368,7 @@
         "regular_market_time": 1781640002,
         "market_state": "PRE",
         "long_name": "Vistra Corp.",
-        "fetched_at": "2026-06-17T10:09:27.882224+00:00",
+        "fetched_at": "2026-06-17T10:10:45.451253+00:00",
         "history": {
           "intraday": [
             {
@@ -130465,7 +130473,11 @@
             },
             {
               "t": "2026-06-17T06:05",
-              "c": 159.41
+              "c": 159.49
+            },
+            {
+              "t": "2026-06-17T06:10",
+              "c": 159.4
             }
           ],
           "intraday_mid": [
@@ -141356,7 +141368,7 @@
         "regular_market_time": 1781640000,
         "market_state": "PRE",
         "long_name": "Talen Energy Corporation",
-        "fetched_at": "2026-06-17T10:09:28.539571+00:00",
+        "fetched_at": "2026-06-17T10:10:46.227826+00:00",
         "history": {
           "intraday": [
             {
@@ -145572,7 +145584,7 @@
         "regular_market_time": 1781674202,
         "market_state": "POSTPOST",
         "long_name": "uPI Semiconductor Corp.",
-        "fetched_at": "2026-06-17T10:09:29.110653+00:00",
+        "fetched_at": "2026-06-17T10:10:46.659155+00:00",
         "history": {
           "intraday": [
             {
@@ -150928,7 +150940,7 @@
         "regular_market_time": 1781674205,
         "market_state": "POSTPOST",
         "long_name": "Sinopower Semiconductor, Inc.",
-        "fetched_at": "2026-06-17T10:09:29.717759+00:00",
+        "fetched_at": "2026-06-17T10:10:47.286891+00:00",
         "history": {
           "intraday": [
             {
@@ -161744,7 +161756,7 @@
         "regular_market_time": 1781674218,
         "market_state": "POSTPOST",
         "long_name": "Phison Electronics Corp.",
-        "fetched_at": "2026-06-17T10:09:30.443685+00:00",
+        "fetched_at": "2026-06-17T10:10:47.938974+00:00",
         "history": {
           "intraday": [
             {
@@ -172568,7 +172580,7 @@
         "regular_market_time": 1781640002,
         "market_state": "PRE",
         "long_name": "Onto Innovation Inc.",
-        "fetched_at": "2026-06-17T10:09:31.207458+00:00",
+        "fetched_at": "2026-06-17T10:10:48.632914+00:00",
         "history": {
           "intraday": [
             {
@@ -180424,8 +180436,8 @@
         "previous_close": 106.71,
         "change": 10.320000000000007,
         "change_pct": 9.67107112735452,
-        "pre_market_price": 117.72,
-        "pre_market_change_pct": 0.5895945,
+        "pre_market_price": 117.68,
+        "pre_market_change_pct": 0.55541444,
         "post_market_price": null,
         "post_market_change_pct": null,
         "day_low": 107.62,
@@ -180448,7 +180460,7 @@
         "regular_market_time": 1781640001,
         "market_state": "PRE",
         "long_name": "CoreWeave, Inc.",
-        "fetched_at": "2026-06-17T10:09:31.826276+00:00",
+        "fetched_at": "2026-06-17T10:10:49.268234+00:00",
         "history": {
           "intraday": [
             {
@@ -180553,7 +180565,11 @@
             },
             {
               "t": "2026-06-17T06:05",
-              "c": 117.72
+              "c": 117.8
+            },
+            {
+              "t": "2026-06-17T06:10",
+              "c": 117.68
             }
           ],
           "intraday_mid": [
@@ -182894,23 +182910,23 @@
         "quote_type": "FUTURE",
         "exchange": "COMEX",
         "currency": "USD",
-        "price": 4348.9,
+        "price": 4348.2,
         "previous_close": 4354.4,
-        "change": -5.5,
-        "change_pct": -0.12630902076060999,
+        "change": -6.199999999999818,
+        "change_pct": -0.14238471431195615,
         "day_low": 4335.6,
         "day_high": 4369.8,
         "fifty_two_week_high": 5586.2,
         "fifty_two_week_low": 3253.8,
-        "dist_from_high_pct": -22.14922487558627,
-        "dist_from_low_pct": 33.65603294609378,
+        "dist_from_high_pct": -22.16175575525402,
+        "dist_from_low_pct": 33.63451963857642,
         "fifty_day_avg": 4579.614,
         "two_hundred_day_avg": 4438.8125,
-        "regular_market_time": 1781690364,
+        "regular_market_time": 1781690443,
         "market_state": "REGULAR",
         "long_name": "Gold Aug 26",
         "unit": "USD per troy ounce",
-        "fetched_at": "2026-06-17T10:09:32.344797+00:00",
+        "fetched_at": "2026-06-17T10:10:49.676737+00:00",
         "history": {
           "intraday": [
             {
@@ -183199,7 +183215,11 @@
             },
             {
               "t": "2026-06-17T05:55",
-              "c": 4348.8999
+              "c": 4349.2998
+            },
+            {
+              "t": "2026-06-17T06:00",
+              "c": 4348.2002
             }
           ],
           "intraday_mid": [
@@ -183709,7 +183729,7 @@
             },
             {
               "t": "2026-05-20T11:00",
-              "c": 4533.0
+              "c": 4532.8999
             },
             {
               "t": "2026-05-20T11:30",
@@ -187113,7 +187133,11 @@
             },
             {
               "t": "2026-06-17T05:30",
-              "c": 4348.8999
+              "c": 4349.2998
+            },
+            {
+              "t": "2026-06-17T06:00",
+              "c": 4348.2002
             }
           ],
           "daily": [
@@ -197167,7 +197191,7 @@
             },
             {
               "t": "2026-06-17",
-              "c": 4348.8999
+              "c": 4348.2002
             }
           ]
         }
@@ -197218,7 +197242,7 @@
         "regular_market_time": 1781674395,
         "market_state": "POSTPOST",
         "long_name": "TWSE Capitalization Weighted Stock Index",
-        "fetched_at": "2026-06-17T10:09:33.009351+00:00",
+        "fetched_at": "2026-06-17T10:10:50.604469+00:00",
         "history": {
           "intraday": [
             {
@@ -208040,7 +208064,7 @@
         "regular_market_time": 1781640000,
         "market_state": "PRE",
         "long_name": "iShares MSCI Taiwan ETF",
-        "fetched_at": "2026-06-17T10:09:33.656213+00:00",
+        "fetched_at": "2026-06-17T10:10:51.103025+00:00",
         "history": {
           "intraday": [
             {
@@ -219294,7 +219318,7 @@
         "regular_market_time": 1781644559,
         "market_state": "PRE",
         "long_name": "NASDAQ Composite",
-        "fetched_at": "2026-06-17T10:09:34.449658+00:00",
+        "fetched_at": "2026-06-17T10:10:51.787046+00:00",
         "history": {
           "intraday": [],
           "intraday_mid": [
@@ -230491,7 +230515,7 @@
         "regular_market_time": 1781644559,
         "market_state": "PRE",
         "long_name": "PHLX Semiconductor",
-        "fetched_at": "2026-06-17T10:09:35.092646+00:00",
+        "fetched_at": "2026-06-17T10:10:52.344105+00:00",
         "history": {
           "intraday": [],
           "intraday_mid": [
@@ -241688,7 +241712,7 @@
         "regular_market_time": 1781640300,
         "market_state": "PRE",
         "long_name": "NYSE Composite Index",
-        "fetched_at": "2026-06-17T10:09:35.832089+00:00",
+        "fetched_at": "2026-06-17T10:10:52.816345+00:00",
         "history": {
           "intraday": [],
           "intraday_mid": [
