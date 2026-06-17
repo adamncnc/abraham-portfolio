@@ -201,6 +201,17 @@
       "entry_zone_hi": 255
     },
     {
+      "id": "8299",
+      "type": "tw_stock",
+      "symbol": "8299.TWO",
+      "name": "群聯",
+      "currency": "TWD",
+      "theme": "NAND 控制晶片龍頭 (HBF 概念/景氣循環股)",
+      "notes": "NAND 控制晶片龍頭 (HBF 概念/景氣循環股): 今年 PE~8 是循環頂峰假便宜 (fwd PE 13.7, TTM EPS 39.7→fwd 170 靠 NAND 漲價上行週期), ROE 37%, analyst mean 2946 (+26%); ⚠️ 營運+自由現金流雙負 (囤 NAND 庫存=循環風險); 進場區 1900-2100 (6/12 hunt#8 分析, 50日線2200下方等回檔), 認錯=NAND 合約價 MoM 轉負無條件離場; HBF 是",
+      "entry_zone_lo": 1900,
+      "entry_zone_hi": 2100
+    },
+    {
       "id": "gold",
       "type": "commodity",
       "symbol": "GC=F",
