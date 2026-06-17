@@ -615,11 +615,66 @@ function buildAssetCard(item, section) {
   `;
 }
 
-// ========== Portfolio Summary ==========
-function renderSummary(summary) {
-  const el = document.getElementById("portfolio-summary");
+// ========== Entry-zone watch (進場區內) ==========
+// Scan watchlist/holdings for names whose live price has fallen into (or below)
+// their configured entry zone [lo, hi]. Powers the top-summary 進場區內 card so
+// Adam sees at a glance which names are at actionable buy levels — none -> 無.
+// (Adam 2026-06-17: 紅圈那塊改列進入進場區的股票名單，沒有就寫「無」。)
+function entryZoneEntries(snapshot) {
+  const items = [
+    ...((snapshot && snapshot.watchlist) || []),
+    ...((snapshot && snapshot.holdings) || []),
+  ];
+  const out = [];
+  for (const item of items) {
+    const hi = item.entry_zone_hi;
+    if (hi == null) continue;                        // no zone defined -> skip
+    const price = item.data && item.data.price;
+    if (price == null) continue;                     // no live price -> skip
+    const distTop = ((price - hi) / hi) * 100;       // % above zone top
+    if (distTop > 0.5) continue;                      // still above zone (waiting) -> skip
+    const lo = item.entry_zone_lo;
+    let state, pct;
+    if (lo != null && price < lo) {
+      state = "破底";                                 // dropped below the zone bottom
+      pct = ((lo - price) / lo) * 100;                // how far below lo
+    } else {
+      state = "在區內";                               // within the buy zone (incl. hi-only)
+      pct = null;
+    }
+    out.push({ name: item.name || item.id, state, pct, distTop });
+  }
+  out.sort((a, b) => a.distTop - b.distTop);          // deepest into the zone first
+  return out;
+}
 
-  // Copilot mode: no tracked positions -> show a watchlist-focused summary
+function zoneCardHtml(snapshot) {
+  const entries = entryZoneEntries(snapshot);
+  let body;
+  if (!entries.length) {
+    body = `<div class="zone-empty">無</div>`;
+  } else {
+    body = `<div class="zone-list">` + entries.map((e) => {
+      const cls = e.state === "破底" ? "zone-below" : "zone-in";
+      const tail = e.state === "破底" ? `破底 ${fmtNum(e.pct, 1)}%` : "在區內";
+      return `<div class="zone-row"><span class="zone-name">${escapeHtml(e.name)}</span><span class="${cls}">${tail}</span></div>`;
+    }).join("") + `</div>`;
+  }
+  const sub = entries.length ? `${entries.length} 檔現價落入買進區` : "目前皆在進場區之上";
+  return `
+    <div class="summary-card">
+      <div class="summary-label">🎯 進場區內</div>
+      ${body}
+      <div class="summary-sub">${sub}</div>
+    </div>`;
+}
+
+// ========== Portfolio Summary ==========
+function renderSummary(summary, snapshot) {
+  const el = document.getElementById("portfolio-summary");
+  const zoneCard = zoneCardHtml(snapshot);
+
+  // Copilot mode: no tracked positions -> show watchlist count + 進場區內 list
   // instead of empty 總市值/總成本/損益 cards reading "–".
   if (!summary || !summary.holdings_count) {
     el.innerHTML = `
@@ -628,11 +683,7 @@ function renderSummary(summary) {
       <div class="summary-value">${summary?.watchlist_count ?? "–"}</div>
       <div class="summary-sub">追蹤標的</div>
     </div>
-    <div class="summary-card">
-      <div class="summary-label">模式</div>
-      <div class="summary-value" style="font-size:18px;">Copilot</div>
-      <div class="summary-sub">標的觀點 · 不記錄持倉</div>
-    </div>`;
+    ${zoneCard}`;
     return;
   }
 
@@ -664,6 +715,7 @@ function renderSummary(summary) {
       <div class="summary-value">${summary.watchlist_count}</div>
       <div class="summary-sub">追蹤中</div>
     </div>
+    ${zoneCard}
   `;
 }
 
@@ -697,7 +749,7 @@ function renderSnapshot(snapshot, opts = {}) {
   const idxCountEl = document.getElementById("indices-count");
   if (idxCountEl) idxCountEl.textContent = `${snapshot.indices?.length || 0} 檔`;
 
-  renderSummary(snapshot.portfolio_summary);
+  renderSummary(snapshot.portfolio_summary, snapshot);
 
   // Holdings (hidden entirely when empty — copilot mode)
   const holdingsGrid = document.getElementById("holdings-grid");
@@ -843,6 +895,9 @@ async function refreshOneCard(section, id, symbol, btn) {
       node.outerHTML = buildAssetCard(item, section);
       initializeCharts([item], section);
     }
+    // Re-evaluate 進場區內 summary — this symbol's new price may have just
+    // entered (or left) its entry zone. (Adam 2026-06-17: 每次更新都要判別)
+    renderSummary(CURRENT_SNAPSHOT.portfolio_summary, CURRENT_SNAPSHOT);
   } catch (err) {
     console.error("card refresh failed:", symbol, err);
     if (btn) {
