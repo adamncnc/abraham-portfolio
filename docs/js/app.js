@@ -37,6 +37,21 @@ const CARD_HISTORY = new Map();
 // trend chart so Adam sees current price vs the pre-set 進場上限/下限.
 const CARD_META = new Map();
 
+// ============================================================================
+// 漲紅跌綠 (台股慣例) — SINGLE SOURCE OF TRUTH for up/down colours.
+// Adam 2026-06-17: 「固定漲紅跌綠 不要忘記」。漲 = 紅、跌 = 綠。
+// BOTH the price-change text (.up/.down in style.css, same hex) AND the trend
+// chart line read their colour from here. NEVER invert (漲綠跌紅 is wrong) and
+// NEVER hardcode a different up/down colour — any new coloured element calls
+// trendColor()/trendFill() so the convention can never drift again.
+// ============================================================================
+const TREND_UP_COLOR = "#f87171";    // 漲 = 紅
+const TREND_DOWN_COLOR = "#4ade80";  // 跌 = 綠
+const TREND_UP_FILL = "rgba(248, 113, 113, 0.15)";
+const TREND_DOWN_FILL = "rgba(74, 222, 128, 0.15)";
+function trendColor(delta) { return Number(delta) >= 0 ? TREND_UP_COLOR : TREND_DOWN_COLOR; }
+function trendFill(delta) { return Number(delta) >= 0 ? TREND_UP_FILL : TREND_DOWN_FILL; }
+
 // ========== Formatters ==========
 function fmtNum(val, decimals = 2) {
   if (val === null || val === undefined || isNaN(val)) return "–";
@@ -279,9 +294,14 @@ function renderChart(canvasId, scope) {
   const colorRef = regCloses && regCloses.length ? regCloses : points.map((p) => p.c);
   const first = colorRef[0];
   const last = colorRef[colorRef.length - 1];
-  // 台股慣例: 漲=紅, 跌=綠
-  const lineColor = last >= first ? "#f87171" : "#4ade80";
-  const fillColor = last >= first ? "rgba(248, 113, 113, 0.15)" : "rgba(74, 222, 128, 0.15)";
+  // 漲紅跌綠 — colour the line by the card's DAY move (= the price-number's
+  // up/down), via the single trendColor() source of truth, so the line colour
+  // can never contradict the number (Adam 2026-06-17 固定漲紅跌綠 不要忘記).
+  // Fallback to the displayed-window trend only when day-change is unavailable.
+  const dayChange = (CARD_META.get(canvasId) || {}).dayChange;
+  const trendDelta = (dayChange != null && !isNaN(dayChange)) ? Number(dayChange) : (last - first);
+  const lineColor = trendColor(trendDelta);
+  const fillColor = trendFill(trendDelta);
 
   const closes = points.map((p) => p.c);
   // High/low of the displayed range -> text line below the chart (updates per scope).
@@ -415,6 +435,7 @@ function initializeCharts(items, section) {
       hi: item.entry_zone_hi ?? null,
       currency: item.currency || item.data?.currency || "USD",
       type: item.type || "",
+      dayChange: item.data?.change_pct ?? null,  // drives the line colour (漲紅跌綠, matches the number)
     });
     renderChart(canvasId, DEFAULT_SCOPE);
   }
@@ -1048,7 +1069,10 @@ if (_liveBtn) _liveBtn.addEventListener("click", liveRefresh);
 // Restore last-viewed market tab BEFORE the first render so its charts (in the
 // visible panel) size correctly; hidden panels resize when first activated.
 activateTab(lsGet("abraham.activeTab", "tw"), false);
-loadAndRender();
+// Render the saved snapshot immediately (fast), then upgrade to live quotes so
+// the colours reflect the CURRENT session, not a stale pre-market snapshot
+// (Adam 2026-06-17). liveRefresh falls back to the static file if the relay is down.
+loadAndRender().then(() => liveRefresh());
 
 // Auto-refresh every 5 minutes (when tab visible). Stay in whichever mode the
 // user last chose: live keeps pulling live quotes, otherwise reload snapshot.
