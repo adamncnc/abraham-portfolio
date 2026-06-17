@@ -212,6 +212,28 @@
       "entry_zone_hi": 2100
     },
     {
+      "id": "onto",
+      "type": "us_stock",
+      "symbol": "ONTO",
+      "name": "Onto Innovation",
+      "currency": "USD",
+      "theme": "HBM/先進封裝製程檢測量測(賣鏟子)",
+      "notes": "HBM/先進封裝製程檢測量測(賣鏟子): 6/17 深查; 營收創高加速(Q3-25 $218M→Q1-26 創高 $292M), 「獲利-47%」是高基期+攤銷費用假警報(底層營收創高); fwd PE 32(還原EPS)/trailing 147假貴/P/S 15貴/零負債/現金$13.2億; 分析師近2月一面倒上修 mean $352(+11%) strong_buy = 8檔賣鏟子唯一目標>現價; 進場區 280-305(突破帶回測+50日線277)/認錯<248(5",
+      "entry_zone_lo": 280,
+      "entry_zone_hi": 305
+    },
+    {
+      "id": "crwv",
+      "type": "us_stock",
+      "symbol": "CRWV",
+      "name": "CoreWeave",
+      "currency": "USD",
+      "theme": "AI GPU 雲端算力(CoreWeave)",
+      "notes": "AI GPU 雲端算力(CoreWeave): 租 Nvidia GPU 給 AI 大廠, 6/17 加入未深查; rev +112%超高成長 BUT ⚠️⚠️深度虧損(EPS -2.72/淨損$16億)+槓桿爆表(負債$351億/D-E 738%/流動比0.32)+FCF -$86億+18%空單; 現$117 距ATH$187 -37%/50日$110/200日$100; 分析師 mean $140(+20%,目標$36-303極離散); 初步進場區 95-110(50/2",
+      "entry_zone_lo": 95,
+      "entry_zone_hi": 110
+    },
+    {
       "id": "gold",
       "type": "commodity",
       "symbol": "GC=F",
