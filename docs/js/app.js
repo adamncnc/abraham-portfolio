@@ -421,6 +421,8 @@ function initializeCharts(items, section) {
 }
 
 document.addEventListener("click", (e) => {
+  const tabBtn = e.target.closest(".market-tab");
+  if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
   const rb = e.target.closest(".card-refresh");
   if (rb) {
     refreshOneCard(rb.dataset.section, rb.dataset.cardid, rb.dataset.sym, rb);
@@ -560,9 +562,10 @@ function buildAssetCard(item, section) {
     ? `<div class="range-bar-wrap">${rangeBarHtml(data.price, data.fifty_two_week_low, data.fifty_two_week_high)}</div>`
     : "";
 
-  // PnL for holdings
+  // PnL — shown whenever the item carries cost/PnL (holdings). Copilot mode has
+  // none, but a future holding shows PnL inside its market tab card.
   let pnlHtml = "";
-  if (section === "holdings" && item.unrealized_pnl !== undefined && item.unrealized_pnl !== null) {
+  if (item.unrealized_pnl !== undefined && item.unrealized_pnl !== null) {
     const pnlCls = changeClass(item.unrealized_pnl);
     pnlHtml = `
       <div class="pnl-row">
@@ -591,8 +594,8 @@ function buildAssetCard(item, section) {
 
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
 
-  // Drag handle only in sortable sections (watchlist / indices), not holdings.
-  const dragHandle = (section === "watchlist" || section === "indices")
+  // Drag handle in every sortable market tab (台股 / 美股 / 指數).
+  const dragHandle = (section === "tw" || section === "us" || section === "idx")
     ? '<span class="drag-handle" title="按住拖拉排序">⠿</span>' : "";
 
   return `
@@ -719,6 +722,55 @@ function renderSummary(summary, snapshot) {
   `;
 }
 
+// ========== Market tabs (台股 / 美股 / 指數) ==========
+// Adam 2026-06-17: 網頁上方三個標籤頁，各檔分門別類；黃金暫放指數頁。
+// Bucket every tracked item by market. Holdings + watchlist split into 台股/美股
+// by type; 黃金 (commodity) and all 大盤指數 go to 指數. Buckets hold REFERENCES
+// to the same item objects, so live-quote mutations (refreshOneCard) show up
+// without re-bucketing.
+function tabForItem(item) {
+  const t = item.type || "";
+  if (t.startsWith("tw_")) return "tw";   // tw_stock / tw_etf -> 台股
+  if (t === "commodity") return "idx";    // 黃金 -> 指數頁 (Adam 2026-06-17)
+  return "us";                            // us_stock / us_etf / 其他 -> 美股
+}
+
+function bucketSnapshot(snapshot) {
+  const tw = [], us = [], idx = [];
+  for (const item of [...(snapshot.holdings || []), ...(snapshot.watchlist || [])]) {
+    const tab = tabForItem(item);
+    (tab === "tw" ? tw : tab === "idx" ? idx : us).push(item);
+  }
+  for (const item of (snapshot.indices || [])) idx.push(item);  // 大盤指數 -> 指數頁
+  snapshot.tw = tw;
+  snapshot.us = us;
+  snapshot.idx = idx;
+}
+
+// Switch the visible market tab. Charts created while a panel was display:none
+// render at 0×0, so resize this tab's charts once it becomes visible.
+function activateTab(which, doResize = true) {
+  if (!which) return;
+  document.querySelectorAll(".market-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === which));
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
+  lsSet("abraham.activeTab", which);
+  if (doResize) {
+    CHART_INSTANCES.forEach((chart, cid) => {
+      if (cid.startsWith("chart-" + which + "-")) { try { chart.resize(); } catch (e) { /* ignore */ } }
+    });
+  }
+}
+
+function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+function renderGrid(section, items, emptyMsg) {
+  const grid = document.getElementById(section + "-grid");
+  if (!grid) return;
+  grid.innerHTML = items && items.length
+    ? items.map((item) => buildAssetCard(item, section)).join("")
+    : `<div class="loading">${emptyMsg}</div>`;
+}
+
 // ========== Main Render ==========
 // Render a snapshot object into the page. Shared by the initial snapshot load
 // and the live-refresh path so price/badges/range/chart all update uniformly.
@@ -741,47 +793,29 @@ function renderSnapshot(snapshot, opts = {}) {
     tsEl.textContent = `資料時間：${ts.toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false })} (Taipei)`;
   }
 
-  // Counts
-  const total = (snapshot.holdings?.length || 0) + (snapshot.watchlist?.length || 0) + (snapshot.indices?.length || 0);
-  document.getElementById("item-count").textContent = `${total} items`;
-  document.getElementById("holdings-count").textContent = `${snapshot.holdings?.length || 0} 檔`;
-  document.getElementById("watchlist-count").textContent = `${snapshot.watchlist?.length || 0} 檔`;
-  const idxCountEl = document.getElementById("indices-count");
-  if (idxCountEl) idxCountEl.textContent = `${snapshot.indices?.length || 0} 檔`;
+  // Bucket every tracked item into the 3 market tabs (台股/美股/指數).
+  bucketSnapshot(snapshot);
+
+  // Counts — header pill = grand total; per-tab counts on tab buttons + headers.
+  const total = snapshot.tw.length + snapshot.us.length + snapshot.idx.length;
+  setText("item-count", `${total} items`);
+  setText("tab-count-tw", snapshot.tw.length);
+  setText("tab-count-us", snapshot.us.length);
+  setText("tab-count-idx", snapshot.idx.length);
+  setText("tw-count", `${snapshot.tw.length} 檔`);
+  setText("us-count", `${snapshot.us.length} 檔`);
+  setText("idx-count", `${snapshot.idx.length} 檔`);
 
   renderSummary(snapshot.portfolio_summary, snapshot);
 
-  // Holdings (hidden entirely when empty — copilot mode)
-  const holdingsGrid = document.getElementById("holdings-grid");
-  if (!snapshot.holdings?.length) {
-    holdingsGrid.innerHTML = '<div class="loading">（尚無持倉）</div>';
-  } else {
-    holdingsGrid.innerHTML = snapshot.holdings.map(item => buildAssetCard(item, "holdings")).join("");
-  }
-  const holdingsSection = document.getElementById("holdings-section");
-  if (holdingsSection) holdingsSection.style.display = snapshot.holdings?.length ? "" : "none";
+  // Render each market tab's grid (台股 / 美股 / 指數含黃金)
+  renderGrid("tw", snapshot.tw, "（台股清單為空）");
+  renderGrid("us", snapshot.us, "（美股清單為空）");
+  renderGrid("idx", snapshot.idx, "（無指數資料）");
 
-  // Watchlist
-  const watchGrid = document.getElementById("watchlist-grid");
-  if (!snapshot.watchlist?.length) {
-    watchGrid.innerHTML = '<div class="loading">（觀察清單為空）</div>';
-  } else {
-    watchGrid.innerHTML = snapshot.watchlist.map(item => buildAssetCard(item, "watchlist")).join("");
-  }
-
-  // Indices (大盤指數) — bottom section
-  const indicesGrid = document.getElementById("indices-grid");
-  if (indicesGrid) {
-    if (!snapshot.indices?.length) {
-      indicesGrid.innerHTML = '<div class="loading">（無指數資料）</div>';
-    } else {
-      indicesGrid.innerHTML = snapshot.indices.map(item => buildAssetCard(item, "indices")).join("");
-    }
-  }
-
-  if (snapshot.holdings?.length) initializeCharts(snapshot.holdings, "holdings");
-  if (snapshot.watchlist?.length) initializeCharts(snapshot.watchlist, "watchlist");
-  if (snapshot.indices?.length) initializeCharts(snapshot.indices, "indices");
+  initializeCharts(snapshot.tw, "tw");
+  initializeCharts(snapshot.us, "us");
+  initializeCharts(snapshot.idx, "idx");
 
   setupOrdering();
 }
@@ -798,9 +832,8 @@ async function loadAndRender() {
   } catch (err) {
     console.error("Failed to load data:", err);
     document.getElementById("timestamp").textContent = `❌ 載入失敗：${err.message}`;
-    document.getElementById("holdings-grid").innerHTML =
-      `<div class="loading">無法載入 ${DATA_URL}<br><small>${err.message}</small></div>`;
-    document.getElementById("watchlist-grid").innerHTML = "";
+    const errHtml = `<div class="loading">無法載入 ${DATA_URL}<br><small>${err.message}</small></div>`;
+    ["tw", "us", "idx"].forEach((s) => { const g = document.getElementById(s + "-grid"); if (g) g.innerHTML = errHtml; });
   } finally {
     refreshBtn.textContent = "↻";
   }
@@ -856,6 +889,7 @@ async function liveRefresh() {
     const note = failCount
       ? `${okCount} 檔即時 · ${failCount} 檔抓取失敗(顯示最近收盤)`
       : `${okCount} 檔即時`;
+    CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
     renderSnapshot(live, { live: true, note });
     LIVE_MODE = true;
   } catch (err) {
@@ -913,7 +947,7 @@ async function refreshOneCard(section, id, symbol, btn) {
 //   A. drag a card by its ⠿ handle (SortableJS, touch-friendly) -> mode 自訂
 //   B. 排序 dropdown per section: 預設 / 漲跌幅 / 距進場區 / 名稱 / 自訂(拖拉)
 // DOM nodes are re-appended in place so charts/canvas are preserved (no rebuild).
-const ORDER_SECTIONS = ["watchlist", "indices"];
+const ORDER_SECTIONS = ["tw", "us", "idx"];
 const SORTABLE_INSTANCES = {};
 
 function lsGet(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
@@ -1010,6 +1044,10 @@ document.addEventListener("change", (e) => {
 document.getElementById("refresh-btn").addEventListener("click", () => { LIVE_MODE = false; loadAndRender(); });
 const _liveBtn = document.getElementById("live-btn");
 if (_liveBtn) _liveBtn.addEventListener("click", liveRefresh);
+
+// Restore last-viewed market tab BEFORE the first render so its charts (in the
+// visible panel) size correctly; hidden panels resize when first activated.
+activateTab(lsGet("abraham.activeTab", "tw"), false);
 loadAndRender();
 
 // Auto-refresh every 5 minutes (when tab visible). Stay in whichever mode the

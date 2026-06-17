@@ -109,6 +109,48 @@ body {
 .zone-below { color: var(--warning); font-weight: 700; font-size: 12px; white-space: nowrap; }
 .zone-empty { font-size: 22px; font-weight: 700; color: var(--text-dim); }
 
+/* Market tabs (台股 / 美股 / 指數) */
+.market-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.market-tab {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.market-tab:hover { background: var(--card-hover); color: var(--text); }
+.market-tab.active {
+  background: linear-gradient(135deg, #1e3a5f 0%, #2d3548 100%);
+  color: var(--text);
+  border-color: var(--info);
+}
+.tab-count {
+  background: var(--border);
+  color: var(--text-dim);
+  padding: 1px 9px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.market-tab.active .tab-count { background: rgba(96, 165, 250, 0.25); color: var(--info); }
+
+/* Tab panels — only the active market shows */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
 /* Section */
 .section { margin-bottom: 28px; }
 .section-header {
@@ -410,4 +452,5 @@ body {
   .asset-price { font-size: 26px; }
   .card-grid { grid-template-columns: 1fr; }
   .portfolio-summary { grid-template-columns: repeat(2, 1fr); }
+  .market-tab { padding: 8px 14px; font-size: 13px; }
 }

@@ -30,23 +30,18 @@
   <!-- rendered by app.js -->
 </section>
 
-<!-- Holdings -->
-<section class="section" id="holdings-section">
-  <div class="section-header">
-    <h2>💰 持倉 Holdings</h2>
-    <span class="section-count" id="holdings-count">–</span>
-  </div>
-  <div class="card-grid" id="holdings-grid">
-    <div class="loading">Loading holdings…</div>
-  </div>
-</section>
+<!-- Market tabs: 台股 / 美股 / 指數 (Adam 2026-06-17: 上方三個標籤頁，各檔分門別類；黃金暫放指數頁) -->
+<nav class="market-tabs" id="market-tabs">
+  <button class="market-tab active" data-tab="tw">🇹🇼 台股 <span class="tab-count" id="tab-count-tw">–</span></button>
+  <button class="market-tab" data-tab="us">🇺🇸 美股 <span class="tab-count" id="tab-count-us">–</span></button>
+  <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
+</nav>
 
-<!-- Watchlist -->
-<section class="section">
+<!-- 台股 -->
+<section class="tab-panel active" id="panel-tw">
   <div class="section-header">
-    <h2>👀 觀察清單 Watchlist</h2>
-    <span class="section-count" id="watchlist-count">–</span>
-    <select class="sort-select" data-section="watchlist" title="排序方式">
+    <span class="section-count" id="tw-count">–</span>
+    <select class="sort-select" data-section="tw" title="排序方式">
       <option value="default">預設順序</option>
       <option value="change">漲跌幅</option>
       <option value="zone">距進場區</option>
@@ -54,25 +49,41 @@
       <option value="custom">自訂(拖拉)</option>
     </select>
   </div>
-  <div class="card-grid" id="watchlist-grid">
-    <div class="loading">Loading watchlist…</div>
+  <div class="card-grid" id="tw-grid">
+    <div class="loading">Loading…</div>
   </div>
 </section>
 
-<!-- Indices (大盤指數) — bottom section -->
-<section class="section">
+<!-- 美股 -->
+<section class="tab-panel" id="panel-us">
   <div class="section-header">
-    <h2>📊 大盤指數 Indices</h2>
-    <span class="section-count" id="indices-count">–</span>
-    <select class="sort-select" data-section="indices" title="排序方式">
+    <span class="section-count" id="us-count">–</span>
+    <select class="sort-select" data-section="us" title="排序方式">
+      <option value="default">預設順序</option>
+      <option value="change">漲跌幅</option>
+      <option value="zone">距進場區</option>
+      <option value="name">名稱</option>
+      <option value="custom">自訂(拖拉)</option>
+    </select>
+  </div>
+  <div class="card-grid" id="us-grid">
+    <div class="loading">Loading…</div>
+  </div>
+</section>
+
+<!-- 指數 (含黃金) -->
+<section class="tab-panel" id="panel-idx">
+  <div class="section-header">
+    <span class="section-count" id="idx-count">–</span>
+    <select class="sort-select" data-section="idx" title="排序方式">
       <option value="default">預設順序</option>
       <option value="change">漲跌幅</option>
       <option value="name">名稱</option>
       <option value="custom">自訂(拖拉)</option>
     </select>
   </div>
-  <div class="card-grid" id="indices-grid">
-    <div class="loading">Loading indices…</div>
+  <div class="card-grid" id="idx-grid">
+    <div class="loading">Loading…</div>
   </div>
 </section>
 
