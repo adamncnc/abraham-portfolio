@@ -596,7 +596,7 @@ function buildAssetCard(item, section) {
     }
     metrics.push(["分析師目標", tgtVal]);
   }
-  if (data.recommendation) {
+  if (data.recommendation && data.recommendation !== "none") {
     const recMap = {
       strong_buy: "強力買進", buy: "買進", outperform: "優於大盤",
       hold: "中立", underperform: "劣於大盤", sell: "賣出", strong_sell: "強力賣出", none: "—",
