@@ -578,6 +578,33 @@ function buildAssetCard(item, section) {
   if (data.dividend_yield_pct !== null && data.dividend_yield_pct !== undefined) {
     metrics.push(["殖利率", `<span class="up">${fmtPct(data.dividend_yield_pct, false)}</span>`]);
   }
+  // 估值資訊 — 本益比(目前/預估) + 分析師平均目標價(含距現價%) + 評等 (Adam 2026-06-19 要求).
+  // 指數/黃金沒有這些欄位 → Yahoo 回 null → 自動跳過不顯示，不亂編。
+  // 負/零 本益比 = 虧損或無盈餘，乘數無意義 → 不顯示（不誤導）。
+  if (data.trailing_pe !== null && data.trailing_pe !== undefined && data.trailing_pe > 0) {
+    metrics.push(["本益比", fmtNum(data.trailing_pe, 1)]);
+  }
+  if (data.forward_pe !== null && data.forward_pe !== undefined && data.forward_pe > 0) {
+    metrics.push(["預估本益比", fmtNum(data.forward_pe, 1)]);
+  }
+  if (data.target_mean_price !== null && data.target_mean_price !== undefined) {
+    let tgtVal = fmtCurrency(data.target_mean_price, data.currency || item.currency);
+    if (price !== null && price !== undefined && price !== 0) {
+      const upside = ((data.target_mean_price - price) / price) * 100;
+      const upSign = upside > 0 ? "+" : "";
+      tgtVal += ` <span class="${changeClass(upside)}">(距現價 ${upSign}${fmtNum(upside, 1)}%)</span>`;
+    }
+    metrics.push(["分析師目標", tgtVal]);
+  }
+  if (data.recommendation) {
+    const recMap = {
+      strong_buy: "強力買進", buy: "買進", outperform: "優於大盤",
+      hold: "中立", underperform: "劣於大盤", sell: "賣出", strong_sell: "強力賣出", none: "—",
+    };
+    const recZh = recMap[data.recommendation] || data.recommendation;
+    const nAna = (data.num_analysts !== null && data.num_analysts !== undefined) ? ` · ${data.num_analysts} 位` : "";
+    metrics.push(["分析師評等", `${recZh}${nAna}`]);
+  }
   if (data.dist_from_high_pct !== null && data.dist_from_high_pct !== undefined) {
     const cls2 = distFromHighClass(data.dist_from_high_pct);
     const label = distFromHighLabel(data.dist_from_high_pct);
