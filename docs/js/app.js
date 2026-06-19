@@ -449,6 +449,21 @@ document.addEventListener("click", (e) => {
     refreshOneCard(rb.dataset.section, rb.dataset.cardid, rb.dataset.sym, rb);
     return;
   }
+  // 圖釘: toggle pinned state + re-apply sort (floats to top unless 漲跌幅/距進場區).
+  const pinB = e.target.closest(".pin-btn");
+  if (pinB) {
+    const section = pinB.dataset.section, id = pinB.dataset.cardid;
+    if (section && id) {
+      const nowPinned = togglePin(section, id);
+      pinB.classList.toggle("pinned", nowPinned);
+      pinB.title = nowPinned ? "取消置頂" : "釘選置頂";
+      pinB.setAttribute("aria-pressed", String(nowPinned));
+      const card = pinB.closest(".asset-card");
+      if (card) card.classList.toggle("pinned", nowPinned);
+      applySort(section);
+    }
+    return;
+  }
   const btn = e.target.closest(".scope-btn");
   if (!btn) return;
   const canvasId = btn.dataset.canvas;
@@ -474,16 +489,26 @@ function buildAssetCard(item, section) {
   const isError = item.status === "error";
   const typeTag = `<span class="asset-type-tag tag-${escapeHtml(item.type)}">${escapeHtml((item.type || "").replace("_", " "))}</span>`;
 
+  // 圖釘按鈕 (右上) — only in sortable market tabs (台股/美股/指數). Reflects saved
+  // pinned state on render so it survives re-renders / live refresh (Adam 2026-06-19).
+  const sortable = (section === "tw" || section === "us" || section === "idx");
+  const pinnedState = sortable && isPinned(section, item.id);
+  const pinnedCardCls = pinnedState ? " pinned" : "";
+  const pinBtn = sortable
+    ? `<button class="pin-btn${pinnedState ? " pinned" : ""}" title="${pinnedState ? "取消置頂" : "釘選置頂"}" aria-pressed="${pinnedState}" data-section="${escapeHtml(section)}" data-cardid="${escapeHtml(item.id)}">📌</button>`
+    : "";
+
   // Error card
   if (isError) {
     return `
-      <div class="asset-card error" data-card="${escapeHtml(section + "-" + item.id)}">
+      <div class="asset-card error${pinnedCardCls}" data-card="${escapeHtml(section + "-" + item.id)}">
         <div class="asset-head">
           <div class="asset-name-block">
             <div class="asset-name">${escapeHtml(item.name || item.id)}</div>
             <div class="asset-symbol">${escapeHtml(item.symbol || "–")}</div>
           </div>
           ${typeTag}
+          ${pinBtn}
         </div>
         <div class="error-box">
           ⚠️ <strong>無法抓取資料</strong><br>
@@ -616,11 +641,11 @@ function buildAssetCard(item, section) {
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
 
   // Drag handle in every sortable market tab (台股 / 美股 / 指數).
-  const dragHandle = (section === "tw" || section === "us" || section === "idx")
+  const dragHandle = sortable
     ? '<span class="drag-handle" title="按住拖拉排序">⠿</span>' : "";
 
   return `
-    <div class="asset-card" data-card="${escapeHtml(section + "-" + item.id)}">
+    <div class="asset-card${pinnedCardCls}" data-card="${escapeHtml(section + "-" + item.id)}">
       <div class="asset-head">
         ${dragHandle}
         <div class="asset-name-block">
@@ -628,6 +653,7 @@ function buildAssetCard(item, section) {
           <div class="asset-symbol">${escapeHtml(item.symbol || "–")} · ${escapeHtml(item.theme || data.exchange || "")}</div>
         </div>
         ${typeTag}
+        ${pinBtn}
       </div>
       ${priceRow}
       ${metricsHtml}
@@ -974,6 +1000,19 @@ const SORTABLE_INSTANCES = {};
 function lsGet(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
 function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode / quota — ignore */ } }
 
+// 圖釘置頂 (Adam 2026-06-19) — per-section pinned id set, persisted like order/sort.
+// Pinned cards float to the top of their tab in ALL sort modes EXCEPT 漲跌幅/距進場區.
+function getPinned(section) { try { return (JSON.parse(lsGet("abraham.pinned." + section, "[]")) || []).map(String); } catch (e) { return []; } }
+function setPinned(section, ids) { lsSet("abraham.pinned." + section, JSON.stringify(ids)); }
+function isPinned(section, id) { return getPinned(section).includes(String(id)); }
+function togglePin(section, id) {
+  const ids = getPinned(section);
+  const i = ids.indexOf(String(id));
+  if (i >= 0) ids.splice(i, 1); else ids.push(String(id));
+  setPinned(section, ids);
+  return i < 0;  // true => now pinned
+}
+
 function cardIdOf(card, section) {
   const dc = card.getAttribute("data-card") || "";
   return dc.startsWith(section + "-") ? dc.slice(section.length + 1) : dc;
@@ -990,7 +1029,9 @@ function sortMetric(item, mode) {
   return 0;
 }
 
-// Reorder the section's card nodes per its saved sort mode (appendChild = move).
+// Reorder the section's card nodes per its saved sort mode (appendChild = move,
+// so charts/canvas are preserved — no rebuild). 圖釘 cards then float to the top
+// in every mode EXCEPT 漲跌幅(change)/距進場區(zone) (Adam 2026-06-19 指定例外).
 function applySort(section) {
   const grid = document.getElementById(section + "-grid");
   if (!grid || !CURRENT_SNAPSHOT) return;
@@ -1000,28 +1041,46 @@ function applySort(section) {
   if (cards.length < 2) return;
   const mode = lsGet("abraham.sort." + section, "default");
 
+  // 1) base ordering per sort mode -> ordered list of card nodes
+  let ordered;
   if (mode === "name") {
-    cards
+    ordered = cards
       .map((c) => [c, (byId.get(cardIdOf(c, section)) || {}).name || ""])
       .sort((a, b) => String(a[1]).localeCompare(String(b[1]), "zh-Hant"))
-      .forEach((pair) => grid.appendChild(pair[0]));
-    return;
-  }
-
-  let ranked;
-  if (mode === "change" || mode === "zone") {
+      .map((p) => p[0]);
+  } else if (mode === "change" || mode === "zone") {
     const dir = mode === "change" ? -1 : 1;
-    ranked = cards.map((c) => [c, sortMetric(byId.get(cardIdOf(c, section)), mode) * dir]);
+    ordered = cards
+      .map((c) => [c, sortMetric(byId.get(cardIdOf(c, section)), mode) * dir])
+      .sort((a, b) => a[1] - b[1])
+      .map((p) => p[0]);
   } else if (mode === "custom") {
     let order = [];
     try { order = JSON.parse(lsGet("abraham.order." + section, "[]")) || []; } catch (e) { order = []; }
     const rank = new Map(order.map((id, i) => [String(id), i]));
-    ranked = cards.map((c, i) => [c, rank.has(cardIdOf(c, section)) ? rank.get(cardIdOf(c, section)) : 1e9 + i]);
+    ordered = cards
+      .map((c, i) => [c, rank.has(cardIdOf(c, section)) ? rank.get(cardIdOf(c, section)) : 1e9 + i])
+      .sort((a, b) => a[1] - b[1])
+      .map((p) => p[0]);
   } else {
     const rank = new Map(items.map((it, i) => [String(it.id), i])); // 預設 = snapshot order
-    ranked = cards.map((c, i) => [c, rank.has(cardIdOf(c, section)) ? rank.get(cardIdOf(c, section)) : 1e9 + i]);
+    ordered = cards
+      .map((c, i) => [c, rank.has(cardIdOf(c, section)) ? rank.get(cardIdOf(c, section)) : 1e9 + i])
+      .sort((a, b) => a[1] - b[1])
+      .map((p) => p[0]);
   }
-  ranked.sort((a, b) => a[1] - b[1]).forEach((pair) => grid.appendChild(pair[0]));
+
+  // 2) 圖釘置頂 — pinned cards float to top (keeping their relative order), EXCEPT
+  //    in 漲跌幅/距進場區 where the pure metric sort wins (Adam 2026-06-19 例外).
+  if (mode !== "change" && mode !== "zone") {
+    const pinned = new Set(getPinned(section));
+    if (pinned.size) {
+      const pins = ordered.filter((c) => pinned.has(cardIdOf(c, section)));
+      if (pins.length) ordered = pins.concat(ordered.filter((c) => !pinned.has(cardIdOf(c, section))));
+    }
+  }
+
+  ordered.forEach((c) => grid.appendChild(c));
 }
 
 // (Re)init SortableJS + sync dropdown + apply saved order. Called after every render.
@@ -1045,6 +1104,7 @@ function setupOrdering() {
           lsSet("abraham.sort." + section, "custom");
           const s = document.querySelector('.sort-select[data-section="' + section + '"]');
           if (s) s.value = "custom";
+          applySort(section);  // keep 圖釘 invariant: pinned stay on top after a drag
         },
       });
     }

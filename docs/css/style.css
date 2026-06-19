@@ -220,6 +220,8 @@ body {
 }
 .asset-card:hover { background: var(--card-hover); border-color: #3d4558; }
 .asset-card.error { border-color: rgba(248, 113, 113, 0.4); }
+/* 圖釘置頂卡 — 細金邊 + 左側金條, 一眼看出哪幾檔被釘 (Adam 2026-06-19) */
+.asset-card.pinned { border-color: rgba(251, 191, 36, 0.55); box-shadow: inset 3px 0 0 0 var(--warning); }
 
 .asset-head {
   display: flex;
@@ -289,6 +291,25 @@ body {
 .card-refresh:disabled { opacity: 0.5; cursor: default; }
 .card-refresh.spin { animation: cardspin 0.8s linear infinite; }
 @keyframes cardspin { to { transform: rotate(360deg); } }
+/* 圖釘按鈕 (右上) — 未釘時灰階淡化, 釘住時金邊+滿色 (Adam 2026-06-19) */
+.pin-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid var(--border);
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+.pin-btn:hover { background: var(--card-hover); filter: none; opacity: 1; }
+.pin-btn.pinned { border-color: var(--warning); background: rgba(251, 191, 36, 0.18); filter: none; opacity: 1; }
 /* 漲紅跌綠 (台股慣例) — 固定不可反轉 (Adam 2026-06-17「固定漲紅跌綠 不要忘記」).
    JS trendColor()/trendFill() 用相同 hex；要改顏色兩邊一起改，且漲必紅、跌必綠. */
 .up { color: #f87171; }   /* 漲 = 紅 */
