@@ -93,6 +93,8 @@ def fetch_us_stock(symbol: str) -> dict:
         "num_analysts": _sanitize(info.get("numberOfAnalystOpinions")),
         "recommendation": info.get("recommendationKey"),
         "recommendation_mean": _sanitize(info.get("recommendationMean")),
+        "eps": _sanitize(info.get("trailingEps")),
+        "gross_margins": _sanitize(info.get("grossMargins")),
         "expense_ratio": _sanitize(info.get("netExpenseRatio") or info.get("annualReportExpenseRatio")),
         "ytd_return_pct": _sanitize(info.get("ytdReturn")),
         "regular_market_time": _sanitize(info.get("regularMarketTime")),

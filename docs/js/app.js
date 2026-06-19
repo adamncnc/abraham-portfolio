@@ -587,6 +587,14 @@ function buildAssetCard(item, section) {
   if (data.forward_pe !== null && data.forward_pe !== undefined && data.forward_pe > 0) {
     metrics.push(["預估本益比", fmtNum(data.forward_pe, 1)]);
   }
+  // EPS(每股盈餘) — 負值=虧損，照實顯示(對虧損公司是有用資訊，跟負本益比不同)。
+  if (data.eps !== null && data.eps !== undefined) {
+    metrics.push(["EPS", fmtCurrency(data.eps, data.currency || item.currency)]);
+  }
+  // 毛利率 — Yahoo grossMargins 是小數(0.45)，×100 顯示百分比。
+  if (data.gross_margins !== null && data.gross_margins !== undefined) {
+    metrics.push(["毛利率", fmtPct(data.gross_margins * 100, false)]);
+  }
   if (data.target_mean_price !== null && data.target_mean_price !== undefined) {
     let tgtVal = fmtCurrency(data.target_mean_price, data.currency || item.currency);
     if (price !== null && price !== undefined && price !== 0) {
