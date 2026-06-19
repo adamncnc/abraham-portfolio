@@ -65,8 +65,8 @@
       "currency": "TWD",
       "theme": "電源管理 IC",
       "notes": "電源管理 IC; 進場區 400-460 (6/13 深查), 認錯 300; Q1 EPS+114%/毛利 50%, 16 分析師 mean 586; 中國營收為主 KY 股",
-      "entry_zone_lo": 400,
-      "entry_zone_hi": 460
+      "entry_zone_lo": 440,
+      "entry_zone_hi": 500
     },
     {
       "id": "3324",
