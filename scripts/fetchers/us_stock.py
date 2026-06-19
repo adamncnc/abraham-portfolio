@@ -58,6 +58,12 @@ def fetch_us_stock(symbol: str) -> dict:
     if dividend_yield is not None and dividend_yield < 1:
         dividend_yield = dividend_yield * 100
 
+    # 營收成長率(季 YoY) — US 用 Yahoo revenueGrowth (對美股 reliable, 與季報計算吻合;
+    # 注意: 對台股會誤導故台股改走 FinMind 月營收, 見 feedback_yahoo_revenuegrowth_vs_monthly)。
+    # 加速度需 YoY-of-YoY(~8 季), Yahoo 只回溯 5 季算不出 → US 標 None(不顯示)。
+    _rg = _sanitize(info.get("revenueGrowth"))
+    rev_yoy_pct = round(_rg * 100, 1) if _rg is not None else None
+
     return {
         "symbol": symbol,
         "quote_type": info.get("quoteType"),
@@ -95,6 +101,9 @@ def fetch_us_stock(symbol: str) -> dict:
         "recommendation_mean": _sanitize(info.get("recommendationMean")),
         "eps": _sanitize(info.get("trailingEps")),
         "gross_margins": _sanitize(info.get("grossMargins")),
+        "rev_yoy_pct": rev_yoy_pct,
+        "rev_accel_pp": None,
+        "rev_growth_period": "季" if rev_yoy_pct is not None else None,
         "expense_ratio": _sanitize(info.get("netExpenseRatio") or info.get("annualReportExpenseRatio")),
         "ytd_return_pct": _sanitize(info.get("ytdReturn")),
         "regular_market_time": _sanitize(info.get("regularMarketTime")),

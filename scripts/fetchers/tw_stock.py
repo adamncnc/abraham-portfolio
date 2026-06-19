@@ -22,6 +22,43 @@ def _sanitize(value):
     return value
 
 
+def _tw_revenue_growth(symbol: str):
+    """台股營收成長: FinMind 月營收 YoY + 月加速度 (anonymous, 無 token)。
+    台股用「月營收」因它最即時(每月10號公布)、且 Yahoo revenueGrowth 對台股是混合/TTM
+    會誤導 (feedback_yahoo_revenuegrowth_vs_monthly: 6/16 力智誤報+0%實際-9.6% / 大中+4%實際+22%)。
+    回 (yoy_pct, accel_pp, asof);任何失敗皆 graceful 回 (None,None,None) 不影響主 fetch。"""
+    code = symbol.split(".")[0]
+    try:
+        import requests
+        r = requests.get(
+            "https://api.finmindtrade.com/api/v4/data",
+            params={"dataset": "TaiwanStockMonthRevenue", "data_id": code, "start_date": "2025-01-01"},
+            headers={"User-Agent": "Mozilla/5.0"}, timeout=20,
+        )
+        j = r.json()
+        if j.get("msg") != "success":
+            return (None, None, None)
+        hist = {(d["revenue_year"], d["revenue_month"]): d["revenue"] for d in j.get("data", [])}
+        if not hist:
+            return (None, None, None)
+        y, m = max(hist.keys())
+
+        def _yoy(yy, mm):
+            cur, prev = hist.get((yy, mm)), hist.get((yy - 1, mm))
+            return None if (not cur or not prev) else (cur / prev - 1.0) * 100.0
+
+        m1y, m1m = (y, m - 1) if m > 1 else (y - 1, 12)
+        y0, y1 = _yoy(y, m), _yoy(m1y, m1m)
+        accel = (y0 - y1) if (y0 is not None and y1 is not None) else None
+        return (
+            round(y0, 1) if y0 is not None else None,
+            round(accel, 1) if accel is not None else None,
+            f"{y}-{m:02d}",
+        )
+    except Exception:  # noqa: BLE001
+        return (None, None, None)
+
+
 def fetch_tw_stock(symbol: str) -> dict:
     ticker = yf.Ticker(symbol)
     info = ticker.info or {}
@@ -57,6 +94,8 @@ def fetch_tw_stock(symbol: str) -> dict:
     if dividend_yield is not None and dividend_yield < 1:
         dividend_yield = dividend_yield * 100
 
+    tw_rev_yoy, tw_rev_accel, tw_rev_asof = _tw_revenue_growth(symbol)
+
     return {
         "symbol": symbol,
         "quote_type": info.get("quoteType"),
@@ -90,6 +129,10 @@ def fetch_tw_stock(symbol: str) -> dict:
         "recommendation_mean": _sanitize(info.get("recommendationMean")),
         "eps": _sanitize(info.get("trailingEps")),
         "gross_margins": _sanitize(info.get("grossMargins")),
+        "rev_yoy_pct": tw_rev_yoy,
+        "rev_accel_pp": tw_rev_accel,
+        "rev_growth_period": "月" if tw_rev_yoy is not None else None,
+        "rev_growth_asof": tw_rev_asof,
         "expense_ratio": _sanitize(info.get("netExpenseRatio") or info.get("annualReportExpenseRatio")),
         "ytd_return_pct": _sanitize(info.get("ytdReturn")),
         "regular_market_time": _sanitize(info.get("regularMarketTime")),

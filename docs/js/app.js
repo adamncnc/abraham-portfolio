@@ -595,6 +595,17 @@ function buildAssetCard(item, section) {
   if (data.gross_margins !== null && data.gross_margins !== undefined) {
     metrics.push(["毛利率", fmtPct(data.gross_margins * 100, false)]);
   }
+  // 營收成長率 — 台股=月營收YoY(FinMind官方)/美股=季營收YoY(Yahoo)；成長加速度=本期YoY−前期YoY
+  // (台股有;美股 Yahoo 只回溯5季算不出YoY-of-YoY→不顯示)。正=成長加速(漲紅)。
+  if (data.rev_yoy_pct !== null && data.rev_yoy_pct !== undefined) {
+    const per = data.rev_growth_period ? `(${data.rev_growth_period})` : "";
+    metrics.push([`營收成長率${per}`, `<span class="${changeClass(data.rev_yoy_pct)}">${fmtPct(data.rev_yoy_pct)}</span>`]);
+  }
+  if (data.rev_accel_pp !== null && data.rev_accel_pp !== undefined) {
+    const a = data.rev_accel_pp;
+    const tag = a > 0.5 ? "↑加速" : a < -0.5 ? "↓減速" : "→持平";
+    metrics.push(["成長加速度", `<span class="${changeClass(a)}">${a > 0 ? "+" : ""}${fmtNum(a, 1)}pp ${tag}</span>`]);
+  }
   if (data.target_mean_price !== null && data.target_mean_price !== undefined) {
     let tgtVal = fmtCurrency(data.target_mean_price, data.currency || item.currency);
     if (price !== null && price !== undefined && price !== 0) {
