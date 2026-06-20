@@ -234,6 +234,17 @@
       "entry_zone_hi": 110
     },
     {
+      "id": "3026",
+      "type": "tw_stock",
+      "symbol": "3026.TW",
+      "name": "禾伸堂",
+      "currency": "TWD",
+      "theme": "高階MLCC(NP0~7成市佔/AI伺服器電力交付)",
+      "notes": "高階MLCC(NP0~7成市佔/AI伺服器電力交付); 6/20深查: AI動能開始進財報(月營收2026 Apr+21.1%/May+21.3% YoY連2月加速+單月record/獲利+70%高階組合/fwd EPS估3倍6.52→19.5) BUT股價已先噴=一年+10倍@~902/trailing PE138/分析師mean目標僅405=現價2.2倍嚴重追高; 進場區330-410(5月起漲基地+分析師目標下/50日433)/認錯<290; 上市TWSE; 非核心=故",
+      "entry_zone_lo": 330,
+      "entry_zone_hi": 410
+    },
+    {
       "id": "gold",
       "type": "commodity",
       "symbol": "GC=F",
