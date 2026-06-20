@@ -256,6 +256,17 @@
       "entry_zone_hi": 195
     },
     {
+      "id": "3653",
+      "type": "tw_stock",
+      "symbol": "3653.TW",
+      "name": "健策",
+      "currency": "TWD",
+      "theme": "高階晶片均熱片IHS/導線架/vapor chamber",
+      "notes": "高階晶片均熱片IHS/導線架/vapor chamber/液冷模組(AI散熱鏈核心,IHS給CPU/GPU封裝); 6/20深查: 近期熱/MLCC組質地最佳=ROE30%/毛利41%/op margin32%/淨現金/D-E0.40=真賺錢非故事; 月營收加速(FinMind 2026 Apr+26.9%/May+37.7% YoY單月23.1億近record,Feb-14.6%為農曆年曆法噪音); fwd PE34(fwd EPS117 vs trailing36=真獲利",
+      "entry_zone_lo": 3050,
+      "entry_zone_hi": 3500
+    },
+    {
       "id": "gold",
       "type": "commodity",
       "symbol": "GC=F",
