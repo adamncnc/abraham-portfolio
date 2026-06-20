@@ -245,6 +245,17 @@
       "entry_zone_hi": 410
     },
     {
+      "id": "6173",
+      "type": "tw_stock",
+      "symbol": "6173.TWO",
+      "name": "信昌電",
+      "currency": "TWD",
+      "theme": "高壓/大尺寸MLCC(Prosperity Dielec",
+      "notes": "高壓/大尺寸MLCC(Prosperity Dielectrics/Walsin集團/禾伸堂同級高壓對手); 6/20深查: 質地MLCC群最佳=毛利25.7%(最高)/幾乎零負債/獲利+70%; AI高壓電容滿載+交期16週(真供需吃緊)+月營收加速(FinMind 2026 Apr+20.4%/May+25.6% YoY單月record, 比禾伸堂+21%更強); BUT股價已先噴=一年+763%@~316/PE97/貼ATH318/無分析師cover/小型波動大; 進場",
+      "entry_zone_lo": 150,
+      "entry_zone_hi": 195
+    },
+    {
       "id": "gold",
       "type": "commodity",
       "symbol": "GC=F",
