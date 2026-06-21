@@ -1064,12 +1064,21 @@ function cardIdOf(card, section) {
   return dc.startsWith(section + "-") ? dc.slice(section.length + 1) : dc;
 }
 
+// 純數值排序模式 -> 方向 (-1 = 大到小 / +1 = 小到大)。圖釘在這些模式不置頂 (純 metric 勝)。
+const METRIC_DIR = { change: -1, growth: -1, eps: -1, pe: 1, zone: 1 };
+
 function sortMetric(item, mode) {
   const d = (item && item.data) || {};
-  if (mode === "change") return d.change_pct == null ? -Infinity : d.change_pct; // 漲跌幅 大->小
-  if (mode === "zone") {                                                          // 距進場區 近->遠
+  if (mode === "change") return d.change_pct == null ? -Infinity : d.change_pct;   // 漲跌幅 大->小
+  if (mode === "growth") return d.rev_yoy_pct == null ? -Infinity : d.rev_yoy_pct; // 營收成長率 大->小
+  if (mode === "eps")    return d.eps == null ? -Infinity : d.eps;                 // EPS 大->小
+  if (mode === "pe") {                                                             // 本益比 小->大 (便宜在前)
+    const pe = d.trailing_pe;
+    return (pe == null || pe <= 0) ? Infinity : pe;                                // 無/負(虧損) -> 最後
+  }
+  if (mode === "zone") {                                                           // 距進場區 近->遠
     const hi = item && item.entry_zone_hi, p = d.price;
-    if (hi == null || p == null) return Infinity;                                 // 無進場區 -> 排最後
+    if (hi == null || p == null) return Infinity;                                  // 無進場區 -> 排最後
     return Math.abs(p - hi) / hi;
   }
   return 0;
@@ -1094,8 +1103,8 @@ function applySort(section) {
       .map((c) => [c, (byId.get(cardIdOf(c, section)) || {}).name || ""])
       .sort((a, b) => String(a[1]).localeCompare(String(b[1]), "zh-Hant"))
       .map((p) => p[0]);
-  } else if (mode === "change" || mode === "zone") {
-    const dir = mode === "change" ? -1 : 1;
+  } else if (METRIC_DIR[mode]) {
+    const dir = METRIC_DIR[mode];
     ordered = cards
       .map((c) => [c, sortMetric(byId.get(cardIdOf(c, section)), mode) * dir])
       .sort((a, b) => a[1] - b[1])
@@ -1117,8 +1126,8 @@ function applySort(section) {
   }
 
   // 2) 圖釘置頂 — pinned cards float to top (keeping their relative order), EXCEPT
-  //    in 漲跌幅/距進場區 where the pure metric sort wins (Adam 2026-06-19 例外).
-  if (mode !== "change" && mode !== "zone") {
+  //    in 純數值排序模式 (漲跌幅/成長率/EPS/本益比/距進場區) where the metric sort wins.
+  if (!METRIC_DIR[mode]) {
     const pinned = new Set(getPinned(section));
     if (pinned.size) {
       const pins = ordered.filter((c) => pinned.has(cardIdOf(c, section)));
