@@ -298,8 +298,11 @@ function renderChart(canvasId, scope) {
   // up/down), via the single trendColor() source of truth, so the line colour
   // can never contradict the number (Adam 2026-06-17 固定漲紅跌綠 不要忘記).
   // Fallback to the displayed-window trend only when day-change is unavailable.
+  // 線色隨時間軸：1d=當日漲跌(漲紅跌綠 Adam 6/17)；其他 scope=該區間 首→末，與下方漲跌數字一致、不矛盾(Adam 6/21)。
   const dayChange = (CARD_META.get(canvasId) || {}).dayChange;
-  const trendDelta = (dayChange != null && !isNaN(dayChange)) ? Number(dayChange) : (last - first);
+  const trendDelta = scope === "1d"
+    ? ((dayChange != null && !isNaN(dayChange)) ? Number(dayChange) : (last - first))
+    : (last - first);
   const lineColor = trendColor(trendDelta);
   const fillColor = trendFill(trendDelta);
 
@@ -308,6 +311,23 @@ function renderChart(canvasId, scope) {
   const hiloEl = document.getElementById("hilo-" + canvasId);
   if (hiloEl) {
     hiloEl.textContent = `區間　高 ${fmtNum(Math.max(...closes), 2)}　低 ${fmtNum(Math.min(...closes), 2)}`;
+  }
+  // 股價後方漲跌數字隨時間軸更新 (Adam 2026-06-21): 1d=當日官方漲跌; 其他=該區間 首→末 漲跌 + 期間標籤。
+  const chgEl = document.getElementById("chg-" + canvasId);
+  if (chgEl) {
+    const cm = CARD_META.get(canvasId) || {};
+    let absChg, pctChg, suffix;
+    if (scope === "1d") {
+      absChg = cm.dayChangeAbs ?? null; pctChg = cm.dayChange ?? null; suffix = "";
+    } else {
+      const f = closes[0], l = closes[closes.length - 1];
+      absChg = (f != null && l != null) ? l - f : null;
+      pctChg = f ? ((l - f) / f) * 100 : null;
+      suffix = " · " + scope;
+    }
+    const sign = (absChg != null && absChg > 0) ? "+" : "";
+    chgEl.className = "asset-change " + changeClass(pctChg);
+    chgEl.innerHTML = `${absChg != null ? sign + fmtNum(absChg, 2) : "–"} (${fmtPct(pctChg)})${suffix}`;
   }
   const datasets = [{
     label: "價格",
@@ -436,6 +456,7 @@ function initializeCharts(items, section) {
       currency: item.currency || item.data?.currency || "USD",
       type: item.type || "",
       dayChange: item.data?.change_pct ?? null,  // drives the line colour (漲紅跌綠, matches the number)
+      dayChangeAbs: item.data?.change ?? null,   // 當日漲跌絕對值 (給 1d scope 漲跌數字用)
     });
     renderChart(canvasId, DEFAULT_SCOPE);
   }
@@ -520,6 +541,7 @@ function buildAssetCard(item, section) {
   }
 
   // Price block
+  const canvasId = canvasIdFor(section, item);  // also reused by chart block below
   const price = data.price;
   const change = data.change;
   const changePct = data.change_pct;
@@ -535,7 +557,7 @@ function buildAssetCard(item, section) {
     ? `
       <div class="asset-price-row">
         <span class="asset-price ${cls}">${fmtNum(price, 2)}</span>
-        <span class="asset-change ${cls}">
+        <span class="asset-change ${cls}" id="chg-${canvasId}">
           ${change !== null ? `${changeSign}${fmtNum(change, 2)}` : "–"}
           (${fmtPct(changePct)})
         </span>
@@ -681,7 +703,6 @@ function buildAssetCard(item, section) {
   }
 
   // Trend chart block (all non-error cards)
-  const canvasId = canvasIdFor(section, item);
   const chartHtml = chartBlockHtml(canvasId);
 
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
