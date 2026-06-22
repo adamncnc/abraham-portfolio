@@ -305,6 +305,17 @@
       "notes": "NAND快閃記憶體大廠(2025/2自威騰WDC分拆;美股NasdaqGS USD); 記憶體超級循環最純NAND玩法、今早deep-read+6.4%出現→Adam明示加入; 基本面爆發=營收YoY+251%/fwd EPS 6x ramp(29→183)/fwd PE12.4/ROE39%/毛利56%/無配息; ⚠️⚠️循環股: 股價一年暴衝@~2274貼ATH2354/50日1400(+62%延伸)/200日613/>分析師mean目標1751(22家buy)=追高無邊",
       "entry_zone_lo": 1400,
       "entry_zone_hi": 1650
+    },
+    {
+      "id": "2449",
+      "type": "tw_stock",
+      "symbol": "2449.TW",
+      "name": "京元電KYEC",
+      "currency": "TWD",
+      "theme": "半導體測試大廠(晶圓測試/最終測試/燒機測試/SLT)=",
+      "notes": "半導體測試大廠(晶圓測試/最終測試/燒機測試/SLT)=AI賣鏟子(每顆GPU/ASIC出貨前都要測; GPU燒機需求明顯增加+ASIC測試翻倍); 6/23深析+Adam明示加入; 體質好=毛利37%/營益率27%/ROE17.6%/營收YoY+39%(Yahoo數待FinMind驗)/fwd EPS 6.51→15.47(2.4x ramp)/fwd PE21.9不貴; ⚠️近單季獲利YoY−47%(擴產折舊+短期淡)/FCF負(猛蓋測試產能); ✅這批熱門股唯一現價33",
+      "entry_zone_lo": 290,
+      "entry_zone_hi": 320
     }
   ]
 }
