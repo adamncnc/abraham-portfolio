@@ -294,6 +294,17 @@
       "notes": "AI資料中心電源+SiC功率+車用/工業半導體+影像感測(美股NasdaqGS); 6/22晚班deep-read功率半導體族群+5%出現→Adam明示加入; 獲利處循環谷底=trailing PE96高/但fwd PE30+PEG0.40(fwd EPS4.32 vs trailing1.36=預期復甦)/ROE7.5%谷底/無配息/毛利43%; ⚠️股價52w+128%貼ATH134.92/今+7.6%@130.9>分析師mean目標107(27家buy)=追高無安全邊際",
       "entry_zone_lo": 100,
       "entry_zone_hi": 115
+    },
+    {
+      "id": "sndk",
+      "type": "us_stock",
+      "symbol": "SNDK",
+      "name": "SanDisk",
+      "currency": "USD",
+      "theme": "NAND快閃記憶體大廠(2025/2自威騰WDC分拆",
+      "notes": "NAND快閃記憶體大廠(2025/2自威騰WDC分拆;美股NasdaqGS USD); 記憶體超級循環最純NAND玩法、今早deep-read+6.4%出現→Adam明示加入; 基本面爆發=營收YoY+251%/fwd EPS 6x ramp(29→183)/fwd PE12.4/ROE39%/毛利56%/無配息; ⚠️⚠️循環股: 股價一年暴衝@~2274貼ATH2354/50日1400(+62%延伸)/200日613/>分析師mean目標1751(22家buy)=追高無邊",
+      "entry_zone_lo": 1400,
+      "entry_zone_hi": 1650
     }
   ]
 }
