@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abraham Portfolio Dashboard</title>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20260623">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
@@ -104,6 +104,15 @@
   </div>
 </footer>
 
-<script src="js/app.js"></script>
+<!-- cache-bust app.js: always load the freshest dashboard code so updates show
+     without a manual hard-refresh (the script is appended at end of body, so the
+     DOM is fully parsed and chart.js/Sortable from <head> are already available). -->
+<script>
+  (function () {
+    var s = document.createElement("script");
+    s.src = "js/app.js?v=" + Date.now();
+    document.body.appendChild(s);
+  })();
+</script>
 </body>
 </html>
