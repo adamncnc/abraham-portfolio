@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 
 import yfinance as yf
 
+from ._fundamentals import fetch_recent_quarter_eps
 from ._history import fetch_history
 
 
@@ -127,7 +128,8 @@ def fetch_tw_stock(symbol: str) -> dict:
         "num_analysts": _sanitize(info.get("numberOfAnalystOpinions")),
         "recommendation": info.get("recommendationKey"),
         "recommendation_mean": _sanitize(info.get("recommendationMean")),
-        "eps": _sanitize(info.get("trailingEps")),
+        "eps": _sanitize(info.get("trailingEps")),  # 年EPS (TTM, 近四季加總)
+        "eps_q": fetch_recent_quarter_eps(symbol),  # 季EPS (最近單季公布值; 台股 Yahoo 常無 → None)
         "gross_margins": _sanitize(info.get("grossMargins")),
         "rev_yoy_pct": tw_rev_yoy,
         "rev_accel_pp": tw_rev_accel,

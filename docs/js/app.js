@@ -609,9 +609,17 @@ function buildAssetCard(item, section) {
   if (data.forward_pe !== null && data.forward_pe !== undefined && data.forward_pe > 0) {
     metrics.push(["預估本益比", fmtNum(data.forward_pe, 1)]);
   }
-  // EPS(每股盈餘) — 負值=虧損，照實顯示(對虧損公司是有用資訊，跟負本益比不同)。
-  if (data.eps !== null && data.eps !== undefined) {
-    metrics.push(["EPS", fmtCurrency(data.eps, data.currency || item.currency)]);
+  // 年EPS(近四季加總 / TTM) — Yahoo trailingEps，財報後幾小時~1-2 天才重算；負值=虧損照實顯示。
+  const hasAnnualEps = data.eps !== null && data.eps !== undefined;
+  if (hasAnnualEps) {
+    metrics.push(["年EPS", fmtCurrency(data.eps, data.currency || item.currency)]);
+  }
+  // 季EPS(最近單季公布值 = 拿來跟分析師預估比 beat/miss 的頭條數字)。只在有 EPS 的個股顯示
+  // (指數/黃金/ETF 無 EPS 不需要這欄)。台股 Yahoo 常無單季 EPS → 顯示 ─ 明確標「沒資料」，
+  // 而非默默消失讓人誤以為漏抓。
+  if (hasAnnualEps) {
+    const hasQ = data.eps_q !== null && data.eps_q !== undefined;
+    metrics.push(["季EPS", hasQ ? fmtCurrency(data.eps_q, data.currency || item.currency) : "─"]);
   }
   // 毛利率 — Yahoo grossMargins 是小數(0.45)，×100 顯示百分比。
   if (data.gross_margins !== null && data.gross_margins !== undefined) {
