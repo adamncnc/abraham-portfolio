@@ -371,6 +371,50 @@
       "notes": "SiP模組(RF前端/PA/WiFi)+光通訊(光收發/CPO封裝)+MEMS(台股TWSE,但總部中國中山/鴻海子公司); 6/26 CPO題材(訊芯CPO 51.2T小量產+與台積電COUPE合作)Adam明示加入; ⚠️⚠️**全清單最投機=純CPO樂透**: trailing PE 2392(幾乎無獲利EPS0.25)/**營收YoY-21%衰退**/營業利益率-5.2%虧損/**零分析師cover**/中國總部+鴻海子(地緣+流動性低beta0.34); 價值100",
       "entry_zone_lo": 480,
       "entry_zone_hi": 540
+    },
+    {
+      "id": "asml",
+      "type": "us_stock",
+      "symbol": "ASML",
+      "name": "ASML艾司摩爾",
+      "currency": "USD",
+      "theme": "半導體EUV曝光機獨佔(美股ADR NasdaqGS U",
+      "notes": "半導體EUV曝光機獨佔(美股ADR NasdaqGS USD); 全球唯一EUV供應商=先進製程守門員(7nm↓+先進DRAM都得用); 6/26四大設備天王介紹Adam明示加入; 品質頂級ROE52%/毛利53%/配息0.5%/四檔最大市值7096億; ⚠️trailing PE62/fwd38; 現價$1841略>分析師mean$1748(+5%四檔最不延伸)/median$1787/15家strong_buy; 從ATH$1959 -6%/52w+131%/50日$16",
+      "entry_zone_lo": 1600,
+      "entry_zone_hi": 1750
+    },
+    {
+      "id": "lrcx",
+      "type": "us_stock",
+      "symbol": "LRCX",
+      "name": "科林Lam",
+      "currency": "USD",
+      "theme": "半導體蝕刻+沉積雙雄(美股NasdaqGS USD)",
+      "notes": "半導體蝕刻+沉積雙雄(美股NasdaqGS USD); 記憶體設備最純槓桿(3D NAND/DRAM最吃)=記憶體大循環大型股最直接玩法; 6/26四大設備天王介紹Adam明示加入; 基本面最猛營收+24%/獲利+41%/ROE67%/毛利50%; ⚠️trailing PE76/fwd50; 現價$402大幅>分析師mean$341(+18%追高)/median$331/31家buy; 從ATH$410 -2%/52w+313%(四檔最猛)/50日$308/beta1.87",
+      "entry_zone_lo": 310,
+      "entry_zone_hi": 355
+    },
+    {
+      "id": "amat",
+      "type": "us_stock",
+      "symbol": "AMAT",
+      "name": "應材Applied",
+      "currency": "USD",
+      "theme": "半導體設備最全才(美股NasdaqGS USD)",
+      "notes": "半導體設備最全才(美股NasdaqGS USD); 蝕刻/沉積/離子佈植/拋光/檢測幾乎都做=美國最大設備廠/最分散最穩; 6/26四大設備天王介紹Adam明示加入; 品質好ROE40%/毛利49%/獲利+34%/配息0.3%; ⚠️trailing PE63/fwd41; 現價$668站ATH$669且>分析師mean$532(+26%追高)/median$525/35家strong_buy; 52w+265%/50日$464; 進場區510-570(分析師均標帶等大回檔)",
+      "entry_zone_lo": 510,
+      "entry_zone_hi": 570
+    },
+    {
+      "id": "klac",
+      "type": "us_stock",
+      "symbol": "KLAC",
+      "name": "科磊KLA",
+      "currency": "USD",
+      "theme": "半導體製程檢測+量測霸主(美股NasdaqGS USD)",
+      "notes": "半導體製程檢測+量測霸主(美股NasdaqGS USD); 找瑕疵+量尺寸=晶片品管警察/市佔5成+=ONTO的龍頭大哥; 6/26四大設備天王介紹Adam明示加入; 四檔賺錢效率最高毛利61%/ROE95%/營益率41%/配息0.4%; ⚠️trailing PE74/fwd51; 現價$259>分析師mean$204(+27%追高四檔最延伸vs目標)/median$200/28家buy評等2.0最保守; 從ATH$270 -4%/52w+191%/50日$200; 進場區",
+      "entry_zone_lo": 205,
+      "entry_zone_hi": 230
     }
   ]
 }
