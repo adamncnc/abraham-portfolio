@@ -262,9 +262,9 @@
       "name": "健策",
       "currency": "TWD",
       "theme": "高階晶片均熱片IHS/導線架/vapor chamber",
-      "notes": "高階晶片均熱片IHS/導線架/vapor chamber/液冷模組(AI散熱鏈核心,IHS給CPU/GPU封裝); 6/20深查: 近期熱/MLCC組質地最佳=ROE30%/毛利41%/op margin32%/淨現金/D-E0.40=真賺錢非故事; 月營收加速(FinMind 2026 Apr+26.9%/May+37.7% YoY單月23.1億近record,Feb-14.6%為農曆年曆法噪音); fwd PE34(fwd EPS117 vs trailing36=真獲利",
-      "entry_zone_lo": 3050,
-      "entry_zone_hi": 3500
+      "notes": "高階晶片均熱片IHS/導線架/vapor chamber/液冷(AI散熱鏈核心,IHS給CPU/GPU封裝); 品質最佳=ROE30%/毛利41%/op margin32%/淨現金/D-E0.40+月營收加速(FinMind Apr+26.9%/May+37.7% YoY近record); ⚠️**6/26 EPS更正重畫進場區**: 原『fwd EPS117/PE34』錯誤(誤用Yahoo遠期EPS123), 真2026 EPS=Factset 55.78/Yahoo cu",
+      "entry_zone_lo": 2700,
+      "entry_zone_hi": 3100
     },
     {
       "id": "gold",
