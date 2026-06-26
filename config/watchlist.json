@@ -338,6 +338,39 @@
       "notes": "磊晶龍頭(Visual Photonics/VPEC,TWSE): 主體GaAs磊晶全球前三(市佔~26%)+光電子(InP/EML給1.6T光模組)為高成長小占比(~22.5%rev但2026E+72%); 6/26礦產戰爭文章分析Adam明示加入; InP缺貨題材受惠(中國管制銦70%/6吋InP+250%/自家剛發調價函)BUT『InP最純受惠』略誇大=主體仍GaAs; 品質好=毛利36%/op24%/ROE16%/PEG0.83/10家strong_buy mean3",
       "entry_zone_lo": 335,
       "entry_zone_hi": 365
+    },
+    {
+      "id": "glw",
+      "type": "us_stock",
+      "symbol": "GLW",
+      "name": "康寧Corning",
+      "currency": "USD",
+      "theme": "光通訊光纖/玻璃基板/特用材料(美股NYSE USD)",
+      "notes": "光通訊光纖/玻璃基板/特用材料(美股NYSE USD); AI資料中心光纖連接(Springboard)+顯示玻璃+Gorilla玻璃+陶瓷基板; 6/26 KOL(川沐)點名殺盤中逆勢撐盤Adam明示加入; 真AI光通訊受惠+品質(ROE17%/營收+20%/獲利+139%) BUT ⚠️估值極貴=2026 PE~71x/fwd54x/P/S12/一年+341%@228貼ATH230.5且**>分析師最高目標$230**(15家buy mean僅$202/median$21",
+      "entry_zone_lo": 185,
+      "entry_zone_hi": 205
+    },
+    {
+      "id": "3711",
+      "type": "tw_stock",
+      "symbol": "3711.TW",
+      "name": "日月光ASE",
+      "currency": "TWD",
+      "theme": "全球第一大封測OSAT+先進封裝(異質整合/CoWoS鄰",
+      "notes": "全球第一大封測OSAT+先進封裝(異質整合/CoWoS鄰接)+EMS(台股TWSE); AI晶片封裝賣鏟子; 6/26 KOL(川沐)點名殺盤中撐盤(今-1.4% vs 大盤-3.6%)Adam明示加入; **這3檔最defensible**=真獲利/16家strong_buy mean588/**fwd PE 25最合理**/ROE13.6%/獲利+88%/配息1% BUT 毛利18.5%(OSAT低利)/FCF負(重capex)/52w+327%@632已略>分析師mea",
+      "entry_zone_lo": 540,
+      "entry_zone_hi": 580
+    },
+    {
+      "id": "6451",
+      "type": "tw_stock",
+      "symbol": "6451.TW",
+      "name": "訊芯-KY",
+      "currency": "TWD",
+      "theme": "SiP模組(RF前端/PA/WiFi)+光通訊(光收發/",
+      "notes": "SiP模組(RF前端/PA/WiFi)+光通訊(光收發/CPO封裝)+MEMS(台股TWSE,但總部中國中山/鴻海子公司); 6/26 CPO題材(訊芯CPO 51.2T小量產+與台積電COUPE合作)Adam明示加入; ⚠️⚠️**全清單最投機=純CPO樂透**: trailing PE 2392(幾乎無獲利EPS0.25)/**營收YoY-21%衰退**/營業利益率-5.2%虧損/**零分析師cover**/中國總部+鴻海子(地緣+流動性低beta0.34); 價值100",
+      "entry_zone_lo": 480,
+      "entry_zone_hi": 540
     }
   ]
 }
