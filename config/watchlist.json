@@ -316,6 +316,28 @@
       "notes": "半導體測試大廠(晶圓測試/最終測試/燒機測試/SLT)=AI賣鏟子(每顆GPU/ASIC出貨前都要測; GPU燒機需求明顯增加+ASIC測試翻倍); 6/23深析+Adam明示加入; 體質好=毛利37%/營益率27%/ROE17.6%/營收YoY+39%(Yahoo數待FinMind驗)/fwd EPS 6.51→15.47(2.4x ramp)/fwd PE21.9不貴; ⚠️近單季獲利YoY−47%(擴產折舊+短期淡)/FCF負(猛蓋測試產能); ✅這批熱門股唯一現價33",
       "entry_zone_lo": 290,
       "entry_zone_hi": 320
+    },
+    {
+      "id": "powi",
+      "type": "us_stock",
+      "symbol": "POWI",
+      "name": "Power Integrations",
+      "currency": "USD",
+      "theme": "高壓電源轉換IC(美股NasdaqGS USD)",
+      "notes": "高壓電源轉換IC(美股NasdaqGS USD); 全球唯一量產1250V/1700V高壓GaN+輝達Kyber 800V designed-in=AI機房800V供電最純玩法; 品質好=零負債/毛利54%/FCF正/配息1%; 6/26 AOSL/POWI對照深查Adam明示加入; ⚠️獲利在景氣低點=trailing PE282/2026 PE~64x/2027~46x貴; 現價$84.8>分析師mean目標$76(5家buy/median$85,近期Stifel$95 ",
+      "entry_zone_lo": 60,
+      "entry_zone_hi": 76
+    },
+    {
+      "id": "2455",
+      "type": "tw_stock",
+      "symbol": "2455.TW",
+      "name": "全新光電",
+      "currency": "TWD",
+      "theme": "磊晶龍頭(Visual Photonics/VPEC,T",
+      "notes": "磊晶龍頭(Visual Photonics/VPEC,TWSE): 主體GaAs磊晶全球前三(市佔~26%)+光電子(InP/EML給1.6T光模組)為高成長小占比(~22.5%rev但2026E+72%); 6/26礦產戰爭文章分析Adam明示加入; InP缺貨題材受惠(中國管制銦70%/6吋InP+250%/自家剛發調價函)BUT『InP最純受惠』略誇大=主體仍GaAs; 品質好=毛利36%/op24%/ROE16%/PEG0.83/10家strong_buy mean3",
+      "entry_zone_lo": 335,
+      "entry_zone_hi": 365
     }
   ]
 }
