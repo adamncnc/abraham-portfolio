@@ -415,6 +415,17 @@
       "notes": "半導體製程檢測+量測霸主(美股NasdaqGS USD); 找瑕疵+量尺寸=晶片品管警察/市佔5成+=ONTO的龍頭大哥; 6/26四大設備天王介紹Adam明示加入; 四檔賺錢效率最高毛利61%/ROE95%/營益率41%/配息0.4%; ⚠️trailing PE74/fwd51; 現價$259>分析師mean$204(+27%追高四檔最延伸vs目標)/median$200/28家buy評等2.0最保守; 從ATH$270 -4%/52w+191%/50日$200; 進場區",
       "entry_zone_lo": 205,
       "entry_zone_hi": 230
+    },
+    {
+      "id": "googl",
+      "type": "us_stock",
+      "symbol": "GOOGL",
+      "name": "Google/Alphabet",
+      "currency": "USD",
+      "theme": "Google母公司Alphabet(美股NasdaqGS",
+      "notes": "Google母公司Alphabet(美股NasdaqGS Class A有投票權, USD); AI全棧巨頭=搜尋廣告金流+Google Cloud(Gemini/Vertex AI/AI基建)+YouTube+Waymo+自研TPU晶片; 6/27 Adam明示加入觀察清單, ⚠️初步未深查. 品質頂級=ROE38.9%/毛利60%/淨利率38%/獲利YoY+82%(AI雲加速)/營收+21.8%/現金$1268億; 估值相對合理=trailing PE25.7/fwd P",
+      "entry_zone_lo": 300,
+      "entry_zone_hi": 330
     }
   ]
 }
