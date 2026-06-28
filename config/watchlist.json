@@ -492,6 +492,28 @@
       "notes": "ABF IC載板專家(FCBGA/flip-chip; CoPoS玻璃核心架構需ABF build-up層); 6/28 Step 11 主動發現納入(原不在清單, Adam拍板msg 1520687737). 這波找到獲利動能最猛者=EPS+530%YoY/營益率12%/D-E2.5最乾淨/rev+32%; 估值trailing PE370x假貴/fwd PE41x; 12家strong_buy mean$973<現價(略高於均標); 現$1125貼ATH$1145/50日",
       "entry_zone_lo": 950,
       "entry_zone_hi": 1050
+    },
+    {
+      "id": "2049",
+      "type": "tw_stock",
+      "symbol": "2049.TW",
+      "name": "上銀Hiwin",
+      "currency": "TWD",
+      "theme": "機器人/線性傳動(滾珠螺桿+線性滑軌, 人形機器人關節/",
+      "notes": "機器人/線性傳動(滾珠螺桿+線性滑軌, 人形機器人關節/致動器核心供應鏈); 6/28 graphify候選深查Adam納入. 情境=主題回檔(從5月高426已−28%@307/跌破季線340但站長期均線249上/52w區間~52%中段); 營收真加速(FinMind月營收YoY 2月−3%→3月+17%→4月+21%→5月+28%回升又加速)BUT獲利還弱(ROE僅4%/毛利6.5%=機具下行谷底, 貴在賭未來人形機器人放量)/預估PE~30x不離譜/trailing71x",
+      "entry_zone_lo": 270,
+      "entry_zone_hi": 300
+    },
+    {
+      "id": "6223",
+      "type": "tw_stock",
+      "symbol": "6223.TWO",
+      "name": "旺矽MPI",
+      "currency": "TWD",
+      "theme": "探針卡+晶圓測試(probe card/wafer te",
+      "notes": "探針卡+晶圓測試(probe card/wafer test=AI賣鏟子; 吃HBM測試+矽光子CPO測試); 6/28 graphify候選深查Adam納入. 情境=結構確認貼歷史新高+froth(6/23創ATH7250/現6500@52w區間88%/比長期均線高+98%極延伸); 體質全場最強=ROE28%/毛利25%/月營收YoY+58%加速(5月MoM+28%)/earnings+70%/11家strong_buy mean7503; BUT最貴=trailingP",
+      "entry_zone_lo": 5700,
+      "entry_zone_hi": 6100
     }
   ]
 }
