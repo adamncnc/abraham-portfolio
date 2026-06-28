@@ -118,10 +118,10 @@
       "symbol": "MU",
       "name": "美光",
       "currency": "USD",
-      "theme": "記憶體超級循環 (HBM/DRAM)",
-      "notes": "記憶體超級循環 (HBM/DRAM); fwd PE9.6/PEG0.34便宜 BUT 52w+804%站ATH$1088/PS21.1(Bilello 2000頂2x警告); 6/24 財報=二元事件; 進場參考 880-980 + 等6/24後, 認錯 <720; USD 計價",
-      "entry_zone_lo": 880,
-      "entry_zone_hi": 980
+      "theme": "記憶體超級循環 (HBM/DRAM) 核心觀察",
+      "notes": "記憶體超級循環 (HBM/DRAM) 核心觀察; 6/24 財報 beat-and-raise → 6/25 跳空 ATH 1255, 分析師全面調高(mean 1410/median 1500/strong-buy); fwd PE 7.6x 便宜但建立在循環高峰 EPS(peak-earnings 陷阱)/beta 2.17 高波動; 2026-06-29 post-earnings re-rate: 進場區 1000-1080(回 breakout base 正常回檔)",
+      "entry_zone_lo": 1000,
+      "entry_zone_hi": 1080
     },
     {
       "id": "gev",
