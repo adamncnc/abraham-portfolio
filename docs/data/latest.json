@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "timestamp_utc": "2026-06-28T18:03:11.672410+00:00",
+  "timestamp_utc": "2026-06-28T18:08:27.454873+00:00",
   "portfolio_summary": {
     "total_market_value_usd_equiv": 0,
     "total_cost_usd_equiv": 0,
@@ -66,7 +66,7 @@
         "regular_market_time": 1782451810,
         "market_state": "PREPRE",
         "long_name": "Delta Electronics, Inc.",
-        "fetched_at": "2026-06-28T18:02:26.478688+00:00",
+        "fetched_at": "2026-06-28T18:07:24.195710+00:00",
         "history": {
           "intraday": [
             {
@@ -10864,7 +10864,7 @@
         "regular_market_time": 1782451821,
         "market_state": "PREPRE",
         "long_name": "Asia Vital Components Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:27.658607+00:00",
+        "fetched_at": "2026-06-28T18:07:25.459211+00:00",
         "history": {
           "intraday": [
             {
@@ -21662,7 +21662,7 @@
         "regular_market_time": 1782451809,
         "market_state": "PREPRE",
         "long_name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "fetched_at": "2026-06-28T18:02:28.835869+00:00",
+        "fetched_at": "2026-06-28T18:07:26.872724+00:00",
         "history": {
           "intraday": [
             {
@@ -32463,7 +32463,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Nebius Group N.V.",
-        "fetched_at": "2026-06-28T18:02:29.462512+00:00",
+        "fetched_at": "2026-06-28T18:07:27.916568+00:00",
         "history": {
           "intraday": [
             {
@@ -36125,7 +36125,7 @@
         "regular_market_time": 1782451801,
         "market_state": "PREPRE",
         "long_name": "FOCI Fiber Optic Communications, Inc.",
-        "fetched_at": "2026-06-28T18:02:30.536380+00:00",
+        "fetched_at": "2026-06-28T18:07:29.157180+00:00",
         "history": {
           "intraday": [
             {
@@ -46923,7 +46923,7 @@
         "regular_market_time": 1782451814,
         "market_state": "PREPRE",
         "long_name": "Silergy Corp.",
-        "fetched_at": "2026-06-28T18:02:31.783880+00:00",
+        "fetched_at": "2026-06-28T18:07:30.543401+00:00",
         "history": {
           "intraday": [
             {
@@ -57721,7 +57721,7 @@
         "regular_market_time": 1782451804,
         "market_state": "PREPRE",
         "long_name": "Auras Technology Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:33.045240+00:00",
+        "fetched_at": "2026-06-28T18:07:31.879730+00:00",
         "history": {
           "intraday": [
             {
@@ -68522,7 +68522,7 @@
         "regular_market_time": 1782504003,
         "market_state": "CLOSED",
         "long_name": "Vertiv Holdings Co",
-        "fetched_at": "2026-06-28T18:02:33.756527+00:00",
+        "fetched_at": "2026-06-28T18:07:33.033085+00:00",
         "history": {
           "intraday": [
             {
@@ -78428,7 +78428,7 @@
         "regular_market_time": 1782451817,
         "market_state": "PREPRE",
         "long_name": "Elite Material Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:34.996630+00:00",
+        "fetched_at": "2026-06-28T18:07:34.499016+00:00",
         "history": {
           "intraday": [
             {
@@ -89226,7 +89226,7 @@
         "regular_market_time": 1782451804,
         "market_state": "PREPRE",
         "long_name": "Yageo Corporation",
-        "fetched_at": "2026-06-28T18:02:36.205507+00:00",
+        "fetched_at": "2026-06-28T18:07:35.815541+00:00",
         "history": {
           "intraday": [
             {
@@ -100027,7 +100027,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Micron Technology, Inc.",
-        "fetched_at": "2026-06-28T18:02:36.855282+00:00",
+        "fetched_at": "2026-06-28T18:07:36.891396+00:00",
         "history": {
           "intraday": [
             {
@@ -112064,7 +112064,7 @@
         "regular_market_time": 1782504003,
         "market_state": "CLOSED",
         "long_name": "GE Vernova Inc.",
-        "fetched_at": "2026-06-28T18:02:37.571659+00:00",
+        "fetched_at": "2026-06-28T18:07:38.175555+00:00",
         "history": {
           "intraday": [
             {
@@ -116289,7 +116289,7 @@
         "regular_market_time": 1782504002,
         "market_state": "CLOSED",
         "long_name": "Hubbell Incorporated",
-        "fetched_at": "2026-06-28T18:02:38.064835+00:00",
+        "fetched_at": "2026-06-28T18:07:39.015803+00:00",
         "history": {
           "intraday": [
             {
@@ -128018,7 +128018,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Constellation Energy Corporation",
-        "fetched_at": "2026-06-28T18:02:38.777227+00:00",
+        "fetched_at": "2026-06-28T18:07:40.171554+00:00",
         "history": {
           "intraday": [
             {
@@ -134395,7 +134395,7 @@
         "regular_market_time": 1782504003,
         "market_state": "CLOSED",
         "long_name": "Vistra Corp.",
-        "fetched_at": "2026-06-28T18:02:39.383652+00:00",
+        "fetched_at": "2026-06-28T18:07:41.173648+00:00",
         "history": {
           "intraday": [
             {
@@ -146140,7 +146140,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Talen Energy Corporation",
-        "fetched_at": "2026-06-28T18:02:40.038064+00:00",
+        "fetched_at": "2026-06-28T18:07:42.127780+00:00",
         "history": {
           "intraday": [
             {
@@ -150842,7 +150842,7 @@
         "regular_market_time": 1782451824,
         "market_state": "PREPRE",
         "long_name": "uPI Semiconductor Corp.",
-        "fetched_at": "2026-06-28T18:02:41.136806+00:00",
+        "fetched_at": "2026-06-28T18:07:43.339973+00:00",
         "history": {
           "intraday": [
             {
@@ -156208,7 +156208,7 @@
         "regular_market_time": 1782451805,
         "market_state": "PREPRE",
         "long_name": "Sinopower Semiconductor, Inc.",
-        "fetched_at": "2026-06-28T18:02:42.168549+00:00",
+        "fetched_at": "2026-06-28T18:07:44.683739+00:00",
         "history": {
           "intraday": [
             {
@@ -166998,7 +166998,7 @@
         "regular_market_time": 1782451818,
         "market_state": "PREPRE",
         "long_name": "Phison Electronics Corp.",
-        "fetched_at": "2026-06-28T18:02:43.422324+00:00",
+        "fetched_at": "2026-06-28T18:07:46.038311+00:00",
         "history": {
           "intraday": [
             {
@@ -177799,7 +177799,7 @@
         "regular_market_time": 1782504003,
         "market_state": "CLOSED",
         "long_name": "Onto Innovation Inc.",
-        "fetched_at": "2026-06-28T18:02:44.303528+00:00",
+        "fetched_at": "2026-06-28T18:07:46.946422+00:00",
         "history": {
           "intraday": [
             {
@@ -186372,7 +186372,7 @@
         "regular_market_time": 1782504000,
         "market_state": "CLOSED",
         "long_name": "CoreWeave, Inc.",
-        "fetched_at": "2026-06-28T18:02:44.951455+00:00",
+        "fetched_at": "2026-06-28T18:07:47.912429+00:00",
         "history": {
           "intraday": [
             {
@@ -189602,7 +189602,7 @@
         "regular_market_time": 1782451830,
         "market_state": "PREPRE",
         "long_name": "Holy Stone Enterprise Co.,Ltd.",
-        "fetched_at": "2026-06-28T18:02:45.985221+00:00",
+        "fetched_at": "2026-06-28T18:07:49.165894+00:00",
         "history": {
           "intraday": [
             {
@@ -200244,7 +200244,7 @@
         "regular_market_time": 1782451824,
         "market_state": "PREPRE",
         "long_name": "Prosperity Dielectrics Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:47.205892+00:00",
+        "fetched_at": "2026-06-28T18:07:50.508581+00:00",
         "history": {
           "intraday": [
             {
@@ -210886,7 +210886,7 @@
         "regular_market_time": 1782451818,
         "market_state": "PREPRE",
         "long_name": "Jentech Precision Industrial Co., Ltd",
-        "fetched_at": "2026-06-28T18:02:48.313350+00:00",
+        "fetched_at": "2026-06-28T18:07:51.867542+00:00",
         "history": {
           "intraday": [
             {
@@ -221660,7 +221660,7 @@
         "market_state": "REGULAR",
         "long_name": "Gold Aug 26",
         "unit": "USD per troy ounce",
-        "fetched_at": "2026-06-28T18:02:48.833490+00:00",
+        "fetched_at": "2026-06-28T18:07:52.590998+00:00",
         "history": {
           "intraday": [],
           "intraday_mid": [
@@ -235526,7 +235526,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Roundhill Memory ETF",
-        "fetched_at": "2026-06-28T18:02:49.499220+00:00",
+        "fetched_at": "2026-06-28T18:07:53.967987+00:00",
         "history": {
           "intraday": [
             {
@@ -237731,7 +237731,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "ON Semiconductor Corporation",
-        "fetched_at": "2026-06-28T18:02:50.071952+00:00",
+        "fetched_at": "2026-06-28T18:07:54.754054+00:00",
         "history": {
           "intraday": [
             {
@@ -249768,7 +249768,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Sandisk Corporation",
-        "fetched_at": "2026-06-28T18:02:50.630993+00:00",
+        "fetched_at": "2026-06-28T18:07:55.790517+00:00",
         "history": {
           "intraday": [
             {
@@ -253118,7 +253118,7 @@
         "regular_market_time": 1782451806,
         "market_state": "PREPRE",
         "long_name": "King Yuan Electronics Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:51.630162+00:00",
+        "fetched_at": "2026-06-28T18:07:57.071666+00:00",
         "history": {
           "intraday": [
             {
@@ -263919,7 +263919,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Power Integrations, Inc.",
-        "fetched_at": "2026-06-28T18:02:52.239188+00:00",
+        "fetched_at": "2026-06-28T18:07:57.971794+00:00",
         "history": {
           "intraday": [
             {
@@ -275613,7 +275613,7 @@
         "regular_market_time": 1782451840,
         "market_state": "PREPRE",
         "long_name": "Visual Photonics Epitaxy Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:53.398165+00:00",
+        "fetched_at": "2026-06-28T18:07:59.395215+00:00",
         "history": {
           "intraday": [
             {
@@ -286258,7 +286258,7 @@
         "regular_market_time": 1782504288,
         "market_state": "CLOSED",
         "long_name": "Corning Incorporated",
-        "fetched_at": "2026-06-28T18:02:53.980119+00:00",
+        "fetched_at": "2026-06-28T18:08:00.544013+00:00",
         "history": {
           "intraday": [
             {
@@ -298280,7 +298280,7 @@
         "regular_market_time": 1782451805,
         "market_state": "PREPRE",
         "long_name": "ASE Technology Holding Co., Ltd.",
-        "fetched_at": "2026-06-28T18:02:55.219188+00:00",
+        "fetched_at": "2026-06-28T18:08:02.051051+00:00",
         "history": {
           "intraday": [
             {
@@ -309078,7 +309078,7 @@
         "regular_market_time": 1782451820,
         "market_state": "PREPRE",
         "long_name": "ShunSin Technology Holdings Limited",
-        "fetched_at": "2026-06-28T18:02:56.423830+00:00",
+        "fetched_at": "2026-06-28T18:08:03.430447+00:00",
         "history": {
           "intraday": [
             {
@@ -319879,7 +319879,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "ASML Holding N.V.",
-        "fetched_at": "2026-06-28T18:02:57.025905+00:00",
+        "fetched_at": "2026-06-28T18:08:04.315552+00:00",
         "history": {
           "intraday": [
             {
@@ -331912,7 +331912,7 @@
         "regular_market_time": 1782504000,
         "market_state": "CLOSED",
         "long_name": "Lam Research Corporation",
-        "fetched_at": "2026-06-28T18:02:57.809401+00:00",
+        "fetched_at": "2026-06-28T18:08:05.374795+00:00",
         "history": {
           "intraday": [
             {
@@ -343949,7 +343949,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Applied Materials, Inc.",
-        "fetched_at": "2026-06-28T18:02:58.487269+00:00",
+        "fetched_at": "2026-06-28T18:08:06.436683+00:00",
         "history": {
           "intraday": [
             {
@@ -355986,7 +355986,7 @@
         "regular_market_time": 1782504002,
         "market_state": "CLOSED",
         "long_name": "KLA Corporation",
-        "fetched_at": "2026-06-28T18:02:59.170227+00:00",
+        "fetched_at": "2026-06-28T18:08:07.511327+00:00",
         "history": {
           "intraday": [
             {
@@ -368019,7 +368019,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Alphabet Inc.",
-        "fetched_at": "2026-06-28T18:02:59.873751+00:00",
+        "fetched_at": "2026-06-28T18:08:08.579369+00:00",
         "history": {
           "intraday": [
             {
@@ -380056,7 +380056,7 @@
         "regular_market_time": 1782504002,
         "market_state": "CLOSED",
         "long_name": "Amazon.com, Inc.",
-        "fetched_at": "2026-06-28T18:03:00.505299+00:00",
+        "fetched_at": "2026-06-28T18:08:09.665749+00:00",
         "history": {
           "intraday": [
             {
@@ -392093,7 +392093,7 @@
         "regular_market_time": 1782504000,
         "market_state": "CLOSED",
         "long_name": "Meta Platforms, Inc.",
-        "fetched_at": "2026-06-28T18:03:01.164283+00:00",
+        "fetched_at": "2026-06-28T18:08:10.739311+00:00",
         "history": {
           "intraday": [
             {
@@ -404130,7 +404130,7 @@
         "regular_market_time": 1782504001,
         "market_state": "CLOSED",
         "long_name": "Microsoft Corporation",
-        "fetched_at": "2026-06-28T18:03:01.896666+00:00",
+        "fetched_at": "2026-06-28T18:08:11.801022+00:00",
         "history": {
           "intraday": [
             {
@@ -416167,7 +416167,7 @@
         "regular_market_time": 1782504002,
         "market_state": "CLOSED",
         "long_name": "Marvell Technology, Inc.",
-        "fetched_at": "2026-06-28T18:03:02.635532+00:00",
+        "fetched_at": "2026-06-28T18:08:12.982367+00:00",
         "history": {
           "intraday": [
             {
@@ -428201,7 +428201,7 @@
         "regular_market_time": 1782451806,
         "market_state": "PREPRE",
         "long_name": "Unimicron Technology Corp.",
-        "fetched_at": "2026-06-28T18:03:03.854718+00:00",
+        "fetched_at": "2026-06-28T18:08:14.398360+00:00",
         "history": {
           "intraday": [
             {
@@ -438999,7 +438999,7 @@
         "regular_market_time": 1782451810,
         "market_state": "PREPRE",
         "long_name": "Nan Ya Printed Circuit Board Corporation",
-        "fetched_at": "2026-06-28T18:03:05.112715+00:00",
+        "fetched_at": "2026-06-28T18:08:15.941594+00:00",
         "history": {
           "intraday": [
             {
@@ -449797,7 +449797,7 @@
         "regular_market_time": 1782451801,
         "market_state": "PREPRE",
         "long_name": "Hiwin Technologies Corporation",
-        "fetched_at": "2026-06-28T18:03:06.340480+00:00",
+        "fetched_at": "2026-06-28T18:08:17.429924+00:00",
         "history": {
           "intraday": [
             {
@@ -460595,7 +460595,7 @@
         "regular_market_time": 1782451815,
         "market_state": "PREPRE",
         "long_name": "MPI Corporation",
-        "fetched_at": "2026-06-28T18:03:07.562107+00:00",
+        "fetched_at": "2026-06-28T18:08:18.817814+00:00",
         "history": {
           "intraday": [
             {
@@ -471396,7 +471396,7 @@
         "regular_market_time": 1782452005,
         "market_state": "PREPRE",
         "long_name": "TWSE Capitalization Weighted Stock Index",
-        "fetched_at": "2026-06-28T18:03:08.349668+00:00",
+        "fetched_at": "2026-06-28T18:08:20.672827+00:00",
         "history": {
           "intraday": [
             {
@@ -482195,7 +482195,7 @@
         "regular_market_time": 1782504000,
         "market_state": "CLOSED",
         "long_name": "iShares MSCI Taiwan ETF",
-        "fetched_at": "2026-06-28T18:03:09.077466+00:00",
+        "fetched_at": "2026-06-28T18:08:21.993350+00:00",
         "history": {
           "intraday": [
             {
@@ -494090,7 +494090,7 @@
         "regular_market_time": 1782508559,
         "market_state": "CLOSED",
         "long_name": "NASDAQ Composite",
-        "fetched_at": "2026-06-28T18:03:09.903340+00:00",
+        "fetched_at": "2026-06-28T18:08:23.687627+00:00",
         "history": {
           "intraday": [
             {
@@ -505733,7 +505733,7 @@
         "regular_market_time": 1782508559,
         "market_state": "CLOSED",
         "long_name": "PHLX Semiconductor",
-        "fetched_at": "2026-06-28T18:03:10.583861+00:00",
+        "fetched_at": "2026-06-28T18:08:25.491668+00:00",
         "history": {
           "intraday": [
             {
@@ -517376,7 +517376,7 @@
         "regular_market_time": 1782504525,
         "market_state": "CLOSED",
         "long_name": "NYSE Composite Index",
-        "fetched_at": "2026-06-28T18:03:11.327291+00:00",
+        "fetched_at": "2026-06-28T18:08:26.957042+00:00",
         "history": {
           "intraday": [
             {
