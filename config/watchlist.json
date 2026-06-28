@@ -470,6 +470,28 @@
       "notes": "資料基礎設施半導體(美股NasdaqGS USD); 三條AI線: ①客製ASIC/XPU(搶博通客製AI晶片生意) ②Structera CXL記憶體壓縮(CDB硬體即時壓縮,1GB當2-4倍/最高3.64x) ③光通訊/CPO/DSP/共封裝光學; **6/28 深查完成**(Adam問記憶體壓縮技術後加入→深調). 品質好=毛利51.5%/ROE16%/低負債D-E29/FCF正; **Q1 FY27(5月底)營收$24.18億+28%/資料中心76%+27%/客製晶片",
       "entry_zone_lo": 220,
       "entry_zone_hi": 265
+    },
+    {
+      "id": "3037",
+      "type": "tw_stock",
+      "symbol": "3037.TW",
+      "name": "欣興Unimicron",
+      "currency": "TWD",
+      "theme": "ABF載板全球前三+台積電CoPoS玻璃核心載板唯一確認",
+      "notes": "ABF載板全球前三+台積電CoPoS玻璃核心載板唯一確認共同開發夥伴(與日本Ibiden); 6/28 Step 11 主動候選篩選納入(Adam拍板msg 1520687737, sonnet screen 可後續全deep-dive). CoPoS最直接玻璃基板受惠+ABF build-up層雙贏(玻璃起飛或ABF續強都吃到); 質地=ROE11%/毛利15%/rev+24.5%; 估值trailing PE222x假貴/fwd PE32x(ramp還原)/17家stro",
+      "entry_zone_lo": 850,
+      "entry_zone_hi": 950
+    },
+    {
+      "id": "8046",
+      "type": "tw_stock",
+      "symbol": "8046.TW",
+      "name": "南亞電路板NanYaPCB",
+      "currency": "TWD",
+      "theme": "ABF IC載板專家(FCBGA/flip-chip",
+      "notes": "ABF IC載板專家(FCBGA/flip-chip; CoPoS玻璃核心架構需ABF build-up層); 6/28 Step 11 主動發現納入(原不在清單, Adam拍板msg 1520687737). 這波找到獲利動能最猛者=EPS+530%YoY/營益率12%/D-E2.5最乾淨/rev+32%; 估值trailing PE370x假貴/fwd PE41x; 12家strong_buy mean$973<現價(略高於均標); 現$1125貼ATH$1145/50日",
+      "entry_zone_lo": 950,
+      "entry_zone_hi": 1050
     }
   ]
 }
