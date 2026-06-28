@@ -459,6 +459,17 @@
       "notes": "Microsoft(美股NasdaqGS, USD); Azure雲(AI算力+OpenAI夥伴)+M365/Copilot+Windows+遊戲; 6/27 Adam明示加入觀察清單, ⚠️初步未深查. ⚠️同META被重打: 一年−25%@$373貼52w低$349/距ATH$555 −33%/遠低於50日$411+200日$448=下降趨勢; 今+5.7%剛彈; 估值trailing PE22/fwd PE19.3/PEG1.13(合理非便宜)/毛利68%/ROE34%",
       "entry_zone_lo": 345,
       "entry_zone_hi": 375
+    },
+    {
+      "id": "mrvl",
+      "type": "us_stock",
+      "symbol": "MRVL",
+      "name": "Marvell邁威爾",
+      "currency": "USD",
+      "theme": "資料基礎設施半導體(美股NasdaqGS USD)",
+      "notes": "資料基礎設施半導體(美股NasdaqGS USD); 三條AI線: ①客製ASIC/XPU(搶博通客製AI晶片生意) ②Structera CXL記憶體壓縮(CDB硬體即時壓縮,1GB當2-4倍/最高3.64x,記憶體缺貨下省採購) ③光通訊/CPO/DSP/共封裝光學; 6/28 Adam問MRVL記憶體壓縮技術後明示加入, ⚠️初步未深查. 品質好=毛利51.5%/ROE16%/低負債D-E29/FCF正; ⚠️估值貴=2026 PE~66x/fwd PE43/PEG1.",
+      "entry_zone_lo": 200,
+      "entry_zone_hi": 230
     }
   ]
 }
