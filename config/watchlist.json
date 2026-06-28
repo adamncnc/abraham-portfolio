@@ -477,10 +477,10 @@
       "symbol": "3037.TW",
       "name": "欣興Unimicron",
       "currency": "TWD",
-      "theme": "ABF載板全球前三+台積電CoPoS玻璃核心載板唯一確認",
-      "notes": "ABF載板全球前三+台積電CoPoS玻璃核心載板唯一確認共同開發夥伴(與日本Ibiden); 6/28 Step 11 主動候選篩選納入(Adam拍板msg 1520687737, sonnet screen 可後續全deep-dive). CoPoS最直接玻璃基板受惠+ABF build-up層雙贏(玻璃起飛或ABF續強都吃到); 質地=ROE11%/毛利15%/rev+24.5%; 估值trailing PE222x假貴/fwd PE32x(ramp還原)/17家stro",
+      "theme": "全球前三ABF載板廠(AI GPU/ASIC基板)+台積",
+      "notes": "全球前三ABF載板廠(AI GPU/ASIC基板)+台積電CoPoS/Intel玻璃基板開發夥伴; **6/28 我親自完整deep-dive**(取代sonnet screen; Adam納入msg 1520687737). 獲利拐點=2025淨利+36%/1Q26 EPS 3.28=13季新高/AI占比30-40%→2026目標60%+/ABF利用率~90%·ASIC>70%/ABF·BT每季漲3-5%; 估值2026 PE~64x(EPS~15.3谷底復甦)/2027 ",
       "entry_zone_lo": 850,
-      "entry_zone_hi": 950
+      "entry_zone_hi": 960
     },
     {
       "id": "8046",
