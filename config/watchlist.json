@@ -514,6 +514,17 @@
       "notes": "探針卡+晶圓測試(probe card/wafer test=AI賣鏟子; 吃HBM測試+矽光子CPO測試); 6/28 graphify候選深查Adam納入. 情境=結構確認貼歷史新高+froth(6/23創ATH7250/現6500@52w區間88%/比長期均線高+98%極延伸); 體質全場最強=ROE28%/毛利25%/月營收YoY+58%加速(5月MoM+28%)/earnings+70%/11家strong_buy mean7503; BUT最貴=trailingP",
       "entry_zone_lo": 5700,
       "entry_zone_hi": 6100
+    },
+    {
+      "id": "oust",
+      "type": "us_stock",
+      "symbol": "OUST",
+      "name": "Ouster光達",
+      "currency": "USD",
+      "theme": "Physical AI/數位光達純玩(自駕/機器人/工業",
+      "notes": "Physical AI/數位光達純玩(自駕/機器人/工業/智慧基建3D感測; 2023合併Velodyne; 320員工小公司); 6/29 graphify候選(Rocky KOL點名)深調Adam納入, USD. 成長真=Q1 2026營收$48.58M YoY+49%/毛利40-47% BUT pre獲利(5季僅去年Q4轉正且一次性)每季燒$17-22M; 財務亮點=淨現金$156M~3年跑道(短期不倒不急稀釋,贏同業); 估值貴P/S 14x; 催化=Benchmar",
+      "entry_zone_lo": 35,
+      "entry_zone_hi": 40
     }
   ]
 }
