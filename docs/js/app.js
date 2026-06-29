@@ -1094,11 +1094,12 @@ function cardIdOf(card, section) {
 }
 
 // 純數值排序模式 -> 方向 (-1 = 大到小 / +1 = 小到大)。圖釘在這些模式不置頂 (純 metric 勝)。
-const METRIC_DIR = { change: -1, growth: -1, eps: -1, pe: 1, zone: 1 };
+const METRIC_DIR = { change: -1, growth: -1, eps: -1, pe: 1, zone: 1, drawdown: 1 };
 
 function sortMetric(item, mode) {
   const d = (item && item.data) || {};
   if (mode === "change") return d.change_pct == null ? -Infinity : d.change_pct;   // 漲跌幅 大->小
+  if (mode === "drawdown") return d.dist_from_high_pct == null ? Infinity : d.dist_from_high_pct; // 回檔深度 距52W高 深(負大)->上, 無資料->最後
   if (mode === "growth") return d.rev_yoy_pct == null ? -Infinity : d.rev_yoy_pct; // 營收成長率 大->小
   if (mode === "eps")    return d.eps == null ? -Infinity : d.eps;                 // EPS 大->小
   if (mode === "pe") {                                                             // 本益比 小->大 (便宜在前)
