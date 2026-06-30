@@ -455,6 +455,21 @@ body {
 .badge-near-low { color: var(--accent); font-weight: 700; }
 .badge-mid { color: var(--warning); }
 
+/* Per-card data-freshness pill (2026-06-30) — live vs stale-close vs snapshot.
+   Status colour, NOT price direction, so it doesn't read as 漲/跌. */
+.freshness-row { margin: -4px 0 10px; }
+.freshness {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.freshness.fresh { color: var(--accent);   background: rgba(74, 222, 128, .12); }
+.freshness.stale { color: var(--warning);  background: rgba(251, 191, 36, .15); }
+.freshness.snap  { color: var(--text-dim); background: rgba(139, 149, 167, .12); }
+
 /* Footer */
 .site-footer {
   text-align: center;

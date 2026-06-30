@@ -10,6 +10,10 @@ const DATA_URL = "./data/latest.json";
 const RELAY_BASE = "https://abraham-quotes.adamncnc.workers.dev";
 let CURRENT_SNAPSHOT = null;
 let LIVE_MODE = false;  // once user presses 抓即時, auto-refresh keeps pulling live
+let REFRESH_INFLIGHT = false;  // guards liveRefresh / refreshOneCard against overlap (auto-refresh + manual)
+// Relay caps each request's symbol count, so one request for the whole list silently
+// drops the tail. Chunk well under the cap and merge so every symbol gets a quote.
+const LIVE_BATCH_SIZE = 30;
 
 const DEFAULT_SCOPE = "1d";
 const SCOPES = [
@@ -504,6 +508,33 @@ function escapeHtml(s) {
   ));
 }
 
+// Per-card data-freshness badge (Adam 2026-06-30): make the FEW symbols that fail
+// to refresh live visible instead of silently looking "stuck". Green = live quote,
+// amber = showing close (live fetch missed this symbol, or pipeline carried stale),
+// grey = plain盤後 snapshot. (Freshness ≠ price direction — separate pill/row, so it
+// doesn't collide with the 漲紅跌綠 price colours.)
+function freshnessBadge(item) {
+  const data = item.data || {};
+  const hhmm = (ms) => new Date(ms).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
+  if (item._live === true) {
+    return `<span class="freshness fresh" title="即時報價">🟢 即時 ${item._liveTs ? hhmm(item._liveTs) : ""}</span>`;
+  }
+  // Carried-forward stale (pipeline kept last-known-good) is the stronger signal —
+  // check it BEFORE the generic live-miss so wording stays exact. (Codex R2 P4.)
+  if (data.stale) {
+    const since = data.stale_since ? new Date(data.stale_since).toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) : "";
+    return `<span class="freshness stale" title="本輪抓取失敗，顯示上次收盤價${since ? "（" + since + "）" : ""}">🟡 舊資料${since ? " " + since : ""}</span>`;
+  }
+  if (item._live === false) {
+    return `<span class="freshness stale" title="此檔即時抓取失敗，顯示最近收盤價">🟡 未即時·收盤</span>`;
+  }
+  if (data.fetched_at) {
+    const s = new Date(data.fetched_at).toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+    return `<span class="freshness snap" title="盤後快照資料">🕒 收盤 ${s}</span>`;
+  }
+  return "";
+}
+
 // ========== Asset Card Builder ==========
 function buildAssetCard(item, section) {
   const data = item.data || {};
@@ -553,6 +584,7 @@ function buildAssetCard(item, section) {
     ? `<button class="card-refresh" title="更新此檔即時" data-sym="${escapeHtml(item.symbol)}" data-section="${escapeHtml(section)}" data-cardid="${escapeHtml(item.id)}">↻</button>`
     : "";
 
+  const badge = freshnessBadge(item);
   const priceRow = price !== null && price !== undefined
     ? `
       <div class="asset-price-row">
@@ -563,6 +595,7 @@ function buildAssetCard(item, section) {
         </span>
         ${cardRefreshBtn}
       </div>
+      ${badge ? `<div class="freshness-row">${badge}</div>` : ""}
     `
     : `
       <div class="asset-price-row">
@@ -961,6 +994,31 @@ async function loadAndRender() {
   }
 }
 
+// Fetch live quotes in batches of <= LIVE_BATCH_SIZE and merge. The relay caps
+// symbols per request, so sending the whole list in one shot silently dropped the
+// tail (the long-standing "a few symbols stuck on close price" bug, 2026-06-30).
+// Batches run sequentially to keep Yahoo concurrency (and rate-limit risk) modest.
+async function fetchQuotesBatched(symbols) {
+  const base = RELAY_BASE.replace(/\/+$/, "");
+  const merged = {};
+  for (let i = 0; i < symbols.length; i += LIVE_BATCH_SIZE) {
+    const batch = symbols.slice(i, i + LIVE_BATCH_SIZE);
+    try {
+      const url = base + "/?symbols=" + encodeURIComponent(batch.join(","));
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`relay HTTP ${res.status}`);
+      const data = await res.json();
+      Object.assign(merged, (data && data.quotes) || {});
+    } catch (err) {
+      // One batch failing must not discard the others — mark just this batch's
+      // symbols failed so the successful batches still render live. (Codex R2 P3.)
+      console.error("live batch failed:", batch.join(","), err);
+      for (const s of batch) if (!(s in merged)) merged[s] = { ok: false, error: String((err && err.message) || err) };
+    }
+  }
+  return merged;
+}
+
 // Live refresh: pull current quotes for every tracked symbol from the relay
 // (Cloudflare Worker), merge into the snapshot, and re-render. Falls back to a
 // plain snapshot reload if the relay isn't configured, and to last-close per
@@ -975,13 +1033,12 @@ async function liveRefresh() {
   const symbols = [...new Set(all.map(it => it.symbol).filter(Boolean))];
   if (!symbols.length) return;
 
+  if (REFRESH_INFLIGHT) return;  // an auto/manual refresh is already running — don't overlap
+  REFRESH_INFLIGHT = true;
   if (btn) { btn.disabled = true; btn.textContent = "抓取中…"; }
   try {
-    const url = RELAY_BASE.replace(/\/+$/, "") + "/?symbols=" + encodeURIComponent(symbols.join(","));
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error(`relay HTTP ${res.status}`);
-    const data = await res.json();
-    const quotes = (data && data.quotes) || {};
+    const quotes = await fetchQuotesBatched(symbols);
+    const liveTs = Date.now();
 
     let okCount = 0, failCount = 0;
     const apply = (item) => {
@@ -996,8 +1053,12 @@ async function liveRefresh() {
         if (q.intraday && q.intraday.length) {
           next.data.history = { ...(next.data.history || {}), intraday: q.intraday };
         }
-      } else if (item.status !== "error") {
-        failCount++;
+        next._live = true;        // fresh live quote applied → green per-card badge
+        next._liveTs = liveTs;
+        delete next.data.stale;   // a fresh quote supersedes any carried-forward stale flag
+      } else {
+        next._live = false;       // showing snapshot close → amber "未即時" per-card badge
+        if (item.status !== "error") failCount++;
       }
       return next;
     };
@@ -1009,7 +1070,7 @@ async function liveRefresh() {
       indices: (CURRENT_SNAPSHOT.indices || []).map(apply),
     };
     const note = failCount
-      ? `${okCount} 檔即時 · ${failCount} 檔抓取失敗(顯示最近收盤)`
+      ? `${okCount} 檔即時 · ${failCount} 檔未即時(顯示收盤)`
       : `${okCount} 檔即時`;
     CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
     renderSnapshot(live, { live: true, note });
@@ -1019,6 +1080,7 @@ async function liveRefresh() {
     document.getElementById("timestamp").textContent =
       `⚠️ 即時抓取失敗，顯示最近收盤：${err.message}`;
   } finally {
+    REFRESH_INFLIGHT = false;
     if (btn) { btn.disabled = false; btn.textContent = "🔄 抓即時"; }
   }
 }
@@ -1029,6 +1091,8 @@ async function refreshOneCard(section, id, symbol, btn) {
   const list = CURRENT_SNAPSHOT[section] || [];
   const item = list.find((it) => it.id === id);
   if (!item) return;
+  if (REFRESH_INFLIGHT) return;  // don't overlap with an auto/full refresh
+  REFRESH_INFLIGHT = true;
   if (btn) { btn.disabled = true; btn.classList.add("spin"); }
   try {
     const url = RELAY_BASE.replace(/\/+$/, "") + "/?symbols=" + encodeURIComponent(symbol);
@@ -1043,6 +1107,9 @@ async function refreshOneCard(section, id, symbol, btn) {
     if (q.changePct != null) item.data.change_pct = q.changePct;
     if (q.intraday && q.intraday.length) item.data.history = { ...(item.data.history || {}), intraday: q.intraday };
     item.status = "ok";
+    item._live = true;             // single-card live quote applied → green badge
+    item._liveTs = Date.now();
+    if (item.data) delete item.data.stale;  // a fresh quote supersedes any carried-forward stale data
     const node = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
     if (node) {
       const cid = canvasIdFor(section, item);
@@ -1061,6 +1128,8 @@ async function refreshOneCard(section, id, symbol, btn) {
       btn.textContent = "✕";
       setTimeout(() => { btn.textContent = "↻"; btn.disabled = false; }, 1500);
     }
+  } finally {
+    REFRESH_INFLIGHT = false;
   }
 }
 
