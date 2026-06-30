@@ -41,8 +41,8 @@
       "symbol": "NBIS",
       "name": "Nebius",
       "currency": "USD",
-      "theme": "AI 雲",
-      "notes": "AI 雲全棧(NVIDIA 聯盟); 6/22 入 Nasdaq 100; 一般關注標的(與清單其他支同等、無特殊持倉/警戒框架; 2026-06-30 正規化); 估值極延伸 P/S76/分析師 mean$244<現價=別追、等回檔到區間",
+      "theme": "AI 雲全棧(NVIDIA 聯盟)",
+      "notes": "AI 雲全棧(NVIDIA 聯盟); 6/22 入 Nasdaq 100; 一般關注標的(與清單其他支同等處理, 無特殊持倉/警戒框架; 2026-06-30 Adam 明示正規化, 撤『$201 警戒/已出場』位階); 進場區 205-225/認錯 190; 估值極延伸 P/S76/分析師 mean$244<現價=別追",
       "entry_zone_lo": 205,
       "entry_zone_hi": 225
     },
@@ -525,6 +525,28 @@
       "notes": "Physical AI/數位光達純玩(自駕/機器人/工業/智慧基建3D感測; 2023合併Velodyne; 320員工小公司); 6/29 graphify候選(Rocky KOL點名)深調Adam納入, USD. 成長真=Q1 2026營收$48.58M YoY+49%/毛利40-47% BUT pre獲利(5季僅去年Q4轉正且一次性)每季燒$17-22M; 財務亮點=淨現金$156M~3年跑道(短期不倒不急稀釋,贏同業); 估值貴P/S 14x; 催化=Benchmar",
       "entry_zone_lo": 35,
       "entry_zone_hi": 40
+    },
+    {
+      "id": "6239",
+      "type": "tw_stock",
+      "symbol": "6239.TW",
+      "name": "力成",
+      "currency": "TWD",
+      "theme": "封測/記憶體封裝測試(全球第5大OSAT/台灣記憶體封測",
+      "notes": "封測/記憶體封裝測試(全球第5大OSAT/台灣記憶體封測龍頭/美光最大封測夥伴; HBM burn-in是AI記憶體出貨卡脖子環節); 6/30 Adam深調後明示加入; 體質中段=毛利17.6%/ROE11%/⚠️FCF-140億(2026 capex US$16億擴產積極)/淨負債167億D/E44%; 估值2026E PE 26.4x(EPS12.77; ⚠️Yahoo forwardPE17.5是用2027 EPS算的假便宜)/trailing40x; 月營收連11月",
+      "entry_zone_lo": 270,
+      "entry_zone_hi": 305
+    },
+    {
+      "id": "3533",
+      "type": "tw_stock",
+      "symbol": "3533.TW",
+      "name": "嘉澤",
+      "currency": "TWD",
+      "theme": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-",
+      "notes": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-80%/AMD EPYC伺服器最大插座供應商/SOCAMM記憶體連接器+NPO插座+液冷快接頭); 6/30 Adam深調後明示加入; 體質最佳=毛利50.8%(連接器同業Amphenol才33%)/ROE19%/淨現金136億幾乎零負債(D/E2%)=堡壘級資產負債表; 估值2026E PE 22x(EPS95.96; ⚠️Yahoo forwardPE16.2是用2027 EPS假便宜)/這群最低; Q1伺服器業務+",
+      "entry_zone_lo": 1850,
+      "entry_zone_hi": 2100
     }
   ]
 }
