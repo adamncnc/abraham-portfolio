@@ -8,6 +8,13 @@ const DATA_URL = "./data/latest.json";
 // Set to your workers.dev URL to enable the 抓即時 button's live fetch.
 // Empty => 抓即時 falls back to reloading the snapshot file.
 const RELAY_BASE = "https://abraham-quotes.adamncnc.workers.dev";
+// Cloud settings sync (Adam 2026-07-01): same Worker, /prefs route backed by KV.
+// Syncs ONLY UI layout prefs (pin / custom order / sort mode / active tab) so every
+// device shows the same layout. Degrades to local-only if the relay/KV isn't set up.
+const PREFS_URL = RELAY_BASE ? RELAY_BASE.replace(/\/+$/, "") + "/prefs" : "";
+const PREFS_SECRET = "abr-dash-7c3f9a";   // low-stakes anti-grief token; must match the Worker
+let PREFS_SYNCING = true;                  // suppress uploads during initial load / cloud-apply
+let _prefsPushTimer = null;
 let CURRENT_SNAPSHOT = null;
 let LIVE_MODE = false;  // once user presses 抓即時, auto-refresh keeps pulling live
 let REFRESH_INFLIGHT = false;  // guards liveRefresh / refreshOneCard against overlap (auto-refresh + manual)
@@ -1142,7 +1149,7 @@ const ORDER_SECTIONS = ["tw", "us", "idx"];
 const SORTABLE_INSTANCES = {};
 
 function lsGet(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
-function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode / quota — ignore */ } }
+function lsSet(k, v) { try { localStorage.setItem(k, v); if (!PREFS_SYNCING && k.indexOf("abraham.") === 0) schedulePrefsPush(); } catch (e) { /* private mode / quota — ignore */ } }
 
 // 圖釘置頂 (Adam 2026-06-19) — per-section pinned id set, persisted like order/sort.
 // Pinned cards float to the top of their tab in ALL sort modes EXCEPT 漲跌幅/距進場區.
@@ -1280,13 +1287,68 @@ document.getElementById("refresh-btn").addEventListener("click", () => { LIVE_MO
 const _liveBtn = document.getElementById("live-btn");
 if (_liveBtn) _liveBtn.addEventListener("click", liveRefresh);
 
-// Restore last-viewed market tab BEFORE the first render so its charts (in the
-// visible panel) size correctly; hidden panels resize when first activated.
-activateTab(lsGet("abraham.activeTab", "tw"), false);
-// Render the saved snapshot immediately (fast), then upgrade to live quotes so
-// the colours reflect the CURRENT session, not a stale pre-market snapshot
-// (Adam 2026-06-17). liveRefresh falls back to the static file if the relay is down.
-loadAndRender().then(() => liveRefresh());
+// --- Cloud prefs sync helpers (Adam 2026-07-01) ---
+// One shared blob in the Worker's KV holds every "abraham.*" localStorage key, so all
+// devices converge. Pull on boot (cloud wins), push debounced on any local change.
+function collectPrefs() {
+  const out = {};
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const k = localStorage.key(i);
+      if (k && k.indexOf("abraham.") === 0) out[k] = localStorage.getItem(k);
+    }
+  } catch (e) {}
+  return out;
+}
+function applyPrefs(obj) {
+  if (!obj || typeof obj !== "object") return;
+  try {
+    for (const k in obj) {
+      if (k.indexOf("abraham.") === 0 && typeof obj[k] === "string") localStorage.setItem(k, obj[k]);
+    }
+  } catch (e) {}
+}
+async function pullPrefs() {
+  if (!PREFS_URL) return;
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 2500);  // never block boot on a slow/missing relay
+    const res = await fetch(PREFS_URL, { signal: ctrl.signal, cache: "no-store" });
+    clearTimeout(t);
+    if (!res.ok) return;
+    const prefs = await res.json();
+    if (prefs && typeof prefs === "object" && Object.keys(prefs).length) applyPrefs(prefs);
+  } catch (e) { /* relay/KV not set up or offline → keep this device's localStorage */ }
+}
+function schedulePrefsPush() {
+  if (!PREFS_URL) return;
+  clearTimeout(_prefsPushTimer);
+  _prefsPushTimer = setTimeout(pushPrefs, 1200);  // debounce bursts of drags/toggles
+}
+async function pushPrefs() {
+  if (!PREFS_URL) return;
+  try {
+    await fetch(PREFS_URL + (PREFS_SECRET ? "?k=" + encodeURIComponent(PREFS_SECRET) : ""), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(collectPrefs()),
+    });
+  } catch (e) { /* offline / not set up → the next change re-syncs */ }
+}
+
+// Boot: pull the unified settings from the relay KV BEFORE first paint so pinned /
+// custom order / sort mode / active tab match on every device. If the relay or its KV
+// isn't set up (or offline), the fetch just fails and we fall back to this device's
+// localStorage — nothing breaks. Edits after boot auto-upload (debounced).
+(async () => {
+  await pullPrefs();
+  // Restore last-viewed market tab BEFORE the first render so its charts size correctly.
+  activateTab(lsGet("abraham.activeTab", "tw"), false);
+  // Render saved snapshot immediately (fast), then upgrade to live quotes.
+  await loadAndRender();
+  PREFS_SYNCING = false;   // boot done — user edits from here on sync up to the cloud
+  liveRefresh();
+})();
 
 // Auto-refresh every 5 minutes (when tab visible). Stay in whichever mode the
 // user last chose: live keeps pulling live quotes, otherwise reload snapshot.

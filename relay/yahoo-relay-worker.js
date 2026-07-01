@@ -1,30 +1,76 @@
-// Abraham Dashboard — Yahoo Finance CORS relay (Cloudflare Worker)
+// Abraham Dashboard — Cloudflare Worker (2 jobs)
+//   1. Yahoo Finance CORS relay for the 抓即時 live-quote button (GET /?symbols=...)
+//   2. Cross-device settings sync (GET/POST /prefs) backed by Workers KV — so
+//      pinned cards / custom order / sort mode / active tab match on every device.
 //
-// Why: GitHub Pages is static and the browser can't call Yahoo directly
-// (CORS-blocked). This tiny Worker fetches Yahoo server-side (no CORS limit)
-// and re-serves the data with Access-Control-Allow-Origin so the dashboard's
-// "抓即時" button can pull live quotes on demand.
+// Why a Worker: GitHub Pages is static; the browser can't call Yahoo (CORS) and has
+// nowhere to store shared settings. This tiny Worker fetches Yahoo server-side and
+// keeps one shared settings blob in KV.
 //
-// Deploy (one-time, free):
-//   1. https://dash.cloudflare.com  → sign up / log in
-//   2. Workers & Pages → Create application → Create Worker → name it
-//      (e.g. abraham-quotes) → Deploy
-//   3. Edit code → paste THIS whole file, replacing the template → Deploy
-//   4. Test in a browser:
-//        https://<your-worker>.workers.dev/?symbols=2330.TW,NBIS,GC=F
-//      Should return JSON with a "quotes" object.
-//   5. Send the workers.dev URL to Abraham → it wires the button + ships.
+// ── Deploy (one-time, free) ─────────────────────────────────────────────────
+//   A. Create/refresh the Worker
+//      1. https://dash.cloudflare.com → Workers & Pages → your worker (abraham-quotes)
+//         → Edit code → paste THIS whole file → Deploy
+//   B. Add the KV store for /prefs (needed for cross-device sync)
+//      2. Workers & Pages → KV → Create a namespace → name it e.g. "abraham-prefs" → Add
+//      3. Back in the worker → Settings → Variables and Bindings → KV Namespace Bindings
+//         → Add binding:  Variable name = PREFS   (exactly)   → select the namespace → Save
+//      4. Deploy again so the binding takes effect.
+//   Test: open https://<your-worker>.workers.dev/prefs  → should return {}  (empty at first)
+//         open https://<your-worker>.workers.dev/?symbols=2330.TW,NBIS → quotes JSON
 //
-// Optional lock-down: set ALLOW to "https://adamncnc.github.io" (only the
-// dashboard origin can use it). "*" works too (anyone can call it; it only
-// exposes public market data, so that's fine).
+// Security note: /prefs stores ONLY non-sensitive UI layout prefs (which cards are
+// pinned + their order + sort mode + active tab). No account or financial data. POST
+// writes require the shared token below (?k=...), which also lives in the dashboard's
+// app.js (PREFS_SECRET) — it's anti-grief, not high security; worst case is a scrambled
+// card order that a drag fixes in seconds.
 
 const ALLOW = "*";
 const CORS = {
   "Access-Control-Allow-Origin": ALLOW,
-  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
   "Access-Control-Allow-Headers": "*",
 };
+
+// ── /prefs settings-sync config ──
+const PREFS_KEY = "dashboard-v1";       // single shared blob → all devices unified
+const PREFS_SECRET = "abr-dash-7c3f9a"; // MUST match app.js PREFS_SECRET
+const PREFS_MAX_BYTES = 65536;          // reject oversized writes
+
+function jsonResponse(obj, status) {
+  return new Response(JSON.stringify(obj), {
+    status: status || 200,
+    headers: { ...CORS, "Content-Type": "application/json", "Cache-Control": "no-store" },
+  });
+}
+
+// GET /prefs  → return the stored settings blob (or {} if none / KV not bound yet)
+// POST /prefs?k=TOKEN → overwrite the settings blob (validated JSON, size-capped)
+async function handlePrefs(request, env) {
+  if (!env || !env.PREFS) {
+    // KV not bound yet → GET returns empty so the dashboard silently uses localStorage.
+    if (request.method === "GET") {
+      return new Response("{}", { headers: { ...CORS, "Content-Type": "application/json", "Cache-Control": "no-store" } });
+    }
+    return jsonResponse({ ok: false, error: "PREFS KV namespace not bound — see deploy step B" }, 200);
+  }
+  if (request.method === "GET") {
+    const v = await env.PREFS.get(PREFS_KEY);
+    return new Response(v || "{}", { headers: { ...CORS, "Content-Type": "application/json", "Cache-Control": "no-store" } });
+  }
+  if (request.method === "POST") {
+    const u = new URL(request.url);
+    if (PREFS_SECRET && u.searchParams.get("k") !== PREFS_SECRET) {
+      return jsonResponse({ ok: false, error: "bad or missing token" }, 403);
+    }
+    const body = await request.text();
+    if (body.length > PREFS_MAX_BYTES) return jsonResponse({ ok: false, error: "payload too large" }, 413);
+    try { JSON.parse(body); } catch (e) { return jsonResponse({ ok: false, error: "invalid JSON" }, 400); }
+    await env.PREFS.put(PREFS_KEY, body);
+    return jsonResponse({ ok: true, updatedAt: Date.now() });
+  }
+  return jsonResponse({ ok: false, error: "method not allowed" }, 405);
+}
 
 const FETCH_ATTEMPTS = 2;  // Yahoo intermittently 429s / returns empty — one retry kills most transient stalls.
 
@@ -86,9 +132,15 @@ async function fetchOne(symbol) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
+
     const u = new URL(request.url);
+
+    // Cross-device settings sync
+    if (u.pathname === "/prefs") return handlePrefs(request, env);
+
+    // Live-quote relay (default route)
     const raw = u.searchParams.get("symbols") || u.searchParams.get("symbol") || "";
     const requested = raw.split(",").map((s) => s.trim()).filter(Boolean);
     if (!requested.length) {
