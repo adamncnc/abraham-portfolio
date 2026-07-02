@@ -547,6 +547,17 @@
       "notes": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-80%/AMD EPYC伺服器最大插座供應商/SOCAMM記憶體連接器+NPO插座+液冷快接頭); 6/30 Adam深調後明示加入; 體質最佳=毛利50.8%(連接器同業Amphenol才33%)/ROE19%/淨現金136億幾乎零負債(D/E2%)=堡壘級資產負債表; 估值2026E PE 22x(EPS95.96; ⚠️Yahoo forwardPE16.2是用2027 EPS假便宜)/這群最低; Q1伺服器業務+",
       "entry_zone_lo": 1850,
       "entry_zone_hi": 2100
+    },
+    {
+      "id": "nvmi",
+      "type": "us_stock",
+      "symbol": "NVMI",
+      "name": "Nova",
+      "currency": "USD",
+      "theme": "以色列半導體量測/製程控制(先進封裝光學量測平台Nova",
+      "notes": "以色列半導體量測/製程控制(先進封裝光學量測平台Nova WMC=AI先進封裝賣鏟子: HBM/CoWoS/hybrid bonding量測); 同群ONTO/KLAC/AMAT量測設備族(是ONTO的$150億大哥); 7/2 Nova WMC獲大型代工廠選用+記憶體/代工採用加速→Adam深調後納入; 品質優=毛利57%/淨利率29%/ROE22%/現金$11億/低債; 估值trailing PE59/fwd PE36/PEG1.46/rev$902M+10%; 一年+7",
+      "entry_zone_lo": 400,
+      "entry_zone_hi": 450
     }
   ]
 }
