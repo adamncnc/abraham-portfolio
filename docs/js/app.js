@@ -164,6 +164,32 @@ function filterHistory(history, scope) {
   return daily.slice(-days);
 }
 
+// Live quotes carry only today's fine-grained `intraday` bars, but the multi-day
+// chart scopes read `intraday_mid` (3d/1w/1m) and `daily` (3m+/all) from the
+// close-time snapshot, which ends at the LAST completed session. Without splicing
+// today in, switching to ≥3d never draws the current day (Adam 2026-07-02). Merge
+// the live bars/price into every series so the line reaches "now" at all scopes.
+function mergeLiveIntoHistory(history, q) {
+  if (!q || !Array.isArray(q.intraday) || !q.intraday.length) return history;
+  const h = { ...(history || {}) };
+  const bars = q.intraday;
+  h.intraday = bars;                                            // 1d scope — unchanged
+  const today = (bars[bars.length - 1].t || "").slice(0, 10);   // exchange-local date
+  const px = (q.price != null) ? q.price : bars[bars.length - 1].c;
+  // 3d/1w/1m: replace any stale "today" slice with the fresh live intraday bars.
+  if (Array.isArray(h.intraday_mid) && h.intraday_mid.length) {
+    h.intraday_mid = [...h.intraday_mid.filter((p) => (p.t || "").slice(0, 10) !== today), ...bars];
+  }
+  // 3m+/all: append (or update) today's single daily point at the live price.
+  if (Array.isArray(h.daily) && h.daily.length) {
+    const last = h.daily[h.daily.length - 1];
+    h.daily = ((last.t || "").slice(0, 10) === today)
+      ? [...h.daily.slice(0, -1), { ...last, c: px }]
+      : [...h.daily, { t: today, c: px }];
+  }
+  return h;
+}
+
 // Classify an intraday bar into pre-market / regular / post-market by its
 // exchange-local time. Yahoo intraday `t` is "YYYY-MM-DDTHH:MM" in the exchange's
 // own timezone, so a minute-of-day comparison is enough.
@@ -1058,7 +1084,7 @@ async function liveRefresh() {
         if (q.change != null) next.data.change = q.change;
         if (q.changePct != null) next.data.change_pct = q.changePct;
         if (q.intraday && q.intraday.length) {
-          next.data.history = { ...(next.data.history || {}), intraday: q.intraday };
+          next.data.history = mergeLiveIntoHistory(next.data.history, q);
         }
         next._live = true;        // fresh live quote applied → green per-card badge
         next._liveTs = liveTs;
@@ -1112,7 +1138,7 @@ async function refreshOneCard(section, id, symbol, btn) {
     if (q.prevClose != null) item.data.previous_close = q.prevClose;
     if (q.change != null) item.data.change = q.change;
     if (q.changePct != null) item.data.change_pct = q.changePct;
-    if (q.intraday && q.intraday.length) item.data.history = { ...(item.data.history || {}), intraday: q.intraday };
+    if (q.intraday && q.intraday.length) item.data.history = mergeLiveIntoHistory(item.data.history, q);
     item.status = "ok";
     item._live = true;             // single-card live quote applied → green badge
     item._liveTs = Date.now();
