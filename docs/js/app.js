@@ -39,7 +39,7 @@ const SCOPES = [
 const SCOPE_DAYS = { "3d": 3, "1w": 7, "1m": 30, "3m": 90, "6m": 180, "1y": 365, "2y": 730, "5y": 1825 };
 
 // Active Chart.js instances keyed by canvas id so we can destroy them before
-// recreating (auto-refresh every 5 min, scope changes).
+// recreating (auto-refresh every 1 min, scope changes).
 const CHART_INSTANCES = new Map();
 // Cache each card's history payload by canvas id so scope toggles don't need
 // to re-fetch. Populated during initializeCharts().
@@ -1350,9 +1350,11 @@ async function pushPrefs() {
   liveRefresh();
 })();
 
-// Auto-refresh every 5 minutes (when tab visible). Stay in whichever mode the
-// user last chose: live keeps pulling live quotes, otherwise reload snapshot.
+// Auto-refresh every 1 minute (when tab visible; Adam 2026-07-02, was 5 min).
+// Stay in whichever mode the user last chose: live keeps pulling live quotes,
+// otherwise reload snapshot. REFRESH_INFLIGHT guard skips a tick if the prior
+// one is still running, so a slow pull can't pile up at the faster cadence.
 setInterval(() => {
   if (document.hidden) return;
   if (LIVE_MODE) liveRefresh(); else loadAndRender();
-}, 5 * 60 * 1000);
+}, 1 * 60 * 1000);
