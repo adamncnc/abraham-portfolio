@@ -58,6 +58,10 @@ def fetch_us_stock(symbol: str) -> dict:
     dividend_yield = _sanitize(info.get("dividendYield") or info.get("yield"))
     if dividend_yield is not None and dividend_yield < 1:
         dividend_yield = dividend_yield * 100
+    if dividend_yield is not None and dividend_yield > 25:
+        # the `yield` fallback can be percentage-format (0.4 = 0.4%) -> x100 turns it into 40%;
+        # no sane yield exceeds 25 -> blank beats wrong (audit 2026-07-03 P2-6)
+        dividend_yield = None
 
     # 營收成長率(季 YoY) — US 用 Yahoo revenueGrowth (對美股 reliable, 與季報計算吻合;
     # 注意: 對台股會誤導故台股改走 FinMind 月營收, 見 feedback_yahoo_revenuegrowth_vs_monthly)。

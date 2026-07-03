@@ -64,7 +64,7 @@
       "name": "矽力-KY",
       "currency": "TWD",
       "theme": "電源管理 IC",
-      "notes": "電源管理 IC; 進場區 400-460 (6/13 深查), 認錯 300; Q1 EPS+114%/毛利 50%, 16 分析師 mean 586; 中國營收為主 KY 股",
+      "notes": "電源管理 IC; 進場區 440-500 (6/19 上修; 舊 400-460 已作廢), 認錯 300; Q1 EPS+114%/毛利 50%, 16 分析師 mean 586; 中國營收為主 KY 股",
       "entry_zone_lo": 440,
       "entry_zone_hi": 500
     },
@@ -292,8 +292,8 @@
       "currency": "USD",
       "theme": "AI資料中心電源+SiC功率+車用/工業半導體+影像感測",
       "notes": "AI資料中心電源+SiC功率+車用/工業半導體+影像感測(美股NasdaqGS); 6/22晚班deep-read功率半導體族群+5%出現→Adam明示加入; 獲利處循環谷底=trailing PE96高/但fwd PE30+PEG0.40(fwd EPS4.32 vs trailing1.36=預期復甦)/ROE7.5%谷底/無配息/毛利43%; ⚠️股價52w+128%貼ATH134.92/今+7.6%@130.9>分析師mean目標107(27家buy)=追高無安全邊際",
-      "entry_zone_lo": 100,
-      "entry_zone_hi": 115
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "sndk",
@@ -569,6 +569,28 @@
       "notes": "光通訊龍頭(美股NasdaqGS USD); AI資料中心雷射/光學元件/光交換器OCS/共封裝光學CPO=賣鏟子給AI光連接; 7/2 Serenity點名光通訊雷射真受惠→Adam深調後納入; 品質好=有真獲利(營收YoY+90%/毛利41%/op22%/ROE23%/EPS5.69)+元件部門營收創高+OCS/CPO在手訂單>$4億+剛入標普500; 估值仍貴=今年PE~88x/fwd PE40x/P/S23; 25家分析師buy mean目標$1111(+53%)/m",
       "entry_zone_lo": 600,
       "entry_zone_hi": 680
+    },
+    {
+      "id": "2345",
+      "type": "tw_stock",
+      "symbol": "2345.TW",
+      "name": "智邦",
+      "currency": "TWD",
+      "theme": "800G 交換器/CPO 組裝(AI 網通核心)",
+      "notes": "800G 交換器/CPO 組裝(AI 網通核心); 狙擊名單 6/11 原始成員(#3), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1850-2050 / 認錯 1430(破200日); 北美雲端 capex 是主風險",
+      "entry_zone_lo": 1850,
+      "entry_zone_hi": 2050
+    },
+    {
+      "id": "3081",
+      "type": "tw_stock",
+      "symbol": "3081.TWO",
+      "name": "聯亞",
+      "currency": "TWD",
+      "theme": "InP 磊晶(光通訊上游, 中國管制外最純受惠, AXT",
+      "notes": "InP 磊晶(光通訊上游, 中國管制外最純受惠, AXTI 除名後唯一 InP 純 play); 狙擊名單 6/11 原始成員(#5), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1600-1900(6/19 上修) / 認錯 1190(破200日); 投機級, 估值極貴 P/S 高檔",
+      "entry_zone_lo": 1600,
+      "entry_zone_hi": 1900
     }
   ]
 }

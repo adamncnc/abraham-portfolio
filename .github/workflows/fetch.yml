@@ -49,6 +49,9 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: auto-update prices ${{ github.run_id }} [skip ci]"
-          file_pattern: "docs/data/*.json data/snapshots/*.json"
+          # data/snapshots/ (directory, not *.json glob): a glob expands to files that still
+          # exist, so the prune step's deletions were never staged and old snapshots kept
+          # resurrecting from HEAD on the next checkout (audit 2026-07-03 P2-5)
+          file_pattern: "docs/data/*.json data/snapshots/"
           commit_user_name: "Abraham Bot"
           commit_user_email: "abraham-bot@users.noreply.github.com"

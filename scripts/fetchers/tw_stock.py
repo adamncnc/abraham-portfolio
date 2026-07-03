@@ -33,7 +33,7 @@ def _tw_revenue_growth(symbol: str):
         import requests
         r = requests.get(
             "https://api.finmindtrade.com/api/v4/data",
-            params={"dataset": "TaiwanStockMonthRevenue", "data_id": code, "start_date": "2025-01-01"},
+            params={"dataset": "TaiwanStockMonthRevenue", "data_id": code, "start_date": f"{datetime.now().year - 1}-01-01"},  # dynamic: prior-year same-month needed for YoY (audit 2026-07-03 P3-19)
             headers={"User-Agent": "Mozilla/5.0"}, timeout=20,
         )
         j = r.json()
@@ -94,6 +94,9 @@ def fetch_tw_stock(symbol: str) -> dict:
     # depending on version. Normalize to percentage.
     if dividend_yield is not None and dividend_yield < 1:
         dividend_yield = dividend_yield * 100
+    if dividend_yield is not None and dividend_yield > 25:
+        # percentage-format `yield` fallback x100 protection - blank beats wrong (audit 2026-07-03 P2-6)
+        dividend_yield = None
 
     tw_rev_yoy, tw_rev_accel, tw_rev_asof = _tw_revenue_growth(symbol)
 

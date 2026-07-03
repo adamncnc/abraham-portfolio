@@ -26,7 +26,7 @@ def fetch_gold(symbol: str = "GC=F") -> dict:
     ticker = yf.Ticker(symbol)
     info = ticker.info or {}
 
-    price = _sanitize(info.get("regularMarketPrice") or info.get("bid") or info.get("previousClose"))
+    price = _sanitize(info.get("regularMarketPrice") or info.get("bid"))  # NO previousClose fallback: closed market goes the carry-forward-stale path like every other fetcher, not +0.00 "fresh" (audit 2026-07-03 P1-6)
     prev_close = _sanitize(info.get("regularMarketPreviousClose") or info.get("previousClose"))
 
     change = None

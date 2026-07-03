@@ -1148,11 +1148,18 @@ async function refreshOneCard(section, id, symbol, btn) {
     if (item.data) delete item.data.stale;  // a fresh quote supersedes any carried-forward stale data
     const node = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
     if (node) {
+      // keep the user's chart scope across the per-card rebuild (was silently reset to 1d — audit 2026-07-03 P3-3)
+      const prevScope = node.querySelector(".scope-btn.active")?.dataset.scope;
       const cid = canvasIdFor(section, item);
       const old = CHART_INSTANCES.get(cid);
       if (old) { try { old.destroy(); } catch (e) { /* ignore */ } CHART_INSTANCES.delete(cid); }
       node.outerHTML = buildAssetCard(item, section);
       initializeCharts([item], section);
+      if (prevScope && prevScope !== DEFAULT_SCOPE) {
+        const rebuilt = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
+        const scopeBtn = rebuilt?.querySelector('.scope-btn[data-scope="' + prevScope + '"]');
+        if (scopeBtn) scopeBtn.click();  // delegated handler re-renders the chart + active tab
+      }
     }
     // Re-evaluate 進場區內 summary — this symbol's new price may have just
     // entered (or left) its entry zone. (Adam 2026-06-17: 每次更新都要判別)

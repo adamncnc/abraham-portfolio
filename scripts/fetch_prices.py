@@ -159,6 +159,10 @@ def main() -> int:
     processed_holdings = [process_item(item) for item in holdings]
     processed_watchlist = [process_item(item) for item in watchlist]
     processed_indices = [process_item(item) for item in indices]
+    # internal routing tag - never serialize it into latest.json / snapshots (audit 2026-07-03 P3-4)
+    for _lst in (processed_holdings, processed_watchlist, processed_indices):
+        for _it in _lst:
+            _it.pop("_section", None)
 
     # Last-known-good carry-forward (2026-06-30): a transient per-item fetch failure
     # should show the previous good price marked "stale", not blank the card.
