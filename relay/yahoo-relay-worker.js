@@ -98,15 +98,6 @@ async function fetchOne(symbol) {
       const res = j && j.chart && j.chart.result && j.chart.result[0];
       const m = res && res.meta;
       if (!m) { lastErr = "no meta"; continue; }
-      // Latest price incl. extended hours (pre/post market) when in those sessions.
-      let price = m.regularMarketPrice ?? null;
-      const ms = m.marketState || "";
-      if (ms.startsWith("PRE") && m.preMarketPrice != null) price = m.preMarketPrice;
-      else if ((ms === "POST" || ms === "POSTPOST") && m.postMarketPrice != null) price = m.postMarketPrice;
-      if (price == null) { lastErr = "no price"; continue; }  // partial payload — retry rather than report a null-price "ok"
-      const prev = m.chartPreviousClose ?? m.previousClose ?? null;
-      const change = price != null && prev != null ? price - prev : null;
-      const changePct = change != null && prev ? (change / prev) * 100 : null;
       const ts = res.timestamp || [];
       const closes =
         (res.indicators && res.indicators.quote && res.indicators.quote[0] &&
@@ -114,16 +105,40 @@ async function fetchOne(symbol) {
       const off = m.gmtoffset || 0;
       const pad = (n) => String(n).padStart(2, "0");
       const intraday = [];
+      let lastBarT = null, lastBarC = null;  // last non-null bar (epoch, close) — includePrePost=true so this covers pre/post
       for (let i = 0; i < ts.length; i++) {
         const c = closes[i];
         if (c == null) continue;
+        lastBarT = ts[i]; lastBarC = c;
         const d = new Date((ts[i] + off) * 1000);
         const t =
           d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" +
           pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes());
         intraday.push({ t, c: Math.round(c * 10000) / 10000 });
       }
-      return { ok: true, price, prevClose: prev, change, changePct, intraday };
+      // Latest price incl. pre/post market. The chart META does NOT carry
+      // marketState/preMarketPrice/postMarketPrice (verified 2026-07-03 — the old code
+      // reading them was dead, so pre/post sessions silently showed the regular close).
+      // Instead: prefer the newest CHART BAR when it is (a) newer than the last regular
+      // trade and (b) fresh (<15 min old) — i.e. an extended-hours session is live NOW.
+      // On holidays/weekends/overnight the bars are hours old → official close is used.
+      const rmt = m.regularMarketTime || 0;
+      const nowS = Math.floor(Date.now() / 1000);
+      const FRESH_S = 15 * 60;
+      let price = m.regularMarketPrice ?? null;
+      let session = "regular";
+      if (lastBarC != null && lastBarT > rmt && nowS - lastBarT <= FRESH_S) {
+        price = lastBarC;
+        const reg = (m.currentTradingPeriod && m.currentTradingPeriod.regular) || null;
+        session = reg && lastBarT >= reg.end ? "post"
+                : reg && lastBarT < reg.start ? "pre"
+                : "regular";
+      }
+      if (price == null) { lastErr = "no price"; continue; }  // partial payload — retry rather than report a null-price "ok"
+      const prev = m.chartPreviousClose ?? m.previousClose ?? null;
+      const change = price != null && prev != null ? price - prev : null;  // vs previous close (pre/post shown as move vs 昨收)
+      const changePct = change != null && prev ? (change / prev) * 100 : null;
+      return { ok: true, price, prevClose: prev, change, changePct, session, asOf: session === "regular" ? rmt : lastBarT, intraday };
     } catch (e) {
       lastErr = String(e);
     }

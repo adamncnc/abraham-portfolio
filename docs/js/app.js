@@ -550,7 +550,8 @@ function freshnessBadge(item) {
   const data = item.data || {};
   const hhmm = (ms) => new Date(ms).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
   if (item._live === true) {
-    return `<span class="freshness fresh" title="即時報價">🟢 即時 ${item._liveTs ? hhmm(item._liveTs) : ""}</span>`;
+    const lbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "即時";
+    return `<span class="freshness fresh" title="即時報價（含盤前/盤後）">🟢 ${lbl} ${item._liveTs ? hhmm(item._liveTs) : ""}</span>`;
   }
   // Carried-forward stale (pipeline kept last-known-good) is the stronger signal —
   // check it BEFORE the generic live-miss so wording stays exact. (Codex R2 P4.)
@@ -1088,6 +1089,7 @@ async function liveRefresh() {
         }
         next._live = true;        // fresh live quote applied → green per-card badge
         next._liveTs = liveTs;
+        next._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
         delete next.data.stale;   // a fresh quote supersedes any carried-forward stale flag
       } else {
         next._live = false;       // showing snapshot close → amber "未即時" per-card badge
@@ -1142,6 +1144,7 @@ async function refreshOneCard(section, id, symbol, btn) {
     item.status = "ok";
     item._live = true;             // single-card live quote applied → green badge
     item._liveTs = Date.now();
+    item._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
     if (item.data) delete item.data.stale;  // a fresh quote supersedes any carried-forward stale data
     const node = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
     if (node) {
@@ -1389,8 +1392,9 @@ const IDLE_SNAPSHOT_MS = 5 * 60 * 1000;  // off-hours: reload the 4MB static sna
 // Market-active test uses each exchange's OWN timezone via Intl, so DST is handled
 // automatically and the windows are exact — no broad UTC union / over-polling. (Codex audit P3)
 // "Active" = any window where the relay serves a LIVE tick, so it now includes US
-// pre-market (04:00 ET) and post-market (to 20:00 ET): the relay returns pre/postMarketPrice
-// in those sessions (relay/yahoo-relay-worker.js lines 102-105). Adam 2026-07-03: 盤前/盤後也要 30s。
+// pre-market (04:00 ET) and post-market (to 20:00 ET): the relay serves the freshest
+// extended-hours chart bar as the price in those sessions (see relay/yahoo-relay-worker.js
+// fetchOne — chart meta has no pre/postMarketPrice fields). Adam 2026-07-03: 盤前/盤後也要 30s。
 function marketActive(d) {
   d = d || new Date();
   const localMins = (tz) => {                    // wall-clock minutes-of-day in that market, or -1 on weekend
