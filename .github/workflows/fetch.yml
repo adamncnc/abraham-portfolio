@@ -2,10 +2,9 @@ name: Fetch Portfolio Prices
 
 on:
   schedule:
-    # Taiwan intraday — Mon-Fri 09:00-13:30 Taipei = 01:00-05:30 UTC, every 30 min.
-    # Captures live regularMarketPrice during the TW session so the board isn't
-    # stuck on yesterday's close during trading hours (Adam 2026-07-03, option B).
-    - cron: "*/30 1-5 * * 1-5"
+    # Close-of-day snapshots only. Intraday LIVE prices come from the client-side relay
+    # (docs/js/app.js → abraham-quotes Worker, 30s during market hours) — not from
+    # committing to git every N min (that bloated the repo). Adam 2026-07-03.
     # Taiwan market close + 1.5h buffer — Mon-Fri 15:00 Taipei = 07:00 UTC
     - cron: "0 7 * * 1-5"
     # US market close + 2h buffer — Tue-Sat 06:00 Taipei = 22:00 UTC (prev day)

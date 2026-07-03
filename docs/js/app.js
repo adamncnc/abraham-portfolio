@@ -1376,11 +1376,33 @@ async function pushPrefs() {
   liveRefresh();
 })();
 
-// Auto-refresh every 1 minute (when tab visible; Adam 2026-07-02, was 5 min).
-// Stay in whichever mode the user last chose: live keeps pulling live quotes,
-// otherwise reload snapshot. REFRESH_INFLIGHT guard skips a tick if the prior
-// one is still running, so a slow pull can't pile up at the faster cadence.
-setInterval(() => {
-  if (document.hidden) return;
-  if (LIVE_MODE) liveRefresh(); else loadAndRender();
-}, 1 * 60 * 1000);
+// Adaptive auto-refresh (Adam 2026-07-03: 看盤要 30 秒即時).
+//   • Market hours (TW 09:00-13:30 Taipei / US 09:30-16:00 ET) → 30s live quotes via relay.
+//   • Off-hours / weekend → 5 min (only to catch a late snapshot; no point hammering Yahoo).
+//   • Hidden tab → skip the tick entirely (don't burn the relay in the background).
+// setTimeout-reschedule (not setInterval) so the cadence re-evaluates as markets open/close.
+// REFRESH_INFLIGHT (inside liveRefresh) skips a tick if the prior pull is still running,
+// so a slow 52-symbol pull can't pile up at 30s.
+const LIVE_FAST_MS = 30 * 1000;      // a market is open → 30s live
+const LIVE_IDLE_MS = 5 * 60 * 1000;  // both markets closed → 5 min
+function marketLikelyOpen(d) {
+  d = d || new Date();
+  const day = d.getUTCDay();                     // 0=Sun … 6=Sat (holidays not modeled)
+  if (day === 0 || day === 6) return false;
+  const m = d.getUTCHours() * 60 + d.getUTCMinutes();
+  const twOpen = m >= 60 && m <= 330;            // 09:00-13:30 Taipei = 01:00-05:30 UTC
+  const usOpen = m >= 810 && m <= 1260;          // 09:30-16:00 ET ≈ 13:30-21:00 UTC (covers EST & EDT)
+  return twOpen || usOpen;
+}
+(function scheduleRefresh() {
+  const open = marketLikelyOpen();
+  setTimeout(async () => {
+    if (!document.hidden) {
+      try {
+        if (LIVE_MODE || open) await liveRefresh();  // market open → force live
+        else await loadAndRender();                  // closed & not in live mode → snapshot
+      } catch (e) { console.error("auto-refresh tick failed:", e); }
+    }
+    scheduleRefresh();  // re-evaluate cadence for the next tick
+  }, open ? LIVE_FAST_MS : LIVE_IDLE_MS);
+})();
