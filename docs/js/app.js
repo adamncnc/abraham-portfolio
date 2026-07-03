@@ -16,7 +16,7 @@ const PREFS_SECRET = "abr-dash-7c3f9a";   // low-stakes anti-grief token; must m
 let PREFS_SYNCING = true;                  // suppress uploads during initial load / cloud-apply
 let _prefsPushTimer = null;
 let CURRENT_SNAPSHOT = null;
-let LIVE_MODE = false;  // once user presses 抓即時, auto-refresh keeps pulling live
+let LIVE_MODE = false;  // set true after a successful live pull; scheduler resets it to false off-hours so auto-refresh reverts to snapshot mode
 let REFRESH_INFLIGHT = false;  // guards liveRefresh / refreshOneCard against overlap (auto-refresh + manual)
 // Relay caps each request's symbol count, so one request for the whole list silently
 // drops the tail. Chunk well under the cap and merge so every symbol gets a quote.
@@ -1377,7 +1377,7 @@ async function pushPrefs() {
 })();
 
 // Adaptive auto-refresh (Adam 2026-07-03: 看盤要 30 秒即時).
-//   • Market hours (TW 09:00-13:30 Taipei / US 09:30-16:00 ET) → 30s live quotes via relay.
+//   • Market active (TW 09:00-13:30 Taipei / US 04:00-20:00 ET incl. pre+post) → 30s live quotes via relay.
 //   • Off-hours / weekend → re-check open every 60s; reload the static snapshot at most every 5 min.
 //   • Hidden tab → skip the tick entirely (don't burn the relay in the background).
 // setTimeout-reschedule (not setInterval) so the cadence re-evaluates as markets open/close.
@@ -1386,9 +1386,12 @@ async function pushPrefs() {
 const LIVE_FAST_MS = 30 * 1000;          // a market is open → 30s live quotes
 const LIVE_IDLE_MS = 60 * 1000;          // markets closed → re-check open every 60s (cheap; snapshot reload throttled below)
 const IDLE_SNAPSHOT_MS = 5 * 60 * 1000;  // off-hours: reload the 4MB static snapshot at most this often
-// Market-open test uses each exchange's OWN timezone via Intl, so DST is handled
+// Market-active test uses each exchange's OWN timezone via Intl, so DST is handled
 // automatically and the windows are exact — no broad UTC union / over-polling. (Codex audit P3)
-function marketOpen(d) {
+// "Active" = any window where the relay serves a LIVE tick, so it now includes US
+// pre-market (04:00 ET) and post-market (to 20:00 ET): the relay returns pre/postMarketPrice
+// in those sessions (relay/yahoo-relay-worker.js lines 102-105). Adam 2026-07-03: 盤前/盤後也要 30s。
+function marketActive(d) {
   d = d || new Date();
   const localMins = (tz) => {                    // wall-clock minutes-of-day in that market, or -1 on weekend
     const p = new Intl.DateTimeFormat("en-US", { timeZone: tz, weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(d);
@@ -1399,26 +1402,29 @@ function marketOpen(d) {
     return hh * 60 + parseInt(g("minute"), 10);
   };
   const tw = localMins("Asia/Taipei");
-  if (tw >= 540 && tw <= 810) return true;       // TW 09:00-13:30
+  if (tw >= 540 && tw <= 810) return true;       // TW 09:00-13:30 (no continuous pre/post session)
   const us = localMins("America/New_York");
-  if (us >= 570 && us <= 960) return true;        // US 09:30-16:00 ET (DST auto)
+  if (us >= 240 && us <= 1200) return true;       // US 04:00-20:00 ET: pre + regular + post (DST auto)
   return false;
 }
 let _lastSnapshotLoad = Date.now();  // boot's loadAndRender() just ran
 (function scheduleRefresh() {
-  const openAtSchedule = marketOpen();
+  const activeAtSchedule = marketActive();
   setTimeout(async () => {
     if (!document.hidden) {
-      const open = marketOpen();  // re-evaluate at FIRE time, not the stale scheduled value (Codex audit P4)
+      const active = marketActive();  // re-evaluate at FIRE time, not the stale scheduled value (Codex audit P4)
       try {
-        if (LIVE_MODE || open) {
-          await liveRefresh();                     // market open → force live (retries even if a prior tick failed = self-healing)
-        } else if (Date.now() - _lastSnapshotLoad >= IDLE_SNAPSHOT_MS) {
-          await loadAndRender();                    // off-hours: refresh snapshot sparingly, not every 60s tick
-          _lastSnapshotLoad = Date.now();
+        if (active) {
+          await liveRefresh();                     // any live session (pre/regular/post) → 30s live; forced regardless of LIVE_MODE so a failed tick self-heals
+        } else {
+          LIVE_MODE = false;                        // markets closed → drop the live latch, don't poll the relay all night (Codex 2026-07-03 P3)
+          if (Date.now() - _lastSnapshotLoad >= IDLE_SNAPSHOT_MS) {
+            await loadAndRender();                   // off-hours: reload the committed close-of-day snapshot, throttled (picks up a fresh latest.json)
+            _lastSnapshotLoad = Date.now();
+          }
         }
       } catch (e) { console.error("auto-refresh tick failed:", e); }
     }
     scheduleRefresh();  // re-evaluate cadence for the next tick
-  }, openAtSchedule ? LIVE_FAST_MS : LIVE_IDLE_MS);
+  }, activeAtSchedule ? LIVE_FAST_MS : LIVE_IDLE_MS);
 })();
