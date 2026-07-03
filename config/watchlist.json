@@ -230,8 +230,8 @@
       "currency": "USD",
       "theme": "AI GPU 雲端算力(CoreWeave,租GPU算力",
       "notes": "AI GPU 雲端算力(CoreWeave,租GPU算力給微軟/OpenAI/Meta): **6/17 深查完成**; 季營收翻倍 2026Q1 $20.8億(+112%)/毛利65%/backlog已簽$990億→公司估Q2底$1310億 BUT ⚠️⚠️越做越虧(2026Q1淨虧$7.4億史上最大: 折舊$11.5億+利息$5.4億/季吃光租金)+現金狂燒(Q1資本支出$77億/FCF單季-$47億/年燒$85-106億靠發債+增資補洞)+負債爆表($351億/一年翻3",
-      "entry_zone_lo": 95,
-      "entry_zone_hi": 110
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "3026",
