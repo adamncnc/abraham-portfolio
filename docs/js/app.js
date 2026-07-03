@@ -1378,31 +1378,47 @@ async function pushPrefs() {
 
 // Adaptive auto-refresh (Adam 2026-07-03: 看盤要 30 秒即時).
 //   • Market hours (TW 09:00-13:30 Taipei / US 09:30-16:00 ET) → 30s live quotes via relay.
-//   • Off-hours / weekend → 5 min (only to catch a late snapshot; no point hammering Yahoo).
+//   • Off-hours / weekend → re-check open every 60s; reload the static snapshot at most every 5 min.
 //   • Hidden tab → skip the tick entirely (don't burn the relay in the background).
 // setTimeout-reschedule (not setInterval) so the cadence re-evaluates as markets open/close.
 // REFRESH_INFLIGHT (inside liveRefresh) skips a tick if the prior pull is still running,
 // so a slow 52-symbol pull can't pile up at 30s.
-const LIVE_FAST_MS = 30 * 1000;      // a market is open → 30s live
-const LIVE_IDLE_MS = 5 * 60 * 1000;  // both markets closed → 5 min
-function marketLikelyOpen(d) {
+const LIVE_FAST_MS = 30 * 1000;          // a market is open → 30s live quotes
+const LIVE_IDLE_MS = 60 * 1000;          // markets closed → re-check open every 60s (cheap; snapshot reload throttled below)
+const IDLE_SNAPSHOT_MS = 5 * 60 * 1000;  // off-hours: reload the 4MB static snapshot at most this often
+// Market-open test uses each exchange's OWN timezone via Intl, so DST is handled
+// automatically and the windows are exact — no broad UTC union / over-polling. (Codex audit P3)
+function marketOpen(d) {
   d = d || new Date();
-  const day = d.getUTCDay();                     // 0=Sun … 6=Sat (holidays not modeled)
-  if (day === 0 || day === 6) return false;
-  const m = d.getUTCHours() * 60 + d.getUTCMinutes();
-  const twOpen = m >= 60 && m <= 330;            // 09:00-13:30 Taipei = 01:00-05:30 UTC
-  const usOpen = m >= 810 && m <= 1260;          // 09:30-16:00 ET ≈ 13:30-21:00 UTC (covers EST & EDT)
-  return twOpen || usOpen;
+  const localMins = (tz) => {                    // wall-clock minutes-of-day in that market, or -1 on weekend
+    const p = new Intl.DateTimeFormat("en-US", { timeZone: tz, weekday: "short", hour: "2-digit", minute: "2-digit", hour12: false }).formatToParts(d);
+    const g = (t) => (p.find((x) => x.type === t) || {}).value;
+    const wd = g("weekday");
+    if (wd === "Sat" || wd === "Sun") return -1;
+    let hh = parseInt(g("hour"), 10); if (hh === 24) hh = 0;   // Intl may emit 24 at midnight
+    return hh * 60 + parseInt(g("minute"), 10);
+  };
+  const tw = localMins("Asia/Taipei");
+  if (tw >= 540 && tw <= 810) return true;       // TW 09:00-13:30
+  const us = localMins("America/New_York");
+  if (us >= 570 && us <= 960) return true;        // US 09:30-16:00 ET (DST auto)
+  return false;
 }
+let _lastSnapshotLoad = Date.now();  // boot's loadAndRender() just ran
 (function scheduleRefresh() {
-  const open = marketLikelyOpen();
+  const openAtSchedule = marketOpen();
   setTimeout(async () => {
     if (!document.hidden) {
+      const open = marketOpen();  // re-evaluate at FIRE time, not the stale scheduled value (Codex audit P4)
       try {
-        if (LIVE_MODE || open) await liveRefresh();  // market open → force live
-        else await loadAndRender();                  // closed & not in live mode → snapshot
+        if (LIVE_MODE || open) {
+          await liveRefresh();                     // market open → force live (retries even if a prior tick failed = self-healing)
+        } else if (Date.now() - _lastSnapshotLoad >= IDLE_SNAPSHOT_MS) {
+          await loadAndRender();                    // off-hours: refresh snapshot sparingly, not every 60s tick
+          _lastSnapshotLoad = Date.now();
+        }
       } catch (e) { console.error("auto-refresh tick failed:", e); }
     }
     scheduleRefresh();  // re-evaluate cadence for the next tick
-  }, open ? LIVE_FAST_MS : LIVE_IDLE_MS);
+  }, openAtSchedule ? LIVE_FAST_MS : LIVE_IDLE_MS);
 })();
