@@ -591,6 +591,17 @@
       "notes": "InP 磊晶(光通訊上游, 中國管制外最純受惠, AXTI 除名後唯一 InP 純 play); 狙擊名單 6/11 原始成員(#5), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1600-1900(6/19 上修) / 認錯 1190(破200日); 投機級, 估值極貴 P/S 高檔",
       "entry_zone_lo": 1600,
       "entry_zone_hi": 1900
+    },
+    {
+      "id": "anet",
+      "type": "us_stock",
+      "symbol": "ANET",
+      "name": "Arista Networks",
+      "currency": "USD",
+      "theme": "AI 資料中心乙太網交換器龍頭+XPO 可插拔陣營主導",
+      "notes": "AI 資料中心乙太網交換器龍頭+XPO 可插拔陣營主導; 進場區 143-160/認錯125 (7/5 深調 msg 1523050200795578541)",
+      "entry_zone_lo": 143,
+      "entry_zone_hi": 160
     }
   ]
 }
