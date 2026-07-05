@@ -1,5 +1,18 @@
 {
-  "schema_version": "1.0",
-  "description": "Copilot 模式 (2026-06-12) 不追蹤實際倉位。黃金 6/16 依 Adam 指示改列觀察清單 (見 config/watchlist.json 的 gold)。目前無持倉 — dashboard 持倉區與損益摘要會自動隱藏。",
+  "schema_version": "2.0",
+  "description": "即時持倉 + ATR 移動停利分頁的資料來源 (Adam 2026-07-06 指令建立)。scripts/holdings_atr.py 讀這裡 → 算每檔 ATR14/20 + 買進後最高價 + 棘輪移動停損 + 損益 + 分批鎖利點 → 寫 docs/data/holdings.json 給第四分頁。holdings 為空時分頁顯示引導文案。Adam 提供實際持倉後填入下面陣列。",
+  "_field_guide": {
+    "id": "唯一代號 (台股用股號如 2308，美股用小寫 ticker 如 nbis)",
+    "type": "tw_stock | us_stock",
+    "symbol": "yfinance 代碼 (台股上市 .TW / 上櫃 .TWO，美股純代碼)",
+    "name": "顯示名稱",
+    "currency": "TWD | USD",
+    "shares": "股數 (數字)",
+    "cost_basis": "平均成本 (每股，計價幣別同 currency)",
+    "entry_date": "買進日 YYYY-MM-DD (算『買進後最高價』用；分批買可填最早那筆或加權，之後可調)",
+    "atr_mult": "選填 — 手動指定 ATR 倍數 (預設自動：近20日均振幅>4%飆股給3×，否則穩健2×)",
+    "atr_period": "選填 — 停損用 ATR 週期 14 或 20 (預設14)",
+    "half_locked": "選填 — 已分批鎖利過設 true，就不再重複提示 +50% 保本"
+  },
   "holdings": []
 }

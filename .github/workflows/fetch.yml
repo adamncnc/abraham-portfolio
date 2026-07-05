@@ -39,6 +39,11 @@ jobs:
         run: python scripts/fetch_prices.py
         continue-on-error: false
 
+      - name: Compute holdings ATR trailing stops (即時持倉分頁)
+        run: python scripts/holdings_atr.py
+        # a holdings hiccup must never fail the price pipeline
+        continue-on-error: true
+
       - name: Prune old snapshots (keep last 90 days)
         run: |
           cd data/snapshots
@@ -52,6 +57,7 @@ jobs:
           # data/snapshots/ (directory, not *.json glob): a glob expands to files that still
           # exist, so the prune step's deletions were never staged and old snapshots kept
           # resurrecting from HEAD on the next checkout (audit 2026-07-03 P2-5)
-          file_pattern: "docs/data/*.json data/snapshots/"
+          # holdings-atr-state.json persists the ratchet (stop only moves up) across CI runs
+          file_pattern: "docs/data/*.json data/snapshots/ data/holdings-atr-state.json"
           commit_user_name: "Abraham Bot"
           commit_user_email: "abraham-bot@users.noreply.github.com"

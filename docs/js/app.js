@@ -3,6 +3,10 @@
 // Adding/removing items in config/*.json is all that's needed to change tracked set.
 
 const DATA_URL = "./data/latest.json";
+// 即時持倉 + ATR 移動停利分頁 (Adam 2026-07-06) — separate small file written by
+// scripts/holdings_atr.py; fetched independently so a holdings error never breaks
+// the main 3 market tabs.
+const HOLDINGS_URL = "./data/holdings.json";
 
 // Live-quote relay (Cloudflare Worker — see relay/yahoo-relay-worker.js).
 // Set to your workers.dev URL to enable the 抓即時 button's live fetch.
@@ -1018,6 +1022,7 @@ async function loadAndRender() {
     const snapshot = await res.json();
     CURRENT_SNAPSHOT = snapshot;
     renderSnapshot(snapshot);
+    loadHoldings();  // 即時持倉分頁 — independent fetch, own error handling
   } catch (err) {
     console.error("Failed to load data:", err);
     document.getElementById("timestamp").textContent = `❌ 載入失敗：${err.message}`;
@@ -1026,6 +1031,117 @@ async function loadAndRender() {
   } finally {
     refreshBtn.textContent = "↻";
   }
+}
+
+// ========== 即時持倉 + ATR 移動停利 (Adam 2026-07-06, 第四分頁) ==========
+// Data source: docs/data/holdings.json, written by scripts/holdings_atr.py.
+// Method: reference_trailing_stop_exit_methodology (肌肉書僮 移動停利).
+function loadHoldings() {
+  const grid = document.getElementById("pos-grid");
+  fetch(HOLDINGS_URL + "?t=" + Date.now(), { cache: "no-store" })
+    .then((res) => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+    .then((snap) => renderHoldings(snap))
+    .catch((err) => {
+      // A holdings failure must never break the other 3 tabs — just note it here.
+      console.warn("holdings load failed:", err);
+      setText("tab-count-pos", "–");
+      setText("pos-count", "–");
+      if (grid) grid.innerHTML = `<div class="loading">持倉資料尚未產生<br><small>${escapeHtml(err.message)}</small></div>`;
+    });
+}
+
+function renderHoldings(snap) {
+  const holdings = (snap && snap.holdings) || [];
+  const grid = document.getElementById("pos-grid");
+  const summaryEl = document.getElementById("pos-summary");
+  setText("tab-count-pos", holdings.length || "–");
+  setText("pos-count", `${holdings.length} 檔`);
+  if (!grid) return;
+
+  if (!holdings.length) {
+    if (summaryEl) summaryEl.innerHTML = "";
+    grid.innerHTML = `<div class="pos-empty">
+        <div class="pos-empty-icon">🎯</div>
+        <div class="pos-empty-title">尚無持倉紀錄</div>
+        <div class="pos-empty-body">跟我說你買了什麼（股票、幾股、平均成本、買進日期），我就把它加進來，<br>即時幫你算 ATR 移動停損價、距離、以及該不該分批鎖利保本。</div>
+      </div>`;
+    return;
+  }
+
+  if (summaryEl) {
+    const pnl = (snap.summary && snap.summary.pnl_by_currency) || {};
+    const parts = Object.entries(pnl).map(([cur, v]) => {
+      const cls = changeClass(v);   // 漲紅跌綠：獲利=up=紅，虧損=down=綠
+      return `<span class="pos-sum-pnl ${cls}">${escapeHtml(cur)} 未實現 ${v >= 0 ? "+" : ""}${fmtCurrency(v, cur, 0)}</span>`;
+    });
+    const asof = snap.timestamp_utc
+      ? new Date(snap.timestamp_utc).toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })
+      : "";
+    summaryEl.innerHTML = `<div class="pos-sum-row">${parts.join("")}${asof ? `<span class="pos-sum-asof">更新 ${asof} (Taipei)</span>` : ""}</div>`;
+  }
+
+  grid.innerHTML = holdings.map(buildHoldingCard).join("");
+}
+
+function posRow(label, val, extraCls = "") {
+  return `<div class="pos-metric ${extraCls}"><span class="pos-metric-label">${label}</span><span class="pos-metric-val">${val}</span></div>`;
+}
+
+function buildHoldingCard(h) {
+  const cur = h.currency || "USD";
+  if (h.status_fetch === "error") {
+    return `<div class="asset-card error pos-card">
+      <div class="asset-head"><div class="asset-name-block">
+        <div class="asset-name">${escapeHtml(h.name || h.id)}</div>
+        <div class="asset-symbol">${escapeHtml(h.symbol || "–")}</div>
+      </div></div>
+      <div class="error-box">⚠️ <strong>無法計算 ATR</strong><br><span style="font-family:monospace;font-size:11px;">${escapeHtml(h.error || "unknown")}</span></div>
+    </div>`;
+  }
+  // Status light is a SEPARATE semantic from 漲紅跌綠 price colours — carried by the
+  // emoji + a left-border accent, so it never collides with the price/P&L cells.
+  const statusCls = h.status === "hit" ? "pos-hit" : h.status === "near" ? "pos-near" : "pos-hold";
+  const priceCls = changeClass(h.change_pct);
+  const pnlCls = changeClass(h.unrealized_pnl_pct);
+  const regimeBadge = h.regime
+    ? `<span class="pos-regime pos-regime-${h.regime === "飆" ? "hot" : "calm"}">${h.regime === "飆" ? "飆·波動大" : "穩健"}</span>`
+    : "";
+
+  const rows = [];
+  rows.push(posRow("🛑 移動停損價", `<b>${fmtCurrency(h.trailing_stop, cur)}</b>`, "pos-stop-row"));
+  rows.push(posRow("距停損", `${h.dist_to_stop_pct != null ? fmtPct(h.dist_to_stop_pct) : "–"}${h.buffer_atr != null ? ` · 緩衝 ${fmtNum(h.buffer_atr, 2)}×ATR` : ""}`));
+  rows.push(posRow("買進後最高", fmtCurrency(h.highest_high_since_entry, cur)));
+  rows.push(posRow(`ATR(${h.atr_period_used || 14}) ×倍數`, `${fmtCurrency(h.atr_used, cur)} × ${h.atr_mult}`));
+  rows.push(posRow("ATR14 / ATR20", `${fmtNum(h.atr14)} / ${fmtNum(h.atr20)}`));
+  rows.push(posRow("日均振幅(20日)", h.amplitude_pct_20d != null ? `${fmtNum(h.amplitude_pct_20d, 1)}%` : "–"));
+  rows.push(posRow("持股 @ 成本", `${fmtNum(h.shares, 0)} @ ${fmtCurrency(h.cost_basis, cur)}`));
+  rows.push(posRow("市值", fmtCurrency(h.market_value, cur, 0)));
+  rows.push(posRow("未實現損益", `<span class="${pnlCls}">${h.unrealized_pnl != null && h.unrealized_pnl >= 0 ? "+" : ""}${fmtCurrency(h.unrealized_pnl, cur, 0)} (${fmtPct(h.unrealized_pnl_pct)})</span>`));
+
+  const scaleOut = h.scale_out_due ? `<div class="pos-scaleout">${escapeHtml(h.scale_out_note || "🎯 到分批鎖利點")}</div>` : "";
+  const chip = h.type === "tw_stock"
+    ? `<div class="pos-chip-note">📊 主力買賣家數差 / 三大法人 / 融資 訊號：建置中（Phase 2）</div>`
+    : "";
+  const foot = [h.entry_date ? `買進 ${escapeHtml(h.entry_date)}` : "", h.atr_asof ? `ATR 截至 ${escapeHtml(h.atr_asof)}` : ""].filter(Boolean).join(" · ");
+
+  return `<div class="asset-card pos-card ${statusCls}">
+    <div class="asset-head">
+      <div class="asset-name-block">
+        <div class="asset-name">${escapeHtml(h.name || h.id)} ${regimeBadge}</div>
+        <div class="asset-symbol">${escapeHtml(h.symbol || "–")}</div>
+      </div>
+    </div>
+    <div class="asset-price-row">
+      <span class="asset-price ${priceCls}">${fmtCurrency(h.price, cur)}</span>
+      <span class="asset-change ${priceCls}">${fmtPct(h.change_pct)}</span>
+    </div>
+    <div class="pos-status ${statusCls}">${escapeHtml(h.status_label || "")}</div>
+    ${scaleOut}
+    <div class="pos-metrics">${rows.join("")}</div>
+    <div class="pos-formula" title="移動停損 = 買進後最高 − 倍數 × ATR，隨新高往上鎖">${escapeHtml(h.stop_formula || "")}</div>
+    ${chip}
+    ${foot ? `<div class="pos-foot">${foot}</div>` : ""}
+  </div>`;
 }
 
 // Fetch live quotes in batches of <= LIVE_BATCH_SIZE and merge. The relay caps

@@ -492,3 +492,47 @@ body {
   .portfolio-summary { grid-template-columns: repeat(2, 1fr); }
   .market-tab { padding: 8px 14px; font-size: 13px; }
 }
+
+/* ===== 即時持倉 + ATR 移動停利 分頁 (Adam 2026-07-06) =====
+   Status light (hold/near/hit) uses blue/amber/red as a LEFT-BORDER accent +
+   emoji — deliberately NOT the 漲紅跌綠 price palette, so a green "holding"
+   badge is never confused with a green "price down". Price/P&L cells keep
+   .up(紅)/.down(綠). */
+.pos-header { flex-wrap: wrap; gap: 8px; }
+.pos-method-note { font-size: 12px; color: var(--text-dim); }
+.pos-summary { margin: 4px 0 14px; }
+.pos-sum-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; font-size: 14px; font-weight: 600; }
+.pos-sum-pnl { padding: 4px 10px; border-radius: 8px; background: rgba(255,255,255,0.04); }
+.pos-sum-asof { font-size: 11px; color: var(--text-dim); font-weight: 400; }
+
+.pos-empty { grid-column: 1 / -1; text-align: center; padding: 48px 20px; color: var(--text-dim); }
+.pos-empty-icon { font-size: 40px; margin-bottom: 12px; }
+.pos-empty-title { font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.pos-empty-body { font-size: 13px; line-height: 1.7; }
+
+.pos-card { box-shadow: inset 4px 0 0 0 var(--info); }        /* default = holding (blue) */
+.pos-card.pos-hold { box-shadow: inset 4px 0 0 0 var(--info); }
+.pos-card.pos-near { box-shadow: inset 4px 0 0 0 var(--warning); border-color: rgba(251,191,36,0.45); }
+.pos-card.pos-hit  { box-shadow: inset 4px 0 0 0 var(--danger); border-color: rgba(248,113,113,0.55); background: rgba(248,113,113,0.06); }
+
+.pos-status { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+.pos-status.pos-hold { color: var(--info); }
+.pos-status.pos-near { color: var(--warning); }
+.pos-status.pos-hit  { color: var(--danger); }
+
+.pos-regime { font-size: 10px; font-weight: 600; padding: 1px 7px; border-radius: 8px; vertical-align: middle; white-space: nowrap; }
+.pos-regime-hot  { background: rgba(248,113,113,0.15); color: var(--danger); }
+.pos-regime-calm { background: rgba(96,165,250,0.15);  color: var(--info); }
+
+.pos-metrics { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.pos-metric { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 13px; padding: 3px 0; border-bottom: 1px dashed rgba(255,255,255,0.05); }
+.pos-metric-label { color: var(--text-dim); white-space: nowrap; }
+.pos-metric-val { text-align: right; font-variant-numeric: tabular-nums; }
+.pos-metric.pos-stop-row { border-bottom: 1px solid var(--border); padding-bottom: 6px; margin-bottom: 2px; }
+.pos-metric.pos-stop-row .pos-metric-label { color: var(--text); font-weight: 700; }
+.pos-metric.pos-stop-row .pos-metric-val b { font-size: 17px; }
+
+.pos-scaleout { font-size: 12.5px; line-height: 1.5; color: var(--warning); background: rgba(251,191,36,0.12); border: 1px solid rgba(251,191,36,0.35); border-radius: 8px; padding: 8px 10px; margin-bottom: 10px; }
+.pos-formula { font-size: 11px; color: var(--text-dim); font-family: "SF Mono", ui-monospace, Consolas, monospace; margin-bottom: 8px; }
+.pos-chip-note { font-size: 11px; color: var(--text-dim); background: rgba(255,255,255,0.03); border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; }
+.pos-foot { font-size: 11px; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 8px; }

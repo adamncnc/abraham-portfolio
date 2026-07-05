@@ -35,6 +35,7 @@
   <button class="market-tab active" data-tab="tw">🇹🇼 台股 <span class="tab-count" id="tab-count-tw">–</span></button>
   <button class="market-tab" data-tab="us">🇺🇸 美股 <span class="tab-count" id="tab-count-us">–</span></button>
   <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
+  <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
 </nav>
 
 <!-- 台股 -->
@@ -92,6 +93,18 @@
     </select>
   </div>
   <div class="card-grid" id="idx-grid">
+    <div class="loading">Loading…</div>
+  </div>
+</section>
+
+<!-- 即時持倉 + ATR 移動停利 (Adam 2026-07-06: 第四分頁，記錄實際持倉並即時換算 ATR 停損策略) -->
+<section class="tab-panel" id="panel-pos">
+  <div class="section-header pos-header">
+    <span class="section-count" id="pos-count">–</span>
+    <span class="pos-method-note">🎯 移動停利：停損隨新高往上鎖 · 碰到就走 · +50% 先落袋一半保本</span>
+  </div>
+  <div class="pos-summary" id="pos-summary"></div>
+  <div class="card-grid" id="pos-grid">
     <div class="loading">Loading…</div>
   </div>
 </section>
