@@ -602,6 +602,17 @@
       "notes": "AI 資料中心乙太網交換器龍頭+XPO 可插拔陣營主導; 進場區 143-160/認錯125 (7/5 深調 msg 1523050200795578541)",
       "entry_zone_lo": 143,
       "entry_zone_hi": 160
+    },
+    {
+      "id": "shaz",
+      "type": "us_stock",
+      "symbol": "SHAZ",
+      "name": "SharonAI",
+      "currency": "USD",
+      "theme": "AI 主權資料中心/Neocloud(SharonAI ",
+      "notes": "AI 主權資料中心/Neocloud(SharonAI Holdings, 美股NASDAQ NCM, USD); 7/5 Serenity 點名(Anthropic 澳洲 1.4GW/$21.6B 外流文件+SharonAI/IREN 建澳洲主權 DC)Adam 明示加入; ⚠️⚠️極投機 de-SPAC 小型故事股=今年2月借殼上市(前 Roth CH/Novus SpinCo)/25員工/營收僅約$150萬但市值$16億(P/S~1000x)/虧損(EPS-3.61)/",
+      "entry_zone_lo": 46,
+      "entry_zone_hi": 60
     }
   ]
 }
