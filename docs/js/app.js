@@ -20,6 +20,7 @@ const PREFS_SECRET = "abr-dash-7c3f9a";   // low-stakes anti-grief token; must m
 let PREFS_SYNCING = true;                  // suppress uploads during initial load / cloud-apply
 let _prefsPushTimer = null;
 let CURRENT_SNAPSHOT = null;
+let HOLDINGS_SNAP = null;   // base 即時持倉 data from holdings.json; live ticks recompute 距停損 off this (never mutated)
 let LIVE_MODE = false;  // set true after a successful live pull; scheduler resets it to false off-hours so auto-refresh reverts to snapshot mode
 let REFRESH_INFLIGHT = false;  // guards liveRefresh / refreshOneCard against overlap (auto-refresh + manual)
 // Relay caps each request's symbol count, so one request for the whole list silently
@@ -1040,7 +1041,7 @@ function loadHoldings() {
   const grid = document.getElementById("pos-grid");
   fetch(HOLDINGS_URL + "?t=" + Date.now(), { cache: "no-store" })
     .then((res) => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
-    .then((snap) => renderHoldings(snap))
+    .then((snap) => { HOLDINGS_SNAP = snap; renderHoldings(snap); })
     .catch((err) => {
       // A holdings failure must never break the other 3 tabs — just note it here.
       console.warn("holdings load failed:", err);
@@ -1069,18 +1070,62 @@ function renderHoldings(snap) {
   }
 
   if (summaryEl) {
-    const pnl = (snap.summary && snap.summary.pnl_by_currency) || {};
-    const parts = Object.entries(pnl).map(([cur, v]) => {
+    // Recompute P&L from the holdings actually shown (so it matches live-refreshed cards).
+    const pnlByCur = {};
+    for (const h of holdings) {
+      if (h.unrealized_pnl != null) pnlByCur[h.currency || "?"] = (pnlByCur[h.currency || "?"] || 0) + h.unrealized_pnl;
+    }
+    const parts = Object.entries(pnlByCur).map(([cur, v]) => {
       const cls = changeClass(v);   // 漲紅跌綠：獲利=up=紅，虧損=down=綠
       return `<span class="pos-sum-pnl ${cls}">${escapeHtml(cur)} 未實現 ${v >= 0 ? "+" : ""}${fmtCurrency(v, cur, 0)}</span>`;
     });
-    const asof = snap.timestamp_utc
-      ? new Date(snap.timestamp_utc).toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })
-      : "";
-    summaryEl.innerHTML = `<div class="pos-sum-row">${parts.join("")}${asof ? `<span class="pos-sum-asof">更新 ${asof} (Taipei)</span>` : ""}</div>`;
+    let stamp = "";
+    if (snap._liveTs) {
+      const t = new Date(snap._liveTs).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
+      stamp = `<span class="pos-sum-asof pos-sum-live">🟢 盤中即時 ${t} (Taipei) · 距停損隨價跳動</span>`;
+    } else if (snap.timestamp_utc) {
+      const asof = new Date(snap.timestamp_utc).toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+      stamp = `<span class="pos-sum-asof">🕒 收盤價 ${asof} (Taipei) · 停損為日線 ATR</span>`;
+    }
+    summaryEl.innerHTML = `<div class="pos-sum-row">${parts.join("")}${stamp}</div>`;
   }
 
   grid.innerHTML = holdings.map(buildHoldingCard).join("");
+}
+
+// Live recompute of one holding's 距停損 / 燈號 / 損益 off a fresh intraday price, using the
+// daily-computed stop + ATR from holdings.json. Mirrors scripts/holdings_atr.py exactly so
+// the intraday numbers are continuous with the close-of-day ones. (Adam 2026-07-06: 盤中即時距停損)
+function recomputeHoldingLive(h, livePrice) {
+  const out = { ...h, price: livePrice };
+  if (h.prev_close) out.change_pct = (livePrice - h.prev_close) / h.prev_close * 100;
+  const stop = h.trailing_stop, atr = h.atr_used;
+  if (stop != null && atr) {
+    out.dist_to_stop_pct = (livePrice - stop) / livePrice * 100;
+    out.buffer_atr = (livePrice - stop) / atr;
+    if (livePrice <= stop) { out.status = "hit"; out.status_label = "🔴 跌破移動停損（該走）"; }
+    else if (out.buffer_atr <= 1) { out.status = "near"; out.status_label = "🟡 接近停損（剩 <1×ATR 緩衝）"; }
+    else { out.status = "hold"; out.status_label = "🟢 抱著（停損在下方）"; }
+  }
+  if (h.shares && h.cost_basis) {
+    out.market_value = h.shares * livePrice;
+    out.unrealized_pnl = h.shares * (livePrice - h.cost_basis);
+    out.unrealized_pnl_pct = (livePrice - h.cost_basis) / h.cost_basis * 100;
+  }
+  return out;
+}
+
+// Apply live quotes (already fetched by liveRefresh) to the 即時持倉 tab and re-render.
+// The stop LEVEL stays daily; price / 距停損 / 燈號 / 損益 update every live tick (~30s).
+function applyLiveToHoldings(quotes, liveTs) {
+  if (!HOLDINGS_SNAP || !((HOLDINGS_SNAP.holdings || []).length)) return;
+  let anyLive = false;
+  const holdings = HOLDINGS_SNAP.holdings.map((h) => {
+    const q = quotes[h.symbol];
+    if (q && q.ok && q.price != null) { anyLive = true; return recomputeHoldingLive(h, q.price); }
+    return h;
+  });
+  renderHoldings({ ...HOLDINGS_SNAP, holdings, _liveTs: anyLive ? liveTs : null });
 }
 
 function posRow(label, val, extraCls = "") {
@@ -1180,7 +1225,9 @@ async function liveRefresh() {
   if (!CURRENT_SNAPSHOT) return;
 
   const all = [...(CURRENT_SNAPSHOT.holdings || []), ...(CURRENT_SNAPSHOT.watchlist || []), ...(CURRENT_SNAPSHOT.indices || [])];
-  const symbols = [...new Set(all.map(it => it.symbol).filter(Boolean))];
+  // include 即時持倉 symbols so the holdings tab's 距停損 updates on the same live tick
+  const holdingSyms = ((HOLDINGS_SNAP && HOLDINGS_SNAP.holdings) || []).map((h) => h.symbol).filter(Boolean);
+  const symbols = [...new Set([...all.map(it => it.symbol).filter(Boolean), ...holdingSyms])];
   if (!symbols.length) return;
 
   if (REFRESH_INFLIGHT) return;  // an auto/manual refresh is already running — don't overlap
@@ -1225,6 +1272,7 @@ async function liveRefresh() {
       : `${okCount} 檔即時`;
     CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
     renderSnapshot(live, { live: true, note });
+    applyLiveToHoldings(quotes, liveTs);   // 即時持倉分頁: 距停損隨這批即時價重算
     LIVE_MODE = true;
   } catch (err) {
     console.error("Live refresh failed:", err);

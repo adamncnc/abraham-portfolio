@@ -504,6 +504,7 @@ body {
 .pos-sum-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; font-size: 14px; font-weight: 600; }
 .pos-sum-pnl { padding: 4px 10px; border-radius: 8px; background: rgba(255,255,255,0.04); }
 .pos-sum-asof { font-size: 11px; color: var(--text-dim); font-weight: 400; }
+.pos-sum-live { color: var(--accent); font-weight: 600; }
 
 .pos-empty { grid-column: 1 / -1; text-align: center; padding: 48px 20px; color: var(--text-dim); }
 .pos-empty-icon { font-size: 40px; margin-bottom: 12px; }
