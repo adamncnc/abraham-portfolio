@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "timestamp_utc": "2026-07-05T10:48:04.791417+00:00",
+  "timestamp_utc": "2026-07-05T18:11:40.598762+00:00",
   "portfolio_summary": {
     "total_market_value_usd_equiv": 0,
     "total_cost_usd_equiv": 0,
@@ -41,7 +41,7 @@
         "dist_from_low_pct": 371.59090909090907,
         "fifty_day_avg": 2165.4,
         "two_hundred_day_avg": 1409.075,
-        "volume": 15169564,
+        "volume": 15207642,
         "average_volume": 11374274,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -63,9 +63,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056613,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Delta Electronics, Inc.",
-        "fetched_at": "2026-07-05T10:47:14.937290+00:00",
+        "fetched_at": "2026-07-05T18:10:50.090866+00:00",
         "history": {
           "intraday": [
             {
@@ -10802,7 +10802,7 @@
         "dist_from_low_pct": 265.5629139072848,
         "fifty_day_avg": 2567.6,
         "two_hundred_day_avg": 1796.585,
-        "volume": 4649082,
+        "volume": 4659120,
         "average_volume": 4614617,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -10824,9 +10824,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056618,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Asia Vital Components Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:16.279002+00:00",
+        "fetched_at": "2026-07-05T18:10:51.264473+00:00",
         "history": {
           "intraday": [
             {
@@ -21563,7 +21563,7 @@
         "dist_from_low_pct": 129.5774647887324,
         "fifty_day_avg": 2310.7,
         "two_hundred_day_avg": 1815.0,
-        "volume": 29404970,
+        "volume": 29491868,
         "average_volume": 34968779,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -21585,9 +21585,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056607,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Taiwan Semiconductor Manufacturing Company Limited",
-        "fetched_at": "2026-07-05T10:47:17.427613+00:00",
+        "fetched_at": "2026-07-05T18:10:52.490320+00:00",
         "history": {
           "intraday": [
             {
@@ -32328,8 +32328,8 @@
         "dist_from_low_pct": 391.2736386420597,
         "fifty_day_avg": 215.091,
         "two_hundred_day_avg": 132.93608,
-        "volume": 24775212,
-        "average_volume": 17816659,
+        "volume": 24901806,
+        "average_volume": 17815093,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 83.25097,
@@ -32351,7 +32351,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Nebius Group N.V.",
-        "fetched_at": "2026-07-05T10:47:18.015200+00:00",
+        "fetched_at": "2026-07-05T18:10:53.074069+00:00",
         "history": {
           "intraday": [
             {
@@ -35952,7 +35952,7 @@
         "dist_from_low_pct": 121.7557251908397,
         "fifty_day_avg": 769.28,
         "two_hundred_day_avg": 545.092,
-        "volume": 4563606,
+        "volume": 4565516,
         "average_volume": 3230452,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -35974,9 +35974,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056602,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "FOCI Fiber Optic Communications, Inc.",
-        "fetched_at": "2026-07-05T10:47:18.974634+00:00",
+        "fetched_at": "2026-07-05T18:10:54.088981+00:00",
         "history": {
           "intraday": [
             {
@@ -46661,7 +46661,7 @@
         "dist_from_low_pct": 246.70487106017194,
         "fifty_day_avg": 533.64,
         "two_hundred_day_avg": 319.0725,
-        "volume": 1346365,
+        "volume": 1348371,
         "average_volume": 6772613,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -46683,9 +46683,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056628,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Silergy Corp.",
-        "fetched_at": "2026-07-05T10:47:20.124596+00:00",
+        "fetched_at": "2026-07-05T18:10:55.256381+00:00",
         "history": {
           "intraday": [
             {
@@ -57422,7 +57422,7 @@
         "dist_from_low_pct": 64.25120772946859,
         "fifty_day_avg": 1067.8,
         "two_hundred_day_avg": 998.875,
-        "volume": 1389603,
+        "volume": 1394228,
         "average_volume": 3840044,
         "net_assets": null,
         "dividend_yield_pct": 1.17,
@@ -57444,9 +57444,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056605,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Auras Technology Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:21.226679+00:00",
+        "fetched_at": "2026-07-05T18:10:56.365140+00:00",
         "history": {
           "intraday": [
             {
@@ -68180,7 +68180,7 @@
         "fifty_day_avg": 324.6012,
         "two_hundred_day_avg": 232.48015,
         "volume": 5868595,
-        "average_volume": 6194466,
+        "average_volume": 6194333,
         "net_assets": null,
         "dividend_yield_pct": 8.0,
         "trailing_pe": 75.70025,
@@ -68202,7 +68202,7 @@
         "regular_market_time": 1783022403,
         "market_state": "CLOSED",
         "long_name": "Vertiv Holdings Co",
-        "fetched_at": "2026-07-05T10:47:21.807545+00:00",
+        "fetched_at": "2026-07-05T18:10:56.952867+00:00",
         "history": {
           "intraday": [
             {
@@ -78047,7 +78047,7 @@
         "dist_from_low_pct": 580.0894854586129,
         "fifty_day_avg": 5013.7,
         "two_hundred_day_avg": 2674.15,
-        "volume": 3085063,
+        "volume": 3097228,
         "average_volume": 2461266,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -78069,9 +78069,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056622,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Elite Material Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:22.929219+00:00",
+        "fetched_at": "2026-07-05T18:10:58.100277+00:00",
         "history": {
           "intraday": [
             {
@@ -88808,7 +88808,7 @@
         "dist_from_low_pct": 772.651356993737,
         "fifty_day_avg": 695.25,
         "two_hundred_day_avg": 356.5225,
-        "volume": 38460267,
+        "volume": 38535306,
         "average_volume": 50551432,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -88830,9 +88830,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056604,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Yageo Corporation",
-        "fetched_at": "2026-07-05T10:47:24.029934+00:00",
+        "fetched_at": "2026-07-05T18:10:59.289321+00:00",
         "history": {
           "intraday": [
             {
@@ -99573,7 +99573,7 @@
         "dist_from_low_pct": 843.6641516734378,
         "fifty_day_avg": 852.0854,
         "two_hundred_day_avg": 444.34445,
-        "volume": 60943570,
+        "volume": 61844373,
         "average_volume": 51299314,
         "net_assets": null,
         "dividend_yield_pct": 5.0,
@@ -99596,7 +99596,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Micron Technology, Inc.",
-        "fetched_at": "2026-07-05T10:47:24.649688+00:00",
+        "fetched_at": "2026-07-05T18:10:59.877371+00:00",
         "history": {
           "intraday": [
             {
@@ -111554,7 +111554,7 @@
         "fifty_day_avg": 1042.0962,
         "two_hundred_day_avg": 794.5347,
         "volume": 2127066,
-        "average_volume": 2718495,
+        "average_volume": 2718451,
         "net_assets": null,
         "dividend_yield_pct": 18.0,
         "trailing_pe": 32.575653,
@@ -111576,7 +111576,7 @@
         "regular_market_time": 1783022402,
         "market_state": "CLOSED",
         "long_name": "GE Vernova Inc.",
-        "fetched_at": "2026-07-05T10:47:25.264044+00:00",
+        "fetched_at": "2026-07-05T18:11:00.506040+00:00",
         "history": {
           "intraday": [
             {
@@ -115760,7 +115760,7 @@
         "regular_market_time": 1783022402,
         "market_state": "CLOSED",
         "long_name": "Hubbell Incorporated",
-        "fetched_at": "2026-07-05T10:47:25.780902+00:00",
+        "fetched_at": "2026-07-05T18:11:00.983224+00:00",
         "history": {
           "intraday": [
             {
@@ -127401,8 +127401,8 @@
         "dist_from_low_pct": 4.645059703450992,
         "fifty_day_avg": 278.8336,
         "two_hundred_day_avg": 316.87537,
-        "volume": 4117423,
-        "average_volume": 3639630,
+        "volume": 4270995,
+        "average_volume": 3639566,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 20.786272,
@@ -127424,7 +127424,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Constellation Energy Corporation",
-        "fetched_at": "2026-07-05T10:47:26.503712+00:00",
+        "fetched_at": "2026-07-05T18:11:01.682442+00:00",
         "history": {
           "intraday": [
             {
@@ -133782,7 +133782,7 @@
         "fifty_day_avg": 154.4138,
         "two_hundred_day_avg": 168.60045,
         "volume": 4208737,
-        "average_volume": 4651277,
+        "average_volume": 4651248,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 25.259197,
@@ -133804,7 +133804,7 @@
         "regular_market_time": 1783022402,
         "market_state": "CLOSED",
         "long_name": "Vistra Corp.",
-        "fetched_at": "2026-07-05T10:47:27.035496+00:00",
+        "fetched_at": "2026-07-05T18:11:02.190994+00:00",
         "history": {
           "intraday": [
             {
@@ -145485,7 +145485,7 @@
         "dist_from_low_pct": 42.72798434442271,
         "fifty_day_avg": 375.1472,
         "two_hundred_day_avg": 372.2718,
-        "volume": 903696,
+        "volume": 913607,
         "average_volume": 816301,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -145508,7 +145508,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Talen Energy Corporation",
-        "fetched_at": "2026-07-05T10:47:27.616855+00:00",
+        "fetched_at": "2026-07-05T18:11:02.813389+00:00",
         "history": {
           "intraday": [
             {
@@ -150225,7 +150225,7 @@
         "dist_from_low_pct": 84.07643312101911,
         "fifty_day_avg": 229.79,
         "two_hundred_day_avg": 198.98,
-        "volume": 5587080,
+        "volume": 5598646,
         "average_volume": 2807433,
         "net_assets": null,
         "dividend_yield_pct": 1.59,
@@ -150247,9 +150247,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056615,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "uPI Semiconductor Corp.",
-        "fetched_at": "2026-07-05T10:47:28.618778+00:00",
+        "fetched_at": "2026-07-05T18:11:03.937763+00:00",
         "history": {
           "intraday": [
             {
@@ -155574,7 +155574,7 @@
         "dist_from_low_pct": 323.50332594235033,
         "fifty_day_avg": 268.53,
         "two_hundred_day_avg": 162.899,
-        "volume": 5288469,
+        "volume": 5297410,
         "average_volume": 1341457,
         "net_assets": null,
         "dividend_yield_pct": 1.13,
@@ -155596,9 +155596,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056606,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Sinopower Semiconductor, Inc.",
-        "fetched_at": "2026-07-05T10:47:29.637327+00:00",
+        "fetched_at": "2026-07-05T18:11:05.042303+00:00",
         "history": {
           "intraday": [
             {
@@ -166327,7 +166327,7 @@
         "dist_from_low_pct": 395.6803455723542,
         "fifty_day_avg": 2373.1,
         "two_hundred_day_avg": 1668.91,
-        "volume": 3584903,
+        "volume": 3593631,
         "average_volume": 7803188,
         "net_assets": null,
         "dividend_yield_pct": 1.53,
@@ -166349,9 +166349,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056618,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Phison Electronics Corp.",
-        "fetched_at": "2026-07-05T10:47:30.750941+00:00",
+        "fetched_at": "2026-07-05T18:11:06.162111+00:00",
         "history": {
           "intraday": [
             {
@@ -177115,7 +177115,7 @@
         "regular_market_time": 1783022403,
         "market_state": "CLOSED",
         "long_name": "Onto Innovation Inc.",
-        "fetched_at": "2026-07-05T10:47:31.329894+00:00",
+        "fetched_at": "2026-07-05T18:11:06.829348+00:00",
         "history": {
           "intraday": [
             {
@@ -185659,9 +185659,9 @@
         "exchange": "NasdaqGS",
         "currency": "USD",
         "price": 81.745,
-        "previous_close": 85.685,
-        "change": -3.9399999999999977,
-        "change_pct": -4.598237731224832,
+        "previous_close": 85.685005,
+        "change": -3.9400049999999993,
+        "change_pct": -4.598243298229368,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": 82.99,
@@ -185676,8 +185676,8 @@
         "dist_from_low_pct": 28.126959247648912,
         "fifty_day_avg": 108.7061,
         "two_hundred_day_avg": 100.16318,
-        "volume": 32450763,
-        "average_volume": 31644162,
+        "volume": 32788112,
+        "average_volume": 31640798,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": null,
@@ -185699,7 +185699,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "CoreWeave, Inc.",
-        "fetched_at": "2026-07-05T10:47:31.853782+00:00",
+        "fetched_at": "2026-07-05T18:11:07.382015+00:00",
         "history": {
           "intraday": [
             {
@@ -188868,7 +188868,7 @@
         "dist_from_low_pct": 1186.4583333333335,
         "fifty_day_avg": 555.67,
         "two_hundred_day_avg": 226.179,
-        "volume": 15319214,
+        "volume": 15337569,
         "average_volume": 6388557,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -188890,9 +188890,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056637,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Holy Stone Enterprise Co.,Ltd.",
-        "fetched_at": "2026-07-05T10:47:32.884695+00:00",
+        "fetched_at": "2026-07-05T18:11:08.379254+00:00",
         "history": {
           "intraday": [
             {
@@ -199629,7 +199629,7 @@
         "dist_from_low_pct": 873.6111111111111,
         "fifty_day_avg": 207.35,
         "two_hundred_day_avg": 100.20125,
-        "volume": 24605954,
+        "volume": 24614197,
         "average_volume": 8021258,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -199651,9 +199651,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056624,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Prosperity Dielectrics Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:34.113926+00:00",
+        "fetched_at": "2026-07-05T18:11:09.533512+00:00",
         "history": {
           "intraday": [
             {
@@ -210390,7 +210390,7 @@
         "dist_from_low_pct": 170.35573122529644,
         "fifty_day_avg": 3896.8,
         "two_hundred_day_avg": 3159.725,
-        "volume": 1137184,
+        "volume": 1138823,
         "average_volume": 1425224,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -210412,9 +210412,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056633,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Jentech Precision Industrial Co., Ltd",
-        "fetched_at": "2026-07-05T10:47:35.615696+00:00",
+        "fetched_at": "2026-07-05T18:11:10.737659+00:00",
         "history": {
           "intraday": [
             {
@@ -221151,70 +221151,10 @@
         "market_state": "REGULAR",
         "long_name": "Gold Aug 26",
         "unit": "USD per troy ounce",
-        "fetched_at": "2026-07-05T10:47:36.160504+00:00",
+        "fetched_at": "2026-07-05T18:11:11.246673+00:00",
         "history": {
           "intraday": [],
           "intraday_mid": [
-            {
-              "t": "2026-06-05T06:30",
-              "c": 4493.7002
-            },
-            {
-              "t": "2026-06-05T07:00",
-              "c": 4493.1001
-            },
-            {
-              "t": "2026-06-05T07:30",
-              "c": 4497.0
-            },
-            {
-              "t": "2026-06-05T08:00",
-              "c": 4491.0
-            },
-            {
-              "t": "2026-06-05T08:30",
-              "c": 4432.1001
-            },
-            {
-              "t": "2026-06-05T09:00",
-              "c": 4430.5
-            },
-            {
-              "t": "2026-06-05T09:30",
-              "c": 4390.5
-            },
-            {
-              "t": "2026-06-05T10:00",
-              "c": 4385.7002
-            },
-            {
-              "t": "2026-06-05T10:30",
-              "c": 4394.6001
-            },
-            {
-              "t": "2026-06-05T11:00",
-              "c": 4376.7998
-            },
-            {
-              "t": "2026-06-05T11:30",
-              "c": 4360.3999
-            },
-            {
-              "t": "2026-06-05T12:00",
-              "c": 4354.5
-            },
-            {
-              "t": "2026-06-05T12:30",
-              "c": 4369.1001
-            },
-            {
-              "t": "2026-06-05T13:00",
-              "c": 4367.3999
-            },
-            {
-              "t": "2026-06-05T13:30",
-              "c": 4366.2002
-            },
             {
               "t": "2026-06-05T14:00",
               "c": 4350.2002
@@ -234760,7 +234700,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Roundhill Memory ETF",
-        "fetched_at": "2026-07-05T10:47:36.781007+00:00",
+        "fetched_at": "2026-07-05T18:11:11.895353+00:00",
         "history": {
           "intraday": [
             {
@@ -236888,9 +236828,9 @@
         "exchange": "NasdaqGS",
         "currency": "USD",
         "price": 91.22,
-        "previous_close": 94.63,
-        "change": -3.4099999999999966,
-        "change_pct": -3.603508401141284,
+        "previous_close": 94.630005,
+        "change": -3.410004999999998,
+        "change_pct": -3.60351349447778,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": 91.7,
@@ -236905,8 +236845,8 @@
         "dist_from_low_pct": 104.71274685816876,
         "fifty_day_avg": 110.6914,
         "two_hundred_day_avg": 71.041,
-        "volume": 15719706,
-        "average_volume": 12913054,
+        "volume": 16104494,
+        "average_volume": 12912954,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 67.07353,
@@ -236928,7 +236868,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "ON Semiconductor Corporation",
-        "fetched_at": "2026-07-05T10:47:37.187156+00:00",
+        "fetched_at": "2026-07-05T18:11:12.329723+00:00",
         "history": {
           "intraday": [
             {
@@ -248861,8 +248801,8 @@
         "dist_from_low_pct": 4251.620947630923,
         "fifty_day_avg": 1610.4528,
         "two_hundred_day_avg": 703.35657,
-        "volume": 16871368,
-        "average_volume": 13648664,
+        "volume": 17346188,
+        "average_volume": 13647262,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 59.51569,
@@ -248884,7 +248824,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Sandisk Corporation",
-        "fetched_at": "2026-07-05T10:47:37.723430+00:00",
+        "fetched_at": "2026-07-05T18:11:12.901756+00:00",
         "history": {
           "intraday": [
             {
@@ -252173,7 +252113,7 @@
         "dist_from_low_pct": 237.02213279678065,
         "fifty_day_avg": 307.63,
         "two_hundred_day_avg": 261.8525,
-        "volume": 31526191,
+        "volume": 31624746,
         "average_volume": 37219562,
         "net_assets": null,
         "dividend_yield_pct": 1.19,
@@ -252195,9 +252135,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056606,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "King Yuan Electronics Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:38.743861+00:00",
+        "fetched_at": "2026-07-05T18:11:13.941141+00:00",
         "history": {
           "intraday": [
             {
@@ -262938,8 +262878,8 @@
         "dist_from_low_pct": 136.51976668826958,
         "fifty_day_avg": 76.985,
         "two_hundred_day_avg": 51.57225,
-        "volume": 1342190,
-        "average_volume": 1228143,
+        "volume": 1343251,
+        "average_volume": 1228125,
         "net_assets": null,
         "dividend_yield_pct": 1.18,
         "trailing_pe": 243.29999,
@@ -262961,7 +262901,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Power Integrations, Inc.",
-        "fetched_at": "2026-07-05T10:47:39.399682+00:00",
+        "fetched_at": "2026-07-05T18:11:14.591226+00:00",
         "history": {
           "intraday": [
             {
@@ -274538,7 +274478,7 @@
         "dist_from_low_pct": 192.24489795918367,
         "fifty_day_avg": 375.59,
         "two_hundred_day_avg": 230.245,
-        "volume": 1967056,
+        "volume": 1969194,
         "average_volume": 8947120,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -274560,9 +274500,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056601,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Visual Photonics Epitaxy Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:40.535569+00:00",
+        "fetched_at": "2026-07-05T18:11:15.734520+00:00",
         "history": {
           "intraday": [
             {
@@ -285170,7 +285110,7 @@
         "regular_market_time": 1783022654,
         "market_state": "CLOSED",
         "long_name": "Corning Incorporated",
-        "fetched_at": "2026-07-05T10:47:41.114354+00:00",
+        "fetched_at": "2026-07-05T18:11:16.342198+00:00",
         "history": {
           "intraday": [
             {
@@ -297111,7 +297051,7 @@
         "dist_from_low_pct": 381.97879858657245,
         "fifty_day_avg": 574.94,
         "two_hundred_day_avg": 352.4625,
-        "volume": 38554558,
+        "volume": 38681754,
         "average_volume": 25104193,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -297133,9 +297073,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056605,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "ASE Technology Holding Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:42.374822+00:00",
+        "fetched_at": "2026-07-05T18:11:17.616573+00:00",
         "history": {
           "intraday": [
             {
@@ -307872,7 +307812,7 @@
         "dist_from_low_pct": 308.2706766917293,
         "fifty_day_avg": 538.0,
         "two_hundred_day_avg": 281.9975,
-        "volume": 4112394,
+        "volume": 4119087,
         "average_volume": 5328222,
         "net_assets": null,
         "dividend_yield_pct": 4.0,
@@ -307894,9 +307834,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056629,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "ShunSin Technology Holdings Limited",
-        "fetched_at": "2026-07-05T10:47:43.525932+00:00",
+        "fetched_at": "2026-07-05T18:11:18.894707+00:00",
         "history": {
           "intraday": [
             {
@@ -318620,9 +318560,9 @@
         "exchange": "NasdaqGS",
         "currency": "USD",
         "price": 1769.32,
-        "previous_close": 1843.04,
-        "change": -73.72000000000003,
-        "change_pct": -3.999913186908587,
+        "previous_close": 1843.0399,
+        "change": -73.71990000000005,
+        "change_pct": -3.9999079781181104,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": 1776.9812,
@@ -318637,7 +318577,7 @@
         "dist_from_low_pct": 158.86931585415812,
         "fifty_day_avg": 1647.1494,
         "two_hundred_day_avg": 1314.8181,
-        "volume": 2667040,
+        "volume": 2700984,
         "average_volume": 1930503,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -318660,7 +318600,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "ASML Holding N.V.",
-        "fetched_at": "2026-07-05T10:47:44.083526+00:00",
+        "fetched_at": "2026-07-05T18:11:19.428782+00:00",
         "history": {
           "intraday": [
             {
@@ -330617,7 +330557,7 @@
         "dist_from_low_pct": 286.4196173301078,
         "fifty_day_avg": 321.0816,
         "two_hundred_day_avg": 222.82996,
-        "volume": 18873415,
+        "volume": 18973407,
         "average_volume": 10887143,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -330640,7 +330580,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Lam Research Corporation",
-        "fetched_at": "2026-07-05T10:47:44.836908+00:00",
+        "fetched_at": "2026-07-05T18:11:20.233509+00:00",
         "history": {
           "intraday": [
             {
@@ -342597,7 +342537,7 @@
         "dist_from_low_pct": 290.3929565611445,
         "fifty_day_avg": 490.1856,
         "two_hundred_day_avg": 339.3491,
-        "volume": 15057181,
+        "volume": 15096149,
         "average_volume": 8852954,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -342620,7 +342560,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Applied Materials, Inc.",
-        "fetched_at": "2026-07-05T10:47:45.429245+00:00",
+        "fetched_at": "2026-07-05T18:11:20.890632+00:00",
         "history": {
           "intraday": [
             {
@@ -354577,7 +354517,7 @@
         "dist_from_low_pct": 183.031337114294,
         "fifty_day_avg": 208.80595,
         "two_hundred_day_avg": 151.9775,
-        "volume": 23573075,
+        "volume": 23648855,
         "average_volume": 11836762,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -354600,7 +354540,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "KLA Corporation",
-        "fetched_at": "2026-07-05T10:47:46.084462+00:00",
+        "fetched_at": "2026-07-05T18:11:21.564353+00:00",
         "history": {
           "intraday": [
             {
@@ -366557,8 +366497,8 @@
         "dist_from_low_pct": 108.31741621809343,
         "fifty_day_avg": 370.9708,
         "two_hundred_day_avg": 316.1535,
-        "volume": 25430462,
-        "average_volume": 31502337,
+        "volume": 25999346,
+        "average_volume": 31501941,
         "net_assets": null,
         "dividend_yield_pct": 24.0,
         "trailing_pe": 27.474045,
@@ -366580,7 +366520,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Alphabet Inc.",
-        "fetched_at": "2026-07-05T10:47:46.740425+00:00",
+        "fetched_at": "2026-07-05T18:11:22.250100+00:00",
         "history": {
           "intraday": [
             {
@@ -378537,8 +378477,8 @@
         "dist_from_low_pct": 23.81122448979591,
         "fifty_day_avg": 255.4168,
         "two_hundred_day_avg": 232.98254,
-        "volume": 44741143,
-        "average_volume": 50924966,
+        "volume": 48298137,
+        "average_volume": 50924132,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 31.638851,
@@ -378560,7 +378500,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Amazon.com, Inc.",
-        "fetched_at": "2026-07-05T10:47:47.373247+00:00",
+        "fetched_at": "2026-07-05T18:11:22.814973+00:00",
         "history": {
           "intraday": [
             {
@@ -390500,9 +390440,9 @@
         "exchange": "NasdaqGS",
         "currency": "USD",
         "price": 582.9,
-        "previous_close": 612.91,
-        "change": -30.00999999999999,
-        "change_pct": -4.896314303894535,
+        "previous_close": 612.91003,
+        "change": -30.01003000000003,
+        "change_pct": -4.8963189589180045,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": 585.0,
@@ -390517,8 +390457,8 @@
         "dist_from_low_pct": 12.040133779264211,
         "fifty_day_avg": 605.229,
         "two_hundred_day_avg": 646.51215,
-        "volume": 20851640,
-        "average_volume": 17209830,
+        "volume": 21750522,
+        "average_volume": 17209111,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 21.18866,
@@ -390540,7 +390480,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Meta Platforms, Inc.",
-        "fetched_at": "2026-07-05T10:47:47.925354+00:00",
+        "fetched_at": "2026-07-05T18:11:23.371349+00:00",
         "history": {
           "intraday": [
             {
@@ -402497,7 +402437,7 @@
         "dist_from_low_pct": 11.824169530355103,
         "fifty_day_avg": 407.5954,
         "two_hundred_day_avg": 445.4361,
-        "volume": 40690198,
+        "volume": 42194409,
         "average_volume": 39838170,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -402520,7 +402460,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Microsoft Corporation",
-        "fetched_at": "2026-07-05T10:47:48.515715+00:00",
+        "fetched_at": "2026-07-05T18:11:23.951495+00:00",
         "history": {
           "intraday": [
             {
@@ -414477,8 +414417,8 @@
         "dist_from_low_pct": 299.23502604166663,
         "fifty_day_avg": 223.627,
         "two_hundred_day_avg": 122.63065,
-        "volume": 37558771,
-        "average_volume": 42827496,
+        "volume": 38579896,
+        "average_volume": 42825174,
         "net_assets": null,
         "dividend_yield_pct": 10.0,
         "trailing_pe": 84.00342,
@@ -414500,7 +414440,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Marvell Technology, Inc.",
-        "fetched_at": "2026-07-05T10:47:49.140534+00:00",
+        "fetched_at": "2026-07-05T18:11:24.599311+00:00",
         "history": {
           "intraday": [
             {
@@ -426453,7 +426393,7 @@
         "dist_from_low_pct": 757.5221238938053,
         "fifty_day_avg": 928.72,
         "two_hundred_day_avg": 463.1699,
-        "volume": 18997866,
+        "volume": 19037504,
         "average_volume": 24828705,
         "net_assets": null,
         "dividend_yield_pct": 20.0,
@@ -426475,9 +426415,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056603,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Unimicron Technology Corp.",
-        "fetched_at": "2026-07-05T10:47:50.357700+00:00",
+        "fetched_at": "2026-07-05T18:11:25.779173+00:00",
         "history": {
           "intraday": [
             {
@@ -437214,7 +437154,7 @@
         "dist_from_low_pct": 908.5106382978724,
         "fifty_day_avg": 918.28,
         "two_hundred_day_avg": 503.9875,
-        "volume": 13107626,
+        "volume": 13118601,
         "average_volume": 18557575,
         "net_assets": null,
         "dividend_yield_pct": 17.0,
@@ -437236,9 +437176,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056608,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Nan Ya Printed Circuit Board Corporation",
-        "fetched_at": "2026-07-05T10:47:51.497314+00:00",
+        "fetched_at": "2026-07-05T18:11:26.950392+00:00",
         "history": {
           "intraday": [
             {
@@ -447975,7 +447915,7 @@
         "dist_from_low_pct": 93.90581717451524,
         "fifty_day_avg": 344.77,
         "two_hundred_day_avg": 252.1575,
-        "volume": 3046635,
+        "volume": 3052491,
         "average_volume": 7135285,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -447997,9 +447937,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056618,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Hiwin Technologies Corporation",
-        "fetched_at": "2026-07-05T10:47:52.633137+00:00",
+        "fetched_at": "2026-07-05T18:11:28.175467+00:00",
         "history": {
           "intraday": [
             {
@@ -458736,7 +458676,7 @@
         "dist_from_low_pct": 650.0,
         "fifty_day_avg": 5882.0,
         "two_hundred_day_avg": 3405.7,
-        "volume": 630545,
+        "volume": 632395,
         "average_volume": 1246520,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -458758,9 +458698,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056616,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "MPI Corporation",
-        "fetched_at": "2026-07-05T10:47:53.861121+00:00",
+        "fetched_at": "2026-07-05T18:11:29.342885+00:00",
         "history": {
           "intraday": [
             {
@@ -469497,8 +469437,8 @@
         "dist_from_low_pct": 203.9024390243903,
         "fifty_day_avg": 37.6945,
         "two_hundred_day_avg": 27.768724,
-        "volume": 9034626,
-        "average_volume": 4485209,
+        "volume": 9136346,
+        "average_volume": 4484690,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": null,
@@ -469520,7 +469460,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Ouster, Inc.",
-        "fetched_at": "2026-07-05T10:47:54.421973+00:00",
+        "fetched_at": "2026-07-05T18:11:29.907686+00:00",
         "history": {
           "intraday": [
             {
@@ -477165,7 +477105,7 @@
         "dist_from_low_pct": 191.3793103448276,
         "fifty_day_avg": 292.55,
         "two_hundred_day_avg": 218.43,
-        "volume": 18245655,
+        "volume": 18265490,
         "average_volume": 26696729,
         "net_assets": null,
         "dividend_yield_pct": 2.07,
@@ -477187,9 +477127,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056604,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Powertech Technology Inc.",
-        "fetched_at": "2026-07-05T10:47:55.445566+00:00",
+        "fetched_at": "2026-07-05T18:11:30.989357+00:00",
         "history": {
           "intraday": [
             {
@@ -487926,7 +487866,7 @@
         "dist_from_low_pct": 90.78947368421053,
         "fifty_day_avg": 2439.4,
         "two_hundred_day_avg": 1789.175,
-        "volume": 983026,
+        "volume": 983188,
         "average_volume": 1401834,
         "net_assets": null,
         "dividend_yield_pct": 1.61,
@@ -487948,9 +487888,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056607,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Lotes Co., Ltd.",
-        "fetched_at": "2026-07-05T10:47:56.568984+00:00",
+        "fetched_at": "2026-07-05T18:11:32.121657+00:00",
         "history": {
           "intraday": [
             {
@@ -498679,7 +498619,7 @@
         "dist_from_low_pct": 102.01091393460233,
         "fifty_day_avg": 519.0476,
         "two_hundred_day_avg": 418.3976,
-        "volume": 856606,
+        "volume": 856785,
         "average_volume": 421180,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -498702,7 +498642,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "Nova Ltd.",
-        "fetched_at": "2026-07-05T10:47:57.140736+00:00",
+        "fetched_at": "2026-07-05T18:11:32.696121+00:00",
         "history": {
           "intraday": [
             {
@@ -510374,9 +510314,9 @@
         "exchange": "NasdaqGS",
         "currency": "USD",
         "price": 728.32,
-        "previous_close": 801.16,
-        "change": -72.83999999999992,
-        "change_pct": -9.09181686554495,
+        "previous_close": 801.16003,
+        "change": -72.84002999999996,
+        "change_pct": -9.09182026966572,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": 726.3,
@@ -510391,8 +510331,8 @@
         "dist_from_low_pct": 718.9812211852019,
         "fifty_day_avg": 898.0808,
         "two_hundred_day_avg": 542.9247,
-        "volume": 5186756,
-        "average_volume": 5933933,
+        "volume": 5229140,
+        "average_volume": 5933751,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 128.22536,
@@ -510414,7 +510354,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "Lumentum Holdings Inc.",
-        "fetched_at": "2026-07-05T10:47:57.712355+00:00",
+        "fetched_at": "2026-07-05T18:11:33.235010+00:00",
         "history": {
           "intraday": [
             {
@@ -522367,7 +522307,7 @@
         "dist_from_low_pct": 276.2035763411279,
         "fifty_day_avg": 2451.6,
         "two_hundred_day_avg": 1550.45,
-        "volume": 3014841,
+        "volume": 3021446,
         "average_volume": 4174848,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -522389,9 +522329,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056620,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "Accton Technology Corporation",
-        "fetched_at": "2026-07-05T10:47:58.816531+00:00",
+        "fetched_at": "2026-07-05T18:11:34.406613+00:00",
         "history": {
           "intraday": [
             {
@@ -533128,7 +533068,7 @@
         "dist_from_low_pct": 584.0390879478828,
         "fifty_day_avg": 2525.5,
         "two_hundred_day_avg": 1325.5175,
-        "volume": 2483911,
+        "volume": 2487458,
         "average_volume": 2734375,
         "net_assets": null,
         "dividend_yield_pct": 14.000000000000002,
@@ -533150,9 +533090,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056623,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "LandMark Optoelectronics Corporation",
-        "fetched_at": "2026-07-05T10:47:59.918606+00:00",
+        "fetched_at": "2026-07-05T18:11:35.548596+00:00",
         "history": {
           "intraday": [
             {
@@ -543890,7 +543830,7 @@
         "fifty_day_avg": 159.7964,
         "two_hundred_day_avg": 143.11935,
         "volume": 8588032,
-        "average_volume": 9609106,
+        "average_volume": 9609074,
         "net_assets": null,
         "dividend_yield_pct": null,
         "trailing_pe": 54.97938,
@@ -543912,7 +543852,7 @@
         "regular_market_time": 1783022403,
         "market_state": "CLOSED",
         "long_name": "Arista Networks, Inc.",
-        "fetched_at": "2026-07-05T10:48:00.478158+00:00",
+        "fetched_at": "2026-07-05T18:11:36.096544+00:00",
         "history": {
           "intraday": [
             {
@@ -555857,7 +555797,7 @@
         "dist_from_low_pct": 310.33232628398787,
         "fifty_day_avg": 64.0038,
         "two_hundred_day_avg": 46.454468,
-        "volume": 2581835,
+        "volume": 2602181,
         "average_volume": 818396,
         "net_assets": null,
         "dividend_yield_pct": null,
@@ -555880,7 +555820,7 @@
         "regular_market_time": 1783022401,
         "market_state": "CLOSED",
         "long_name": "SharonAI Holdings Inc.",
-        "fetched_at": "2026-07-05T10:48:01.050922+00:00",
+        "fetched_at": "2026-07-05T18:11:36.813460+00:00",
         "history": {
           "intraday": [
             {
@@ -558040,9 +557980,9 @@
         "exchange": "Taiwan",
         "currency": "TWD",
         "price": 46780.62,
-        "previous_close": 46744.16,
-        "change": 36.45999999999913,
-        "change_pct": 0.07799904843727884,
+        "previous_close": 46744.2,
+        "change": 36.42000000000553,
+        "change_pct": 0.07791340957809853,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -558078,9 +558018,9 @@
         "expense_ratio": null,
         "ytd_return_pct": null,
         "regular_market_time": 1783056795,
-        "market_state": "CLOSED",
+        "market_state": "PREPRE",
         "long_name": "TWSE Capitalization Weighted Stock Index",
-        "fetched_at": "2026-07-05T10:48:01.612515+00:00",
+        "fetched_at": "2026-07-05T18:11:37.460991+00:00",
         "history": {
           "intraday": [
             {
@@ -568842,7 +568782,7 @@
         "regular_market_time": 1783022400,
         "market_state": "CLOSED",
         "long_name": "iShares MSCI Taiwan ETF",
-        "fetched_at": "2026-07-05T10:48:02.222043+00:00",
+        "fetched_at": "2026-07-05T18:11:38.121759+00:00",
         "history": {
           "intraday": [
             {
@@ -580628,9 +580568,9 @@
         "exchange": "Nasdaq GIDS",
         "currency": "USD",
         "price": 25832.672,
-        "previous_close": 26040.031,
-        "change": -207.35900000000038,
-        "change_pct": -0.7963085758231255,
+        "previous_close": 26040.0,
+        "change": -207.32800000000134,
+        "change_pct": -0.7961904761904814,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -580668,7 +580608,7 @@
         "regular_market_time": 1783026959,
         "market_state": "CLOSED",
         "long_name": "NASDAQ Composite",
-        "fetched_at": "2026-07-05T10:48:02.906194+00:00",
+        "fetched_at": "2026-07-05T18:11:38.872005+00:00",
         "history": {
           "intraday": [
             {
@@ -592214,9 +592154,9 @@
         "exchange": "Nasdaq GIDS",
         "currency": "USD",
         "price": 12626.222,
-        "previous_close": 13353.279,
-        "change": -727.0570000000007,
-        "change_pct": -5.444782513718171,
+        "previous_close": 13353.3,
+        "change": -727.0779999999995,
+        "change_pct": -5.444931215504778,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -592254,7 +592194,7 @@
         "regular_market_time": 1783026959,
         "market_state": "CLOSED",
         "long_name": "PHLX Semiconductor",
-        "fetched_at": "2026-07-05T10:48:03.647146+00:00",
+        "fetched_at": "2026-07-05T18:11:39.520256+00:00",
         "history": {
           "intraday": [
             {
@@ -603800,9 +603740,9 @@
         "exchange": "NYSE",
         "currency": "USD",
         "price": 23957.08,
-        "previous_close": 23737.184,
-        "change": 219.89600000000064,
-        "change_pct": 0.9263777876937745,
+        "previous_close": 23737.2,
+        "change": 219.88000000000102,
+        "change_pct": 0.9263097585224922,
         "pre_market_price": null,
         "pre_market_change_pct": null,
         "post_market_price": null,
@@ -603840,7 +603780,7 @@
         "regular_market_time": 1783022775,
         "market_state": "CLOSED",
         "long_name": "NYSE Composite Index",
-        "fetched_at": "2026-07-05T10:48:04.345765+00:00",
+        "fetched_at": "2026-07-05T18:11:40.180663+00:00",
         "history": {
           "intraday": [
             {
