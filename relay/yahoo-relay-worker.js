@@ -146,6 +146,73 @@ async function fetchOne(symbol) {
   return { ok: false, error: lastErr };
 }
 
+// ── TWSE MIS 官方即時報價 (near-real-time ~5-10s) for .TW / .TWO ───────────────
+// Yahoo's free TW feed lags ~20 min (regularMarketTime is ~20 min behind the tape).
+// TWSE MIS is the exchange's own snapshot — what broker apps show — delayed only a few
+// seconds. We overlay MIS onto the Yahoo base for TW symbols DURING LIVE TRADING, and
+// keep Yahoo for intraday history + as the fallback when MIS is unreachable/off-hours.
+// Crucially asOf = the MIS quote's own time, so the dashboard can label the price's REAL
+// time (delay ≈ 0) instead of the fetch time. (Adam 2026-07-06: 資料不對也不即時)
+function misChannel(sym) {
+  // 2330.TW → tse_2330.tw ; 6488.TWO → otc_6488.tw ; non-TW → null
+  const m = /^(\d{3,6})\.(TW|TWO)$/i.exec(sym || "");
+  if (!m) return null;
+  return (m[2].toUpperCase() === "TWO" ? "otc" : "tse") + "_" + m[1] + ".tw";
+}
+function misNum(v) {
+  if (v == null) return null;
+  const n = parseFloat(v);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+// Fetch MIS for a batch of yf TW symbols. Returns { yfSym: { price, prevClose, asOf(sec) } }.
+// Only returns entries whose quote is fresh (<10 min) → self-gates to trading hours; stale
+// off-hours ticks are skipped so we never override Yahoo's close with a frozen MIS value.
+async function fetchMisBatch(twSymbols) {
+  const out = {};
+  const chans = [];
+  const bySym = {};   // stock-code → yf symbol
+  for (const s of twSymbols) {
+    const ch = misChannel(s);
+    if (ch) { chans.push(ch); bySym[ch.replace(/^(tse|otc)_/, "").replace(/\.tw$/, "")] = s; }
+  }
+  if (!chans.length) return out;
+  const url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&_=" +
+    Date.now() + "&ex_ch=" + encodeURIComponent(chans.join("|"));
+  try {
+    const r = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0",
+        Referer: "https://mis.twse.com.tw/stock/index.jsp",
+        Accept: "application/json",
+      },
+      cf: { cacheTtl: 0 },
+    });
+    if (!r.ok) return out;
+    const j = await r.json();
+    if (!j || j.rtcode !== "0000" || !Array.isArray(j.msgArray)) return out;
+    const nowS = Math.floor(Date.now() / 1000);
+    for (const a of j.msgArray) {
+      const code = a.c || (a.ch || "").replace(/\.tw$/i, "");
+      const yf = bySym[code];
+      if (!yf) continue;
+      const asOf = a.tlong ? Math.floor(parseInt(a.tlong, 10) / 1000) : null;
+      if (!asOf || nowS - asOf > 600) continue;   // stale (off-hours) → let Yahoo close stand
+      // Price: last trade z when present; MIS blanks z to "-" between matches, so fall back
+      // to the best bid/ask midpoint (spread is 1 tick for liquid names → ≈ last).
+      let price = misNum(a.z);
+      if (price == null) {
+        const bid = misNum((a.b || "").split("_")[0]);
+        const ask = misNum((a.a || "").split("_")[0]);
+        if (bid != null && ask != null) price = Math.round(((bid + ask) / 2) * 100) / 100;
+        else price = bid != null ? bid : ask;
+      }
+      if (price == null) continue;
+      out[yf] = { price, prevClose: misNum(a.y), asOf };
+    }
+  } catch (e) { /* MIS unreachable → caller keeps the Yahoo quote (honest-but-delayed) */ }
+  return out;
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") return new Response(null, { headers: CORS });
@@ -175,6 +242,43 @@ export default {
       symbols.map(async (s) => [s, await fetchOne(s)])
     );
     const quotes = Object.fromEntries(pairs);
+
+    // Overlay TWSE MIS near-real-time onto TW symbols (Yahoo stays as fallback + intraday
+    // source). One batched MIS call for all .TW/.TWO in this request. If MIS is off-hours
+    // or unreachable, nothing is overridden and Yahoo's (delayed) quote stands.
+    const twSyms = symbols.filter((s) => misChannel(s));
+    if (twSyms.length) {
+      const mis = await fetchMisBatch(twSyms);
+      for (const s of twSyms) {
+        const m = mis[s];
+        if (!m) continue;
+        const base = quotes[s] || {};
+        const prev = m.prevClose != null ? m.prevClose : base.prevClose;
+        const change = prev != null ? Math.round((m.price - prev) * 10000) / 10000 : (base.change ?? null);
+        const changePct = change != null && prev ? (change / prev) * 100 : (base.changePct ?? null);
+        // Append the live MIS point to Yahoo's intraday so the sparkline ends at the
+        // real-time price instead of the ~20-min-old Yahoo tail (replace if same minute).
+        const intraday = Array.isArray(base.intraday) ? base.intraday.slice() : [];
+        const d = new Date((m.asOf + 8 * 3600) * 1000);   // MIS asOf → Taipei wall clock
+        const p2 = (n) => String(n).padStart(2, "0");
+        const tStr = d.getUTCFullYear() + "-" + p2(d.getUTCMonth() + 1) + "-" + p2(d.getUTCDate()) +
+          "T" + p2(d.getUTCHours()) + ":" + p2(d.getUTCMinutes());
+        if (intraday.length && intraday[intraday.length - 1].t === tStr) intraday[intraday.length - 1].c = m.price;
+        else intraday.push({ t: tStr, c: m.price });
+        quotes[s] = {
+          ok: true,
+          price: m.price,
+          prevClose: prev,
+          change,
+          changePct,
+          session: "regular",
+          asOf: m.asOf,        // MIS quote time (~seconds old) → dashboard labels the price's REAL time
+          intraday,
+          src: "twse-mis",     // provenance (debugging)
+        };
+      }
+    }
+
     for (const s of dropped) quotes[s] = { ok: false, error: "symbol cap exceeded (" + MAX_SYMBOLS + ")" };
     return new Response(
       JSON.stringify({ ok: true, ts: Date.now(), dropped: dropped.length, quotes }),

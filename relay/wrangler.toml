@@ -1,3 +1,10 @@
 name = "abraham-quotes"
 main = "yahoo-relay-worker.js"
 compatibility_date = "2024-11-01"
+
+# /prefs cross-device settings sync (pinned cards / order / tab). This binding was
+# originally added via the CF dashboard; declaring it here so `wrangler deploy` preserves
+# it instead of stripping it (would silently drop settings-sync to per-device localStorage).
+[[kv_namespaces]]
+binding = "PREFS"
+id = "c51aa9f8bad64715ab312d1c87d6f51d"

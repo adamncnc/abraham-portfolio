@@ -556,7 +556,16 @@ function freshnessBadge(item) {
   const hhmm = (ms) => new Date(ms).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
   if (item._live === true) {
     const lbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "即時";
-    return `<span class="freshness fresh" title="即時報價（含盤前/盤後）">🟢 ${lbl} ${item._liveTs ? hhmm(item._liveTs) : ""}</span>`;
+    // Show the PRICE's own time (quote asOf), not our fetch time — so a delayed source is
+    // honest instead of masquerading as live. (Adam 2026-07-06: 應標『該價格是什麼時間』)
+    const qts = item._quoteTs || item._liveTs;
+    const delayMin = item._quoteTs && item._liveTs ? Math.round((item._liveTs - item._quoteTs) / 60000) : 0;
+    if (delayMin >= 3) {
+      // Don't call a lagged quote 「即時」— that's the very thing Adam flagged. Use 報價.
+      const dlbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "報價";
+      return `<span class="freshness delayed" title="這是該價格本身的成交時間；資料源延遲約 ${delayMin} 分鐘（非即時）">🟡 ${dlbl} ${hhmm(qts)}·慢${delayMin}分</span>`;
+    }
+    return `<span class="freshness fresh" title="報價成交時間（幾乎即時）">🟢 ${lbl} ${hhmm(qts)}</span>`;
   }
   // Carried-forward stale (pipeline kept last-known-good) is the stronger signal —
   // check it BEFORE the generic live-miss so wording stays exact. (Codex R2 P4.)
@@ -1082,9 +1091,16 @@ function renderHoldings(snap) {
       return `<span class="pos-sum-pnl ${cls}">${escapeHtml(cur)} 未實現 ${v >= 0 ? "+" : ""}${fmtCurrency(v, cur, 0)}</span>`;
     });
     let stamp = "";
-    if (snap._liveTs) {
-      const t = new Date(snap._liveTs).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
-      stamp = `<span class="pos-sum-asof pos-sum-live">🟢 盤中即時 ${t} (Taipei) · 距停損隨價跳動</span>`;
+    if (snap._liveTs || snap._quoteTs) {
+      // Stamp the PRICE's own time (quote asOf), not the fetch time — honest about any lag.
+      const qts = snap._quoteTs || snap._liveTs;
+      const t = new Date(qts).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
+      const delayMin = snap._quoteTs && snap._liveTs ? Math.round((snap._liveTs - snap._quoteTs) / 60000) : 0;
+      if (delayMin >= 3) {
+        stamp = `<span class="pos-sum-asof pos-sum-delayed">🟡 報價 ${t} (Taipei) · 資料源延遲約 ${delayMin} 分 · 非即時</span>`;
+      } else {
+        stamp = `<span class="pos-sum-asof pos-sum-live">🟢 盤中即時 ${t} (Taipei) · 距停損隨價跳動</span>`;
+      }
     } else if (snap.timestamp_utc) {
       const asof = new Date(snap.timestamp_utc).toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
       stamp = `<span class="pos-sum-asof">🕒 收盤價 ${asof} (Taipei) · 停損為日線 ATR</span>`;
@@ -1122,12 +1138,17 @@ function recomputeHoldingLive(h, livePrice) {
 function applyLiveToHoldings(quotes, liveTs) {
   if (!HOLDINGS_SNAP || !((HOLDINGS_SNAP.holdings || []).length)) return;
   let anyLive = false;
+  let quoteTs = null;   // newest quote asOf among held symbols (ms) → stamp shows the price's real time
   const holdings = HOLDINGS_SNAP.holdings.map((h) => {
     const q = quotes[h.symbol];
-    if (q && q.ok && q.price != null) { anyLive = true; return recomputeHoldingLive(h, q.price); }
+    if (q && q.ok && q.price != null) {
+      anyLive = true;
+      if (q.asOf) { const ms = q.asOf * 1000; if (!quoteTs || ms > quoteTs) quoteTs = ms; }
+      return recomputeHoldingLive(h, q.price);
+    }
     return h;
   });
-  renderHoldings({ ...HOLDINGS_SNAP, holdings, _liveTs: anyLive ? liveTs : null });
+  renderHoldings({ ...HOLDINGS_SNAP, holdings, _liveTs: anyLive ? liveTs : null, _quoteTs: anyLive ? quoteTs : null });
 }
 
 function posRow(label, val, extraCls = "") {
@@ -1253,7 +1274,8 @@ async function liveRefresh() {
           next.data.history = mergeLiveIntoHistory(next.data.history, q);
         }
         next._live = true;        // fresh live quote applied → green per-card badge
-        next._liveTs = liveTs;
+        next._liveTs = liveTs;    // when WE fetched (for delay calc)
+        next._quoteTs = q.asOf ? q.asOf * 1000 : null;  // when the PRICE is actually from (Adam 2026-07-06)
         next._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
         delete next.data.stale;   // a fresh quote supersedes any carried-forward stale flag
       } else {
@@ -1310,6 +1332,7 @@ async function refreshOneCard(section, id, symbol, btn) {
     item.status = "ok";
     item._live = true;             // single-card live quote applied → green badge
     item._liveTs = Date.now();
+    item._quoteTs = q.asOf ? q.asOf * 1000 : null;  // the price's own time (Adam 2026-07-06)
     item._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
     if (item.data) delete item.data.stale;  // a fresh quote supersedes any carried-forward stale data
     const node = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
