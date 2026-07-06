@@ -196,7 +196,10 @@ async function fetchMisBatch(twSymbols) {
       const yf = bySym[code];
       if (!yf) continue;
       const asOf = a.tlong ? Math.floor(parseInt(a.tlong, 10) / 1000) : null;
-      if (!asOf || nowS - asOf > 600) continue;   // stale (off-hours) → let Yahoo close stand
+      // MIS is the PRIMARY TW source whenever it has today's quote — live during 09:00-13:30,
+      // and the frozen official close after 13:30 (MIS keeps returning z=close, asOf=13:30).
+      // Only >6h old (a previous session's leftover) is skipped so Yahoo's close can stand.
+      if (!asOf || nowS - asOf > 6 * 3600) continue;
       // Price: last trade z when present; MIS blanks z to "-" between matches, so fall back
       // to the best bid/ask midpoint (spread is 1 tick for liquid names → ≈ last).
       let price = misNum(a.z);
@@ -207,7 +210,10 @@ async function fetchMisBatch(twSymbols) {
         else price = bid != null ? bid : ask;
       }
       if (price == null) continue;
-      out[yf] = { price, prevClose: misNum(a.y), asOf };
+      // fresh (<5min) = live trading; older-but-same-session = the official closing print →
+      // frontend labels "closed" as 收盤 (not 慢N分). (Adam 2026-07-06: 收盤後別假裝慢N分)
+      const session = nowS - asOf <= 300 ? "regular" : "closed";
+      out[yf] = { price, prevClose: misNum(a.y), asOf, session };
     }
   } catch (e) { /* MIS unreachable → caller keeps the Yahoo quote (honest-but-delayed) */ }
   return out;
@@ -271,8 +277,8 @@ export default {
           prevClose: prev,
           change,
           changePct,
-          session: "regular",
-          asOf: m.asOf,        // MIS quote time (~seconds old) → dashboard labels the price's REAL time
+          session: m.session || "regular",   // "closed" post-13:30 → frontend shows 🕒 收盤, not 慢N分
+          asOf: m.asOf,        // MIS quote time (~seconds old live / 13:30 close) → labels the price's REAL time
           intraday,
           src: "twse-mis",     // provenance (debugging)
         };

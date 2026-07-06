@@ -555,10 +555,15 @@ function freshnessBadge(item) {
   const data = item.data || {};
   const hhmm = (ms) => new Date(ms).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
   if (item._live === true) {
-    const lbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "即時";
     // Show the PRICE's own time (quote asOf), not our fetch time — so a delayed source is
     // honest instead of masquerading as live. (Adam 2026-07-06: 應標『該價格是什麼時間』)
     const qts = item._quoteTs || item._liveTs;
+    // Market closed: this IS the official close (證交所), not "delayed" data → 收盤, never 慢N分.
+    // (Adam 2026-07-06: 收盤後別退回 Yahoo 舊價 + 假裝慢N分)
+    if (item._session === "closed") {
+      return `<span class="freshness snap" title="今日收盤價（證交所）；市場已收盤，非即時">🕒 收盤 ${hhmm(qts)}</span>`;
+    }
+    const lbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "即時";
     const delayMin = item._quoteTs && item._liveTs ? Math.round((item._liveTs - item._quoteTs) / 60000) : 0;
     if (delayMin >= 3) {
       // Don't call a lagged quote 「即時」— that's the very thing Adam flagged. Use 報價.
@@ -1096,7 +1101,10 @@ function renderHoldings(snap) {
       const qts = snap._quoteTs || snap._liveTs;
       const t = new Date(qts).toLocaleTimeString("zh-TW", { timeZone: "Asia/Taipei", hour12: false }).slice(0, 5);
       const delayMin = snap._quoteTs && snap._liveTs ? Math.round((snap._liveTs - snap._quoteTs) / 60000) : 0;
-      if (delayMin >= 3) {
+      if (snap._session === "closed") {
+        // Market closed → official close (證交所). 距停損 is off the daily ATR, computed on the close.
+        stamp = `<span class="pos-sum-asof">🕒 收盤 ${t} (Taipei) · 停損為日線 ATR · 已收盤</span>`;
+      } else if (delayMin >= 3) {
         stamp = `<span class="pos-sum-asof pos-sum-delayed">🟡 報價 ${t} (Taipei) · 資料源延遲約 ${delayMin} 分 · 非即時</span>`;
       } else {
         stamp = `<span class="pos-sum-asof pos-sum-live">🟢 盤中即時 ${t} (Taipei) · 距停損隨價跳動</span>`;
@@ -1138,17 +1146,18 @@ function recomputeHoldingLive(h, livePrice) {
 function applyLiveToHoldings(quotes, liveTs) {
   if (!HOLDINGS_SNAP || !((HOLDINGS_SNAP.holdings || []).length)) return;
   let anyLive = false;
-  let quoteTs = null;   // newest quote asOf among held symbols (ms) → stamp shows the price's real time
+  let quoteTs = null;        // newest quote asOf among held symbols (ms) → stamp shows the price's real time
+  let quoteSession = null;   // session of that newest quote ("regular"/"closed") → 收盤 vs 即時 stamp
   const holdings = HOLDINGS_SNAP.holdings.map((h) => {
     const q = quotes[h.symbol];
     if (q && q.ok && q.price != null) {
       anyLive = true;
-      if (q.asOf) { const ms = q.asOf * 1000; if (!quoteTs || ms > quoteTs) quoteTs = ms; }
+      if (q.asOf) { const ms = q.asOf * 1000; if (!quoteTs || ms > quoteTs) { quoteTs = ms; quoteSession = q.session || null; } }
       return recomputeHoldingLive(h, q.price);
     }
     return h;
   });
-  renderHoldings({ ...HOLDINGS_SNAP, holdings, _liveTs: anyLive ? liveTs : null, _quoteTs: anyLive ? quoteTs : null });
+  renderHoldings({ ...HOLDINGS_SNAP, holdings, _liveTs: anyLive ? liveTs : null, _quoteTs: anyLive ? quoteTs : null, _session: anyLive ? quoteSession : null });
 }
 
 function posRow(label, val, extraCls = "") {
