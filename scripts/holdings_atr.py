@@ -247,7 +247,11 @@ def main() -> int:
         pass
 
     ap = argparse.ArgumentParser()
-    ap.add_argument("--config", default=str(ROOT / "config" / "holdings.json"))
+    # ATR holdings live in their OWN config, separate from config/holdings.json
+    # (which fetch_prices.py reads into latest.json). Keeping them apart prevents a
+    # held+watched stock from rendering twice — once in a market tab, once in the
+    # 即時持倉 tab (2026-07-06 欣興 duplicate fix).
+    ap.add_argument("--config", default=str(ROOT / "config" / "atr-holdings.json"))
     ap.add_argument("--out", default=str(ROOT / "docs" / "data" / "holdings.json"))
     ap.add_argument("--state", default=str(ROOT / "data" / "holdings-atr-state.json"))
     args = ap.parse_args()

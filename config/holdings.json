@@ -1,6 +1,6 @@
 {
   "schema_version": "2.0",
-  "description": "即時持倉 + ATR 移動停利分頁的資料來源 (Adam 2026-07-06 指令建立)。scripts/holdings_atr.py 讀這裡 → 算每檔 ATR14/20 + 買進後最高價 + 棘輪移動停損 + 損益 + 分批鎖利點 → 寫 docs/data/holdings.json 給第四分頁。holdings 為空時分頁顯示引導文案。Adam 提供實際持倉後填入下面陣列。",
+  "description": "⚠️ 此檔為 fetch_prices.py → latest.json 的持倉來源，現**刻意留空**。實際 ATR 持倉已改放 config/atr-holdings.json (holdings_atr.py 讀)，兩檔分家避免同股票在『台股分頁』與『即時持倉分頁』重複顯示 (2026-07-06 修 欣興重複 bug)。要加持倉請改 config/atr-holdings.json，不要動這裡。",
   "_field_guide": {
     "id": "唯一代號 (台股用股號如 2308，美股用小寫 ticker 如 nbis)",
     "type": "tw_stock | us_stock",
@@ -14,7 +14,5 @@
     "atr_period": "選填 — 停損用 ATR 週期 14 或 20 (預設14)",
     "half_locked": "選填 — 已分批鎖利過設 true，就不再重複提示 +50% 保本"
   },
-  "holdings": [
-    {"id":"3037","type":"tw_stock","symbol":"3037.TW","name":"欣興","currency":"TWD","shares":35,"cost_basis":969,"entry_date":null,"note":"Adam 2026-07-06 亮點App庫存截圖(35股零股/均價969/市值33915)；entry_date 待補 → 現用近60日高當『買進後最高』fallback；P&L 用成交均價不含手續費"}
-  ]
+  "holdings": []
 }

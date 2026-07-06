@@ -931,7 +931,9 @@ function tabForItem(item) {
 
 function bucketSnapshot(snapshot) {
   const tw = [], us = [], idx = [];
-  for (const item of [...(snapshot.holdings || []), ...(snapshot.watchlist || [])]) {
+  // Holdings live in their own 即時持倉 tab now — do NOT also bucket them into the
+  // market tabs, or a held+watched stock shows twice (2026-07-06 欣興 duplicate fix).
+  for (const item of (snapshot.watchlist || [])) {
     const tab = tabForItem(item);
     (tab === "tw" ? tw : tab === "idx" ? idx : us).push(item);
   }
