@@ -14,5 +14,7 @@
     "atr_period": "選填 — 停損用 ATR 週期 14 或 20 (預設14)",
     "half_locked": "選填 — 已分批鎖利過設 true，就不再重複提示 +50% 保本"
   },
-  "holdings": []
+  "holdings": [
+    {"id":"3037","type":"tw_stock","symbol":"3037.TW","name":"欣興","currency":"TWD","shares":35,"cost_basis":969,"entry_date":null,"note":"Adam 2026-07-06 亮點App庫存截圖(35股零股/均價969/市值33915)；entry_date 待補 → 現用近60日高當『買進後最高』fallback；P&L 用成交均價不含手續費"}
+  ]
 }
