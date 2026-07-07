@@ -613,6 +613,28 @@
       "notes": "AI 主權資料中心/Neocloud(SharonAI Holdings, 美股NASDAQ NCM, USD); 7/5 Serenity 點名(Anthropic 澳洲 1.4GW/$21.6B 外流文件+SharonAI/IREN 建澳洲主權 DC)Adam 明示加入; ⚠️⚠️極投機 de-SPAC 小型故事股=今年2月借殼上市(前 Roth CH/Novus SpinCo)/25員工/營收僅約$150萬但市值$16億(P/S~1000x)/虧損(EPS-3.61)/",
       "entry_zone_lo": 46,
       "entry_zone_hi": 60
+    },
+    {
+      "id": "1519",
+      "type": "tw_stock",
+      "symbol": "1519.TW",
+      "name": "華城",
+      "currency": "TWD",
+      "theme": "重電/電網變壓器龍頭(美國電網受惠最純台廠 Fortun",
+      "notes": "重電/電網變壓器龍頭(美國電網受惠最純台廠 Fortune Electric, TWSE); 7/7 Adam「華城 士電 兩檔加入清單」明示加入(源自美國電網吃緊→台廠訂單熱潮深挖). 台灣首張Stargate變壓器單~NT$20億+累計AI/美國單>NT$120億+外銷占比今年~50%→2027拚55%+訂單能見度2028. 體質好=毛利42%/beta0.97低波動/低負債D/E30. ⚠️月營收減速(2026 1月+6/3月+3/4月+6/5月-9.3%轉負; 專案型",
+      "entry_zone_lo": 680,
+      "entry_zone_hi": 750
+    },
+    {
+      "id": "1503",
+      "type": "tw_stock",
+      "symbol": "1503.TW",
+      "name": "士電",
+      "currency": "TWD",
+      "theme": "重電/變壓器+多角化集團(士林電機 Shihlin El",
+      "notes": "重電/變壓器+多角化集團(士林電機 Shihlin Electric, TWSE; 汽車零件/EV動力/機車/開關/工控/家電+重電變壓器); 7/7 Adam「華城 士電 兩檔加入清單」明示加入. 北美AI資料中心變壓器訂單確認+過UL認證+3月起新單漲價15-20%(需求強能漲價)+能見度2029-30. ⚠️多角化集團=重電變壓器只是其中一段, 美國變壓器是成長引擎非全部; 體質中等(毛利21%/ROE9.5%比華城低)+僅2分析師cover(薄). 月營收比華城健康(",
+      "entry_zone_lo": 200,
+      "entry_zone_hi": 220
     }
   ]
 }
