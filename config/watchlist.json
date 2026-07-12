@@ -635,6 +635,17 @@
       "notes": "重電/變壓器+多角化集團(士林電機 Shihlin Electric, TWSE; 汽車零件/EV動力/機車/開關/工控/家電+重電變壓器); 7/7 Adam「華城 士電 兩檔加入清單」明示加入. 北美AI資料中心變壓器訂單確認+過UL認證+3月起新單漲價15-20%(需求強能漲價)+能見度2029-30. ⚠️多角化集團=重電變壓器只是其中一段, 美國變壓器是成長引擎非全部; 體質中等(毛利21%/ROE9.5%比華城低)+僅2分析師cover(薄). 月營收比華城健康(",
       "entry_zone_lo": 200,
       "entry_zone_hi": 220
+    },
+    {
+      "id": "avgo",
+      "type": "us_stock",
+      "symbol": "AVGO",
+      "name": "博通Broadcom",
+      "currency": "USD",
+      "theme": "客製 AI ASIC 軍火商(Meta Iris 9月量",
+      "notes": "客製 AI ASIC 軍火商(Meta Iris 9月量產/Apple Baltra 長約 2031/TPU)+AI 網通+VMware; Trend Core 本週 3 報告核心受益位→Adam 7/13 明示加入; 品質頂(毛利76%/ROE37%/FCF $27B) BUT 債 $64.9B(VMware); 2026FY PE 34.4x(勿用 trailing 66x 攤銷失真/勿用 fwd 20.6x 明年假便宜); 45 分析師 strong_buy mean ",
+      "entry_zone_lo": 357,
+      "entry_zone_hi": 372
     }
   ]
 }
