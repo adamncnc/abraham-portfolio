@@ -541,3 +541,23 @@ body {
 .pos-formula { font-size: 11px; color: var(--text-dim); font-family: "SF Mono", ui-monospace, Consolas, monospace; margin-bottom: 8px; }
 .pos-chip-note { font-size: 11px; color: var(--text-dim); background: rgba(255,255,255,0.03); border-radius: 6px; padding: 6px 8px; margin-bottom: 8px; }
 .pos-foot { font-size: 11px; color: var(--text-dim); border-top: 1px solid var(--border); padding-top: 8px; }
+
+/* ===== 模擬倉 分頁 (Adam 2026-07-13: 第五分頁, 虛擬 100 萬 TWD 實驗) =====
+   Tables reuse the dark card palette; 損益/報酬/動作 colours come from the existing
+   .up(漲紅)/.down(跌綠)/.flat classes — 漲紅跌綠鐵則, no new price colours here. */
+.sim-header { flex-wrap: wrap; gap: 8px; }
+.sim-block { margin-bottom: 24px; }
+.sim-block-title { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+.sim-table-wrap { overflow-x: auto; background: var(--card); border: 1px solid var(--border); border-radius: 12px; -webkit-overflow-scrolling: touch; }
+.sim-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 620px; }
+.sim-table th { text-align: left; padding: 10px 12px; color: var(--text-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid var(--border); white-space: nowrap; }
+.sim-table td { padding: 9px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: top; }
+.sim-table tbody tr:last-child td { border-bottom: none; }
+.sim-table tbody tr:hover td { background: rgba(255, 255, 255, 0.02); }
+.sim-table td.num, .sim-table th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.sim-sub { font-size: 11px; color: var(--text-dim); font-family: "SF Mono", ui-monospace, Consolas, monospace; }
+.sim-table td.sim-time { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.sim-reason { color: var(--text-dim); font-size: 12px; max-width: 340px; }
+.sim-empty { padding: 24px; text-align: center; color: var(--text-dim); font-size: 13px; }
+.sim-nav-wrap { position: relative; height: 180px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px; }
+.sim-nav-wrap.empty { display: flex; align-items: center; justify-content: center; color: var(--text-dim); font-size: 12px; }

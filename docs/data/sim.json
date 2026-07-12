@@ -1,0 +1,106 @@
+{
+  "portfolio": {
+    "experiment": "Adam 投資模擬器（2026-07-13 起）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T03:46:10+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "positions": [],
+    "pending_orders": [
+      {
+        "id": "ord-3017",
+        "placed_ts": "2026-07-13T03:46:55+08:00",
+        "ticker": "3017.TW",
+        "name": "奇鋐",
+        "side": "buy",
+        "budget_twd": 100000,
+        "band": [
+          2260,
+          2400
+        ],
+        "stop": 2150,
+        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+      },
+      {
+        "id": "ord-2345",
+        "placed_ts": "2026-07-13T03:46:55+08:00",
+        "ticker": "2345.TW",
+        "name": "智邦",
+        "side": "buy",
+        "budget_twd": 100000,
+        "band": [
+          2280,
+          2480
+        ],
+        "stop": 2170,
+        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+      },
+      {
+        "id": "ord-3324",
+        "placed_ts": "2026-07-13T03:46:55+08:00",
+        "ticker": "3324.TWO",
+        "name": "雙鴻",
+        "side": "buy",
+        "budget_twd": 50000,
+        "band": [
+          860,
+          925
+        ],
+        "stop": 845,
+        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+      },
+      {
+        "id": "ord-3037",
+        "placed_ts": "2026-07-13T03:46:55+08:00",
+        "ticker": "3037.TW",
+        "name": "欣興Unimicron",
+        "side": "buy",
+        "budget_twd": 100000,
+        "band": [
+          850,
+          960
+        ],
+        "stop": 760,
+        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+      },
+      {
+        "id": "ord-1519",
+        "placed_ts": "2026-07-13T03:46:55+08:00",
+        "ticker": "1519.TW",
+        "name": "華城",
+        "side": "buy",
+        "budget_twd": 100000,
+        "band": [
+          680,
+          750
+        ],
+        "stop": 625,
+        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+      },
+      {
+        "id": "ord-1503",
+        "placed_ts": "2026-07-13T03:46:55+08:00",
+        "ticker": "1503.TW",
+        "name": "士電",
+        "side": "buy",
+        "budget_twd": 100000,
+        "band": [
+          200,
+          220
+        ],
+        "stop": 185,
+        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+      }
+    ],
+    "trades": [],
+    "benchmarks_inception": {}
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-12T19:55:29.854041+00:00"
+}

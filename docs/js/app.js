@@ -7,6 +7,10 @@ const DATA_URL = "./data/latest.json";
 // scripts/holdings_atr.py; fetched independently so a holdings error never breaks
 // the main 3 market tabs.
 const HOLDINGS_URL = "./data/holdings.json";
+// 模擬倉分頁 (Adam 2026-07-13) — 虛擬 100 萬 TWD 實驗帳本. Written locally by
+// ~/Abraham/abraham-portfolio-sync.py from ~/Abraham/sim-portfolio/ and committed;
+// fetched independently (same isolation pattern as holdings.json).
+const SIM_URL = "./data/sim.json";
 
 // Live-quote relay (Cloudflare Worker — see relay/yahoo-relay-worker.js).
 // Set to your workers.dev URL to enable the 抓即時 button's live fetch.
@@ -21,6 +25,7 @@ let PREFS_SYNCING = true;                  // suppress uploads during initial lo
 let _prefsPushTimer = null;
 let CURRENT_SNAPSHOT = null;
 let HOLDINGS_SNAP = null;   // base 即時持倉 data from holdings.json; live ticks recompute 距停損 off this (never mutated)
+let SIM_SNAP = null;        // 模擬倉 data from sim.json; re-rendered after each live tick so 現價 join stays fresh
 let LIVE_MODE = false;  // set true after a successful live pull; scheduler resets it to false off-hours so auto-refresh reverts to snapshot mode
 let REFRESH_INFLIGHT = false;  // guards liveRefresh / refreshOneCard against overlap (auto-refresh + manual)
 // Relay caps each request's symbol count, so one request for the whole list silently
@@ -1040,6 +1045,7 @@ async function loadAndRender() {
     CURRENT_SNAPSHOT = snapshot;
     renderSnapshot(snapshot);
     loadHoldings();  // 即時持倉分頁 — independent fetch, own error handling
+    loadSim();       // 模擬倉分頁 — independent fetch, own error handling
   } catch (err) {
     console.error("Failed to load data:", err);
     document.getElementById("timestamp").textContent = `❌ 載入失敗：${err.message}`;
@@ -1221,6 +1227,267 @@ function buildHoldingCard(h) {
   </div>`;
 }
 
+// ========== 模擬倉 (Adam 2026-07-13, 第五分頁) ==========
+// Data source: docs/data/sim.json = {portfolio, nav_log, generated_at}, merged from
+// ~/Abraham/sim-portfolio/ by abraham-portfolio-sync.py. 虛擬 100 萬 TWD 實驗:
+// 帳戶摘要 + 持倉 + 掛單 + 交易紀錄(含 skip, 透明度優先) + 淨值曲線.
+// 現價 join: positions match latest.json symbols via CURRENT_SNAPSHOT (live ticks
+// update it, and liveRefresh re-calls renderSim so 市值/損益 follow the live price).
+function loadSim() {
+  fetch(SIM_URL + "?t=" + Date.now(), { cache: "no-store" })
+    .then((res) => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
+    .then((sim) => { SIM_SNAP = sim; renderSim(sim); })
+    .catch((err) => {
+      // A sim failure must never break the other 4 tabs — just note it in-panel.
+      console.warn("sim load failed:", err);
+      setText("tab-count-sim", "–");
+      setText("sim-count", "–");
+      const posEl = document.getElementById("sim-positions");
+      if (posEl) posEl.innerHTML = `<div class="loading">模擬倉資料尚未產生<br><small>${escapeHtml(err.message)}</small></div>`;
+      ["sim-orders", "sim-trades"].forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = `<div class="sim-empty">–</div>`;
+      });
+    });
+}
+
+// symbol -> live/snapshot price from the market tabs' data (watchlist/holdings/indices).
+// Sim tickers use the same yfinance symbols (3017.TW / 3324.TWO), so a direct key match.
+function simPriceMap() {
+  const m = {};
+  const snap = CURRENT_SNAPSHOT || {};
+  for (const it of [...(snap.watchlist || []), ...(snap.holdings || []), ...(snap.indices || [])]) {
+    if (it.symbol && it.data && it.data.price != null) m[it.symbol] = it.data.price;
+  }
+  return m;
+}
+
+function simBandText(band) {
+  if (Array.isArray(band) && band.length === 2) return `${fmtNum(band[0], 0)}–${fmtNum(band[1], 0)}`;
+  return "–";
+}
+
+// "2026-07-13T03:46:55+08:00" -> "07-13 03:46" (Taipei)
+function fmtSimTs(ts) {
+  if (!ts) return "–";
+  const d = new Date(ts);
+  if (isNaN(d)) return escapeHtml(String(ts));
+  return d.toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false, month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+}
+
+function simTableHtml(headers, rows, emptyMsg) {
+  if (!rows.length) return `<div class="sim-empty">${escapeHtml(emptyMsg)}</div>`;
+  const thead = headers.map(([label, numCls]) => `<th${numCls ? ' class="num"' : ""}>${escapeHtml(label)}</th>`).join("");
+  return `<table class="sim-table"><thead><tr>${thead}</tr></thead><tbody>${rows.join("")}</tbody></table>`;
+}
+
+// 持倉表: 名稱/股數/成本價/現價(join latest.json 同 ticker; 沒有就顯示成本)/市值/損益%/認錯線/進場帶.
+// Position schema is defensive (ledger's positions[] is still empty as of 2026-07-13):
+// ticker/name/shares + cost under cost|avg_cost|cost_basis|avg_price, stop, band.
+function simPositionsHtml(positions, priceMap) {
+  const rows = positions.map((p) => {
+    const cost = p.cost ?? p.avg_cost ?? p.cost_basis ?? p.avg_price ?? null;
+    const live = priceMap[p.ticker];
+    const hasLive = live != null;
+    const px = hasLive ? live : cost;                    // 沒現價 -> 顯示成本 (標註)
+    const mv = px != null && p.shares != null ? px * p.shares : null;
+    const pnlPct = hasLive && cost ? ((live - cost) / cost) * 100 : null;
+    const pnlCls = changeClass(pnlPct);                  // 漲紅跌綠 via existing classes
+    const pxCell = hasLive
+      ? fmtNum(live, 2)
+      : (cost != null ? `<span class="flat" title="無現價，暫以成本價顯示">${fmtNum(cost, 2)}*</span>` : "–");
+    return `<tr>
+      <td><b>${escapeHtml(p.name || p.ticker || "–")}</b><br><span class="sim-sub">${escapeHtml(p.ticker || "")}</span></td>
+      <td class="num">${fmtNum(p.shares, 0)}</td>
+      <td class="num">${cost != null ? fmtNum(cost, 2) : "–"}</td>
+      <td class="num">${pxCell}</td>
+      <td class="num">${mv != null ? fmtCurrency(mv, "TWD", 0) : "–"}</td>
+      <td class="num ${pnlCls}">${pnlPct != null ? fmtPct(pnlPct) : "–"}</td>
+      <td class="num">${p.stop != null ? fmtNum(p.stop, 0) : "–"}</td>
+      <td class="num">${simBandText(p.band)}</td>
+    </tr>`;
+  });
+  return simTableHtml(
+    [["名稱", 0], ["股數", 1], ["成本價", 1], ["現價", 1], ["市值", 1], ["損益%", 1], ["認錯線", 1], ["進場帶", 1]],
+    rows,
+    "尚無持倉 — 等掛單成交後顯示"
+  );
+}
+
+// 掛單表: 名稱/預算/進場帶/認錯線/掛單時間/狀態(pending).
+function simOrdersHtml(orders) {
+  const rows = orders.map((o) => `<tr>
+      <td><b>${escapeHtml(o.name || o.ticker || "–")}</b><br><span class="sim-sub">${escapeHtml(o.ticker || "")}</span></td>
+      <td class="num">${o.budget_twd != null ? fmtCurrency(o.budget_twd, "TWD", 0) : "–"}</td>
+      <td class="num">${simBandText(o.band)}</td>
+      <td class="num">${o.stop != null ? fmtNum(o.stop, 0) : "–"}</td>
+      <td class="num">${fmtSimTs(o.placed_ts)}</td>
+      <td><span class="badge-mid">⏳ pending</span></td>
+    </tr>`);
+  return simTableHtml(
+    [["名稱", 0], ["預算", 1], ["進場帶", 1], ["認錯線", 1], ["掛單時間", 1], ["狀態", 0]],
+    rows,
+    "無掛單"
+  );
+}
+
+// 交易紀錄表: 時間/動作/名稱/股數/價格/費用/理由 — skip_* rows顯示照舊 (透明度是重點).
+function simTradesHtml(trades) {
+  const actionCell = (a) => {
+    const act = String(a || "–");
+    if (act === "buy") return `<span class="up">買進</span>`;    // 買 = 紅 (台式, existing .up)
+    if (act === "sell") return `<span class="down">賣出</span>`; // 賣 = 綠 (existing .down)
+    return `<span class="flat">${escapeHtml(act)}</span>`;       // skip_* etc. 原字照登
+  };
+  const rows = trades.map((t) => `<tr>
+      <td class="sim-time">${fmtSimTs(t.ts || t.time)}</td>
+      <td>${actionCell(t.action || t.side)}</td>
+      <td><b>${escapeHtml(t.name || t.ticker || "–")}</b></td>
+      <td class="num">${t.shares != null ? fmtNum(t.shares, 0) : "–"}</td>
+      <td class="num">${t.price != null ? fmtNum(t.price, 2) : "–"}</td>
+      <td class="num">${(t.fee ?? t.fee_twd) != null ? fmtNum(t.fee ?? t.fee_twd, 0) : "–"}</td>
+      <td class="sim-reason">${escapeHtml(t.reason || "")}</td>
+    </tr>`);
+  return simTableHtml(
+    [["時間", 0], ["動作", 0], ["名稱", 0], ["股數", 1], ["價格", 1], ["費用", 1], ["理由", 0]],
+    rows,
+    "尚無交易紀錄"
+  );
+}
+
+// 淨值曲線 — Chart.js is already loaded from <head> for the market-tab trend charts,
+// so reuse it (no new library). <2 points -> placeholder text (v1 表格為主).
+function renderSimNavChart(navLog) {
+  const wrap = document.getElementById("sim-nav-wrap");
+  if (!wrap) return;
+  const cid = "chart-sim-nav";
+  const existing = CHART_INSTANCES.get(cid);
+  if (existing) { try { existing.destroy(); } catch (e) {} CHART_INSTANCES.delete(cid); }
+  const pts = (navLog || []).filter((r) => r && r.nav_twd != null);
+  if (pts.length < 2 || typeof Chart === "undefined") {
+    wrap.classList.add("empty");
+    wrap.innerHTML = "<span>（淨值紀錄滿 2 筆後顯示曲線）</span>";
+    return;
+  }
+  wrap.classList.remove("empty");
+  if (!document.getElementById(cid)) wrap.innerHTML = `<canvas id="${cid}"></canvas>`;
+  const navs = pts.map((r) => r.nav_twd);
+  // 漲紅跌綠 via the single source of truth — line colour = 期末 vs 期初淨值.
+  const delta = navs[navs.length - 1] - navs[0];
+  const chart = new Chart(document.getElementById(cid), {
+    type: "line",
+    data: {
+      labels: pts.map((r) => r.ts),
+      datasets: [{
+        label: "淨值",
+        data: navs,
+        borderColor: trendColor(delta),
+        backgroundColor: trendFill(delta),
+        borderWidth: 1.8,
+        fill: true,
+        tension: 0.15,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        pointHoverBackgroundColor: trendColor(delta),
+        pointHoverBorderColor: "#0f1419",
+        pointHoverBorderWidth: 2,
+      }],
+    },
+    plugins: [crosshairPlugin],
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: "index", intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          displayColors: false,
+          backgroundColor: "rgba(15, 20, 25, 0.95)",
+          titleColor: "#8b95a7",
+          bodyColor: "#e4e8f0",
+          borderColor: "#2d3548",
+          borderWidth: 1,
+          padding: 8,
+          callbacks: {
+            title: (items) => fmtChartTs(items[0]?.label),
+            label: (ctx) => `淨值 ${fmtCurrency(ctx.parsed.y, "TWD", 0)}`,
+          },
+        },
+      },
+      scales: { x: { display: false }, y: { display: false } },
+      animation: { duration: 200 },
+    },
+  });
+  CHART_INSTANCES.set(cid, chart);  // "chart-sim-" prefix -> activateTab("sim") auto-resizes it
+}
+
+function renderSim(sim) {
+  const pf = (sim && sim.portfolio) || {};
+  const navLog = Array.isArray(sim && sim.nav_log) ? sim.nav_log : [];
+  const positions = pf.positions || [];
+  const orders = pf.pending_orders || [];
+  const trades = pf.trades || [];
+
+  // --- 帳戶摘要卡 ---
+  const initial = pf.initial_capital_twd ?? null;
+  const last = navLog.length ? navLog[navLog.length - 1] : null;
+  const nav = last ? last.nav_twd : initial;             // 淨值: nav_log 最後一筆, 沒有就 initial
+  const retPct = last
+    ? last.return_pct
+    : (nav != null && initial ? ((nav - initial) / initial) * 100 : null);
+  // bench_return_pct: 同期 0050/SPY 報酬 — schema 可能是 {ticker: pct} 或單一數字, 都吃.
+  let benchText = "尚無基準紀錄";
+  const bench = last ? last.bench_return_pct : null;
+  if (bench != null) {
+    benchText = typeof bench === "object"
+      ? Object.entries(bench).map(([k, v]) => `${escapeHtml(k)} ${fmtPct(v)}`).join(" · ")
+      : `基準 ${fmtPct(bench)}`;
+  }
+  const sumEl = document.getElementById("sim-summary");
+  if (sumEl) {
+    sumEl.innerHTML = `
+      <div class="summary-card">
+        <div class="summary-label">💰 淨值</div>
+        <div class="summary-value">${nav != null ? fmtCurrency(nav, "TWD", 0) : "–"}</div>
+        <div class="summary-sub">起始 ${initial != null ? fmtCurrency(initial, "TWD", 0) : "–"} · ${escapeHtml(pf.inception_ts ? "自 " + fmtSimTs(pf.inception_ts) : "")}</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">📊 報酬</div>
+        <div class="summary-value ${changeClass(retPct)}">${retPct != null ? fmtPct(retPct) : "–"}</div>
+        <div class="summary-sub">對照同期：${benchText}</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">💵 現金</div>
+        <div class="summary-value">${pf.cash_twd != null ? fmtCurrency(pf.cash_twd, "TWD", 0) : "–"}</div>
+        <div class="summary-sub">可動用資金</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">📦 開倉數</div>
+        <div class="summary-value">${positions.length}</div>
+        <div class="summary-sub">掛單 ${orders.length} 筆 · 交易 ${trades.length} 筆</div>
+      </div>`;
+  }
+
+  // --- counts ---
+  setText("tab-count-sim", positions.length + orders.length || "–");
+  setText("sim-count", `持倉 ${positions.length} · 掛單 ${orders.length}`);
+  setText("sim-pos-count", `${positions.length} 檔`);
+  setText("sim-ord-count", `${orders.length} 筆`);
+  setText("sim-trade-count", `${trades.length} 筆`);
+
+  // --- 三張表 ---
+  const priceMap = simPriceMap();
+  const posEl = document.getElementById("sim-positions");
+  if (posEl) posEl.innerHTML = simPositionsHtml(positions, priceMap);
+  const ordEl = document.getElementById("sim-orders");
+  if (ordEl) ordEl.innerHTML = simOrdersHtml(orders);
+  const trdEl = document.getElementById("sim-trades");
+  if (trdEl) trdEl.innerHTML = simTradesHtml(trades);
+
+  // --- 淨值曲線 ---
+  renderSimNavChart(navLog);
+}
+
 // Fetch live quotes in batches of <= LIVE_BATCH_SIZE and merge. The relay caps
 // symbols per request, so sending the whole list in one shot silently dropped the
 // tail (the long-standing "a few symbols stuck on close price" bug, 2026-06-30).
@@ -1306,6 +1573,7 @@ async function liveRefresh() {
     CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
     renderSnapshot(live, { live: true, note });
     applyLiveToHoldings(quotes, liveTs);   // 即時持倉分頁: 距停損隨這批即時價重算
+    if (SIM_SNAP) renderSim(SIM_SNAP);     // 模擬倉分頁: 現價 join 吃這批即時價 + 重建被 renderSnapshot 銷毀的淨值圖
     LIVE_MODE = true;
   } catch (err) {
     console.error("Live refresh failed:", err);

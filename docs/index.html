@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abraham Portfolio Dashboard</title>
-<link rel="stylesheet" href="css/style.css?v=20260706">
+<link rel="stylesheet" href="css/style.css?v=20260713">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
@@ -36,6 +36,7 @@
   <button class="market-tab" data-tab="us">🇺🇸 美股 <span class="tab-count" id="tab-count-us">–</span></button>
   <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
   <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
+  <button class="market-tab" data-tab="sim">🧪 模擬倉 <span class="tab-count" id="tab-count-sim">–</span></button>
 </nav>
 
 <!-- 台股 -->
@@ -106,6 +107,32 @@
   <div class="pos-summary" id="pos-summary"></div>
   <div class="card-grid" id="pos-grid">
     <div class="loading">Loading…</div>
+  </div>
+</section>
+
+<!-- 模擬倉 (Adam 2026-07-13: 第五分頁，虛擬 100 萬 TWD 模擬實驗帳本；資料 = docs/data/sim.json，
+     由 ~/Abraham/abraham-portfolio-sync.py 從 ~/Abraham/sim-portfolio/ 帳本合併產生) -->
+<section class="tab-panel" id="panel-sim">
+  <div class="section-header sim-header">
+    <span class="section-count" id="sim-count">–</span>
+    <span class="pos-method-note">🧪 虛擬 100 萬 TWD 模擬實驗 · 帳本全紀錄（含略過 skip，透明度優先）· 分析 ≠ 買進建議</span>
+  </div>
+  <div class="portfolio-summary" id="sim-summary"></div>
+  <div class="sim-block">
+    <div class="sim-block-title">📈 淨值曲線</div>
+    <div class="sim-nav-wrap" id="sim-nav-wrap"><canvas id="chart-sim-nav"></canvas></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-positions"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-orders"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-trades"><div class="loading">Loading…</div></div>
   </div>
 </section>
 
