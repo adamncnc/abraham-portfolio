@@ -36,7 +36,8 @@
   <button class="market-tab" data-tab="us">🇺🇸 美股 <span class="tab-count" id="tab-count-us">–</span></button>
   <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
   <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
-  <button class="market-tab" data-tab="sim">🧪 模擬倉 <span class="tab-count" id="tab-count-sim">–</span></button>
+  <button class="market-tab" data-tab="sim">🧪 模擬倉1 <span class="tab-count" id="tab-count-sim">–</span></button>
+  <button class="market-tab" data-tab="sim2">📐 模擬倉2 <span class="tab-count" id="tab-count-sim2">–</span></button>
 </nav>
 
 <!-- 台股 -->
@@ -110,12 +111,12 @@
   </div>
 </section>
 
-<!-- 模擬倉 (Adam 2026-07-13: 第五分頁，虛擬 100 萬 TWD 模擬實驗帳本；資料 = docs/data/sim.json，
+<!-- 模擬倉1 (Adam 2026-07-13: 虛擬 100 萬 TWD 模擬實驗帳本；資料 = docs/data/sim.json，
      由 ~/Abraham/abraham-portfolio-sync.py 從 ~/Abraham/sim-portfolio/ 帳本合併產生) -->
 <section class="tab-panel" id="panel-sim">
   <div class="section-header sim-header">
     <span class="section-count" id="sim-count">–</span>
-    <span class="pos-method-note">🧪 虛擬 100 萬 TWD 模擬實驗 · 帳本全紀錄（含略過 skip，透明度優先）· 分析 ≠ 買進建議</span>
+    <span class="pos-method-note">🧪 模擬倉1 · 虛擬 100 萬 TWD · 基本面選股＋紀律執行 · 帳本全紀錄（含略過 skip，透明度優先）· 分析 ≠ 買進建議</span>
   </div>
   <div class="portfolio-summary" id="sim-summary"></div>
   <div class="sim-block">
@@ -133,6 +134,32 @@
   <div class="sim-block">
     <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-trade-count">–</span></div>
     <div class="sim-table-wrap" id="sim-trades"><div class="loading">Loading…</div></div>
+  </div>
+</section>
+
+<!-- 模擬倉2 (Adam 2026-07-13: 純技術分析帳本，不看基本面；資料 = docs/data/sim2.json，
+     來源 ~/Abraham/sim-portfolio-2/；同一套撮合規則與 DM 鐵則) -->
+<section class="tab-panel" id="panel-sim2">
+  <div class="section-header sim-header">
+    <span class="section-count" id="sim2-count">–</span>
+    <span class="pos-method-note">📐 模擬倉2 · 虛擬 100 萬 TWD · 純技術分析（多頭排列＋相對強度選股，不看基本面）· 帳本全紀錄 · 分析 ≠ 買進建議</span>
+  </div>
+  <div class="portfolio-summary" id="sim2-summary"></div>
+  <div class="sim-block">
+    <div class="sim-block-title">📈 淨值曲線</div>
+    <div class="sim-nav-wrap" id="sim2-nav-wrap"><canvas id="chart-sim2-nav"></canvas></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim2-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim2-positions"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim2-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim2-orders"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim2-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim2-trades"><div class="loading">Loading…</div></div>
   </div>
 </section>
 

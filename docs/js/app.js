@@ -10,7 +10,12 @@ const HOLDINGS_URL = "./data/holdings.json";
 // 模擬倉分頁 (Adam 2026-07-13) — 虛擬 100 萬 TWD 實驗帳本. Written locally by
 // ~/Abraham/abraham-portfolio-sync.py from ~/Abraham/sim-portfolio/ and committed;
 // fetched independently (same isolation pattern as holdings.json).
-const SIM_URL = "./data/sim.json";
+// 兩本模擬倉: sim=模擬倉1(基本面+紀律) / sim2=模擬倉2(純技術分析, Adam 2026-07-13 加開).
+// key 同時是 DOM id 前綴 (panel-sim2 / sim2-positions / chart-sim2-nav / tab-count-sim2).
+const SIM_BOOKS = [
+  { key: "sim", url: "./data/sim.json" },
+  { key: "sim2", url: "./data/sim2.json" },
+];
 
 // Live-quote relay (Cloudflare Worker — see relay/yahoo-relay-worker.js).
 // Set to your workers.dev URL to enable the 抓即時 button's live fetch.
@@ -25,7 +30,7 @@ let PREFS_SYNCING = true;                  // suppress uploads during initial lo
 let _prefsPushTimer = null;
 let CURRENT_SNAPSHOT = null;
 let HOLDINGS_SNAP = null;   // base 即時持倉 data from holdings.json; live ticks recompute 距停損 off this (never mutated)
-let SIM_SNAP = null;        // 模擬倉 data from sim.json; re-rendered after each live tick so 現價 join stays fresh
+const SIM_SNAPS = {};       // 模擬倉 data keyed by book key (sim/sim2); re-rendered after each live tick so 現價 join stays fresh
 let LIVE_MODE = false;  // set true after a successful live pull; scheduler resets it to false off-hours so auto-refresh reverts to snapshot mode
 let REFRESH_INFLIGHT = false;  // guards liveRefresh / refreshOneCard against overlap (auto-refresh + manual)
 // Relay caps each request's symbol count, so one request for the whole list silently
@@ -1234,17 +1239,21 @@ function buildHoldingCard(h) {
 // 現價 join: positions match latest.json symbols via CURRENT_SNAPSHOT (live ticks
 // update it, and liveRefresh re-calls renderSim so 市值/損益 follow the live price).
 function loadSim() {
-  fetch(SIM_URL + "?t=" + Date.now(), { cache: "no-store" })
+  SIM_BOOKS.forEach((book) => loadSimBook(book));
+}
+
+function loadSimBook({ key, url }) {
+  fetch(url + "?t=" + Date.now(), { cache: "no-store" })
     .then((res) => { if (!res.ok) throw new Error(`HTTP ${res.status}`); return res.json(); })
-    .then((sim) => { SIM_SNAP = sim; renderSim(sim); })
+    .then((sim) => { SIM_SNAPS[key] = sim; renderSim(sim, key); })
     .catch((err) => {
-      // A sim failure must never break the other 4 tabs — just note it in-panel.
-      console.warn("sim load failed:", err);
-      setText("tab-count-sim", "–");
-      setText("sim-count", "–");
-      const posEl = document.getElementById("sim-positions");
+      // A sim-book failure must never break the other tabs — just note it in-panel.
+      console.warn(`${key} load failed:`, err);
+      setText(`tab-count-${key}`, "–");
+      setText(`${key}-count`, "–");
+      const posEl = document.getElementById(`${key}-positions`);
       if (posEl) posEl.innerHTML = `<div class="loading">模擬倉資料尚未產生<br><small>${escapeHtml(err.message)}</small></div>`;
-      ["sim-orders", "sim-trades"].forEach((id) => {
+      [`${key}-orders`, `${key}-trades`].forEach((id) => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = `<div class="sim-empty">–</div>`;
       });
@@ -1355,10 +1364,10 @@ function simTradesHtml(trades) {
 
 // 淨值曲線 — Chart.js is already loaded from <head> for the market-tab trend charts,
 // so reuse it (no new library). <2 points -> placeholder text (v1 表格為主).
-function renderSimNavChart(navLog) {
-  const wrap = document.getElementById("sim-nav-wrap");
+function renderSimNavChart(navLog, key = "sim") {
+  const wrap = document.getElementById(`${key}-nav-wrap`);
   if (!wrap) return;
-  const cid = "chart-sim-nav";
+  const cid = `chart-${key}-nav`;
   const existing = CHART_INSTANCES.get(cid);
   if (existing) { try { existing.destroy(); } catch (e) {} CHART_INSTANCES.delete(cid); }
   const pts = (navLog || []).filter((r) => r && r.nav_twd != null);
@@ -1416,10 +1425,10 @@ function renderSimNavChart(navLog) {
       animation: { duration: 200 },
     },
   });
-  CHART_INSTANCES.set(cid, chart);  // "chart-sim-" prefix -> activateTab("sim") auto-resizes it
+  CHART_INSTANCES.set(cid, chart);  // "chart-<key>-" prefix -> activateTab(key) auto-resizes it
 }
 
-function renderSim(sim) {
+function renderSim(sim, key = "sim") {
   const pf = (sim && sim.portfolio) || {};
   const navLog = Array.isArray(sim && sim.nav_log) ? sim.nav_log : [];
   const positions = pf.positions || [];
@@ -1441,7 +1450,7 @@ function renderSim(sim) {
       ? Object.entries(bench).map(([k, v]) => `${escapeHtml(k)} ${fmtPct(v)}`).join(" · ")
       : `基準 ${fmtPct(bench)}`;
   }
-  const sumEl = document.getElementById("sim-summary");
+  const sumEl = document.getElementById(`${key}-summary`);
   if (sumEl) {
     sumEl.innerHTML = `
       <div class="summary-card">
@@ -1467,23 +1476,23 @@ function renderSim(sim) {
   }
 
   // --- counts ---
-  setText("tab-count-sim", positions.length + orders.length || "–");
-  setText("sim-count", `持倉 ${positions.length} · 掛單 ${orders.length}`);
-  setText("sim-pos-count", `${positions.length} 檔`);
-  setText("sim-ord-count", `${orders.length} 筆`);
-  setText("sim-trade-count", `${trades.length} 筆`);
+  setText(`tab-count-${key}`, positions.length + orders.length || "–");
+  setText(`${key}-count`, `持倉 ${positions.length} · 掛單 ${orders.length}`);
+  setText(`${key}-pos-count`, `${positions.length} 檔`);
+  setText(`${key}-ord-count`, `${orders.length} 筆`);
+  setText(`${key}-trade-count`, `${trades.length} 筆`);
 
   // --- 三張表 ---
   const priceMap = simPriceMap();
-  const posEl = document.getElementById("sim-positions");
+  const posEl = document.getElementById(`${key}-positions`);
   if (posEl) posEl.innerHTML = simPositionsHtml(positions, priceMap);
-  const ordEl = document.getElementById("sim-orders");
+  const ordEl = document.getElementById(`${key}-orders`);
   if (ordEl) ordEl.innerHTML = simOrdersHtml(orders);
-  const trdEl = document.getElementById("sim-trades");
+  const trdEl = document.getElementById(`${key}-trades`);
   if (trdEl) trdEl.innerHTML = simTradesHtml(trades);
 
   // --- 淨值曲線 ---
-  renderSimNavChart(navLog);
+  renderSimNavChart(navLog, key);
 }
 
 // Fetch live quotes in batches of <= LIVE_BATCH_SIZE and merge. The relay caps
@@ -1571,7 +1580,9 @@ async function liveRefresh() {
     CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
     renderSnapshot(live, { live: true, note });
     applyLiveToHoldings(quotes, liveTs);   // 即時持倉分頁: 距停損隨這批即時價重算
-    if (SIM_SNAP) renderSim(SIM_SNAP);     // 模擬倉分頁: 現價 join 吃這批即時價 + 重建被 renderSnapshot 銷毀的淨值圖
+    SIM_BOOKS.forEach(({ key }) => {       // 模擬倉分頁: 現價 join 吃這批即時價 + 重建被 renderSnapshot 銷毀的淨值圖
+      if (SIM_SNAPS[key]) renderSim(SIM_SNAPS[key], key);
+    });
     LIVE_MODE = true;
   } catch (err) {
     console.error("Live refresh failed:", err);

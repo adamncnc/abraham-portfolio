@@ -19,8 +19,9 @@
           2400
         ],
         "stop": 2150,
-        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
-        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）",
+        "limit": 2400
       },
       {
         "id": "ord-2345",
@@ -34,8 +35,9 @@
           2480
         ],
         "stop": 2170,
-        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
-        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）",
+        "limit": 2480
       },
       {
         "id": "ord-3324",
@@ -49,8 +51,9 @@
           925
         ],
         "stop": 845,
-        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
-        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）",
+        "limit": 925
       },
       {
         "id": "ord-3037",
@@ -64,8 +67,9 @@
           960
         ],
         "stop": 760,
-        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
-        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）",
+        "limit": 960
       },
       {
         "id": "ord-1519",
@@ -79,8 +83,9 @@
           750
         ],
         "stop": 625,
-        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
-        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）",
+        "limit": 750
       },
       {
         "id": "ord-1503",
@@ -94,13 +99,14 @@
           220
         ],
         "stop": 185,
-        "fill_rule": "next_open_if_open<=band_high_and_open>stop",
-        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）"
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "帶內首批（7/12 重畫帶；7/9 收盤在帶內或帶近；模擬器 inception 部署）",
+        "limit": 220
       }
     ],
     "trades": [],
     "benchmarks_inception": {}
   },
   "nav_log": [],
-  "generated_at": "2026-07-12T19:55:29.854041+00:00"
+  "generated_at": "2026-07-13T03:42:52.347087+00:00"
 }

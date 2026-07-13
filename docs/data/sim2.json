@@ -1,0 +1,15 @@
+{
+  "portfolio": {
+    "experiment": "Adam 投資模擬器2 — 純技術分析（2026-07-13 起）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T11:38:52+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "positions": [],
+    "pending_orders": [],
+    "trades": [],
+    "benchmarks_inception": {}
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T03:42:52.348591+00:00"
+}
