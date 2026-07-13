@@ -1,0 +1,111 @@
+{
+  "portfolio": {
+    "experiment": "台股・策略2 — 全市場 × 純技術（2026-07-13 22:2x 六本制重建）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T22:22:17+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "realized_pnl_twd": 0.0,
+    "positions": [],
+    "pending_orders": [
+      {
+        "id": "tw2-3707",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "3707.TWO",
+        "name": "漢磊",
+        "side": "buy",
+        "budget_twd": 41000,
+        "limit": 84.8,
+        "stop": 74.6,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "台股RS #1 +39.2%／A回檔MA20／族群 IC設計電源／首批半倉（本批 6 筆 >=3）"
+      },
+      {
+        "id": "tw2-6719",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "side": "buy",
+        "budget_twd": 41000,
+        "limit": 242.0,
+        "stop": 212.5,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "台股RS #2 +31.2%／A回檔MA50／族群 IC設計電源／首批半倉（本批 6 筆 >=3）"
+      },
+      {
+        "id": "tw2-8926",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "8926.TW",
+        "name": "台汽電",
+        "side": "buy",
+        "budget_twd": 46000,
+        "limit": 67.9,
+        "stop": 60.6,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "台股RS #3 +30.1%／A回檔MA50／族群 ind-23／首批半倉（本批 6 筆 >=3）"
+      },
+      {
+        "id": "tw2-2312",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "2312.TW",
+        "name": "金寶",
+        "side": "buy",
+        "budget_twd": 47000,
+        "limit": 34.05,
+        "stop": 30.45,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "台股RS #4 +25.9%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）"
+      },
+      {
+        "id": "tw2-2356",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "2356.TW",
+        "name": "英業達",
+        "side": "buy",
+        "budget_twd": 51000,
+        "limit": 63.2,
+        "stop": 57.0,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "台股RS #5 +17.1%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）"
+      },
+      {
+        "id": "tw2-2301",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "2301.TW",
+        "name": "光寶科",
+        "side": "buy",
+        "budget_twd": 45000,
+        "limit": 215.5,
+        "stop": 192.0,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "台股RS #6 +16.5%／A回檔MA20／族群 網通伺服器／首批半倉（本批 6 筆 >=3）"
+      }
+    ],
+    "pending_sells": [],
+    "trades": [
+      {
+        "ts": "2026-07-13T22:22:17+08:00",
+        "action": "RESET",
+        "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
+      }
+    ],
+    "benchmarks_inception": {
+      "0050.TW": {
+        "date": "2026-07-13",
+        "close": 106.0
+      },
+      "SPY": {
+        "date": "2026-07-10",
+        "close": 754.9500122070312
+      }
+    }
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T14:28:20.291158+00:00"
+}

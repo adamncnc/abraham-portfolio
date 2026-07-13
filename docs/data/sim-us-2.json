@@ -1,0 +1,117 @@
+{
+  "portfolio": {
+    "experiment": "美股・策略2 — 全市場 × 純技術（2193 檔池）（2026-07-13 22:2x 六本制重建）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T22:22:17+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "realized_pnl_twd": 0.0,
+    "positions": [],
+    "pending_orders": [
+      {
+        "id": "us2-FTRE",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "side": "buy",
+        "budget_twd": 89000,
+        "limit": 16.93,
+        "stop": 15.03,
+        "stop_rule": "ta",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "美股RS #1 +78.3%／A回檔MA20／族群 Biotechnology／滿倉（Adam 核准美股取消首批半倉）",
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "id": "us2-GBTG",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class",
+        "side": "buy",
+        "budget_twd": 150000,
+        "limit": 9.38,
+        "stop": 8.82,
+        "stop_rule": "ta",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "美股RS #2 +56.6%／A回檔MA20／族群 Travel Services／滿倉（Adam 核准美股取消首批半倉）",
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "id": "us2-BRKR",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "side": "buy",
+        "budget_twd": 112000,
+        "limit": 58.26,
+        "stop": 53.1,
+        "stop_rule": "ta",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "美股RS #3 +47.1%／A回檔MA20／族群 Health Care Equipment／滿倉（Adam 核准美股取消首批半倉）",
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "id": "us2-PAYO",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "PAYO",
+        "name": "Payoneer Global Inc.",
+        "side": "buy",
+        "budget_twd": 150000,
+        "limit": 7.04,
+        "stop": 6.62,
+        "stop_rule": "ta",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "美股RS #4 +44.7%／A回檔MA20／族群 Transaction & Payment Processing Services／滿倉（Adam 核准美股取消首批半倉）",
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "id": "us2-RAL",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "RAL",
+        "name": "Ralliant Corporation Common Stock",
+        "side": "buy",
+        "budget_twd": 129000,
+        "limit": 69.49,
+        "stop": 64.14,
+        "stop_rule": "ta",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "美股RS #5 +44.6%／A回檔MA20／族群 Electronic Equipment & Instruments／滿倉（Adam 核准美股取消首批半倉）",
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "id": "us2-FLYW",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "FLYW",
+        "name": "Flywire Corporation",
+        "side": "buy",
+        "budget_twd": 108000,
+        "limit": 16.83,
+        "stop": 15.28,
+        "stop_rule": "ta",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "美股RS #6 +39.5%／A回檔MA20／族群 Software - Infrastructure／滿倉（Adam 核准美股取消首批半倉）",
+        "fill_mode": "intraday_from_placed"
+      }
+    ],
+    "pending_sells": [],
+    "trades": [
+      {
+        "ts": "2026-07-13T22:22:17+08:00",
+        "action": "RESET",
+        "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
+      }
+    ],
+    "benchmarks_inception": {
+      "0050.TW": {
+        "date": "2026-07-13",
+        "close": 106.0
+      },
+      "SPY": {
+        "date": "2026-07-10",
+        "close": 754.9500122070312
+      }
+    }
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T14:28:20.293161+00:00"
+}

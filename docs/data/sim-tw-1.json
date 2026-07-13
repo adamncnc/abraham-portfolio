@@ -1,0 +1,46 @@
+{
+  "portfolio": {
+    "experiment": "台股・策略1 — 我看好的名單 × 進場帶紀律（2026-07-13 22:2x 六本制重建）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T22:22:17+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "realized_pnl_twd": 0.0,
+    "positions": [],
+    "pending_orders": [
+      {
+        "id": "tw1-1503",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "1503.TW",
+        "name": "士電",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 220.0,
+        "stop": 185,
+        "stop_rule": "daily_all",
+        "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
+        "reason": "帶內(200-220,位置100%=帶頂)；未破50日線；乖離年線12%；健康回檔→限價=min(收盤220,帶頂220)。⚠️買在自訂便宜區的天花板，安全邊際最低。其餘 8 檔全被七關擋下（智邦/雙鴻/群聯/京元電/華城 破50日線無企穩；國巨+118%、欣興+90% froth；訊芯樂透級；奇鋐已跌破帶底）"
+      }
+    ],
+    "pending_sells": [],
+    "trades": [
+      {
+        "ts": "2026-07-13T22:22:17+08:00",
+        "action": "RESET",
+        "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
+      }
+    ],
+    "benchmarks_inception": {
+      "0050.TW": {
+        "date": "2026-07-13",
+        "close": 106.0
+      },
+      "SPY": {
+        "date": "2026-07-10",
+        "close": 754.9500122070312
+      }
+    }
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T14:28:20.291158+00:00"
+}

@@ -1,0 +1,80 @@
+{
+  "portfolio": {
+    "experiment": "美股・策略1 — 我看好的名單 × 進場帶紀律（2026-07-13 22:2x 六本制重建）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T22:22:17+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "realized_pnl_twd": 0.0,
+    "positions": [],
+    "pending_orders": [
+      {
+        "id": "us1-GLW",
+        "placed_ts": "2026-07-13T22:27:25+08:00",
+        "ticker": "GLW",
+        "name": "康寧Corning",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 190.89,
+        "stop": 165,
+        "stop_rule": "daily_all",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K",
+        "fill_mode": "intraday_from_placed",
+        "reason": "帶內(185-205,位置29.4%=五檔中最貼近支撐→依規格書§2第7關排序為第一順位)；未破50日線；乖離年線46.9%——原本要減半到5萬、撞美股6萬下限而買不到，Adam 2026-07-13 22:23 取消泡沫減半後解禁；限價=健康回檔 min(收盤190.89, 帶頂205)。⚠️先前被到價偵測器的即時價誤判成『跌破帶底』而隱形"
+      },
+      {
+        "id": "us1-CEG",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "CEG",
+        "name": "Constellation星座能源",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 251.38,
+        "stop": 215,
+        "stop_rule": "daily_all",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "帶內(235-258,位置71%)；破50日線但有企穩訊號(連2日縮量紅K)；乖離年線-20%不減半；限價=帶內最高結構支撐(MA20 256.71) 受「不追價」上限壓到收盤 251.38",
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "id": "us1-POWI",
+        "placed_ts": "2026-07-13T22:22:17+08:00",
+        "ticker": "POWI",
+        "name": "Power Integrations",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 65.21,
+        "stop": 55,
+        "stop_rule": "daily_all",
+        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
+        "reason": "帶內(60-76,位置75%)；破50日線但有企穩訊號；乖離年線38%未達40%不減半；限價=帶內唯一結構支撐(前波低 65.21)——兩條均線都在帶頂之上",
+        "fill_mode": "intraday_from_placed"
+      }
+    ],
+    "pending_sells": [],
+    "trades": [
+      {
+        "ts": "2026-07-13T22:22:17+08:00",
+        "action": "RESET",
+        "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
+      },
+      {
+        "ts": "2026-07-13T22:27:25+08:00",
+        "action": "RULE_CHANGE",
+        "note": "Adam 22:23「泡沫減半 也取消」→ 乖離年線 40-70% 不再減半（>=70% 仍不做）。受影響：GLW(46.9%)、LRCX(53.5%) 解禁；GLW 依帶內位置排序入選，LRCX 第4名被每日3檔上限擋下。"
+      }
+    ],
+    "benchmarks_inception": {
+      "0050.TW": {
+        "date": "2026-07-13",
+        "close": 106.0
+      },
+      "SPY": {
+        "date": "2026-07-10",
+        "close": 754.9500122070312
+      }
+    }
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T14:28:20.293161+00:00"
+}

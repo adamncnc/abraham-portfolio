@@ -36,9 +36,12 @@
   <button class="market-tab" data-tab="us">🇺🇸 美股 <span class="tab-count" id="tab-count-us">–</span></button>
   <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
   <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
-  <button class="market-tab" data-tab="sim">🧪 模擬倉1 <span class="tab-count" id="tab-count-sim">–</span></button>
-  <button class="market-tab" data-tab="sim2">📐 模擬倉2 <span class="tab-count" id="tab-count-sim2">–</span></button>
-  <button class="market-tab" data-tab="sim3">🎪 模擬倉3 <span class="tab-count" id="tab-count-sim3">–</span></button>
+  <button class="market-tab" data-tab="sim-tw-1">🇹🇼1 <span class="tab-count" id="tab-count-sim-tw-1">–</span></button>
+  <button class="market-tab" data-tab="sim-tw-2">🇹🇼2 <span class="tab-count" id="tab-count-sim-tw-2">–</span></button>
+  <button class="market-tab" data-tab="sim-tw-3">🇹🇼3 <span class="tab-count" id="tab-count-sim-tw-3">–</span></button>
+  <button class="market-tab" data-tab="sim-us-1">🇺🇸1 <span class="tab-count" id="tab-count-sim-us-1">–</span></button>
+  <button class="market-tab" data-tab="sim-us-2">🇺🇸2 <span class="tab-count" id="tab-count-sim-us-2">–</span></button>
+  <button class="market-tab" data-tab="sim-us-3">🇺🇸3 <span class="tab-count" id="tab-count-sim-us-3">–</span></button>
 </nav>
 
 <!-- 台股 -->
@@ -112,81 +115,153 @@
   </div>
 </section>
 
-<!-- 模擬倉1 (Adam 2026-07-13: 虛擬 100 萬 TWD 模擬實驗帳本；資料 = docs/data/sim.json，
-     由 ~/Abraham/abraham-portfolio-sync.py 從 ~/Abraham/sim-portfolio/ 帳本合併產生) -->
-<section class="tab-panel" id="panel-sim">
+<!-- 🇹🇼 台股·策略1（Adam 2026-07-13 22:17 六本制；資料 = docs/data/sim-tw-1.json，來源 ~/Abraham/sim-tw-1/）-->
+<section class="tab-panel" id="panel-sim-tw-1">
   <div class="section-header sim-header">
-    <span class="section-count" id="sim-count">–</span>
-    <span class="pos-method-note">🧪 模擬倉1 · 虛擬 100 萬 TWD · 基本面選股＋紀律執行 · 帳本全紀錄（含略過 skip，透明度優先）· 分析 ≠ 買進建議</span>
+    <span class="section-count" id="sim-tw-1-count">–</span>
+    <span class="pos-method-note">🇹🇼 台股策略1 · 虛擬 100 萬 TWD · 選股＝我看好的名單（基本面把關）＋ 操作＝進場帶紀律（七道關卡＋認錯線）· 帳本全紀錄（含略過 skip，透明度優先）· 分析 ≠ 買進建議</span>
   </div>
-  <div class="portfolio-summary" id="sim-summary"></div>
+  <div class="portfolio-summary" id="sim-tw-1-summary"></div>
   <div class="sim-block">
     <div class="sim-block-title">📈 淨值曲線</div>
-    <div class="sim-nav-wrap" id="sim-nav-wrap"><canvas id="chart-sim-nav"></canvas></div>
+    <div class="sim-nav-wrap" id="sim-tw-1-nav-wrap"><canvas id="chart-sim-tw-1-nav"></canvas></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-pos-count">–</span></div>
-    <div class="sim-table-wrap" id="sim-positions"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-tw-1-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-1-positions"><div class="loading">Loading…</div></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-ord-count">–</span></div>
-    <div class="sim-table-wrap" id="sim-orders"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-tw-1-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-1-orders"><div class="loading">Loading…</div></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-trade-count">–</span></div>
-    <div class="sim-table-wrap" id="sim-trades"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-tw-1-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-1-trades"><div class="loading">Loading…</div></div>
   </div>
 </section>
 
-<!-- 模擬倉2 (Adam 2026-07-13: 純技術分析帳本，不看基本面；資料 = docs/data/sim2.json，
-     來源 ~/Abraham/sim-portfolio-2/；同一套撮合規則與 DM 鐵則) -->
-<section class="tab-panel" id="panel-sim2">
+<!-- 🇹🇼 台股·策略2（Adam 2026-07-13 22:17 六本制；資料 = docs/data/sim-tw-2.json，來源 ~/Abraham/sim-tw-2/）-->
+<section class="tab-panel" id="panel-sim-tw-2">
   <div class="section-header sim-header">
-    <span class="section-count" id="sim2-count">–</span>
-    <span class="pos-method-note">📐 模擬倉2 · 虛擬 100 萬 TWD · 純技術分析（多頭排列＋相對強度選股，不看基本面）· 帳本全紀錄 · 分析 ≠ 買進建議</span>
+    <span class="section-count" id="sim-tw-2-count">–</span>
+    <span class="pos-method-note">🇹🇼 台股策略2 · 虛擬 100 萬 TWD · 選股＝全市場技術面（約 1800 檔，完全不看基本面）＋ 操作＝純技術 · 帳本全紀錄 · 分析 ≠ 買進建議</span>
   </div>
-  <div class="portfolio-summary" id="sim2-summary"></div>
+  <div class="portfolio-summary" id="sim-tw-2-summary"></div>
   <div class="sim-block">
     <div class="sim-block-title">📈 淨值曲線</div>
-    <div class="sim-nav-wrap" id="sim2-nav-wrap"><canvas id="chart-sim2-nav"></canvas></div>
+    <div class="sim-nav-wrap" id="sim-tw-2-nav-wrap"><canvas id="chart-sim-tw-2-nav"></canvas></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim2-pos-count">–</span></div>
-    <div class="sim-table-wrap" id="sim2-positions"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-tw-2-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-2-positions"><div class="loading">Loading…</div></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim2-ord-count">–</span></div>
-    <div class="sim-table-wrap" id="sim2-orders"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-tw-2-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-2-orders"><div class="loading">Loading…</div></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim2-trade-count">–</span></div>
-    <div class="sim-table-wrap" id="sim2-trades"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-tw-2-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-2-trades"><div class="loading">Loading…</div></div>
   </div>
 </section>
 
-<!-- 模擬倉3 (Adam 2026-07-13: 觀察清單內看好的股票 × 技術分析操作；資料 = docs/data/sim3.json，
-     來源 ~/Abraham/sim-portfolio-3/；選股池 = universe.json，操作規則同模擬倉2) -->
-<section class="tab-panel" id="panel-sim3">
+<!-- 🇹🇼 台股·策略3（Adam 2026-07-13 22:17 六本制；資料 = docs/data/sim-tw-3.json，來源 ~/Abraham/sim-tw-3/）-->
+<section class="tab-panel" id="panel-sim-tw-3">
   <div class="section-header sim-header">
-    <span class="section-count" id="sim3-count">–</span>
-    <span class="pos-method-note">🎪 模擬倉3 · 虛擬 100 萬 TWD · 選股＝觀察清單內看好的（基本面把關）＋ 操作＝純技術分析（進出場全交給技術面）· 帳本全紀錄 · 分析 ≠ 買進建議</span>
+    <span class="section-count" id="sim-tw-3-count">–</span>
+    <span class="pos-method-note">🇹🇼 台股策略3 · 虛擬 100 萬 TWD · 選股＝我看好的名單（基本面把關）＋ 操作＝純技術（進出場全交給技術面）· 帳本全紀錄 · 分析 ≠ 買進建議</span>
   </div>
-  <div class="portfolio-summary" id="sim3-summary"></div>
+  <div class="portfolio-summary" id="sim-tw-3-summary"></div>
   <div class="sim-block">
     <div class="sim-block-title">📈 淨值曲線</div>
-    <div class="sim-nav-wrap" id="sim3-nav-wrap"><canvas id="chart-sim3-nav"></canvas></div>
+    <div class="sim-nav-wrap" id="sim-tw-3-nav-wrap"><canvas id="chart-sim-tw-3-nav"></canvas></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim3-pos-count">–</span></div>
-    <div class="sim-table-wrap" id="sim3-positions"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-tw-3-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-3-positions"><div class="loading">Loading…</div></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim3-ord-count">–</span></div>
-    <div class="sim-table-wrap" id="sim3-orders"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-tw-3-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-3-orders"><div class="loading">Loading…</div></div>
   </div>
   <div class="sim-block">
-    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim3-trade-count">–</span></div>
-    <div class="sim-table-wrap" id="sim3-trades"><div class="loading">Loading…</div></div>
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-tw-3-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-tw-3-trades"><div class="loading">Loading…</div></div>
+  </div>
+</section>
+
+<!-- 🇺🇸 美股·策略1（Adam 2026-07-13 22:17 六本制；資料 = docs/data/sim-us-1.json，來源 ~/Abraham/sim-us-1/）-->
+<section class="tab-panel" id="panel-sim-us-1">
+  <div class="section-header sim-header">
+    <span class="section-count" id="sim-us-1-count">–</span>
+    <span class="pos-method-note">🇺🇸 美股策略1 · 虛擬 100 萬 TWD · 選股＝我看好的名單（基本面把關）＋ 操作＝進場帶紀律（七道關卡＋認錯線）· 帳本全紀錄 · 分析 ≠ 買進建議</span>
+  </div>
+  <div class="portfolio-summary" id="sim-us-1-summary"></div>
+  <div class="sim-block">
+    <div class="sim-block-title">📈 淨值曲線</div>
+    <div class="sim-nav-wrap" id="sim-us-1-nav-wrap"><canvas id="chart-sim-us-1-nav"></canvas></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-us-1-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-1-positions"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-us-1-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-1-orders"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-us-1-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-1-trades"><div class="loading">Loading…</div></div>
+  </div>
+</section>
+
+<!-- 🇺🇸 美股·策略2（Adam 2026-07-13 22:17 六本制；資料 = docs/data/sim-us-2.json，來源 ~/Abraham/sim-us-2/）-->
+<section class="tab-panel" id="panel-sim-us-2">
+  <div class="section-header sim-header">
+    <span class="section-count" id="sim-us-2-count">–</span>
+    <span class="pos-method-note">🇺🇸 美股策略2 · 虛擬 100 萬 TWD · 選股＝全市場技術面（2193 檔，含 ADR 與近期 IPO，完全不看基本面）＋ 操作＝純技術 · 帳本全紀錄 · 分析 ≠ 買進建議</span>
+  </div>
+  <div class="portfolio-summary" id="sim-us-2-summary"></div>
+  <div class="sim-block">
+    <div class="sim-block-title">📈 淨值曲線</div>
+    <div class="sim-nav-wrap" id="sim-us-2-nav-wrap"><canvas id="chart-sim-us-2-nav"></canvas></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-us-2-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-2-positions"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-us-2-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-2-orders"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-us-2-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-2-trades"><div class="loading">Loading…</div></div>
+  </div>
+</section>
+
+<!-- 🇺🇸 美股策略3（Adam 2026-07-13 22:17 六本制；資料 = docs/data/sim-us-3.json，來源 ~/Abraham/sim-us-3/）-->
+<section class="tab-panel" id="panel-sim-us-3">
+  <div class="section-header sim-header">
+    <span class="section-count" id="sim-us-3-count">–</span>
+    <span class="pos-method-note">🇺🇸 美股策略3 · 虛擬 100 萬 TWD · 選股＝我看好的名單（基本面把關）＋ 操作＝純技術 · 帳本全紀錄 · 分析 ≠ 買進建議</span>
+  </div>
+  <div class="portfolio-summary" id="sim-us-3-summary"></div>
+  <div class="sim-block">
+    <div class="sim-block-title">📈 淨值曲線</div>
+    <div class="sim-nav-wrap" id="sim-us-3-nav-wrap"><canvas id="chart-sim-us-3-nav"></canvas></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim-us-3-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-3-positions"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim-us-3-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-3-orders"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-us-3-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim-us-3-trades"><div class="loading">Loading…</div></div>
   </div>
 </section>
 

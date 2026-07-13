@@ -1,0 +1,32 @@
+{
+  "portfolio": {
+    "experiment": "美股・策略3 — 我看好的名單 × 純技術（2026-07-13 22:2x 六本制重建）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T22:22:17+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "realized_pnl_twd": 0.0,
+    "positions": [],
+    "pending_orders": [],
+    "pending_sells": [],
+    "trades": [
+      {
+        "ts": "2026-07-13T22:22:17+08:00",
+        "action": "RESET",
+        "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
+      }
+    ],
+    "benchmarks_inception": {
+      "0050.TW": {
+        "date": "2026-07-13",
+        "close": 106.0
+      },
+      "SPY": {
+        "date": "2026-07-10",
+        "close": 754.9500122070312
+      }
+    }
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T14:28:20.293161+00:00"
+}

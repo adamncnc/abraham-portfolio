@@ -10,13 +10,17 @@ const HOLDINGS_URL = "./data/holdings.json";
 // 模擬倉分頁 (Adam 2026-07-13) — 虛擬 100 萬 TWD 實驗帳本. Written locally by
 // ~/Abraham/abraham-portfolio-sync.py from ~/Abraham/sim-portfolio/ and committed;
 // fetched independently (same isolation pattern as holdings.json).
-// 三本模擬倉 (Adam 2026-07-13 一日內加開 2、3): sim=模擬倉1(我看好的名單 × 進場帶紀律) /
-// sim2=模擬倉2(全市場技術面選股 × 純技術操作) / sim3=模擬倉3(我看好的名單 × 純技術操作).
+// 六本模擬倉 (Adam 2026-07-13 22:17): 台股/美股 × 策略1/2/3，各虛擬 100 萬、互不調度。
+// 策略1=我看好的名單 × 進場帶紀律；策略2=全市場 × 純技術；策略3=我看好的名單 × 純技術。
+// 台股/美股拆開的理由：相對強度是「贏過自己市場」，兩市場指數強弱不同 → 不可同榜排序。
 // key 同時是 DOM id 前綴 (panel-sim3 / sim3-positions / chart-sim3-nav / tab-count-sim3).
 const SIM_BOOKS = [
-  { key: "sim", url: "./data/sim.json" },
-  { key: "sim2", url: "./data/sim2.json" },
-  { key: "sim3", url: "./data/sim3.json" },
+  { key: "sim-tw-1", url: "./data/sim-tw-1.json" },
+  { key: "sim-tw-2", url: "./data/sim-tw-2.json" },
+  { key: "sim-tw-3", url: "./data/sim-tw-3.json" },
+  { key: "sim-us-1", url: "./data/sim-us-1.json" },
+  { key: "sim-us-2", url: "./data/sim-us-2.json" },
+  { key: "sim-us-3", url: "./data/sim-us-3.json" },
 ];
 
 // Live-quote relay (Cloudflare Worker — see relay/yahoo-relay-worker.js).
