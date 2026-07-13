@@ -8,85 +8,97 @@
     "positions": [],
     "pending_orders": [
       {
-        "id": "ord2-3707",
-        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "id": "ord2b-3707",
+        "placed_ts": "2026-07-13T20:55:00+08:00",
         "ticker": "3707.TWO",
         "name": "漢磊",
         "side": "buy",
-        "budget_twd": 41000,
+        "budget_twd": 41500,
         "limit": 84.8,
         "stop": 74.6,
+        "stop_rule": "ta",
         "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
-        "reason": "TA首批: RS63+39.2%全場最強/多頭排列/回測MA20; 乖離200日38%貼閘門上限+當沖比重高=本批最險",
-        "tranche": "1/2 首批（站穩/創高才加後半）"
+        "reason": "RS63 +39.2% 全場最強／回測 MA20／族群 IC設計電源 #1；半倉（本批 6 筆 ≥3）",
+        "tranche": "1/2 首批（站穩才加後半）"
       },
       {
-        "id": "ord2-6719",
-        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "id": "ord2b-6719",
+        "placed_ts": "2026-07-13T20:55:00+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "side": "buy",
-        "budget_twd": 41000,
+        "budget_twd": 41500,
         "limit": 242.0,
         "stop": 212.5,
+        "stop_rule": "ta",
         "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
-        "reason": "TA首批: RS63+31.2%/回測MA50 242/乖離25%健康",
-        "tranche": "1/2 首批（站穩/創高才加後半）"
+        "reason": "RS63 +31.2%／回測 MA50 242／族群 IC設計電源 #2（該族群自此滿額）；半倉",
+        "tranche": "1/2 首批"
       },
       {
-        "id": "ord2-2312",
-        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "id": "ord2b-8926",
+        "placed_ts": "2026-07-13T20:55:00+08:00",
+        "ticker": "8926.TW",
+        "name": "台汽電",
+        "side": "buy",
+        "budget_twd": 46500,
+        "limit": 67.9,
+        "stop": 60.6,
+        "stop_rule": "ta",
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "RS63 +30.1%／回測均線／族群 ind-23（油電燃氣，主題表外新名字，DM 已標記）。⚠️ 我沒研究過這家公司——倉2 purity 條款明定不看基本面，訊號到就做",
+        "tranche": "1/2 首批"
+      },
+      {
+        "id": "ord2b-2312",
+        "placed_ts": "2026-07-13T20:55:00+08:00",
         "ticker": "2312.TW",
         "name": "金寶",
         "side": "buy",
-        "budget_twd": 47000,
-        "limit": 33.65,
-        "stop": 30.05,
+        "budget_twd": 47500,
+        "limit": 34.05,
+        "stop": 30.45,
+        "stop_rule": "ta",
         "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
-        "reason": "TA首批: RS63+28.5%/回測MA50/EMS",
-        "tranche": "1/2 首批（站穩/創高才加後半）"
+        "reason": "RS63 +25.9%（未調整價；還原價曾誤報 +28.5%）／回測 MA50 34.05（原 33.65 是還原價假均線）／族群 EMS #1；半倉",
+        "tranche": "1/2 首批"
       },
       {
-        "id": "ord2-2881",
-        "placed_ts": "2026-07-13T14:16:54+08:00",
-        "ticker": "2881.TW",
-        "name": "富邦金",
+        "id": "ord2b-2356",
+        "placed_ts": "2026-07-13T20:55:00+08:00",
+        "ticker": "2356.TW",
+        "name": "英業達",
         "side": "buy",
-        "budget_twd": 68000,
-        "limit": 126.5,
-        "stop": 117.0,
+        "budget_twd": 51000,
+        "limit": 63.2,
+        "stop": 57.0,
+        "stop_rule": "ta",
         "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
-        "reason": "TA首批: RS63+23.3%/回測MA20/金融=與科技分散",
-        "tranche": "1/2 首批（站穩/創高才加後半）"
+        "reason": "RS63 +17.1%／回測 MA50／族群 EMS #2。原批漏掉它＝我沒照 RS 排序取（v1.1 §3.4.1 已禁止臨場加戲）",
+        "tranche": "1/2 首批"
       },
       {
-        "id": "ord2-2301",
-        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "id": "ord2b-2301",
+        "placed_ts": "2026-07-13T20:55:00+08:00",
         "ticker": "2301.TW",
         "name": "光寶科",
         "side": "buy",
-        "budget_twd": 45000,
+        "budget_twd": 45500,
         "limit": 215.5,
         "stop": 192.0,
+        "stop_rule": "ta",
         "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
-        "reason": "TA首批: RS63+16.5%/回測MA20/電源供應",
-        "tranche": "1/2 首批（站穩/創高才加後半）"
-      },
-      {
-        "id": "ord2-3035",
-        "placed_ts": "2026-07-13T14:16:54+08:00",
-        "ticker": "3035.TW",
-        "name": "智原",
-        "side": "buy",
-        "budget_twd": 42000,
-        "limit": 214.5,
-        "stop": 188.5,
-        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
-        "reason": "TA首批: RS63+16.1%/回測MA20(現價已低於線0.7%)/IC設計",
-        "tranche": "1/2 首批（站穩/創高才加後半）"
+        "reason": "RS63 +16.5%／回測 MA20／族群 網通伺服器；每日 6 檔上限至此滿",
+        "tranche": "1/2 首批"
       }
     ],
-    "trades": [],
+    "trades": [
+      {
+        "ts": "2026-07-13T20:55:00+08:00",
+        "action": "amend_batch",
+        "note": "首批 6 筆撤換（未成交，依規格書 §1.6 第6條：撤單唯一正當理由=資料/程式 bug，須公開對照）。原批 14:16 掛：漢磊41000/力智41000/金寶33.65×47000/富邦金126.5×68000/光寶科45000/智原42000。撤換理由：①【資料 bug】掃描器用還原價（auto_adjust=True），除息旺季高殖利率股 RS 系統性虛高 → 富邦金 RS 23.3%→實際 18.4%，且未調整價下根本無進場點（126.5 是假均線）→ 撤單；金寶限價 33.65→34.05（真實 MA50）。②【我違反自己的規則】原批 漢磊+力智+智原 = 同族群(IC設計電源) 3 檔，超過 v1 §3.4.2 明定的『同族群最多 2 檔』；且我沒照 RS 排序取（跳過 RS+29.3% 茂達、+17.1% 英業達，去拿 +16.1% 智原）→ 智原撤單、英業達補進。③ 修正資料後 台汽電(RS+30.1%) 新進榜 → 依序補進。新批＝機械可複現：依 RS 排序 + 同族群≤2 + 每日≤6 + 實際筆數≥3 故半倉。"
+      }
+    ],
     "benchmarks_inception": {
       "0050.TW": {
         "date": "2026-07-13",
@@ -112,5 +124,5 @@
       }
     }
   ],
-  "generated_at": "2026-07-13T10:51:19.124966+00:00"
+  "generated_at": "2026-07-13T11:45:50.821266+00:00"
 }
