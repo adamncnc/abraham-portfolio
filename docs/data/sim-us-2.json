@@ -4,114 +4,148 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 1000000.0,
+    "cash_twd": 871362.2826806493,
     "realized_pnl_twd": 0.0,
-    "positions": [],
-    "pending_orders": [
+    "positions": [
       {
-        "id": "us2-FTRE",
-        "placed_ts": "2026-07-13T22:22:17+08:00",
-        "ticker": "FTRE",
-        "name": "Fortrea Holdings Inc.",
-        "side": "buy",
-        "budget_twd": 89000,
-        "limit": 16.93,
-        "stop": 15.03,
-        "stop_rule": "ta",
-        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
-        "reason": "美股RS #1 +78.3%／A回檔MA20／族群 Biotechnology／滿倉（Adam 核准美股取消首批半倉）",
-        "fill_mode": "intraday_from_placed"
-      },
-      {
-        "id": "us2-GBTG",
-        "placed_ts": "2026-07-13T22:22:17+08:00",
-        "ticker": "GBTG",
-        "name": "Global Business Travel Group, Inc. Class",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 9.38,
-        "stop": 8.82,
-        "stop_rule": "ta",
-        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
-        "reason": "美股RS #2 +56.6%／A回檔MA20／族群 Travel Services／滿倉（Adam 核准美股取消首批半倉）",
-        "fill_mode": "intraday_from_placed"
-      },
-      {
-        "id": "us2-BRKR",
-        "placed_ts": "2026-07-13T22:22:17+08:00",
-        "ticker": "BRKR",
-        "name": "Bruker Corporation",
-        "side": "buy",
-        "budget_twd": 112000,
-        "limit": 58.26,
-        "stop": 53.1,
-        "stop_rule": "ta",
-        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
-        "reason": "美股RS #3 +47.1%／A回檔MA20／族群 Health Care Equipment／滿倉（Adam 核准美股取消首批半倉）",
-        "fill_mode": "intraday_from_placed"
-      },
-      {
-        "id": "us2-PAYO",
-        "placed_ts": "2026-07-13T22:22:17+08:00",
-        "ticker": "PAYO",
-        "name": "Payoneer Global Inc.",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 7.04,
-        "stop": 6.62,
-        "stop_rule": "ta",
-        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
-        "reason": "美股RS #4 +44.7%／A回檔MA20／族群 Transaction & Payment Processing Services／滿倉（Adam 核准美股取消首批半倉）",
-        "fill_mode": "intraday_from_placed"
-      },
-      {
-        "id": "us2-RAL",
-        "placed_ts": "2026-07-13T22:22:17+08:00",
         "ticker": "RAL",
         "name": "Ralliant Corporation Common Stock",
-        "side": "buy",
-        "budget_twd": 129000,
-        "limit": 69.49,
+        "shares": 58,
+        "avg_price": 68.48,
+        "fill_date": "2026-07-13",
+        "fx_at_fill": 32.2239990234375,
         "stop": 64.14,
         "stop_rule": "ta",
-        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
-        "reason": "美股RS #5 +44.6%／A回檔MA20／族群 Electronic Equipment & Instruments／滿倉（Adam 核准美股取消首批半倉）",
-        "fill_mode": "intraday_from_placed"
-      },
-      {
-        "id": "us2-FLYW",
-        "placed_ts": "2026-07-13T22:22:17+08:00",
-        "ticker": "FLYW",
-        "name": "Flywire Corporation",
-        "side": "buy",
-        "budget_twd": 108000,
-        "limit": 16.83,
-        "stop": 15.28,
-        "stop_rule": "ta",
-        "fill_rule": "盤中掛單: 只認 placed_ts 之後的 1 分 K（首價<=stop void; <=limit fill@首價; 之後最低<=limit fill@limit; 否則 expire）",
-        "reason": "美股RS #6 +39.5%／A回檔MA20／族群 Software - Infrastructure／滿倉（Adam 核准美股取消首批半倉）",
-        "fill_mode": "intraday_from_placed"
+        "group": "Electronic Equipment & Instruments",
+        "cost_twd": 128638.0,
+        "half_locked": false,
+        "ratchet_armed": false
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
         "action": "RESET",
         "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
+      },
+      {
+        "ts": "2026-07-14T04:20:42+08:00",
+        "order_id": "us2-FTRE",
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "action": "expire_unfilled",
+        "open": 17.610000610351562,
+        "low": 17.44499969482422,
+        "limit": 16.93,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-14T04:20:42+08:00",
+        "order_id": "us2-GBTG",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class",
+        "action": "expire_unfilled",
+        "open": 9.399999618530273,
+        "low": 9.399999618530273,
+        "limit": 9.38,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-14T04:20:42+08:00",
+        "order_id": "us2-BRKR",
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "action": "expire_unfilled",
+        "open": 59.47999954223633,
+        "low": 58.459999084472656,
+        "limit": 58.26,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-14T04:20:42+08:00",
+        "order_id": "us2-PAYO",
+        "ticker": "PAYO",
+        "name": "Payoneer Global Inc.",
+        "action": "expire_unfilled",
+        "open": 7.099999904632568,
+        "low": 7.099999904632568,
+        "limit": 7.04,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-14T04:20:42+08:00",
+        "order_id": "us2-RAL",
+        "ticker": "RAL",
+        "name": "Ralliant Corporation Common Stock",
+        "action": "buy",
+        "shares": 58,
+        "price": 68.48,
+        "fee": 20.0,
+        "cost_twd": 128638.0,
+        "fill_date": "2026-07-13",
+        "fill_how": "掛單後首價",
+        "reason": "美股RS #5 +44.6%／A回檔MA20／族群 Electronic Equipment & Instruments／滿倉（Adam 核准美股取消首批半倉）"
+      },
+      {
+        "ts": "2026-07-14T04:20:42+08:00",
+        "order_id": "us2-FLYW",
+        "ticker": "FLYW",
+        "name": "Flywire Corporation",
+        "action": "expire_unfilled",
+        "open": 17.84429931640625,
+        "low": 17.729999542236328,
+        "limit": 16.83,
+        "fill_mode": "intraday_from_placed"
       }
     ],
+    "benchmark_spec": {
+      "ticker": "SPY",
+      "mode": "intraday_from_ts",
+      "ts": "2026-07-13T22:22:17+08:00",
+      "why": "帳本開始那一刻美股正在交易 → 錨在掛單後第一根 1 分 K，與我的單同一條起跑線"
+    },
+    "ticker_state": {
+      "RAL": {
+        "splits_applied": [],
+        "divs_credited": [
+          "2025-09-08",
+          "2025-12-08",
+          "2026-03-09",
+          "2026-06-08"
+        ]
+      }
+    },
     "benchmarks_inception": {
-      "0050.TW": {
-        "date": "2026-07-13",
-        "close": 106.0
-      },
       "SPY": {
-        "date": "2026-07-10",
-        "close": 754.9500122070312
+        "date": "2026-07-13",
+        "close": 751.795,
+        "fx": 32.198,
+        "how": "2026-07-13 掛單當下",
+        "spec": {
+          "ticker": "SPY",
+          "mode": "intraday_from_ts",
+          "ts": "2026-07-13T22:22:17+08:00",
+          "why": "帳本開始那一刻美股正在交易 → 錨在掛單後第一根 1 分 K，與我的單同一條起跑線"
+        },
+        "resolved_ts": "2026-07-14T02:09:09+08:00"
       }
     }
   },
-  "nav_log": [],
-  "generated_at": "2026-07-13T14:28:20.293161+00:00"
+  "nav_log": [
+    {
+      "ts": "2026-07-14T04:22:00+08:00",
+      "nav_twd": 996682.0,
+      "return_pct": -0.33,
+      "cash_twd": 871362.0,
+      "n_positions": 1,
+      "usdtwd": 32.225,
+      "bench_return_pct": {
+        "SPY": -0.27
+      },
+      "realized_pnl_twd": 0.0
+    }
+  ],
+  "generated_at": "2026-07-13T20:23:04.339941+00:00"
 }

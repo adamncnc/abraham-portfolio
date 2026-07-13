@@ -19,7 +19,8 @@
         "stop": 74.6,
         "stop_rule": "ta",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
-        "reason": "台股RS #1 +39.2%／A回檔MA20／族群 IC設計電源／首批半倉（本批 6 筆 >=3）"
+        "reason": "台股RS #1 +39.2%／A回檔MA20／族群 IC設計電源／首批半倉（本批 6 筆 >=3）",
+        "group": "IC設計電源"
       },
       {
         "id": "tw2-6719",
@@ -32,7 +33,8 @@
         "stop": 212.5,
         "stop_rule": "ta",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
-        "reason": "台股RS #2 +31.2%／A回檔MA50／族群 IC設計電源／首批半倉（本批 6 筆 >=3）"
+        "reason": "台股RS #2 +31.2%／A回檔MA50／族群 IC設計電源／首批半倉（本批 6 筆 >=3）",
+        "group": "IC設計電源"
       },
       {
         "id": "tw2-8926",
@@ -45,7 +47,8 @@
         "stop": 60.6,
         "stop_rule": "ta",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
-        "reason": "台股RS #3 +30.1%／A回檔MA50／族群 ind-23／首批半倉（本批 6 筆 >=3）"
+        "reason": "台股RS #3 +30.1%／A回檔MA50／族群 ind-23／首批半倉（本批 6 筆 >=3）",
+        "group": "ind-23"
       },
       {
         "id": "tw2-2312",
@@ -58,7 +61,8 @@
         "stop": 30.45,
         "stop_rule": "ta",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
-        "reason": "台股RS #4 +25.9%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）"
+        "reason": "台股RS #4 +25.9%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）",
+        "group": "EMS"
       },
       {
         "id": "tw2-2356",
@@ -71,7 +75,8 @@
         "stop": 57.0,
         "stop_rule": "ta",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
-        "reason": "台股RS #5 +17.1%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）"
+        "reason": "台股RS #5 +17.1%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）",
+        "group": "EMS"
       },
       {
         "id": "tw2-2301",
@@ -84,7 +89,8 @@
         "stop": 192.0,
         "stop_rule": "ta",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
-        "reason": "台股RS #6 +16.5%／A回檔MA20／族群 網通伺服器／首批半倉（本批 6 筆 >=3）"
+        "reason": "台股RS #6 +16.5%／A回檔MA20／族群 網通伺服器／首批半倉（本批 6 筆 >=3）",
+        "group": "網通伺服器"
       }
     ],
     "pending_sells": [],
@@ -95,17 +101,14 @@
         "note": "Adam 2026-07-13 22:17 指令：改 6 本帳本（美股/台股 × 策略1/2/3，各 100 萬）、美股取消首批半倉、全部歸零重做。舊 3 本封存 sim-archive-2026-07-13-reset/。"
       }
     ],
-    "benchmarks_inception": {
-      "0050.TW": {
-        "date": "2026-07-13",
-        "close": 106.0
-      },
-      "SPY": {
-        "date": "2026-07-10",
-        "close": 754.9500122070312
-      }
-    }
+    "benchmark_spec": {
+      "ticker": "0050.TW",
+      "mode": "next_open_after",
+      "ts": "2026-07-13T22:22:17+08:00",
+      "why": "帳本開始那一刻台股已收盤 → 錨在下一節開盤，因為我的單也是那時才進得去"
+    },
+    "ticker_state": {}
   },
   "nav_log": [],
-  "generated_at": "2026-07-13T14:28:20.291158+00:00"
+  "generated_at": "2026-07-13T20:23:04.337937+00:00"
 }
