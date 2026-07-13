@@ -1262,11 +1262,6 @@ function simPriceMap() {
   return m;
 }
 
-function simBandText(band) {
-  if (Array.isArray(band) && band.length === 2) return `${fmtNum(band[0], 0)}–${fmtNum(band[1], 0)}`;
-  return "–";
-}
-
 // "2026-07-13T03:46:55+08:00" -> "07-13 03:46" (Taipei)
 function fmtSimTs(ts) {
   if (!ts) return "–";
@@ -1281,9 +1276,9 @@ function simTableHtml(headers, rows, emptyMsg) {
   return `<table class="sim-table"><thead><tr>${thead}</tr></thead><tbody>${rows.join("")}</tbody></table>`;
 }
 
-// 持倉表: 名稱/股數/成本價/現價(join latest.json 同 ticker; 沒有就顯示成本)/市值/損益%/認錯線/進場帶.
-// Position schema is defensive (ledger's positions[] is still empty as of 2026-07-13):
-// ticker/name/shares + cost under cost|avg_cost|cost_basis|avg_price, stop, band.
+// 持倉表: 名稱/股數/成本價/現價(join latest.json 同 ticker; 沒有就顯示成本)/市值/損益%/認錯線.
+// (2026-07-13 Adam: 模擬倉頁不顯示進場區 — 掛單顯示實際限價、持倉不帶分析帶)
+// Position schema is defensive: ticker/name/shares + cost under cost|avg_cost|cost_basis|avg_price, stop.
 function simPositionsHtml(positions, priceMap) {
   const rows = positions.map((p) => {
     const cost = p.cost ?? p.avg_cost ?? p.cost_basis ?? p.avg_price ?? null;
@@ -1304,28 +1299,31 @@ function simPositionsHtml(positions, priceMap) {
       <td class="num">${mv != null ? fmtCurrency(mv, "TWD", 0) : "–"}</td>
       <td class="num ${pnlCls}">${pnlPct != null ? fmtPct(pnlPct) : "–"}</td>
       <td class="num">${p.stop != null ? fmtNum(p.stop, 0) : "–"}</td>
-      <td class="num">${simBandText(p.band)}</td>
     </tr>`;
   });
   return simTableHtml(
-    [["名稱", 0], ["股數", 1], ["成本價", 1], ["現價", 1], ["市值", 1], ["損益%", 1], ["認錯線", 1], ["進場帶", 1]],
+    [["名稱", 0], ["股數", 1], ["成本價", 1], ["現價", 1], ["市值", 1], ["損益%", 1], ["認錯線", 1]],
     rows,
     "尚無持倉 — 等掛單成交後顯示"
   );
 }
 
-// 掛單表: 名稱/預算/進場帶/認錯線/掛單時間/狀態(pending).
+// 掛單表: 名稱/預算/限價(實際掛單價)/認錯線/掛單時間/狀態(pending).
+// (2026-07-13 Adam: 要寫實際掛單, 不寫進場區 — limit 欄為準, 舊資料 fallback band 上緣)
 function simOrdersHtml(orders) {
-  const rows = orders.map((o) => `<tr>
+  const rows = orders.map((o) => {
+    const lim = o.limit ?? (Array.isArray(o.band) && o.band.length === 2 ? o.band[1] : null);
+    return `<tr>
       <td><b>${escapeHtml(o.name || o.ticker || "–")}</b><br><span class="sim-sub">${escapeHtml(o.ticker || "")}</span></td>
       <td class="num">${o.budget_twd != null ? fmtCurrency(o.budget_twd, "TWD", 0) : "–"}</td>
-      <td class="num">${simBandText(o.band)}</td>
+      <td class="num"><b>${lim != null ? fmtNum(lim, 0) : "–"}</b></td>
       <td class="num">${o.stop != null ? fmtNum(o.stop, 0) : "–"}</td>
       <td class="num">${fmtSimTs(o.placed_ts)}</td>
       <td><span class="badge-mid">⏳ pending</span></td>
-    </tr>`);
+    </tr>`;
+  });
   return simTableHtml(
-    [["名稱", 0], ["預算", 1], ["進場帶", 1], ["認錯線", 1], ["掛單時間", 1], ["狀態", 0]],
+    [["名稱", 0], ["預算", 1], ["限價", 1], ["認錯線", 1], ["掛單時間", 1], ["狀態", 0]],
     rows,
     "無掛單"
   );
