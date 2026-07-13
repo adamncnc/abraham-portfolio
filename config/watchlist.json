@@ -54,8 +54,8 @@
       "currency": "TWD",
       "theme": "光通訊/CPO 封裝 (FOCI)",
       "notes": "光通訊/CPO 封裝 (FOCI); 進場區 550-650 (6/13 深查, 投機級), 認錯 456; TTM 虧損+季營收 YoY−7.2%, 價值全在 2027 CPO 故事",
-      "entry_zone_lo": 550,
-      "entry_zone_hi": 650
+      "entry_zone_lo": 510,
+      "entry_zone_hi": 570
     },
     {
       "id": "6415",
@@ -545,8 +545,8 @@
       "currency": "TWD",
       "theme": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-",
       "notes": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-80%/AMD EPYC伺服器最大插座供應商/SOCAMM記憶體連接器+NPO插座+液冷快接頭); 6/30 Adam深調後明示加入; 體質最佳=毛利50.8%(連接器同業Amphenol才33%)/ROE19%/淨現金136億幾乎零負債(D/E2%)=堡壘級資產負債表; 估值2026E PE 22x(EPS95.96; ⚠️Yahoo forwardPE16.2是用2027 EPS假便宜)/這群最低; Q1伺服器業務+",
-      "entry_zone_lo": 1850,
-      "entry_zone_hi": 2100
+      "entry_zone_lo": 1800,
+      "entry_zone_hi": 1920
     },
     {
       "id": "nvmi",
