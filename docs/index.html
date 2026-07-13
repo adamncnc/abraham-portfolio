@@ -38,6 +38,7 @@
   <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
   <button class="market-tab" data-tab="sim">🧪 模擬倉1 <span class="tab-count" id="tab-count-sim">–</span></button>
   <button class="market-tab" data-tab="sim2">📐 模擬倉2 <span class="tab-count" id="tab-count-sim2">–</span></button>
+  <button class="market-tab" data-tab="sim3">🎪 模擬倉3 <span class="tab-count" id="tab-count-sim3">–</span></button>
 </nav>
 
 <!-- 台股 -->
@@ -160,6 +161,32 @@
   <div class="sim-block">
     <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim2-trade-count">–</span></div>
     <div class="sim-table-wrap" id="sim2-trades"><div class="loading">Loading…</div></div>
+  </div>
+</section>
+
+<!-- 模擬倉3 (Adam 2026-07-13: 觀察清單內看好的股票 × 技術分析操作；資料 = docs/data/sim3.json，
+     來源 ~/Abraham/sim-portfolio-3/；選股池 = universe.json，操作規則同模擬倉2) -->
+<section class="tab-panel" id="panel-sim3">
+  <div class="section-header sim-header">
+    <span class="section-count" id="sim3-count">–</span>
+    <span class="pos-method-note">🎪 模擬倉3 · 虛擬 100 萬 TWD · 選股＝觀察清單內看好的（基本面把關）＋ 操作＝純技術分析（進出場全交給技術面）· 帳本全紀錄 · 分析 ≠ 買進建議</span>
+  </div>
+  <div class="portfolio-summary" id="sim3-summary"></div>
+  <div class="sim-block">
+    <div class="sim-block-title">📈 淨值曲線</div>
+    <div class="sim-nav-wrap" id="sim3-nav-wrap"><canvas id="chart-sim3-nav"></canvas></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📦 持倉 <span class="section-count" id="sim3-pos-count">–</span></div>
+    <div class="sim-table-wrap" id="sim3-positions"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">🕒 掛單 <span class="section-count" id="sim3-ord-count">–</span></div>
+    <div class="sim-table-wrap" id="sim3-orders"><div class="loading">Loading…</div></div>
+  </div>
+  <div class="sim-block">
+    <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim3-trade-count">–</span></div>
+    <div class="sim-table-wrap" id="sim3-trades"><div class="loading">Loading…</div></div>
   </div>
 </section>
 

@@ -1,0 +1,30 @@
+{
+  "portfolio": {
+    "experiment": "Adam 投資模擬器3 — 觀察清單內看好的股票 × 技術分析操作（2026-07-13 起）",
+    "base_currency": "TWD",
+    "inception_ts": "2026-07-13T18:55:00+08:00",
+    "initial_capital_twd": 1000000,
+    "cash_twd": 1000000.0,
+    "positions": [],
+    "pending_orders": [
+      {
+        "id": "ord3-6719",
+        "placed_ts": "2026-07-13T18:55:00+08:00",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "side": "buy",
+        "budget_twd": 83000,
+        "limit": 242.0,
+        "stop": 212.5,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "倉3 首日唯一過濾通過者: 51 檔選股池中唯一同時滿足多頭排列(收252.5>MA50 242>MA200)+相對強度(RS63 +31.2pp 勝加權)+量能+froth 閘門(乖離年線 25% <40%)且有進場點(回測 MA50 242)。認錯 212.5 = 限價 −12%(2×ATR 8.4% 觸上限)；單筆風險 1%(NT$1 萬)÷12% = 預算 8.3 萬 = 滿倉單筆(非半倉，因本批只有一檔)",
+        "tranche": "full（本批唯一標的，直接給滿 1% 風險）"
+      }
+    ],
+    "trades": [],
+    "benchmarks_inception": null,
+    "_first_screen_note": "2026-07-13 首掃: 51 檔 → 28 檔跌破 MA50(七月殺盤打壞趨勢) / 17 檔 froth 閘門擋(乖離年線 +42~262%) / 3 檔量能不足 / 2 檔相對強度輸指數(台積電 −5.2pp、士電 −13.8pp) → 僅 1 檔可掛單。8.3% 部位 + 91.7% 現金 = 方法忠實執行後的結果，不是失誤。"
+  },
+  "nav_log": [],
+  "generated_at": "2026-07-13T10:51:19.125966+00:00"
+}

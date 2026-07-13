@@ -10,11 +10,13 @@ const HOLDINGS_URL = "./data/holdings.json";
 // 模擬倉分頁 (Adam 2026-07-13) — 虛擬 100 萬 TWD 實驗帳本. Written locally by
 // ~/Abraham/abraham-portfolio-sync.py from ~/Abraham/sim-portfolio/ and committed;
 // fetched independently (same isolation pattern as holdings.json).
-// 兩本模擬倉: sim=模擬倉1(基本面+紀律) / sim2=模擬倉2(純技術分析, Adam 2026-07-13 加開).
-// key 同時是 DOM id 前綴 (panel-sim2 / sim2-positions / chart-sim2-nav / tab-count-sim2).
+// 三本模擬倉 (Adam 2026-07-13 一日內加開 2、3): sim=模擬倉1(我看好的名單 × 進場帶紀律) /
+// sim2=模擬倉2(全市場技術面選股 × 純技術操作) / sim3=模擬倉3(我看好的名單 × 純技術操作).
+// key 同時是 DOM id 前綴 (panel-sim3 / sim3-positions / chart-sim3-nav / tab-count-sim3).
 const SIM_BOOKS = [
   { key: "sim", url: "./data/sim.json" },
   { key: "sim2", url: "./data/sim2.json" },
+  { key: "sim3", url: "./data/sim3.json" },
 ];
 
 // Live-quote relay (Cloudflare Worker — see relay/yahoo-relay-worker.js).
