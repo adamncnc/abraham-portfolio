@@ -6,7 +6,86 @@
     "initial_capital_twd": 1000000,
     "cash_twd": 1000000.0,
     "positions": [],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "ord2-3707",
+        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "ticker": "3707.TWO",
+        "name": "漢磊",
+        "side": "buy",
+        "budget_twd": 41000,
+        "limit": 84.8,
+        "stop": 74.6,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "TA首批: RS63+39.2%全場最強/多頭排列/回測MA20; 乖離200日38%貼閘門上限+當沖比重高=本批最險",
+        "tranche": "1/2 首批（站穩/創高才加後半）"
+      },
+      {
+        "id": "ord2-6719",
+        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "side": "buy",
+        "budget_twd": 41000,
+        "limit": 242.0,
+        "stop": 212.5,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "TA首批: RS63+31.2%/回測MA50 242/乖離25%健康",
+        "tranche": "1/2 首批（站穩/創高才加後半）"
+      },
+      {
+        "id": "ord2-2312",
+        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "ticker": "2312.TW",
+        "name": "金寶",
+        "side": "buy",
+        "budget_twd": 47000,
+        "limit": 33.65,
+        "stop": 30.05,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "TA首批: RS63+28.5%/回測MA50/EMS",
+        "tranche": "1/2 首批（站穩/創高才加後半）"
+      },
+      {
+        "id": "ord2-2881",
+        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "ticker": "2881.TW",
+        "name": "富邦金",
+        "side": "buy",
+        "budget_twd": 68000,
+        "limit": 126.5,
+        "stop": 117.0,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "TA首批: RS63+23.3%/回測MA20/金融=與科技分散",
+        "tranche": "1/2 首批（站穩/創高才加後半）"
+      },
+      {
+        "id": "ord2-2301",
+        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "ticker": "2301.TW",
+        "name": "光寶科",
+        "side": "buy",
+        "budget_twd": 45000,
+        "limit": 215.5,
+        "stop": 192.0,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "TA首批: RS63+16.5%/回測MA20/電源供應",
+        "tranche": "1/2 首批（站穩/創高才加後半）"
+      },
+      {
+        "id": "ord2-3035",
+        "placed_ts": "2026-07-13T14:16:54+08:00",
+        "ticker": "3035.TW",
+        "name": "智原",
+        "side": "buy",
+        "budget_twd": 42000,
+        "limit": 214.5,
+        "stop": 188.5,
+        "fill_rule": "limit_order: open<=stop void; open<=limit fill@open; low<=limit fill@limit; else expire (day order, no chase)",
+        "reason": "TA首批: RS63+16.1%/回測MA20(現價已低於線0.7%)/IC設計",
+        "tranche": "1/2 首批（站穩/創高才加後半）"
+      }
+    ],
     "trades": [],
     "benchmarks_inception": {
       "0050.TW": {
@@ -33,5 +112,5 @@
       }
     }
   ],
-  "generated_at": "2026-07-13T06:05:08.920870+00:00"
+  "generated_at": "2026-07-13T06:16:55.227466+00:00"
 }
