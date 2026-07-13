@@ -8,8 +8,30 @@
     "positions": [],
     "pending_orders": [],
     "trades": [],
-    "benchmarks_inception": {}
+    "benchmarks_inception": {
+      "0050.TW": {
+        "date": "2026-07-13",
+        "close": 106.0
+      },
+      "SPY": {
+        "date": "2026-07-10",
+        "close": 754.9500122070312
+      }
+    }
   },
-  "nav_log": [],
-  "generated_at": "2026-07-13T03:42:52.348591+00:00"
+  "nav_log": [
+    {
+      "ts": "2026-07-13T14:05:08+08:00",
+      "nav_twd": 1000000.0,
+      "return_pct": 0.0,
+      "cash_twd": 1000000.0,
+      "n_positions": 0,
+      "usdtwd": 32.081,
+      "bench_return_pct": {
+        "0050.TW": 0.0,
+        "SPY": 0.0
+      }
+    }
+  ],
+  "generated_at": "2026-07-13T06:05:08.920870+00:00"
 }
