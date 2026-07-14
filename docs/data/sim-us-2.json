@@ -1,6 +1,7 @@
 {
   "portfolio": {
     "experiment": "美股・策略2 — 全市場 × 純技術（2193 檔池）（2026-07-13 22:2x 六本制重建）",
+    "strategy": 2,
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
@@ -19,10 +20,87 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "ratchet_value": 59.184
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "sim-us-2-2026-07-14-NTAP",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "NTAP",
+        "name": "NetApp, Inc.",
+        "side": "buy",
+        "budget_twd": 120000,
+        "limit": 159.88,
+        "stop": 146.59,
+        "stop_rule": "ta",
+        "group": "Technology Hardware, Storage & Peripherals",
+        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-14"
+      },
+      {
+        "id": "sim-us-2-2026-07-14-GBTG",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class A Common Stock",
+        "side": "buy",
+        "budget_twd": 150000,
+        "limit": 9.39,
+        "stop": 8.83,
+        "stop_rule": "ta",
+        "group": "Travel Services",
+        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-14"
+      },
+      {
+        "id": "sim-us-2-2026-07-14-BRKR",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "side": "buy",
+        "budget_twd": 114000,
+        "limit": 58.45,
+        "stop": 53.34,
+        "stop_rule": "ta",
+        "group": "Health Care Equipment",
+        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-14"
+      },
+      {
+        "id": "sim-us-2-2026-07-14-FLYW",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "FLYW",
+        "name": "Flywire Corporation",
+        "side": "buy",
+        "budget_twd": 114000,
+        "limit": 16.98,
+        "stop": 15.49,
+        "stop_rule": "ta",
+        "group": "Software - Infrastructure",
+        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-14"
+      },
+      {
+        "id": "sim-us-2-2026-07-14-PAYO",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "PAYO",
+        "name": "Payoneer Global Inc.",
+        "side": "buy",
+        "budget_twd": 150000,
+        "limit": 7.06,
+        "stop": 6.64,
+        "stop_rule": "ta",
+        "group": "Transaction & Payment Processing Services",
+        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-14"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -145,7 +223,19 @@
         "SPY": -0.27
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-14T10:12:25+08:00",
+      "nav_twd": 996515.0,
+      "return_pct": -0.35,
+      "cash_twd": 871362.0,
+      "n_positions": 1,
+      "usdtwd": 32.182,
+      "bench_return_pct": {
+        "SPY": -0.4
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-13T20:23:04.339941+00:00"
+  "generated_at": "2026-07-14T02:12:32.806340+00:00"
 }

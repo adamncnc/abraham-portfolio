@@ -1,6 +1,7 @@
 {
   "portfolio": {
     "experiment": "台股・策略1 — 我看好的名單 × 進場帶紀律（2026-07-13 22:2x 六本制重建）",
+    "strategy": 1,
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
@@ -17,10 +18,19 @@
         "budget_twd": 100000,
         "limit": 220.0,
         "stop": 185,
-        "stop_rule": "daily_all",
+        "stop_rule": "weekly_all",
         "fill_rule": "limit_order: 開盤<=stop void; 開盤<=limit fill@開盤; 低<=limit fill@limit; 皆未觸 expire（當日失效不追）",
         "reason": "帶內(200-220,位置100%=帶頂)；未破50日線；乖離年線12%；健康回檔→限價=min(收盤220,帶頂220)。⚠️買在自訂便宜區的天花板，安全邊際最低。其餘 8 檔全被七關擋下（智邦/雙鴻/群聯/京元電/華城 破50日線無企穩；國巨+118%、欣興+90% froth；訊芯樂透級；奇鋐已跌破帶底）",
-        "group": "重電電網"
+        "group": "重電電網",
+        "corrections": [
+          {
+            "ts": "2026-07-14T08:04:55+08:00",
+            "field": "stop_rule",
+            "from": "daily_all",
+            "to": "weekly_all",
+            "why": "程式 bug（Codex R6 P1#4 根因）：出場規則以前由三個地方各自猜，沒人去讀 hunt-list 的認錯線註記 → 士電註明「週收破認錯線185」卻被寫成 daily_all。規格書 §5.1：倉1 註明週收破 → weekly_all。價格條件(limit/stop/預算)未變，只更正判定基準。未成交，依 §1.6 第6條可更正並須 DM 對照。"
+          }
+        ]
       }
     ],
     "pending_sells": [],
@@ -40,5 +50,5 @@
     "ticker_state": {}
   },
   "nav_log": [],
-  "generated_at": "2026-07-13T20:23:04.337937+00:00"
+  "generated_at": "2026-07-14T02:12:32.803838+00:00"
 }

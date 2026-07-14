@@ -1,6 +1,7 @@
 {
   "portfolio": {
     "experiment": "美股・策略1 — 我看好的名單 × 進場帶紀律（2026-07-13 22:2x 六本制重建）",
+    "strategy": 1,
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
@@ -19,10 +20,42 @@
         "group": "光通訊CPO",
         "cost_twd": 97229.0,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "ratchet_value": 125.9975
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "sim-us-1-2026-07-14-KLAC",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "KLAC",
+        "name": "科磊KLA",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 222.25,
+        "stop": 180.0,
+        "stop_rule": "daily_all",
+        "group": "半導體設備",
+        "reason": "七關全過（財報關已查證：KLAC 7/29、CEG 8/6，皆非鄰近）；規格書 §2。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-14.json",
+        "target_session": "2026-07-14"
+      },
+      {
+        "id": "sim-us-1-2026-07-14-CEG",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "CEG",
+        "name": "Constellation",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 257.25,
+        "stop": 215.0,
+        "stop_rule": "daily_all",
+        "group": "電力IPP",
+        "reason": "七關全過（財報關已查證：KLAC 7/29、CEG 8/6，皆非鄰近）；規格書 §2。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-14.json",
+        "target_session": "2026-07-14"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -268,7 +301,19 @@
         "SPY": -0.27
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-14T10:12:17+08:00",
+      "nav_twd": 997027.0,
+      "return_pct": -0.3,
+      "cash_twd": 902771.0,
+      "n_positions": 1,
+      "usdtwd": 32.172,
+      "bench_return_pct": {
+        "SPY": -0.43
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-13T20:23:04.339941+00:00"
+  "generated_at": "2026-07-14T02:12:32.805837+00:00"
 }

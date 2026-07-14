@@ -1,13 +1,30 @@
 {
   "portfolio": {
     "experiment": "美股・策略3 — 我看好的名單 × 純技術（2026-07-13 22:2x 六本制重建）",
+    "strategy": 3,
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
     "cash_twd": 1000000.0,
     "realized_pnl_twd": 0.0,
     "positions": [],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "sim-us-3-2026-07-14-ASML",
+        "placed_ts": "2026-07-14T07:48:54+08:00",
+        "ticker": "ASML",
+        "name": "ASML",
+        "side": "buy",
+        "budget_twd": 91000,
+        "limit": 1689.92,
+        "stop": 1505.32,
+        "stop_rule": "ta",
+        "group": "半導體設備",
+        "reason": "全池 26 檔唯一過技術面者。⚠️ 明日(7/15)財報——倉3 純技術，規格書 §6 明文『倉2／3 照做』。DM 1526374377627582534",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-14"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -51,7 +68,19 @@
         "SPY": -0.27
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-14T10:12:31+08:00",
+      "nav_twd": 1000000.0,
+      "return_pct": 0.0,
+      "cash_twd": 1000000.0,
+      "n_positions": 0,
+      "usdtwd": 32.183,
+      "bench_return_pct": {
+        "SPY": -0.4
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-13T20:23:04.341952+00:00"
+  "generated_at": "2026-07-14T02:12:32.807343+00:00"
 }

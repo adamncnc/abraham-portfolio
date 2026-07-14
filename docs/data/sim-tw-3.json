@@ -1,6 +1,7 @@
 {
   "portfolio": {
     "experiment": "台股・策略3 — 我看好的名單 × 純技術（2026-07-13 22:2x 六本制重建）",
+    "strategy": 3,
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
@@ -40,5 +41,5 @@
     "ticker_state": {}
   },
   "nav_log": [],
-  "generated_at": "2026-07-13T20:23:04.339941+00:00"
+  "generated_at": "2026-07-14T02:12:32.804838+00:00"
 }
