@@ -21,7 +21,8 @@
         "cost_twd": 128638.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 59.184
+        "ratchet_value": 59.184,
+        "ratchet_asof": "2026-07-14"
       }
     ],
     "pending_orders": [
@@ -235,7 +236,19 @@
         "SPY": -0.4
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-14T14:06:13+08:00",
+      "nav_twd": 996418.0,
+      "return_pct": -0.36,
+      "cash_twd": 871362.0,
+      "n_positions": 1,
+      "usdtwd": 32.157,
+      "bench_return_pct": {
+        "SPY": -0.48
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-14T02:12:32.806340+00:00"
+  "generated_at": "2026-07-14T06:06:23.929481+00:00"
 }
