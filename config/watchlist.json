@@ -21,8 +21,8 @@
       "currency": "TWD",
       "theme": "散熱/液冷龍頭",
       "notes": "散熱/液冷龍頭; 狙擊區 1950-2150",
-      "entry_zone_lo": 2260,
-      "entry_zone_hi": 2400
+      "entry_zone_lo": 1850,
+      "entry_zone_hi": 2050
     },
     {
       "id": "2330",
