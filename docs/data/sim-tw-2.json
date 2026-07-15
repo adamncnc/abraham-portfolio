@@ -207,6 +207,126 @@
         "reason": "倉2 純技術：RS63 +7.3% 由高到低機械取（規格書 §3.4）；A回檔MA50；台股首批半倉 102,000→51,000（實際下單 6 筆 ≥3）。DM 1526489260960514189",
         "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
         "target_session": "2026-07-15"
+      },
+      {
+        "id": "actionable-2026-07-15-2881.TW",
+        "placed_ts": "2026-07-15T15:26:47+08:00",
+        "ticker": "2881.TW",
+        "name": "富邦金",
+        "side": "buy",
+        "budget_twd": 65000,
+        "limit": 129.0,
+        "stop": 119.0,
+        "stop_rule": "ta",
+        "group": "金融",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json",
+          "date": "2026-07-15",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2881",
+            "name": "富邦金",
+            "yf": "2881.TW",
+            "group": "金融",
+            "px": 128.5,
+            "ma20": 129.12,
+            "ma50": 115.03,
+            "ma200_gap": 32.3,
+            "rs63": 18.0,
+            "atr20_pct": 3.9,
+            "setup": "A回檔MA20",
+            "limit": 129.0,
+            "stop": 119.0,
+            "stop_pct": -7.7,
+            "budget": 65000,
+            "budget_full_screen": 130000,
+            "half_note": "台股首批半倉 §3.4.5 人工：實際下單 3 筆 >=3 -> x50%",
+            "dm_msg_id": "1526852364529832056",
+            "rs_rank_today": 5
+          }
+        },
+        "target_session": "2026-07-16"
+      },
+      {
+        "id": "actionable-2026-07-15-2404.TW",
+        "placed_ts": "2026-07-15T15:26:47+08:00",
+        "ticker": "2404.TW",
+        "name": "漢唐",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 1285.0,
+        "stop": 1130.0,
+        "stop_rule": "ta",
+        "group": "ind-31",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json",
+          "date": "2026-07-15",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2404",
+            "name": "漢唐",
+            "yf": "2404.TW",
+            "group": "ind-31",
+            "px": 1285.0,
+            "ma20": 1285.0,
+            "ma50": 1187.82,
+            "ma200_gap": 29.9,
+            "rs63": 11.7,
+            "atr20_pct": 6.1,
+            "setup": "A回檔MA20",
+            "limit": 1285.0,
+            "stop": 1130.0,
+            "stop_pct": -12.0,
+            "budget": 41500,
+            "budget_full_screen": 83000,
+            "half_note": "台股首批半倉 §3.4.5 人工：實際下單 3 筆 >=3 -> x50%",
+            "dm_msg_id": "1526852364529832056",
+            "rs_rank_today": 6
+          }
+        },
+        "target_session": "2026-07-16"
+      },
+      {
+        "id": "actionable-2026-07-15-3605.TW",
+        "placed_ts": "2026-07-15T15:26:47+08:00",
+        "ticker": "3605.TW",
+        "name": "宏致",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 82.6,
+        "stop": 72.6,
+        "stop_rule": "ta",
+        "group": "ind-28",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json",
+          "date": "2026-07-15",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "3605",
+            "name": "宏致",
+            "yf": "3605.TW",
+            "group": "ind-28",
+            "px": 85.8,
+            "ma20": 82.67,
+            "ma50": 80.33,
+            "ma200_gap": 23.8,
+            "rs63": 4.7,
+            "atr20_pct": 6.1,
+            "setup": "A回檔MA20",
+            "limit": 82.6,
+            "stop": 72.6,
+            "stop_pct": -12.0,
+            "budget": 41500,
+            "budget_full_screen": 83000,
+            "half_note": "台股首批半倉 §3.4.5 人工：實際下單 3 筆 >=3 -> x50%",
+            "dm_msg_id": "1526852364529832056",
+            "rs_rank_today": 11
+          }
+        },
+        "target_session": "2026-07-16"
       }
     ],
     "pending_sells": [],
@@ -301,7 +421,7 @@
         "reason": "台股RS #6 +16.5%／A回檔MA20／族群 網通伺服器／首批半倉（本批 6 筆 >=3）"
       },
       {
-        "ts": "2026-07-15T14:05:57+08:00",
+        "ts": "2026-07-15T15:14:16+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -594,5 +714,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-15T06:06:07.094883+00:00"
+  "generated_at": "2026-07-15T21:20:30.538232+00:00"
 }

@@ -99,7 +99,19 @@
         "SPY": -0.18
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-16T05:20:29+08:00",
+      "nav_twd": 1000000.0,
+      "return_pct": 0.0,
+      "cash_twd": 1000000.0,
+      "n_positions": 0,
+      "usdtwd": 32.143,
+      "bench_return_pct": {
+        "SPY": 0.23
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-15T06:06:07.097883+00:00"
+  "generated_at": "2026-07-15T21:20:30.541980+00:00"
 }
