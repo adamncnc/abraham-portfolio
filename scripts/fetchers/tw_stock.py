@@ -6,7 +6,7 @@ the dashboard can render regardless of underlying data source.
 from __future__ import annotations
 
 import math
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import yfinance as yf
 
@@ -24,40 +24,59 @@ def _sanitize(value):
 
 
 def _tw_revenue_growth(symbol: str):
-    """台股營收成長: FinMind 月營收 YoY + 月加速度 (anonymous, 無 token)。
+    """台股營收成長: FinMind 月營收 (anonymous, 無 token)。
     台股用「月營收」因它最即時(每月10號公布)、且 Yahoo revenueGrowth 對台股是混合/TTM
     會誤導 (feedback_yahoo_revenuegrowth_vs_monthly: 6/16 力智誤報+0%實際-9.6% / 大中+4%實際+22%)。
-    回 (yoy_pct, accel_pp, asof);任何失敗皆 graceful 回 (None,None,None) 不影響主 fetch。"""
+    回 dict(yoy/accel/mom/qoq/asof)：yoy=年增率、accel=本月YoY−上月YoY、
+    mom=月增率(本月vs上月)、qoq=季增率=最近3個月合計vs前一輪3個月合計(滾動, Adam 2026-07-15:
+    例 4/5/6 vs 1/2/3)。任何失敗皆 graceful 回全 None dict 不影響主 fetch。"""
+    empty = {"yoy": None, "accel": None, "mom": None, "qoq": None, "asof": None}
     code = symbol.split(".")[0]
     try:
         import requests
         r = requests.get(
             "https://api.finmindtrade.com/api/v4/data",
-            params={"dataset": "TaiwanStockMonthRevenue", "data_id": code, "start_date": f"{datetime.now().year - 1}-01-01"},  # dynamic: prior-year same-month needed for YoY (audit 2026-07-03 P3-19)
+            # 550 天 ≈ 18 個月：YoY 要去年同月(最遠 13 個月前)、滾動 QoQ 要 6 個月，全年任何月份都夠
+            # (舊寫法 now().year-1 年初會缺去年同月, audit 2026-07-03 P3-19 的殘邊)
+            params={"dataset": "TaiwanStockMonthRevenue", "data_id": code, "start_date": (datetime.now() - timedelta(days=550)).strftime("%Y-%m-01")},
             headers={"User-Agent": "Mozilla/5.0"}, timeout=20,
         )
         j = r.json()
         if j.get("msg") != "success":
-            return (None, None, None)
+            return empty
         hist = {(d["revenue_year"], d["revenue_month"]): d["revenue"] for d in j.get("data", [])}
         if not hist:
-            return (None, None, None)
+            return empty
         y, m = max(hist.keys())
+
+        def _back(yy, mm, k):
+            """k 個月前的 (年, 月)，跨年安全。"""
+            idx = yy * 12 + (mm - 1) - k
+            return idx // 12, idx % 12 + 1
 
         def _yoy(yy, mm):
             cur, prev = hist.get((yy, mm)), hist.get((yy - 1, mm))
             return None if (not cur or not prev) else (cur / prev - 1.0) * 100.0
 
-        m1y, m1m = (y, m - 1) if m > 1 else (y - 1, 12)
-        y0, y1 = _yoy(y, m), _yoy(m1y, m1m)
+        y0, y1 = _yoy(y, m), _yoy(*_back(y, m, 1))
         accel = (y0 - y1) if (y0 is not None and y1 is not None) else None
-        return (
-            round(y0, 1) if y0 is not None else None,
-            round(accel, 1) if accel is not None else None,
-            f"{y}-{m:02d}",
-        )
+
+        cur, prev = hist.get((y, m)), hist.get(_back(y, m, 1))
+        mom = (cur / prev - 1.0) * 100.0 if (cur and prev) else None
+
+        # 滾動 3 月 QoQ：6 個月缺任一筆就回 None——寧可不顯示也不給部分合計的假數字
+        six = [hist.get(_back(y, m, k)) for k in range(6)]
+        qoq = (sum(six[:3]) / sum(six[3:]) - 1.0) * 100.0 if all(six) else None
+
+        return {
+            "yoy": round(y0, 1) if y0 is not None else None,
+            "accel": round(accel, 1) if accel is not None else None,
+            "mom": round(mom, 1) if mom is not None else None,
+            "qoq": round(qoq, 1) if qoq is not None else None,
+            "asof": f"{y}-{m:02d}",
+        }
     except Exception:  # noqa: BLE001
-        return (None, None, None)
+        return empty
 
 
 def fetch_tw_stock(symbol: str) -> dict:
@@ -98,7 +117,7 @@ def fetch_tw_stock(symbol: str) -> dict:
         # percentage-format `yield` fallback x100 protection - blank beats wrong (audit 2026-07-03 P2-6)
         dividend_yield = None
 
-    tw_rev_yoy, tw_rev_accel, tw_rev_asof = _tw_revenue_growth(symbol)
+    tw_rev = _tw_revenue_growth(symbol)
 
     return {
         "symbol": symbol,
@@ -134,10 +153,12 @@ def fetch_tw_stock(symbol: str) -> dict:
         "eps": _sanitize(info.get("trailingEps")),  # 年EPS (TTM, 近四季加總)
         "eps_q": fetch_recent_quarter_eps(symbol),  # 季EPS (最近單季公布值; 台股 Yahoo 常無 → None)
         "gross_margins": _sanitize(info.get("grossMargins")),
-        "rev_yoy_pct": tw_rev_yoy,
-        "rev_accel_pp": tw_rev_accel,
-        "rev_growth_period": "月" if tw_rev_yoy is not None else None,
-        "rev_growth_asof": tw_rev_asof,
+        "rev_yoy_pct": tw_rev["yoy"],
+        "rev_accel_pp": tw_rev["accel"],
+        "rev_mom_pct": tw_rev["mom"],  # 月增率 (Adam 2026-07-15)
+        "rev_qoq_pct": tw_rev["qoq"],  # 季增率: 滾動3月合計 vs 前3月合計 (Adam 2026-07-15)
+        "rev_growth_period": "月" if tw_rev["yoy"] is not None else None,
+        "rev_growth_asof": tw_rev["asof"],
         "expense_ratio": _sanitize(info.get("netExpenseRatio") or info.get("annualReportExpenseRatio")),
         "ytd_return_pct": _sanitize(info.get("ytdReturn")),
         "regular_market_time": _sanitize(info.get("regularMarketTime")),

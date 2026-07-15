@@ -76,3 +76,29 @@ def fetch_recent_quarter_eps(symbol: str):
         return round(val, 4) if val is not None else None
     except Exception:  # noqa: BLE001
         return None
+
+
+def fetch_quarterly_revenue_qoq(symbol: str):
+    """最新一季總營收 vs 前一季的季增率 % (Adam 2026-07-15 的「季增率」, 美股腿)。
+
+    台股腿的季增率走 FinMind 月營收滾動 3 月合計 (tw_stock._tw_revenue_growth);
+    美股沒有月營收, 對應物就是財報季營收 QoQ。Source = ``Ticker.quarterly_income_stmt``
+    的 "Total Revenue" — 這張表 Yahoo 在財報後幾天才更新 (比 earnings_history 慢),
+    季增率是慢節奏指標所以可接受。任何失敗 → None (卡片不顯示該列, blank beats wrong)。
+    """
+    import yfinance as yf
+
+    try:
+        df = yf.Ticker(symbol).quarterly_income_stmt
+        if df is None or getattr(df, "empty", True) or "Total Revenue" not in df.index:
+            return None
+        series = df.loc["Total Revenue"].dropna()
+        if len(series) < 2:
+            return None
+        series = series.sort_index()  # columns = 季末日期, 升冪後尾巴是最新季
+        cur, prev = _clean(series.iloc[-1]), _clean(series.iloc[-2])
+        if not cur or not prev:
+            return None
+        return round((cur / prev - 1.0) * 100.0, 1)
+    except Exception:  # noqa: BLE001
+        return None

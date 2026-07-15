@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 
 import yfinance as yf
 
-from ._fundamentals import fetch_recent_quarter_eps
+from ._fundamentals import fetch_quarterly_revenue_qoq, fetch_recent_quarter_eps
 from ._history import fetch_history
 
 
@@ -109,6 +109,8 @@ def fetch_us_stock(symbol: str) -> dict:
         "gross_margins": _sanitize(info.get("grossMargins")),
         "rev_yoy_pct": rev_yoy_pct,
         "rev_accel_pp": None,
+        "rev_mom_pct": None,  # 美股無月營收, 月增率不適用 (Adam 2026-07-15)
+        "rev_qoq_pct": fetch_quarterly_revenue_qoq(symbol),  # 季增率: 最新季 vs 前季 (Adam 2026-07-15)
         "rev_growth_period": "季" if rev_yoy_pct is not None else None,
         "expense_ratio": _sanitize(info.get("netExpenseRatio") or info.get("annualReportExpenseRatio")),
         "ytd_return_pct": _sanitize(info.get("ytdReturn")),

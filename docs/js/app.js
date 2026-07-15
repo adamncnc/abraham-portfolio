@@ -733,6 +733,15 @@ function buildAssetCard(item, section) {
     const per = data.rev_growth_period ? `(${data.rev_growth_period})` : "";
     metrics.push([`營收成長率${per}`, `<span class="${changeClass(data.rev_yoy_pct)}">${fmtPct(data.rev_yoy_pct)}</span>`]);
   }
+  // 月增率/季增率 (Adam 2026-07-15): 上面的營收成長率是「跟去年同月比」, 會把月對月的
+  // 回落藏起來 (旺矽 6 月 MoM -3.9% 但 YoY +65% 的盲點)。月增率=本月vs上月 (台股月營收才有);
+  // 季增率=台股取最近3個月合計vs前一輪3個月合計 (滾動, 例 4/5/6 vs 1/2/3) / 美股=最新季vs前季。
+  if (data.rev_mom_pct !== null && data.rev_mom_pct !== undefined) {
+    metrics.push(["月增率", `<span class="${changeClass(data.rev_mom_pct)}">${fmtPct(data.rev_mom_pct)}</span>`]);
+  }
+  if (data.rev_qoq_pct !== null && data.rev_qoq_pct !== undefined) {
+    metrics.push(["季增率", `<span class="${changeClass(data.rev_qoq_pct)}">${fmtPct(data.rev_qoq_pct)}</span>`]);
+  }
   if (data.rev_accel_pp !== null && data.rev_accel_pp !== undefined) {
     const a = data.rev_accel_pp;
     const tag = a > 0.5 ? "↑加速" : a < -0.5 ? "↓減速" : "→持平";
