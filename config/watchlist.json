@@ -646,6 +646,15 @@
       "notes": "客製 AI ASIC 軍火商(Meta Iris 9月量產/Apple Baltra 長約 2031/TPU)+AI 網通+VMware; Trend Core 本週 3 報告核心受益位→Adam 7/13 明示加入; 品質頂(毛利76%/ROE37%/FCF $27B) BUT 債 $64.9B(VMware); 2026FY PE 34.4x(勿用 trailing 66x 攤銷失真/勿用 fwd 20.6x 明年假便宜); 45 分析師 strong_buy mean ",
       "entry_zone_lo": 357,
       "entry_zone_hi": 372
+    },
+    {
+      "id": "skhy",
+      "type": "us_stock",
+      "symbol": "SKHY",
+      "name": "SK海力士",
+      "currency": "USD",
+      "theme": "SK 海力士美股存託憑證(ADS, Nasdaq Nas",
+      "notes": "SK 海力士美股存託憑證(ADS, Nasdaq NasdaqGS, USD); 全球第2大記憶體廠=HBM 龍頭(供 NVIDIA)+DRAM/NAND, 記憶體超級循環最純大型玩法之一(與美光 MU/SanDisk SNDK/群聯 8299 同族). 7/10 於那斯達克首日交易(SEC 一手源: F-1 6/24→註冊生效+定價 7/9→424B4 7/10; CIK 2120882; 影片稱美股史上最大外國 IPO $26.5B/超額 7 倍=二手未獨立驗). ⚠️*"
     }
   ]
 }
