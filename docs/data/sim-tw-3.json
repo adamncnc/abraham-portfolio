@@ -87,7 +87,15 @@
           ]
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": []
+        "corporate_actions": [
+          {
+            "date": "2025-07-17",
+            "kind": "div",
+            "amount": 1.696934,
+            "source_count": 1,
+            "key": "div:2025-07-17"
+          }
+        ]
       }
     },
     "benchmarks_inception": {
@@ -120,5 +128,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-15T02:25:20.566285+00:00"
+  "generated_at": "2026-07-15T06:06:07.095882+00:00"
 }
