@@ -23,7 +23,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 176.95,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 244.0
       }
     ],
     "pending_orders": [],
@@ -58,12 +59,35 @@
     "ticker_state": {
       "6719.TW": {
         "splits_applied": [],
-        "divs_credited": [
-          "2022-08-30",
-          "2023-07-04",
-          "2024-07-18",
-          "2025-07-17"
-        ]
+        "divs_credited": [],
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "6719.TW",
+            "name": "力智",
+            "shares": 342,
+            "avg_price": 242.0,
+            "fill_date": "2026-07-14",
+            "fx_at_fill": 1.0,
+            "stop": 212.5,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-14",
+            "group": "IC設計電源",
+            "cost_twd": 82882.0,
+            "half_locked": false,
+            "ratchet_armed": true,
+            "ratchet_value": 176.95,
+            "ratchet_asof": "2026-07-14",
+            "fill_ref_close": 244.0
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-14",
+              "value": 212.5
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": []
       }
     },
     "benchmarks_inception": {
@@ -96,5 +120,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-14T06:06:23.927481+00:00"
+  "generated_at": "2026-07-15T00:15:14.343135+00:00"
 }

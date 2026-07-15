@@ -21,87 +21,13 @@
         "cost_twd": 128638.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 59.184,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_value": 59.7685,
+        "ratchet_asof": "2026-07-15",
+        "fill_ref_close": 67.050003,
+        "stop_asof": "2026-07-13"
       }
     ],
-    "pending_orders": [
-      {
-        "id": "sim-us-2-2026-07-14-NTAP",
-        "placed_ts": "2026-07-14T07:48:54+08:00",
-        "ticker": "NTAP",
-        "name": "NetApp, Inc.",
-        "side": "buy",
-        "budget_twd": 120000,
-        "limit": 159.88,
-        "stop": 146.59,
-        "stop_rule": "ta",
-        "group": "Technology Hardware, Storage & Peripherals",
-        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
-        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
-        "target_session": "2026-07-14"
-      },
-      {
-        "id": "sim-us-2-2026-07-14-GBTG",
-        "placed_ts": "2026-07-14T07:48:54+08:00",
-        "ticker": "GBTG",
-        "name": "Global Business Travel Group, Inc. Class A Common Stock",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 9.39,
-        "stop": 8.83,
-        "stop_rule": "ta",
-        "group": "Travel Services",
-        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
-        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
-        "target_session": "2026-07-14"
-      },
-      {
-        "id": "sim-us-2-2026-07-14-BRKR",
-        "placed_ts": "2026-07-14T07:48:54+08:00",
-        "ticker": "BRKR",
-        "name": "Bruker Corporation",
-        "side": "buy",
-        "budget_twd": 114000,
-        "limit": 58.45,
-        "stop": 53.34,
-        "stop_rule": "ta",
-        "group": "Health Care Equipment",
-        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
-        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
-        "target_session": "2026-07-14"
-      },
-      {
-        "id": "sim-us-2-2026-07-14-FLYW",
-        "placed_ts": "2026-07-14T07:48:54+08:00",
-        "ticker": "FLYW",
-        "name": "Flywire Corporation",
-        "side": "buy",
-        "budget_twd": 114000,
-        "limit": 16.98,
-        "stop": 15.49,
-        "stop_rule": "ta",
-        "group": "Software - Infrastructure",
-        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
-        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
-        "target_session": "2026-07-14"
-      },
-      {
-        "id": "sim-us-2-2026-07-14-PAYO",
-        "placed_ts": "2026-07-14T07:48:54+08:00",
-        "ticker": "PAYO",
-        "name": "Payoneer Global Inc.",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 7.06,
-        "stop": 6.64,
-        "stop_rule": "ta",
-        "group": "Transaction & Payment Processing Services",
-        "reason": "RS63 由高到低機械取；RAMP(RS36.6%) 被總部位 80% 上限擋下，不縮股數硬買。規格書 §3.4。DM 1526374377627582534",
-        "source_file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-14.json",
-        "target_session": "2026-07-14"
-      }
-    ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -177,6 +103,61 @@
         "low": 17.729999542236328,
         "limit": 16.83,
         "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-15T08:15:01+08:00",
+        "order_id": "sim-us-2-2026-07-14-NTAP",
+        "ticker": "NTAP",
+        "name": "NetApp, Inc.",
+        "action": "expire_unfilled",
+        "open": 166.3699951171875,
+        "low": 164.41000366210938,
+        "limit": 159.88,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-15T08:15:01+08:00",
+        "order_id": "sim-us-2-2026-07-14-GBTG",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class A Common Stock",
+        "action": "expire_unfilled",
+        "open": 9.399999618530273,
+        "low": 9.399999618530273,
+        "limit": 9.39,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-15T08:15:01+08:00",
+        "order_id": "sim-us-2-2026-07-14-BRKR",
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "action": "expire_unfilled",
+        "open": 59.31999969482422,
+        "low": 58.619998931884766,
+        "limit": 58.45,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-15T08:15:01+08:00",
+        "order_id": "sim-us-2-2026-07-14-FLYW",
+        "ticker": "FLYW",
+        "name": "Flywire Corporation",
+        "action": "expire_unfilled",
+        "open": 17.770000457763672,
+        "low": 17.530000686645508,
+        "limit": 16.98,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-15T08:15:01+08:00",
+        "order_id": "sim-us-2-2026-07-14-PAYO",
+        "ticker": "PAYO",
+        "name": "Payoneer Global Inc.",
+        "action": "expire_unfilled",
+        "open": 7.110000133514404,
+        "low": 7.099999904632568,
+        "limit": 7.06,
+        "fill_mode": null
       }
     ],
     "benchmark_spec": {
@@ -188,11 +169,62 @@
     "ticker_state": {
       "RAL": {
         "splits_applied": [],
-        "divs_credited": [
-          "2025-09-08",
-          "2025-12-08",
-          "2026-03-09",
-          "2026-06-08"
+        "divs_credited": [],
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "RAL",
+            "name": "Ralliant Corporation Common Stock",
+            "shares": 58,
+            "avg_price": 68.48,
+            "fill_date": "2026-07-13",
+            "fx_at_fill": 32.2239990234375,
+            "stop": 64.14,
+            "stop_rule": "ta",
+            "group": "Electronic Equipment & Instruments",
+            "cost_twd": 128638.0,
+            "half_locked": false,
+            "ratchet_armed": false,
+            "ratchet_value": 59.184,
+            "ratchet_asof": "2026-07-14",
+            "fill_ref_close": 67.05000305175781
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-13",
+              "value": 64.14
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-09-08",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2025-09-08"
+          },
+          {
+            "date": "2025-12-08",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2025-12-08"
+          },
+          {
+            "date": "2026-03-09",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2026-03-09"
+          },
+          {
+            "date": "2026-06-08",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2026-06-08"
+          }
         ]
       }
     },
@@ -248,7 +280,19 @@
         "SPY": -0.48
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-15T08:15:05+08:00",
+      "nav_twd": 997253.0,
+      "return_pct": -0.27,
+      "cash_twd": 871362.0,
+      "n_positions": 1,
+      "usdtwd": 32.137,
+      "bench_return_pct": {
+        "SPY": -0.18
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-14T06:06:23.929481+00:00"
+  "generated_at": "2026-07-15T00:15:14.345139+00:00"
 }

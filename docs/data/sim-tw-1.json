@@ -23,7 +23,8 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 178.15,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 205.0
       }
     ],
     "pending_orders": [],
@@ -118,5 +119,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-14T06:06:23.926481+00:00"
+  "generated_at": "2026-07-15T00:15:14.341132+00:00"
 }

@@ -23,7 +23,8 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 56.735,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 77.5999984741211
       },
       {
         "ticker": "6719.TW",
@@ -40,7 +41,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 176.95,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 244.0
       },
       {
         "ticker": "8926.TW",
@@ -57,7 +59,8 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 55.765,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 67.30000305175781
       },
       {
         "ticker": "2312.TW",
@@ -74,7 +77,8 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 26.9875,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 32.79999923706055
       },
       {
         "ticker": "2356.TW",
@@ -91,7 +95,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 53.77,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 63.70000076293945
       },
       {
         "ticker": "2301.TW",
@@ -108,10 +113,102 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 174.4,
-        "ratchet_asof": "2026-07-14"
+        "ratchet_asof": "2026-07-14",
+        "fill_ref_close": 212.5
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "sim-tw-2-2026-07-14-2377.TW",
+        "placed_ts": "2026-07-14T15:26:06+08:00",
+        "ticker": "2377.TW",
+        "name": "微星",
+        "side": "buy",
+        "budget_twd": 59000,
+        "limit": 140.0,
+        "stop": 128.0,
+        "stop_rule": "ta",
+        "group": "ind-25",
+        "reason": "倉2 純技術：RS63 +37.9% 由高到低機械取（規格書 §3.4）；A回檔MA20；台股首批半倉 118,000→59,000（實際下單 6 筆 ≥3）。DM 1526489260960514189",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-15"
+      },
+      {
+        "id": "sim-tw-2-2026-07-14-8016.TW",
+        "placed_ts": "2026-07-14T15:26:06+08:00",
+        "ticker": "8016.TW",
+        "name": "矽創",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 298.5,
+        "stop": 262.5,
+        "stop_rule": "ta",
+        "group": "ind-24",
+        "reason": "倉2 純技術：RS63 +27.4% 由高到低機械取（規格書 §3.4）；A回檔MA50；台股首批半倉 83,000→41,500（實際下單 6 筆 ≥3）。DM 1526489260960514189",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-15"
+      },
+      {
+        "id": "sim-tw-2-2026-07-14-5536.TWO",
+        "placed_ts": "2026-07-14T15:26:06+08:00",
+        "ticker": "5536.TWO",
+        "name": "聖暉*",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 1105.0,
+        "stop": 972.0,
+        "stop_rule": "ta",
+        "group": "ind-31",
+        "reason": "倉2 純技術：RS63 +26.2% 由高到低機械取（規格書 §3.4）；A回檔MA50；台股首批半倉 83,000→41,500（實際下單 6 筆 ≥3）。DM 1526489260960514189",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-15"
+      },
+      {
+        "id": "sim-tw-2-2026-07-14-2465.TW",
+        "placed_ts": "2026-07-14T15:26:06+08:00",
+        "ticker": "2465.TW",
+        "name": "麗臺",
+        "side": "buy",
+        "budget_twd": 43000,
+        "limit": 80.6,
+        "stop": 71.2,
+        "stop_rule": "ta",
+        "group": "ind-25",
+        "reason": "倉2 純技術：RS63 +11.4% 由高到低機械取（規格書 §3.4）；A回檔MA50；台股首批半倉 86,000→43,000（實際下單 6 筆 ≥3）。DM 1526489260960514189",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-15"
+      },
+      {
+        "id": "sim-tw-2-2026-07-14-6202.TW",
+        "placed_ts": "2026-07-14T15:26:06+08:00",
+        "ticker": "6202.TW",
+        "name": "盛群",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 67.6,
+        "stop": 59.4,
+        "stop_rule": "ta",
+        "group": "ind-24",
+        "reason": "倉2 純技術：RS63 +7.9% 由高到低機械取（規格書 §3.4）；A回檔MA20；台股首批半倉 83,000→41,500（實際下單 6 筆 ≥3）。DM 1526489260960514189",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-15"
+      },
+      {
+        "id": "sim-tw-2-2026-07-14-2882.TW",
+        "placed_ts": "2026-07-14T15:26:06+08:00",
+        "ticker": "2882.TW",
+        "name": "國泰金",
+        "side": "buy",
+        "budget_twd": 51000,
+        "limit": 92.1,
+        "stop": 83.0,
+        "stop_rule": "ta",
+        "group": "金融",
+        "reason": "倉2 純技術：RS63 +7.3% 由高到低機械取（規格書 §3.4）；A回檔MA50；台股首批半倉 102,000→51,000（實際下單 6 筆 ≥3）。DM 1526489260960514189",
+        "source_file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-14.json",
+        "target_session": "2026-07-15"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -387,5 +484,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-14T06:06:23.927481+00:00"
+  "generated_at": "2026-07-15T00:15:14.341132+00:00"
 }
