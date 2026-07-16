@@ -655,6 +655,17 @@
       "currency": "USD",
       "theme": "SK 海力士美股存託憑證(ADS, Nasdaq Nas",
       "notes": "SK 海力士美股存託憑證(ADS, Nasdaq NasdaqGS, USD); 全球第2大記憶體廠=HBM 龍頭(供 NVIDIA)+DRAM/NAND, 記憶體超級循環最純大型玩法之一(與美光 MU/SanDisk SNDK/群聯 8299 同族). 7/10 於那斯達克首日交易(SEC 一手源: F-1 6/24→註冊生效+定價 7/9→424B4 7/10; CIK 2120882; 影片稱美股史上最大外國 IPO $26.5B/超額 7 倍=二手未獨立驗). ⚠️*"
+    },
+    {
+      "id": "aehr",
+      "type": "us_stock",
+      "symbol": "AEHR",
+      "name": "Aehr Test Systems",
+      "currency": "USD",
+      "theme": "晶圓級燒機測試設備(wafer-level burn-i",
+      "notes": "晶圓級燒機測試設備(wafer-level burn-in; 美股NasdaqGS USD); 產品FOX(晶圓級)+Sonoma(封裝級,撐單顆2000W). 7/16 Adam截圖深調後明示加入(ast-0042). **一次真轉型**: 舊業務EV碳化矽SiC從>95%營收崩到<5%(EV放緩+主動轉型), 轉AI燒機=AI加速器/CPU/網通71%營收+矽光子20%. 催化=FY2026 Q4(截5/31,7/14盤後)beat(營收$18.8M+34% YoY/no",
+      "entry_zone_lo": 62,
+      "entry_zone_hi": 72
     }
   ]
 }

@@ -8,7 +8,44 @@
     "cash_twd": 1000000.0,
     "realized_pnl_twd": 0.0,
     "positions": [],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-16-ASML",
+        "placed_ts": "2026-07-16T07:42:50+08:00",
+        "ticker": "ASML",
+        "name": "ASML",
+        "side": "buy",
+        "budget_twd": 95000,
+        "limit": 1822.61,
+        "stop": 1632.41,
+        "stop_rule": "ta",
+        "group": "半導體設備",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "ASML",
+            "name": "ASML",
+            "yf": "ASML",
+            "group": "半導體設備",
+            "px": 1815.27,
+            "ma20": 1822.61,
+            "ma50": 1704.41,
+            "ma200_gap": 34.6,
+            "rs63": 10.9,
+            "atr20_pct": 5.2,
+            "setup": "A回檔MA20",
+            "limit": 1822.61,
+            "stop": 1632.41,
+            "stop_pct": -10.4,
+            "budget": 95000
+          }
+        },
+        "target_session": "2026-07-16"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -113,5 +150,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-15T21:20:30.541980+00:00"
+  "generated_at": "2026-07-16T03:29:51.938820+00:00"
 }
