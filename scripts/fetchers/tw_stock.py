@@ -11,7 +11,7 @@ from datetime import datetime, timedelta, timezone
 import yfinance as yf
 
 from ._fundamentals import fetch_recent_quarter_eps
-from ._history import fetch_history
+from ._history import fetch_history, resolve_price
 
 
 def _sanitize(value):
@@ -82,9 +82,19 @@ def _tw_revenue_growth(symbol: str):
 def fetch_tw_stock(symbol: str) -> dict:
     ticker = yf.Ticker(symbol)
     info = ticker.info or {}
+    history = fetch_history(symbol)  # fetched once; reused for the close-fallback + output
+    market_state = info.get("marketState")
 
-    price = _sanitize(info.get("regularMarketPrice"))
-    prev_close = _sanitize(info.get("regularMarketPreviousClose") or info.get("previousClose"))
+    # Post-close, yfinance's regularMarketPrice intermittently returns None for some
+    # TW tickers (2026-07-16: TPEx name 力智 6719.TW after 13:30). resolve_price falls
+    # back to the last completed daily close — but only when it is *proven* completed
+    # (known non-REGULAR state) and recent, paired within the same series. Anything
+    # unproven stays None so carry_forward_stale flags it stale. See _history.py.
+    price, prev_close = resolve_price(
+        _sanitize(info.get("regularMarketPrice")),
+        _sanitize(info.get("regularMarketPreviousClose") or info.get("previousClose")),
+        history, market_state,
+    )
 
     change = None
     change_pct = None
@@ -162,8 +172,8 @@ def fetch_tw_stock(symbol: str) -> dict:
         "expense_ratio": _sanitize(info.get("netExpenseRatio") or info.get("annualReportExpenseRatio")),
         "ytd_return_pct": _sanitize(info.get("ytdReturn")),
         "regular_market_time": _sanitize(info.get("regularMarketTime")),
-        "market_state": info.get("marketState"),
+        "market_state": market_state,
         "long_name": info.get("longName") or info.get("shortName"),
         "fetched_at": datetime.now(timezone.utc).isoformat(),
-        "history": fetch_history(symbol),
+        "history": history,
     }
