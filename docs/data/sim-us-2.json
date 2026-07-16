@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 871362.2826806493,
+    "cash_twd": 569918.6029565898,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -22,229 +22,66 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 59.8105,
-        "ratchet_asof": "2026-07-16",
+        "ratchet_asof": "2026-07-17",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13"
-      }
-    ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-07-16-FTRE",
-        "placed_ts": "2026-07-16T07:42:49+08:00",
-        "ticker": "FTRE",
-        "name": "Fortrea Holdings Inc.",
-        "side": "buy",
-        "budget_twd": 91000,
-        "limit": 17.12,
-        "stop": 15.25,
-        "stop_rule": "ta",
-        "group": "Biotechnology",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "FTRE",
-            "name": "Fortrea Holdings Inc.",
-            "yf": "FTRE",
-            "group": "Biotechnology",
-            "px": 17.91,
-            "ma20": 17.12,
-            "ma50": 15.84,
-            "ma200_gap": 37.0,
-            "rs63": 78.1,
-            "atr20_pct": 5.2,
-            "setup": "A回檔MA20",
-            "limit": 17.12,
-            "stop": 15.25,
-            "stop_pct": -10.9,
-            "budget": 91000
-          }
-        },
-        "target_session": "2026-07-16"
       },
       {
-        "id": "actionable-2026-07-16-GBTG",
-        "placed_ts": "2026-07-16T07:42:50+08:00",
-        "ticker": "GBTG",
-        "name": "Global Business Travel Group, Inc. Class A Common Stock",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 9.39,
-        "stop": 8.83,
-        "stop_rule": "ta",
-        "group": "Travel Services",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "GBTG",
-            "name": "Global Business Travel Group, Inc. Class A Common Stock",
-            "yf": "GBTG",
-            "group": "Travel Services",
-            "px": 9.4,
-            "ma20": 9.39,
-            "ma50": 9.39,
-            "ma200_gap": 25.7,
-            "rs63": 56.2,
-            "atr20_pct": 0.4,
-            "setup": "A回檔MA20",
-            "limit": 9.39,
-            "stop": 8.83,
-            "stop_pct": -6.0,
-            "budget": 150000
-          }
-        },
-        "target_session": "2026-07-16"
-      },
-      {
-        "id": "actionable-2026-07-16-NTAP",
-        "placed_ts": "2026-07-16T07:42:50+08:00",
         "ticker": "NTAP",
         "name": "NetApp, Inc.",
-        "side": "buy",
-        "budget_twd": 105000,
-        "limit": 160.54,
+        "shares": 20,
+        "avg_price": 160.54,
+        "fill_date": "2026-07-16",
+        "fx_at_fill": 32.24700164794922,
         "stop": 145.3,
         "stop_rule": "ta",
+        "stop_asof": "2026-07-16",
         "group": "Technology Hardware, Storage & Peripherals",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "NTAP",
-            "name": "NetApp, Inc.",
-            "yf": "NTAP",
-            "group": "Technology Hardware, Storage & Peripherals",
-            "px": 162.1,
-            "ma20": 160.54,
-            "ma50": 149.1,
-            "ma200_gap": 37.3,
-            "rs63": 55.2,
-            "atr20_pct": 4.7,
-            "setup": "A回檔MA20",
-            "limit": 160.54,
-            "stop": 145.3,
-            "stop_pct": -9.5,
-            "budget": 105000
-          }
-        },
-        "target_session": "2026-07-16"
+        "cost_twd": 104184.0,
+        "fill_ref_close": 159.690002,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 136.944,
+        "ratchet_asof": "2026-07-17"
       },
       {
-        "id": "actionable-2026-07-16-NUTX",
-        "placed_ts": "2026-07-16T07:42:50+08:00",
         "ticker": "NUTX",
         "name": "Nutex Health Inc.",
-        "side": "buy",
-        "budget_twd": 84000,
-        "limit": 169.44,
+        "shares": 15,
+        "avg_price": 169.44,
+        "fill_date": "2026-07-16",
+        "fx_at_fill": 32.24700164794922,
         "stop": 149.37,
         "stop_rule": "ta",
+        "stop_asof": "2026-07-16",
         "group": "Medical Care Facilities",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "NUTX",
-            "name": "Nutex Health Inc.",
-            "yf": "NUTX",
-            "group": "Medical Care Facilities",
-            "px": 176.0,
-            "ma20": 169.44,
-            "ma50": 146.43,
-            "ma200_gap": 35.5,
-            "rs63": 54.5,
-            "atr20_pct": 5.7,
-            "setup": "A回檔MA20",
-            "limit": 169.44,
-            "stop": 149.37,
-            "stop_pct": -11.8,
-            "budget": 84000
-          }
-        },
-        "target_session": "2026-07-16"
+        "cost_twd": 82604.0,
+        "fill_ref_close": 164.399994,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 132.25,
+        "ratchet_asof": "2026-07-17"
       },
       {
-        "id": "actionable-2026-07-16-CRSR",
-        "placed_ts": "2026-07-16T07:42:50+08:00",
-        "ticker": "CRSR",
-        "name": "Corsair Gaming, Inc.",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 9.09,
-        "stop": 8.0,
-        "stop_rule": "ta",
-        "group": "Technology Hardware, Storage & Peripherals",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "CRSR",
-            "name": "Corsair Gaming, Inc.",
-            "yf": "CRSR",
-            "group": "Technology Hardware, Storage & Peripherals",
-            "px": 9.48,
-            "ma20": 9.09,
-            "ma50": 8.72,
-            "ma200_gap": 37.4,
-            "rs63": 46.0,
-            "atr20_pct": 6.1,
-            "setup": "A回檔MA20",
-            "limit": 9.09,
-            "stop": 8.0,
-            "stop_pct": -12.0,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-07-16"
-      },
-      {
-        "id": "actionable-2026-07-16-BRKR",
-        "placed_ts": "2026-07-16T07:42:50+08:00",
         "ticker": "BRKR",
         "name": "Bruker Corporation",
-        "side": "buy",
-        "budget_twd": 115000,
-        "limit": 58.84,
+        "shares": 61,
+        "avg_price": 57.96,
+        "fill_date": "2026-07-16",
+        "fx_at_fill": 32.24700164794922,
         "stop": 53.76,
         "stop_rule": "ta",
+        "stop_asof": "2026-07-16",
         "group": "Health Care Equipment",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "BRKR",
-            "name": "Bruker Corporation",
-            "yf": "BRKR",
-            "group": "Health Care Equipment",
-            "px": 58.66,
-            "ma20": 58.84,
-            "ma50": 53.17,
-            "ma200_gap": 32.7,
-            "rs63": 38.3,
-            "atr20_pct": 4.3,
-            "setup": "A回檔MA20",
-            "limit": 58.84,
-            "stop": 53.76,
-            "stop_pct": -8.6,
-            "budget": 115000
-          }
-        },
-        "target_session": "2026-07-16"
+        "cost_twd": 114656.0,
+        "fill_ref_close": 59.25,
+        "half_locked": false,
+        "ratchet_armed": true,
+        "ratchet_value": 51.5895,
+        "ratchet_asof": "2026-07-17"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -375,6 +212,87 @@
         "low": 7.099999904632568,
         "limit": 7.06,
         "fill_mode": null
+      },
+      {
+        "ts": "2026-07-17T05:20:27+08:00",
+        "order_id": "actionable-2026-07-16-FTRE",
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "action": "expire_unfilled",
+        "open": 17.899999618530273,
+        "low": 17.600000381469727,
+        "limit": 17.12,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-17T05:20:27+08:00",
+        "order_id": "actionable-2026-07-16-GBTG",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class A Common Stock",
+        "action": "expire_unfilled",
+        "open": 9.40999984741211,
+        "low": 9.399999618530273,
+        "limit": 9.39,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-17T05:20:27+08:00",
+        "order_id": "actionable-2026-07-16-NTAP",
+        "ticker": "NTAP",
+        "name": "NetApp, Inc.",
+        "action": "buy",
+        "shares": 20,
+        "price": 160.54,
+        "fee": 20.0,
+        "cost_twd": 104184.0,
+        "fill_date": "2026-07-16",
+        "fill_how": "盤中觸限價",
+        "stop": 145.3,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json"
+      },
+      {
+        "ts": "2026-07-17T05:20:27+08:00",
+        "order_id": "actionable-2026-07-16-NUTX",
+        "ticker": "NUTX",
+        "name": "Nutex Health Inc.",
+        "action": "buy",
+        "shares": 15,
+        "price": 169.44,
+        "fee": 20.0,
+        "cost_twd": 82604.0,
+        "fill_date": "2026-07-16",
+        "fill_how": "盤中觸限價",
+        "stop": 149.37,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json"
+      },
+      {
+        "ts": "2026-07-17T05:20:27+08:00",
+        "order_id": "actionable-2026-07-16-CRSR",
+        "ticker": "CRSR",
+        "name": "Corsair Gaming, Inc.",
+        "action": "expire_unfilled",
+        "open": 9.300000190734863,
+        "low": 9.109999656677246,
+        "limit": 9.09,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-17T05:20:27+08:00",
+        "order_id": "actionable-2026-07-16-BRKR",
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "action": "buy",
+        "shares": 61,
+        "price": 57.96,
+        "fee": 20.0,
+        "cost_twd": 114656.0,
+        "fill_date": "2026-07-16",
+        "fill_how": "開盤",
+        "stop": 53.76,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json"
       }
     ],
     "benchmark_spec": {
@@ -443,6 +361,154 @@
             "key": "div:2026-06-08"
           }
         ]
+      },
+      "NTAP": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "NTAP",
+            "name": "NetApp, Inc.",
+            "shares": 20,
+            "avg_price": 160.54,
+            "fill_date": "2026-07-16",
+            "fx_at_fill": 32.24700164794922,
+            "stop": 145.3,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-16",
+            "group": "Technology Hardware, Storage & Peripherals",
+            "cost_twd": 104184.0,
+            "fill_ref_close": 159.69000244140625,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-16",
+              "value": 145.3
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-10-03",
+            "kind": "div",
+            "amount": 0.52,
+            "source_count": 1,
+            "key": "div:2025-10-03"
+          },
+          {
+            "date": "2026-01-02",
+            "kind": "div",
+            "amount": 0.52,
+            "source_count": 1,
+            "key": "div:2026-01-02"
+          },
+          {
+            "date": "2026-04-02",
+            "kind": "div",
+            "amount": 0.52,
+            "source_count": 1,
+            "key": "div:2026-04-02"
+          },
+          {
+            "date": "2026-07-10",
+            "kind": "div",
+            "amount": 0.52,
+            "source_count": 1,
+            "key": "div:2026-07-10"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "BRKR": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "BRKR",
+            "name": "Bruker Corporation",
+            "shares": 61,
+            "avg_price": 57.96,
+            "fill_date": "2026-07-16",
+            "fx_at_fill": 32.24700164794922,
+            "stop": 53.76,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-16",
+            "group": "Health Care Equipment",
+            "cost_twd": 114656.0,
+            "fill_ref_close": 59.25,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-16",
+              "value": 53.76
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-09-23",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2025-09-23"
+          },
+          {
+            "date": "2025-12-08",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2025-12-08"
+          },
+          {
+            "date": "2026-03-23",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2026-03-23"
+          },
+          {
+            "date": "2026-06-22",
+            "kind": "div",
+            "amount": 0.05,
+            "source_count": 1,
+            "key": "div:2026-06-22"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "NUTX": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "NUTX",
+            "name": "Nutex Health Inc.",
+            "shares": 15,
+            "avg_price": 169.44,
+            "fill_date": "2026-07-16",
+            "fx_at_fill": 32.24700164794922,
+            "stop": 149.37,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-16",
+            "group": "Medical Care Facilities",
+            "cost_twd": 82604.0,
+            "fill_ref_close": 164.39999389648438,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-16",
+              "value": 149.37
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -521,7 +587,19 @@
         "SPY": 0.23
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-17T05:20:36+08:00",
+      "nav_twd": 994141.0,
+      "return_pct": -0.59,
+      "cash_twd": 569919.0,
+      "n_positions": 4,
+      "usdtwd": 32.247,
+      "bench_return_pct": {
+        "SPY": 0.01
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T06:06:09.445631+00:00"
+  "generated_at": "2026-07-16T21:20:51.280864+00:00"
 }

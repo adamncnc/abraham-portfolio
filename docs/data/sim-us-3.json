@@ -5,47 +5,29 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 1000000.0,
+    "cash_twd": 941391.5586822452,
     "realized_pnl_twd": 0.0,
-    "positions": [],
-    "pending_orders": [
+    "positions": [
       {
-        "id": "actionable-2026-07-16-ASML",
-        "placed_ts": "2026-07-16T07:42:50+08:00",
         "ticker": "ASML",
         "name": "ASML",
-        "side": "buy",
-        "budget_twd": 95000,
-        "limit": 1822.61,
+        "shares": 1,
+        "avg_price": 1797.48,
+        "fill_date": "2026-07-16",
+        "fx_at_fill": 32.24700164794922,
         "stop": 1632.41,
         "stop_rule": "ta",
+        "stop_asof": "2026-07-16",
         "group": "半導體設備",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "ASML",
-            "name": "ASML",
-            "yf": "ASML",
-            "group": "半導體設備",
-            "px": 1815.27,
-            "ma20": 1822.61,
-            "ma50": 1704.41,
-            "ma200_gap": 34.6,
-            "rs63": 10.9,
-            "atr20_pct": 5.2,
-            "setup": "A回檔MA20",
-            "limit": 1822.61,
-            "stop": 1632.41,
-            "stop_pct": -10.4,
-            "budget": 95000
-          }
-        },
-        "target_session": "2026-07-16"
+        "cost_twd": 58608.0,
+        "fill_ref_close": 1784.869995,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 1501.9355,
+        "ratchet_asof": "2026-07-17"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -63,6 +45,22 @@
         "low": 1749.8599853515625,
         "limit": 1689.92,
         "fill_mode": null
+      },
+      {
+        "ts": "2026-07-17T05:20:43+08:00",
+        "order_id": "actionable-2026-07-16-ASML",
+        "ticker": "ASML",
+        "name": "ASML",
+        "action": "buy",
+        "shares": 1,
+        "price": 1797.48,
+        "fee": 20.0,
+        "cost_twd": 58608.0,
+        "fill_date": "2026-07-16",
+        "fill_how": "開盤",
+        "stop": 1632.41,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-16.json"
       }
     ],
     "benchmark_spec": {
@@ -71,7 +69,67 @@
       "ts": "2026-07-13T22:22:17+08:00",
       "why": "帳本開始那一刻美股正在交易 → 錨在掛單後第一根 1 分 K，與我的單同一條起跑線"
     },
-    "ticker_state": {},
+    "ticker_state": {
+      "ASML": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "ASML",
+            "name": "ASML",
+            "shares": 1,
+            "avg_price": 1797.48,
+            "fill_date": "2026-07-16",
+            "fx_at_fill": 32.24700164794922,
+            "stop": 1632.41,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-16",
+            "group": "半導體設備",
+            "cost_twd": 58608.0,
+            "fill_ref_close": 1784.8699951171875,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-16",
+              "value": 1632.41
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-07-29",
+            "kind": "div",
+            "amount": 1.847,
+            "source_count": 1,
+            "key": "div:2025-07-29"
+          },
+          {
+            "date": "2025-10-29",
+            "kind": "div",
+            "amount": 1.864,
+            "source_count": 1,
+            "key": "div:2025-10-29"
+          },
+          {
+            "date": "2026-02-10",
+            "kind": "div",
+            "amount": 1.883,
+            "source_count": 1,
+            "key": "div:2026-02-10"
+          },
+          {
+            "date": "2026-04-27",
+            "kind": "div",
+            "amount": 3.177,
+            "source_count": 1,
+            "key": "div:2026-04-27"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
+      }
+    },
     "benchmarks_inception": {
       "SPY": {
         "date": "2026-07-13",
@@ -148,7 +206,19 @@
         "SPY": 0.23
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-17T05:20:49+08:00",
+      "nav_twd": 998948.0,
+      "return_pct": -0.11,
+      "cash_twd": 941392.0,
+      "n_positions": 1,
+      "usdtwd": 32.247,
+      "bench_return_pct": {
+        "SPY": 0.01
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T06:06:09.445631+00:00"
+  "generated_at": "2026-07-16T21:20:51.280864+00:00"
 }

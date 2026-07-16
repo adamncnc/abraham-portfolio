@@ -171,7 +171,188 @@
         "ratchet_asof": "2026-07-16"
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-16-2377.TW",
+        "placed_ts": "2026-07-16T15:29:35+08:00",
+        "ticker": "2377.TW",
+        "name": "微星",
+        "side": "buy",
+        "budget_twd": 61000,
+        "limit": 140.5,
+        "stop": 129.0,
+        "stop_rule": "ta",
+        "group": "ind-25",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2377",
+            "name": "微星",
+            "yf": "2377.TW",
+            "group": "ind-25",
+            "px": 145.0,
+            "ma20": 140.88,
+            "ma50": 130.98,
+            "ma200_gap": 34.1,
+            "rs63": 39.2,
+            "atr20_pct": 3.9,
+            "setup": "A回檔MA20",
+            "limit": 140.5,
+            "stop": 129.0,
+            "stop_pct": -8.1,
+            "budget": 61000
+          }
+        },
+        "target_session": "2026-07-17"
+      },
+      {
+        "id": "actionable-2026-07-16-8932.TWO",
+        "placed_ts": "2026-07-16T15:29:36+08:00",
+        "ticker": "8932.TWO",
+        "name": "智通*",
+        "side": "buy",
+        "budget_twd": 49500,
+        "limit": 129.5,
+        "stop": 116.0,
+        "stop_rule": "ta",
+        "group": "ind-36",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "8932",
+            "name": "智通*",
+            "yf": "8932.TWO",
+            "group": "ind-36",
+            "px": 129.5,
+            "ma20": 111.0,
+            "ma50": 103.98,
+            "ma200_gap": 35.9,
+            "rs63": 24.6,
+            "atr20_pct": 5.0,
+            "setup": "B突破",
+            "limit": 129.5,
+            "stop": 116.0,
+            "stop_pct": -10.1,
+            "budget": 49500
+          }
+        },
+        "target_session": "2026-07-17"
+      },
+      {
+        "id": "actionable-2026-07-16-2379.TW",
+        "placed_ts": "2026-07-16T15:29:36+08:00",
+        "ticker": "2379.TW",
+        "name": "瑞昱",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 675.0,
+        "stop": 594.0,
+        "stop_rule": "ta",
+        "group": "ind-24",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2379",
+            "name": "瑞昱",
+            "yf": "2379.TW",
+            "group": "ind-24",
+            "px": 712.0,
+            "ma20": 793.65,
+            "ma50": 675.76,
+            "ma200_gap": 29.0,
+            "rs63": 11.4,
+            "atr20_pct": 8.5,
+            "setup": "A回檔MA50",
+            "limit": 675.0,
+            "stop": 594.0,
+            "stop_pct": -12.0,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-17"
+      },
+      {
+        "id": "actionable-2026-07-16-2882.TW",
+        "placed_ts": "2026-07-16T15:29:36+08:00",
+        "ticker": "2882.TW",
+        "name": "國泰金",
+        "side": "buy",
+        "budget_twd": 55000,
+        "limit": 92.9,
+        "stop": 84.4,
+        "stop_rule": "ta",
+        "group": "金融",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2882",
+            "name": "國泰金",
+            "yf": "2882.TW",
+            "group": "金融",
+            "px": 97.3,
+            "ma20": 101.82,
+            "ma50": 92.98,
+            "ma200_gap": 27.2,
+            "rs63": 9.2,
+            "atr20_pct": 4.3,
+            "setup": "A回檔MA50",
+            "limit": 92.9,
+            "stop": 84.4,
+            "stop_pct": -9.1,
+            "budget": 55000
+          }
+        },
+        "target_session": "2026-07-17"
+      },
+      {
+        "id": "actionable-2026-07-16-8131.TW",
+        "placed_ts": "2026-07-16T15:29:36+08:00",
+        "ticker": "8131.TW",
+        "name": "福懋科",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 75.1,
+        "stop": 66.0,
+        "stop_rule": "ta",
+        "group": "ind-24",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "8131",
+            "name": "福懋科",
+            "yf": "8131.TW",
+            "group": "ind-24",
+            "px": 76.6,
+            "ma20": 75.19,
+            "ma50": 71.13,
+            "ma200_gap": 31.9,
+            "rs63": 0.1,
+            "atr20_pct": 7.0,
+            "setup": "A回檔MA20",
+            "limit": 75.1,
+            "stop": 66.0,
+            "stop_pct": -12.0,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-17"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -378,7 +559,7 @@
         "fill_mode": null
       },
       {
-        "ts": "2026-07-16T14:05:59+08:00",
+        "ts": "2026-07-16T15:13:41+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -803,5 +984,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T06:06:09.441881+00:00"
+  "generated_at": "2026-07-16T21:20:51.277351+00:00"
 }

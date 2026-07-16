@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 713203.4384295642,
+    "cash_twd": 614251.2543783318,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -22,7 +22,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 130.0415,
-        "ratchet_asof": "2026-07-16",
+        "ratchet_asof": "2026-07-17",
         "fill_ref_close": 183.110001,
         "stop_asof": "2026-07-13"
       },
@@ -41,8 +41,8 @@
         "fill_ref_close": 256.429993,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 230.0025,
-        "ratchet_asof": "2026-07-16"
+        "ratchet_value": 230.2134,
+        "ratchet_asof": "2026-07-17"
       },
       {
         "ticker": "LRCX",
@@ -59,55 +59,29 @@
         "fill_ref_close": 335.429993,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 245.8905,
-        "ratchet_asof": "2026-07-16"
-      }
-    ],
-    "pending_orders": [
+        "ratchet_value": 246.15,
+        "ratchet_asof": "2026-07-17"
+      },
       {
-        "id": "passed-2026-07-16-KLAC",
-        "placed_ts": "2026-07-16T07:42:49+08:00",
         "ticker": "KLAC",
         "name": "科磊KLA",
-        "side": "buy",
-        "budget_twd": 100000,
-        "limit": 224.5,
+        "shares": 14,
+        "avg_price": 217.76,
+        "fill_date": "2026-07-16",
+        "fx_at_fill": 32.24700164794922,
         "stop": 180.0,
         "stop_rule": "daily_all",
+        "stop_asof": "2026-07-16",
         "group": "半導體設備",
-        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "passed",
-          "candidate": {
-            "tk": "KLAC",
-            "nm": "科磊KLA",
-            "group": "半導體設備",
-            "px": 224.5,
-            "bar": "2026-07-15",
-            "zone": "205-230",
-            "ma20": 244.41,
-            "ma50": 215.86,
-            "froth": 43.1,
-            "stab": "-",
-            "broke50": false,
-            "limit": 224.5,
-            "stop": 180,
-            "size": 100000,
-            "half": "-",
-            "fee_note": "",
-            "rule": "跳空進帶→限價=跳空前一日收盤 230.37（上限帶頂）",
-            "depth": 78.0,
-            "unevaluated": [
-              "月營收（美股無月度揭露，改看季報 → 人工）",
-              "循環見頂訊號（無法機械判定 → 人工）"
-            ]
-          }
-        },
-        "target_session": "2026-07-16"
+        "cost_twd": 98952.0,
+        "fill_ref_close": 219.369995,
+        "half_locked": false,
+        "ratchet_armed": true,
+        "ratchet_value": 158.095,
+        "ratchet_asof": "2026-07-17"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -197,6 +171,22 @@
         "stop": 280.0,
         "opened": true,
         "reason": "七關全過（在带入80%、健康回檔、財報關過）；半導體設備族群=KLAC+LRCX 2檔/20萬 在上限內；規格書§2。DM 1526734502158929971"
+      },
+      {
+        "ts": "2026-07-17T05:20:06+08:00",
+        "order_id": "passed-2026-07-16-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊KLA",
+        "action": "buy",
+        "shares": 14,
+        "price": 217.76,
+        "fee": 20.0,
+        "cost_twd": 98952.0,
+        "fill_date": "2026-07-16",
+        "fill_how": "開盤",
+        "stop": 180.0,
+        "opened": true,
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json"
       }
     ],
     "benchmark_spec": {
@@ -383,6 +373,72 @@
         ],
         "splits_applied": [],
         "divs_credited": []
+      },
+      "KLAC": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "KLAC",
+            "name": "科磊KLA",
+            "shares": 14,
+            "avg_price": 217.76,
+            "fill_date": "2026-07-16",
+            "fx_at_fill": 32.24700164794922,
+            "stop": 180.0,
+            "stop_rule": "daily_all",
+            "stop_asof": "2026-07-16",
+            "group": "半導體設備",
+            "cost_twd": 98952.0,
+            "fill_ref_close": 219.3699951171875,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-16",
+              "value": 180.0
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-08-18",
+            "kind": "div",
+            "amount": 0.19,
+            "source_count": 1,
+            "key": "div:2025-08-18"
+          },
+          {
+            "date": "2025-11-17",
+            "kind": "div",
+            "amount": 0.19,
+            "source_count": 1,
+            "key": "div:2025-11-17"
+          },
+          {
+            "date": "2026-02-17",
+            "kind": "div",
+            "amount": 0.19,
+            "source_count": 1,
+            "key": "div:2026-02-17"
+          },
+          {
+            "date": "2026-05-18",
+            "kind": "div",
+            "amount": 0.23,
+            "source_count": 1,
+            "key": "div:2026-05-18"
+          },
+          {
+            "date": "2026-06-12",
+            "kind": "split",
+            "ratio": 10.0,
+            "source_count": 1,
+            "key": "split:2026-06-12"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -461,7 +517,19 @@
         "SPY": 0.23
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-17T05:20:17+08:00",
+      "nav_twd": 975235.0,
+      "return_pct": -2.48,
+      "cash_twd": 614251.0,
+      "n_positions": 4,
+      "usdtwd": 32.247,
+      "bench_return_pct": {
+        "SPY": 0.01
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T06:06:09.443625+00:00"
+  "generated_at": "2026-07-16T21:20:51.278854+00:00"
 }

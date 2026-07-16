@@ -27,7 +27,50 @@
         "fill_ref_close": 205.0
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "passed-2026-07-16-2449.TW",
+        "placed_ts": "2026-07-16T15:25:36+08:00",
+        "ticker": "2449.TW",
+        "name": "京元電KYEC",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 318.0,
+        "stop": 258.0,
+        "stop_rule": "daily_all",
+        "group": "封測載板",
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json",
+          "date": "2026-07-16",
+          "kind": "passed",
+          "candidate": {
+            "tk": "2449.TW",
+            "nm": "京元電KYEC",
+            "group": "封測載板",
+            "px": 318.0,
+            "bar": "2026-07-16",
+            "zone": "290-320",
+            "ma20": 319.93,
+            "ma50": 309.68,
+            "froth": 21.6,
+            "stab": "2日縮量紅K",
+            "broke50": false,
+            "limit": 318.0,
+            "stop": 258,
+            "size": 100000,
+            "half": "-",
+            "fee_note": "",
+            "rule": "健康回檔→min(收盤, 帶頂)",
+            "depth": 93.3,
+            "unevaluated": [
+              "循環見頂訊號（無法機械判定 → 人工）"
+            ]
+          }
+        },
+        "target_session": "2026-07-17"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -140,5 +183,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T06:06:09.441881+00:00"
+  "generated_at": "2026-07-16T21:20:51.277351+00:00"
 }
