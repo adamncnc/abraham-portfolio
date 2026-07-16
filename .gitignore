@@ -6,3 +6,6 @@ venv/
 .DS_Store
 Thumbs.db
 *.log
+
+# daily price snapshot archive: local-only, zero readers (2026-07-16, Adam approved DM 1527135093007847507)
+data/snapshots/
