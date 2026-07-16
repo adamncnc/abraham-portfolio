@@ -32,8 +32,8 @@
       "currency": "TWD",
       "theme": "核心",
       "notes": "核心; 狙擊加碼區 2050-2150",
-      "entry_zone_lo": 2250,
-      "entry_zone_hi": 2340
+      "entry_zone_lo": 2330,
+      "entry_zone_hi": 2410
     },
     {
       "id": "nbis",
