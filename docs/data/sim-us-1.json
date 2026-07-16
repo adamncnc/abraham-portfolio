@@ -6,7 +6,7 @@
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
     "cash_twd": 614251.2543783318,
-    "realized_pnl_twd": 0.0,
+    "realized_pnl_twd": 0,
     "positions": [
       {
         "ticker": "GLW",
@@ -20,9 +20,9 @@
         "group": "光通訊CPO",
         "cost_twd": 97229.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 130.0415,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_armed": false,
+        "ratchet_value": 125.9975,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 183.110001,
         "stop_asof": "2026-07-13"
       },
@@ -40,9 +40,7 @@
         "cost_twd": 99927.0,
         "fill_ref_close": 256.429993,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 230.2134,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "LRCX",
@@ -58,9 +56,7 @@
         "cost_twd": 89640.0,
         "fill_ref_close": 335.429993,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 246.15,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "KLAC",
@@ -76,13 +72,21 @@
         "cost_twd": 98952.0,
         "fill_ref_close": 219.369995,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 158.095,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       }
     ],
     "pending_orders": [],
-    "pending_sells": [],
+    "pending_sells": [
+      {
+        "id": "sell-2026-07-17-GLW-stop_all",
+        "placed_ts": "2026-07-17T05:45:45+08:00",
+        "ticker": "GLW",
+        "name": "康寧Corning",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "reason": "2026-07-17 出場檢查：7/16 日收 158.39 < 認錯線 165（daily_all）→ 全數出清；DM 1527430940916453468 先發後寫（§1.6-5）"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -102,8 +106,8 @@
         "action": "buy",
         "shares": 16,
         "price": 187.33,
-        "fee": 20.0,
-        "cost_twd": 97229.0,
+        "fee": 20,
+        "cost_twd": 97229,
         "fill_date": "2026-07-13",
         "fill_how": "掛單後首價",
         "reason": "帶內(185-205,位置29.4%=五檔中最貼近支撐→依規格書§2第7關排序為第一順位)；未破50日線；乖離年線46.9%——原本要減半到5萬、撞美股6萬下限而買不到，Adam 2026-07-13 22:23 取消泡沫減半後解禁；限價=健康回檔 min(收盤190.89, 帶頂205)。⚠️先前被到價偵測器的即時價誤判成『跌破帶底』而隱形"
@@ -149,11 +153,11 @@
         "action": "buy",
         "shares": 12,
         "price": 257.25,
-        "fee": 20.0,
-        "cost_twd": 99927.0,
+        "fee": 20,
+        "cost_twd": 99927,
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
-        "stop": 215.0,
+        "stop": 215,
         "reason": "七關全過（財報關已查證：KLAC 7/29、CEG 8/6，皆非鄰近）；規格書 §2。DM 1526374377627582534"
       },
       {
@@ -164,11 +168,11 @@
         "action": "buy",
         "shares": 8,
         "price": 346.1,
-        "fee": 20.0,
-        "cost_twd": 89640.0,
+        "fee": 20,
+        "cost_twd": 89640,
         "fill_date": "2026-07-15",
         "fill_how": "盤中觸限價",
-        "stop": 280.0,
+        "stop": 280,
         "opened": true,
         "reason": "七關全過（在带入80%、健康回檔、財報關過）；半導體設備族群=KLAC+LRCX 2檔/20萬 在上限內；規格書§2。DM 1526734502158929971"
       },
@@ -180,11 +184,11 @@
         "action": "buy",
         "shares": 14,
         "price": 217.76,
-        "fee": 20.0,
-        "cost_twd": 98952.0,
+        "fee": 20,
+        "cost_twd": 98952,
         "fill_date": "2026-07-16",
         "fill_how": "開盤",
-        "stop": 180.0,
+        "stop": 180,
         "opened": true,
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json"
       }
@@ -207,10 +211,10 @@
             "avg_price": 187.33,
             "fill_date": "2026-07-13",
             "fx_at_fill": 32.2239990234375,
-            "stop": 165.0,
+            "stop": 165,
             "stop_rule": "daily_all",
             "group": "光通訊CPO",
-            "cost_twd": 97229.0,
+            "cost_twd": 97229,
             "half_locked": false,
             "ratchet_armed": false,
             "ratchet_value": 125.9975,
@@ -220,7 +224,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-13",
-              "value": 165.0
+              "value": 165
             }
           ]
         },
@@ -265,11 +269,11 @@
             "avg_price": 257.25,
             "fill_date": "2026-07-14",
             "fx_at_fill": 32.1619987487793,
-            "stop": 215.0,
+            "stop": 215,
             "stop_rule": "daily_all",
             "stop_asof": "2026-07-14",
             "group": "電力IPP",
-            "cost_twd": 99927.0,
+            "cost_twd": 99927,
             "fill_ref_close": 256.42999267578125,
             "half_locked": false,
             "ratchet_armed": false
@@ -277,7 +281,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-14",
-              "value": 215.0
+              "value": 215
             }
           ]
         },
@@ -324,11 +328,11 @@
             "avg_price": 346.1,
             "fill_date": "2026-07-15",
             "fx_at_fill": 32.143001556396484,
-            "stop": 280.0,
+            "stop": 280,
             "stop_rule": "daily_all",
             "stop_asof": "2026-07-15",
             "group": "半導體設備",
-            "cost_twd": 89640.0,
+            "cost_twd": 89640,
             "fill_ref_close": 335.42999267578125,
             "half_locked": false,
             "ratchet_armed": false
@@ -336,7 +340,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-15",
-              "value": 280.0
+              "value": 280
             }
           ]
         },
@@ -383,11 +387,11 @@
             "avg_price": 217.76,
             "fill_date": "2026-07-16",
             "fx_at_fill": 32.24700164794922,
-            "stop": 180.0,
+            "stop": 180,
             "stop_rule": "daily_all",
             "stop_asof": "2026-07-16",
             "group": "半導體設備",
-            "cost_twd": 98952.0,
+            "cost_twd": 98952,
             "fill_ref_close": 219.3699951171875,
             "half_locked": false,
             "ratchet_armed": false
@@ -395,7 +399,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-16",
-              "value": 180.0
+              "value": 180
             }
           ]
         },
@@ -531,5 +535,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T21:20:51.278854+00:00"
+  "generated_at": "2026-07-16T21:56:22.461931+00:00"
 }
