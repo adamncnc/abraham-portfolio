@@ -54,10 +54,11 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: auto-update prices ${{ github.run_id }} [skip ci]"
-          # data/snapshots/ (directory, not *.json glob): a glob expands to files that still
-          # exist, so the prune step's deletions were never staged and old snapshots kept
-          # resurrecting from HEAD on the next checkout (audit 2026-07-03 P2-5)
+          # data/snapshots/ removed from the pattern 2026-07-16 (Adam approved): dated
+          # snapshot archives are local-only now (gitignored; repo was growing 15MB/day
+          # with zero readers). Keeping an ignored path here would make git add fail and
+          # kill the whole price-update commit. Local machines keep their own archives.
           # holdings-atr-state.json persists the ratchet (stop only moves up) across CI runs
-          file_pattern: "docs/data/*.json data/snapshots/ data/holdings-atr-state.json"
+          file_pattern: "docs/data/*.json data/holdings-atr-state.json"
           commit_user_name: "Abraham Bot"
           commit_user_email: "abraham-bot@users.noreply.github.com"
