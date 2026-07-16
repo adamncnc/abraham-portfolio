@@ -22,8 +22,8 @@
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 178.15,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 182.575,
+        "ratchet_asof": "2026-07-16",
         "fill_ref_close": 205.0
       }
     ],
@@ -126,7 +126,19 @@
         "0050.TW": -1.04
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-16T14:05:19+08:00",
+      "nav_twd": 993878.0,
+      "return_pct": -0.61,
+      "cash_twd": 900038.0,
+      "n_positions": 1,
+      "usdtwd": 32.176,
+      "bench_return_pct": {
+        "0050.TW": 0.85
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T03:29:51.932721+00:00"
+  "generated_at": "2026-07-16T06:06:09.441881+00:00"
 }
