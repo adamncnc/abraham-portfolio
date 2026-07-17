@@ -23,7 +23,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 183.65,
-        "ratchet_asof": "2026-07-16",
+        "ratchet_asof": "2026-07-17",
         "fill_ref_close": 244.0
       }
     ],
@@ -87,15 +87,7 @@
           ]
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-07-17",
-            "kind": "div",
-            "amount": 1.696934,
-            "source_count": 1,
-            "key": "div:2025-07-17"
-          }
-        ]
+        "corporate_actions": []
       }
     },
     "benchmarks_inception": {
@@ -138,7 +130,19 @@
         "0050.TW": 0.85
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-17T14:06:32+08:00",
+      "nav_twd": 993555.0,
+      "return_pct": -0.64,
+      "cash_twd": 917118.0,
+      "n_positions": 1,
+      "usdtwd": 32.328,
+      "bench_return_pct": {
+        "0050.TW": -5.07
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T21:56:22.459926+00:00"
+  "generated_at": "2026-07-17T06:06:35.335997+00:00"
 }

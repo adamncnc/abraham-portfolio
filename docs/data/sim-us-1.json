@@ -20,9 +20,9 @@
         "group": "光通訊CPO",
         "cost_twd": 97229.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 125.9975,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_armed": true,
+        "ratchet_value": 130.0415,
+        "ratchet_asof": "2026-07-17",
         "fill_ref_close": 183.110001,
         "stop_asof": "2026-07-13"
       },
@@ -40,7 +40,9 @@
         "cost_twd": 99927.0,
         "fill_ref_close": 256.429993,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": true,
+        "ratchet_value": 230.2134,
+        "ratchet_asof": "2026-07-17"
       },
       {
         "ticker": "LRCX",
@@ -56,7 +58,9 @@
         "cost_twd": 89640.0,
         "fill_ref_close": 335.429993,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "ratchet_value": 246.15,
+        "ratchet_asof": "2026-07-17"
       },
       {
         "ticker": "KLAC",
@@ -72,7 +76,9 @@
         "cost_twd": 98952.0,
         "fill_ref_close": 219.369995,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": true,
+        "ratchet_value": 158.095,
+        "ratchet_asof": "2026-07-17"
       }
     ],
     "pending_orders": [],
@@ -535,5 +541,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T21:56:22.461931+00:00"
+  "generated_at": "2026-07-17T06:06:35.338001+00:00"
 }

@@ -22,12 +22,47 @@
         "cost_twd": 58608.0,
         "fill_ref_close": 1784.869995,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 1501.9355,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-17-KLAC",
+        "placed_ts": "2026-07-17T07:40:57+08:00",
+        "ticker": "KLAC",
+        "name": "科磊",
+        "side": "buy",
+        "budget_twd": 83000,
+        "limit": 216.82,
+        "stop": 190.8,
+        "stop_rule": "ta",
+        "group": "半導體設備",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-17.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-17.json",
+          "date": "2026-07-17",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "KLAC",
+            "name": "科磊",
+            "yf": "KLAC",
+            "group": "半導體設備",
+            "px": 219.37,
+            "ma20": 243.51,
+            "ma50": 216.82,
+            "ma200_gap": 39.4,
+            "rs63": 18.2,
+            "atr20_pct": 9.3,
+            "setup": "A回檔MA50",
+            "limit": 216.82,
+            "stop": 190.8,
+            "stop_pct": -12.0,
+            "budget": 83000
+          }
+        },
+        "target_session": "2026-07-17"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -220,5 +255,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T21:56:22.463934+00:00"
+  "generated_at": "2026-07-17T06:06:35.340004+00:00"
 }

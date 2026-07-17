@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 900037.7565,
+    "cash_twd": 800139.6042000001,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -22,55 +22,30 @@
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 182.575,
-        "ratchet_asof": "2026-07-16",
+        "ratchet_value": 182.875,
+        "ratchet_asof": "2026-07-17",
         "fill_ref_close": 205.0
-      }
-    ],
-    "pending_orders": [
+      },
       {
-        "id": "passed-2026-07-16-2449.TW",
-        "placed_ts": "2026-07-16T15:25:36+08:00",
         "ticker": "2449.TW",
         "name": "京元電KYEC",
-        "side": "buy",
-        "budget_twd": 100000,
-        "limit": 318.0,
+        "shares": 326,
+        "avg_price": 306.0,
+        "fill_date": "2026-07-17",
+        "fx_at_fill": 1.0,
         "stop": 258.0,
         "stop_rule": "daily_all",
+        "stop_asof": "2026-07-17",
         "group": "封測載板",
-        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json",
-          "date": "2026-07-16",
-          "kind": "passed",
-          "candidate": {
-            "tk": "2449.TW",
-            "nm": "京元電KYEC",
-            "group": "封測載板",
-            "px": 318.0,
-            "bar": "2026-07-16",
-            "zone": "290-320",
-            "ma20": 319.93,
-            "ma50": 309.68,
-            "froth": 21.6,
-            "stab": "2日縮量紅K",
-            "broke50": false,
-            "limit": 318.0,
-            "stop": 258,
-            "size": 100000,
-            "half": "-",
-            "fee_note": "",
-            "rule": "健康回檔→min(收盤, 帶頂)",
-            "depth": 93.3,
-            "unevaluated": [
-              "循環見頂訊號（無法機械判定 → 人工）"
-            ]
-          }
-        },
-        "target_session": "2026-07-17"
+        "cost_twd": 99898.0,
+        "fill_ref_close": 286.5,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 211.65,
+        "ratchet_asof": "2026-07-17"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -91,6 +66,22 @@
         "fill_date": "2026-07-14",
         "fill_how": "開盤",
         "reason": "帶內(200-220,位置100%=帶頂)；未破50日線；乖離年線12%；健康回檔→限價=min(收盤220,帶頂220)。⚠️買在自訂便宜區的天花板，安全邊際最低。其餘 8 檔全被七關擋下（智邦/雙鴻/群聯/京元電/華城 破50日線無企穩；國巨+118%、欣興+90% froth；訊芯樂透級；奇鋐已跌破帶底）"
+      },
+      {
+        "ts": "2026-07-17T14:05:27+08:00",
+        "order_id": "passed-2026-07-16-2449.TW",
+        "ticker": "2449.TW",
+        "name": "京元電KYEC",
+        "action": "buy",
+        "shares": 326,
+        "price": 306.0,
+        "fee": 142.15,
+        "cost_twd": 99898.0,
+        "fill_date": "2026-07-17",
+        "fill_how": "開盤",
+        "stop": 258.0,
+        "opened": true,
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json"
       }
     ],
     "benchmark_spec": {
@@ -139,6 +130,36 @@
             "key": "div:2025-07-24"
           }
         ]
+      },
+      "2449.TW": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "2449.TW",
+            "name": "京元電KYEC",
+            "shares": 326,
+            "avg_price": 306.0,
+            "fill_date": "2026-07-17",
+            "fx_at_fill": 1.0,
+            "stop": 258.0,
+            "stop_rule": "daily_all",
+            "stop_asof": "2026-07-17",
+            "group": "封測載板",
+            "cost_twd": 99898.0,
+            "fill_ref_close": 286.5,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-17",
+              "value": 258.0
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -181,7 +202,19 @@
         "0050.TW": 0.85
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-17T14:05:37+08:00",
+      "nav_twd": 982779.0,
+      "return_pct": -1.72,
+      "cash_twd": 800140.0,
+      "n_positions": 2,
+      "usdtwd": 32.332,
+      "bench_return_pct": {
+        "0050.TW": -5.07
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-16T21:56:22.456913+00:00"
+  "generated_at": "2026-07-17T06:06:35.333993+00:00"
 }
