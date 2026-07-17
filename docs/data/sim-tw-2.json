@@ -6,7 +6,7 @@
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
     "cash_twd": 430496.2226378075,
-    "realized_pnl_twd": 0.0,
+    "realized_pnl_twd": 0,
     "positions": [
       {
         "ticker": "3707.TWO",
@@ -14,7 +14,7 @@
         "shares": 505,
         "avg_price": 81.0,
         "fill_date": "2026-07-14",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 74.6,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
@@ -32,7 +32,7 @@
         "shares": 169,
         "avg_price": 242.0,
         "fill_date": "2026-07-14",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 212.5,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
@@ -42,7 +42,7 @@
         "ratchet_armed": true,
         "ratchet_value": 176.95,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 244.0
+        "fill_ref_close": 244
       },
       {
         "ticker": "8926.TW",
@@ -50,7 +50,7 @@
         "shares": 676,
         "avg_price": 67.9,
         "fill_date": "2026-07-14",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 60.6,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
@@ -68,7 +68,7 @@
         "shares": 1378,
         "avg_price": 34.05,
         "fill_date": "2026-07-14",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 30.45,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
@@ -86,7 +86,7 @@
         "shares": 805,
         "avg_price": 63.2,
         "fill_date": "2026-07-14",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 55.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
@@ -104,7 +104,7 @@
         "shares": 208,
         "avg_price": 215.5,
         "fill_date": "2026-07-14",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 192.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
@@ -122,7 +122,7 @@
         "shares": 532,
         "avg_price": 80.6,
         "fill_date": "2026-07-15",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 71.2,
         "stop_rule": "ta",
         "stop_asof": "2026-07-15",
@@ -138,13 +138,13 @@
         "shares": 505,
         "avg_price": 128.5,
         "fill_date": "2026-07-16",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 119.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-16",
         "group": "金融",
         "cost_twd": 64985.0,
-        "fill_ref_close": 125.0,
+        "fill_ref_close": 125,
         "half_locked": false,
         "ratchet_armed": false
       },
@@ -154,13 +154,13 @@
         "shares": 33,
         "avg_price": 1230.0,
         "fill_date": "2026-07-16",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 1130.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-16",
         "group": "ind-31",
         "cost_twd": 40648.0,
-        "fill_ref_close": 1250.0,
+        "fill_ref_close": 1250,
         "half_locked": false,
         "ratchet_armed": false
       },
@@ -170,7 +170,7 @@
         "shares": 433,
         "avg_price": 140.5,
         "fill_date": "2026-07-17",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 129.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-17",
@@ -186,13 +186,13 @@
         "shares": 395,
         "avg_price": 125.0,
         "fill_date": "2026-07-17",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 116.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-17",
         "group": "ind-36",
         "cost_twd": 49445.0,
-        "fill_ref_close": 117.0,
+        "fill_ref_close": 117,
         "half_locked": false,
         "ratchet_armed": false
       },
@@ -202,19 +202,210 @@
         "shares": 558,
         "avg_price": 74.2,
         "fill_date": "2026-07-17",
-        "fx_at_fill": 1.0,
+        "fx_at_fill": 1,
         "stop": 66.0,
         "stop_rule": "ta",
         "stop_asof": "2026-07-17",
         "group": "ind-24",
         "cost_twd": 41463.0,
-        "fill_ref_close": 69.0,
+        "fill_ref_close": 69,
         "half_locked": false,
         "ratchet_armed": false
       }
     ],
-    "pending_orders": [],
-    "pending_sells": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-17-3094.TW",
+        "placed_ts": "2026-07-17T16:52:29+08:00",
+        "ticker": "3094.TW",
+        "name": "聯傑",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 36.05,
+        "stop": 31.7,
+        "stop_rule": "ta",
+        "group": "ind-24",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+          "date": "2026-07-17",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "3094",
+            "name": "聯傑",
+            "yf": "3094.TW",
+            "group": "ind-24",
+            "px": 36.9,
+            "ma20": 40.28,
+            "ma50": 36.1,
+            "ma200_gap": 33.6,
+            "rs63": 31.8,
+            "atr20_pct": 9.1,
+            "setup": "A回檔MA50",
+            "limit": 36.05,
+            "stop": 31.7,
+            "stop_pct": -12,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-20"
+      },
+      {
+        "id": "actionable-2026-07-17-5536.TWO",
+        "placed_ts": "2026-07-17T16:52:29+08:00",
+        "ticker": "5536.TWO",
+        "name": "聖暉*",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 1130,
+        "stop": 994,
+        "stop_rule": "ta",
+        "group": "ind-31",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+          "date": "2026-07-17",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "5536",
+            "name": "聖暉*",
+            "yf": "5536.TWO",
+            "group": "ind-31",
+            "px": 1140,
+            "ma20": 1289.5,
+            "ma50": 1130.56,
+            "ma200_gap": 35.4,
+            "rs63": 29.4,
+            "atr20_pct": 8.2,
+            "setup": "A回檔MA50",
+            "limit": 1130,
+            "stop": 994,
+            "stop_pct": -12,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-20"
+      },
+      {
+        "id": "actionable-2026-07-17-3362.TWO",
+        "placed_ts": "2026-07-17T16:52:29+08:00",
+        "ticker": "3362.TWO",
+        "name": "先進光",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 151.5,
+        "stop": 133,
+        "stop_rule": "ta",
+        "group": "ind-26",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+          "date": "2026-07-17",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "3362",
+            "name": "先進光",
+            "yf": "3362.TWO",
+            "group": "ind-26",
+            "px": 156,
+            "ma20": 183.28,
+            "ma50": 151.94,
+            "ma200_gap": 36.8,
+            "rs63": 22.5,
+            "atr20_pct": 9.5,
+            "setup": "A回檔MA50",
+            "limit": 151.5,
+            "stop": 133,
+            "stop_pct": -12,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-20"
+      },
+      {
+        "id": "actionable-2026-07-17-2882.TW",
+        "placed_ts": "2026-07-17T16:52:29+08:00",
+        "ticker": "2882.TW",
+        "name": "國泰金",
+        "side": "buy",
+        "budget_twd": 59000,
+        "limit": 93.2,
+        "stop": 85.3,
+        "stop_rule": "ta",
+        "group": "金融",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+          "date": "2026-07-17",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2882",
+            "name": "國泰金",
+            "yf": "2882.TW",
+            "group": "金融",
+            "px": 94.3,
+            "ma20": 100.86,
+            "ma50": 93.29,
+            "ma200_gap": 23,
+            "rs63": 12.2,
+            "atr20_pct": 4.2,
+            "setup": "A回檔MA50",
+            "limit": 93.2,
+            "stop": 85.3,
+            "stop_pct": -8.4,
+            "budget": 59000
+          }
+        },
+        "target_session": "2026-07-20"
+      },
+      {
+        "id": "actionable-2026-07-17-2103.TW",
+        "placed_ts": "2026-07-17T16:52:29+08:00",
+        "ticker": "2103.TW",
+        "name": "台橡",
+        "side": "buy",
+        "budget_twd": 43500,
+        "limit": 22.6,
+        "stop": 20,
+        "stop_rule": "ta",
+        "group": "ind-11",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-17.json",
+          "date": "2026-07-17",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2103",
+            "name": "台橡",
+            "yf": "2103.TW",
+            "group": "ind-11",
+            "px": 23.5,
+            "ma20": 22.6,
+            "ma50": 21.47,
+            "ma200_gap": 30.7,
+            "rs63": 6.5,
+            "atr20_pct": 5.5,
+            "setup": "A回檔MA20",
+            "limit": 22.6,
+            "stop": 20,
+            "stop_pct": -11.4,
+            "budget": 43500
+          }
+        },
+        "target_session": "2026-07-20"
+      }
+    ],
+    "pending_sells": [
+      {
+        "id": "sell-2026-07-17-3707.TWO-stop_all",
+        "placed_ts": "2026-07-17T15:55:00+08:00",
+        "ticker": "3707.TWO",
+        "name": "漢磊",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "reason": "2026-07-17 出場檢查：週五收盤 68.7 < 認錯線 74.6（ta 規則週收破=全數出清）；DM 1527598699994157088 先發後寫（§1.6-5）"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -228,9 +419,9 @@
         "name": "漢磊",
         "action": "buy",
         "shares": 505,
-        "price": 81.0,
+        "price": 81,
         "fee": 58.29,
-        "cost_twd": 40963.0,
+        "cost_twd": 40963,
         "fill_date": "2026-07-14",
         "fill_how": "開盤",
         "reason": "台股RS #1 +39.2%／A回檔MA20／族群 IC設計電源／首批半倉（本批 6 筆 >=3）"
@@ -242,9 +433,9 @@
         "name": "力智",
         "action": "buy",
         "shares": 169,
-        "price": 242.0,
+        "price": 242,
         "fee": 58.28,
-        "cost_twd": 40956.0,
+        "cost_twd": 40956,
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
         "reason": "台股RS #2 +31.2%／A回檔MA50／族群 IC設計電源／首批半倉（本批 6 筆 >=3）"
@@ -258,7 +449,7 @@
         "shares": 676,
         "price": 67.9,
         "fee": 65.41,
-        "cost_twd": 45966.0,
+        "cost_twd": 45966,
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
         "reason": "台股RS #3 +30.1%／A回檔MA50／族群 ind-23／首批半倉（本批 6 筆 >=3）"
@@ -272,7 +463,7 @@
         "shares": 1378,
         "price": 34.05,
         "fee": 66.86,
-        "cost_twd": 46988.0,
+        "cost_twd": 46988,
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
         "reason": "台股RS #4 +25.9%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）"
@@ -286,7 +477,7 @@
         "shares": 805,
         "price": 63.2,
         "fee": 72.5,
-        "cost_twd": 50948.0,
+        "cost_twd": 50948,
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
         "reason": "台股RS #5 +17.1%／A回檔MA50／族群 EMS／首批半倉（本批 6 筆 >=3）"
@@ -300,7 +491,7 @@
         "shares": 208,
         "price": 215.5,
         "fee": 63.87,
-        "cost_twd": 44888.0,
+        "cost_twd": 44888,
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
         "reason": "台股RS #6 +16.5%／A回檔MA20／族群 網通伺服器／首批半倉（本批 6 筆 >=3）"
@@ -311,9 +502,9 @@
         "ticker": "2377.TW",
         "name": "微星",
         "action": "expire_unfilled",
-        "open": 149.0,
-        "low": 144.0,
-        "limit": 140.0,
+        "open": 149,
+        "low": 144,
+        "limit": 140,
         "fill_mode": null
       },
       {
@@ -322,8 +513,8 @@
         "ticker": "8016.TW",
         "name": "矽創",
         "action": "expire_unfilled",
-        "open": 318.0,
-        "low": 302.0,
+        "open": 318,
+        "low": 302,
         "limit": 298.5,
         "fill_mode": null
       },
@@ -333,9 +524,9 @@
         "ticker": "5536.TWO",
         "name": "聖暉*",
         "action": "expire_unfilled",
-        "open": 1150.0,
-        "low": 1130.0,
-        "limit": 1105.0,
+        "open": 1150,
+        "low": 1130,
+        "limit": 1105,
         "fill_mode": null
       },
       {
@@ -347,7 +538,7 @@
         "shares": 532,
         "price": 80.6,
         "fee": 61.1,
-        "cost_twd": 42940.0,
+        "cost_twd": 42940,
         "fill_date": "2026-07-15",
         "fill_how": "盤中觸限價",
         "stop": 71.2,
@@ -360,8 +551,8 @@
         "ticker": "6202.TW",
         "name": "盛群",
         "action": "expire_unfilled",
-        "open": 69.0,
-        "low": 69.0,
+        "open": 69,
+        "low": 69,
         "limit": 67.6,
         "fill_mode": null
       },
@@ -385,10 +576,10 @@
         "shares": 505,
         "price": 128.5,
         "fee": 92.47,
-        "cost_twd": 64985.0,
+        "cost_twd": 64985,
         "fill_date": "2026-07-16",
         "fill_how": "開盤",
-        "stop": 119.0,
+        "stop": 119,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json"
       },
@@ -399,12 +590,12 @@
         "name": "漢唐",
         "action": "buy",
         "shares": 33,
-        "price": 1230.0,
+        "price": 1230,
         "fee": 57.84,
-        "cost_twd": 40648.0,
+        "cost_twd": 40648,
         "fill_date": "2026-07-16",
         "fill_how": "開盤",
-        "stop": 1130.0,
+        "stop": 1130,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-15.json"
       },
@@ -428,10 +619,10 @@
         "shares": 433,
         "price": 140.5,
         "fee": 86.69,
-        "cost_twd": 60923.0,
+        "cost_twd": 60923,
         "fill_date": "2026-07-17",
         "fill_how": "盤中觸限價",
-        "stop": 129.0,
+        "stop": 129,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json"
       },
@@ -442,12 +633,12 @@
         "name": "智通*",
         "action": "buy",
         "shares": 395,
-        "price": 125.0,
+        "price": 125,
         "fee": 70.36,
-        "cost_twd": 49445.0,
+        "cost_twd": 49445,
         "fill_date": "2026-07-17",
         "fill_how": "開盤",
-        "stop": 116.0,
+        "stop": 116,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json"
       },
@@ -457,9 +648,9 @@
         "ticker": "2379.TW",
         "name": "瑞昱",
         "action": "expire_unfilled",
-        "open": 699.0,
-        "low": 696.0,
-        "limit": 675.0,
+        "open": 699,
+        "low": 696,
+        "limit": 675,
         "fill_mode": null
       },
       {
@@ -468,7 +659,7 @@
         "ticker": "2882.TW",
         "name": "國泰金",
         "action": "expire_unfilled",
-        "open": 97.0,
+        "open": 97,
         "low": 94.30000305175781,
         "limit": 92.9,
         "fill_mode": null
@@ -481,16 +672,16 @@
         "action": "buy",
         "shares": 558,
         "price": 74.2,
-        "fee": 59.0,
-        "cost_twd": 41463.0,
+        "fee": 59,
+        "cost_twd": 41463,
         "fill_date": "2026-07-17",
         "fill_how": "開盤",
-        "stop": 66.0,
+        "stop": 66,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json"
       },
       {
-        "ts": "2026-07-17T14:11:28+08:00",
+        "ts": "2026-07-17T16:53:16+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -519,14 +710,14 @@
             "ticker": "3707.TWO",
             "name": "漢磊",
             "shares": 505,
-            "avg_price": 81.0,
+            "avg_price": 81,
             "fill_date": "2026-07-14",
-            "fx_at_fill": 1.0,
+            "fx_at_fill": 1,
             "stop": 74.6,
             "stop_rule": "ta",
             "stop_asof": "2026-07-14",
             "group": "IC設計電源",
-            "cost_twd": 40963.0,
+            "cost_twd": 40963,
             "half_locked": false,
             "ratchet_armed": false,
             "ratchet_value": 56.735,
@@ -551,19 +742,19 @@
             "ticker": "6719.TW",
             "name": "力智",
             "shares": 169,
-            "avg_price": 242.0,
+            "avg_price": 242,
             "fill_date": "2026-07-14",
-            "fx_at_fill": 1.0,
+            "fx_at_fill": 1,
             "stop": 212.5,
             "stop_rule": "ta",
             "stop_asof": "2026-07-14",
             "group": "IC設計電源",
-            "cost_twd": 40956.0,
+            "cost_twd": 40956,
             "half_locked": false,
             "ratchet_armed": true,
             "ratchet_value": 176.95,
             "ratchet_asof": "2026-07-14",
-            "fill_ref_close": 244.0
+            "fill_ref_close": 244
           },
           "stop_facts": [
             {
@@ -585,12 +776,12 @@
             "shares": 676,
             "avg_price": 67.9,
             "fill_date": "2026-07-14",
-            "fx_at_fill": 1.0,
+            "fx_at_fill": 1,
             "stop": 60.6,
             "stop_rule": "ta",
             "stop_asof": "2026-07-14",
             "group": "ind-23",
-            "cost_twd": 45966.0,
+            "cost_twd": 45966,
             "half_locked": false,
             "ratchet_armed": false,
             "ratchet_value": 55.765,
@@ -625,12 +816,12 @@
             "shares": 1378,
             "avg_price": 34.05,
             "fill_date": "2026-07-14",
-            "fx_at_fill": 1.0,
+            "fx_at_fill": 1,
             "stop": 30.45,
             "stop_rule": "ta",
             "stop_asof": "2026-07-14",
             "group": "EMS",
-            "cost_twd": 46988.0,
+            "cost_twd": 46988,
             "half_locked": false,
             "ratchet_armed": false,
             "ratchet_value": 26.9875,
@@ -667,12 +858,12 @@
             "shares": 805,
             "avg_price": 63.2,
             "fill_date": "2026-07-14",
-            "fx_at_fill": 1.0,
-            "stop": 57.0,
+            "fx_at_fill": 1,
+            "stop": 57,
             "stop_rule": "ta",
             "stop_asof": "2026-07-14",
             "group": "EMS",
-            "cost_twd": 50948.0,
+            "cost_twd": 50948,
             "half_locked": false,
             "ratchet_armed": true,
             "ratchet_value": 53.77,
@@ -682,7 +873,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-14",
-              "value": 57.0
+              "value": 57
             }
           ]
         },
@@ -707,12 +898,12 @@
             "shares": 208,
             "avg_price": 215.5,
             "fill_date": "2026-07-14",
-            "fx_at_fill": 1.0,
-            "stop": 192.0,
+            "fx_at_fill": 1,
+            "stop": 192,
             "stop_rule": "ta",
             "stop_asof": "2026-07-14",
             "group": "網通伺服器",
-            "cost_twd": 44888.0,
+            "cost_twd": 44888,
             "half_locked": false,
             "ratchet_armed": false,
             "ratchet_value": 174.4,
@@ -722,7 +913,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-14",
-              "value": 192.0
+              "value": 192
             }
           ]
         },
@@ -752,20 +943,20 @@
             "shares": 505,
             "avg_price": 128.5,
             "fill_date": "2026-07-16",
-            "fx_at_fill": 1.0,
-            "stop": 119.0,
+            "fx_at_fill": 1,
+            "stop": 119,
             "stop_rule": "ta",
             "stop_asof": "2026-07-16",
             "group": "金融",
-            "cost_twd": 64985.0,
-            "fill_ref_close": 125.0,
+            "cost_twd": 64985,
+            "fill_ref_close": 125,
             "half_locked": false,
             "ratchet_armed": false
           },
           "stop_facts": [
             {
               "asof": "2026-07-16",
-              "value": 119.0
+              "value": 119
             }
           ]
         },
@@ -795,22 +986,22 @@
             "ticker": "2404.TW",
             "name": "漢唐",
             "shares": 33,
-            "avg_price": 1230.0,
+            "avg_price": 1230,
             "fill_date": "2026-07-16",
-            "fx_at_fill": 1.0,
-            "stop": 1130.0,
+            "fx_at_fill": 1,
+            "stop": 1130,
             "stop_rule": "ta",
             "stop_asof": "2026-07-16",
             "group": "ind-31",
-            "cost_twd": 40648.0,
-            "fill_ref_close": 1250.0,
+            "cost_twd": 40648,
+            "fill_ref_close": 1250,
             "half_locked": false,
             "ratchet_armed": false
           },
           "stop_facts": [
             {
               "asof": "2026-07-16",
-              "value": 1130.0
+              "value": 1130
             }
           ]
         },
@@ -835,12 +1026,12 @@
             "shares": 532,
             "avg_price": 80.6,
             "fill_date": "2026-07-15",
-            "fx_at_fill": 1.0,
+            "fx_at_fill": 1,
             "stop": 71.2,
             "stop_rule": "ta",
             "stop_asof": "2026-07-15",
             "group": "ind-25",
-            "cost_twd": 42940.0,
+            "cost_twd": 42940,
             "fill_ref_close": 83.30000305175781,
             "half_locked": false,
             "ratchet_armed": false
@@ -865,20 +1056,20 @@
             "shares": 558,
             "avg_price": 74.2,
             "fill_date": "2026-07-17",
-            "fx_at_fill": 1.0,
-            "stop": 66.0,
+            "fx_at_fill": 1,
+            "stop": 66,
             "stop_rule": "ta",
             "stop_asof": "2026-07-17",
             "group": "ind-24",
-            "cost_twd": 41463.0,
-            "fill_ref_close": 69.0,
+            "cost_twd": 41463,
+            "fill_ref_close": 69,
             "half_locked": false,
             "ratchet_armed": false
           },
           "stop_facts": [
             {
               "asof": "2026-07-17",
-              "value": 66.0
+              "value": 66
             }
           ]
         },
@@ -910,12 +1101,12 @@
             "shares": 433,
             "avg_price": 140.5,
             "fill_date": "2026-07-17",
-            "fx_at_fill": 1.0,
-            "stop": 129.0,
+            "fx_at_fill": 1,
+            "stop": 129,
             "stop_rule": "ta",
             "stop_asof": "2026-07-17",
             "group": "ind-25",
-            "cost_twd": 60923.0,
+            "cost_twd": 60923,
             "fill_ref_close": 141.5,
             "half_locked": false,
             "ratchet_armed": false
@@ -923,7 +1114,7 @@
           "stop_facts": [
             {
               "asof": "2026-07-17",
-              "value": 129.0
+              "value": 129
             }
           ]
         },
@@ -946,22 +1137,22 @@
             "ticker": "8932.TWO",
             "name": "智通*",
             "shares": 395,
-            "avg_price": 125.0,
+            "avg_price": 125,
             "fill_date": "2026-07-17",
-            "fx_at_fill": 1.0,
-            "stop": 116.0,
+            "fx_at_fill": 1,
+            "stop": 116,
             "stop_rule": "ta",
             "stop_asof": "2026-07-17",
             "group": "ind-36",
-            "cost_twd": 49445.0,
-            "fill_ref_close": 117.0,
+            "cost_twd": 49445,
+            "fill_ref_close": 117,
             "half_locked": false,
             "ratchet_armed": false
           },
           "stop_facts": [
             {
               "asof": "2026-07-17",
-              "value": 116.0
+              "value": 116
             }
           ]
         },
@@ -990,7 +1181,7 @@
       "0050.TW": {
         "date": "2026-07-14",
         "close": 105.5,
-        "fx": 1.0,
+        "fx": 1,
         "how": "2026-07-14 開盤",
         "spec": {
           "ticker": "0050.TW",
@@ -1040,5 +1231,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-17T06:33:09.636036+00:00"
+  "generated_at": "2026-07-17T09:00:25.402103+00:00"
 }

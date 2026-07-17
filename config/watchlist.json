@@ -43,8 +43,8 @@
       "currency": "USD",
       "theme": "AI 雲全棧(NVIDIA 聯盟)",
       "notes": "AI 雲全棧(NVIDIA 聯盟); 6/22 入 Nasdaq 100; 一般關注標的(與清單其他支同等處理, 無特殊持倉/警戒框架; 2026-06-30 Adam 明示正規化, 撤『$201 警戒/已出場』位階); 進場區 205-225/認錯 190; 估值極延伸 P/S76/分析師 mean$244<現價=別追",
-      "entry_zone_lo": 205,
-      "entry_zone_hi": 225
+      "entry_zone_lo": 140,
+      "entry_zone_hi": 158
     },
     {
       "id": "3363",
@@ -87,8 +87,8 @@
       "currency": "USD",
       "theme": "資料中心電力+散熱 (台達電國際頭號對手)",
       "notes": "資料中心電力+散熱 (台達電國際頭號對手); 800V HVDC 最純美股玩法; 看好結構但估值貴 (6/16 深查 fwd PE~35x/trailing 76x/DCF 合理~$193) + froth 高檔; 進場區 275-290 (6月初急殺支撐帶), 認錯 <250; 27 分析師 strong_buy mean $378; USD 計價",
-      "entry_zone_lo": 275,
-      "entry_zone_hi": 290
+      "entry_zone_lo": 258,
+      "entry_zone_hi": 282
     },
     {
       "id": "2383",
@@ -131,8 +131,8 @@
       "currency": "USD",
       "theme": "美股電網/電力設備龍頭 (燃氣發電機供電DC + 電網含",
       "notes": "美股電網/電力設備龍頭 (燃氣發電機供電DC + 電網含大型變壓器 + 風電); AI供電題材最強/分析師目標$1212(+24%) BUT fwd PE~40貴/52w+100%/從ATH1182回-17%; 進場區 850-950/認錯<750; USD; AI受益深(gas turbine+grid雙引擎吃DC電力)",
-      "entry_zone_lo": 850,
-      "entry_zone_hi": 950
+      "entry_zone_lo": 950,
+      "entry_zone_hi": 1010
     },
     {
       "id": "hubb",
@@ -142,7 +142,7 @@
       "currency": "USD",
       "theme": "美股電網變壓器+電氣設備 (Utility Soluti",
       "notes": "美股電網變壓器+電氣設備 (Utility Solutions做電網變壓器 + Electrical Solutions); 估值合理fwd PE22.5/ROE26%/配息1.2%; 52w+25%溫和/從ATH565回-13%; 進場區 440-475/認錯<390; USD; AI受益較淺(data center是Electrical一塊+grid廣基)",
-      "entry_zone_lo": 440,
+      "entry_zone_lo": 455,
       "entry_zone_hi": 475
     },
     {
@@ -153,8 +153,8 @@
       "currency": "USD",
       "theme": "全美最大核電商(31.7GW核+Calpine)",
       "notes": "全美最大核電商(31.7GW核+Calpine); AI最純電力受益(Microsoft 20年三哩島重啟$1.6B + Meta 20年1.1GW伊州); 已從ATH$412 -36%(主因3/26 Crane重啟併網延到2031非2027); Q1 EPS$2.74 beat/fwd PE19.3/ROE16%/strong_buy目標$368(+40%); 進場區235-258(近52w低240.5)/認錯<215; USD",
-      "entry_zone_lo": 235,
-      "entry_zone_hi": 258
+      "entry_zone_lo": 230,
+      "entry_zone_hi": 248
     },
     {
       "id": "vst",
@@ -164,7 +164,7 @@
       "currency": "USD",
       "theme": "IPP(核+氣+電池+零售44GW, 德州ERCOT重)",
       "notes": "IPP(核+氣+電池+零售44GW, 德州ERCOT重); AI電力(Meta+AWS 20年3800MW PPA); fwd PE14/PEG0.44便宜/ROE43%/Q1記錄EBITDA$1.49B/strong_buy目標$225(+47%); 已從ATH$220 -30%(sector de-rating非公司面); ⚠️高槓桿債股355%+merchant電價風險; 進場區130-150(近52w低133)/認錯<122; USD",
-      "entry_zone_lo": 130,
+      "entry_zone_lo": 138,
       "entry_zone_hi": 150
     },
     {
@@ -175,7 +175,7 @@
       "currency": "USD",
       "theme": "IPP(核+化石13.1GW)",
       "notes": "IPP(核+化石13.1GW); AI最純綁定=賓州Susquehanna核電→AWS DC 1920MW/$18B/到2042; rev+97%/fwd PE11.1(三檔最便宜)/目標$472(+22%,14分析師)/FCF+$1.39B BUT TTM小虧; ⚠️高槓桿債股635%(三檔最高)+小float(波動大); ⚠️距ATH$451僅-14%(6/15剛+7%噴上=非低檔, 進場時機差於CEG/VST在低檔); 進場區330-365(50日$359+6/10低$",
-      "entry_zone_lo": 330,
+      "entry_zone_lo": 335,
       "entry_zone_hi": 365
     },
     {
@@ -219,8 +219,8 @@
       "currency": "USD",
       "theme": "HBM/先進封裝製程檢測量測(賣鏟子)",
       "notes": "HBM/先進封裝製程檢測量測(賣鏟子): 6/17 深查; 營收創高加速(Q3-25 $218M→Q1-26 創高 $292M), 「獲利-47%」是高基期+攤銷費用假警報(底層營收創高); fwd PE 32(還原EPS)/trailing 147假貴/P/S 15貴/零負債/現金$13.2億; 分析師近2月一面倒上修 mean $352(+11%) strong_buy = 8檔賣鏟子唯一目標>現價; 進場區 280-305(突破帶回測+50日線277)/認錯<248(5",
-      "entry_zone_lo": 280,
-      "entry_zone_hi": 305
+      "entry_zone_lo": 255,
+      "entry_zone_hi": 285
     },
     {
       "id": "crwv",
@@ -347,8 +347,8 @@
       "currency": "USD",
       "theme": "光通訊光纖/玻璃基板/特用材料(美股NYSE USD)",
       "notes": "光通訊光纖/玻璃基板/特用材料(美股NYSE USD); AI資料中心光纖連接(Springboard)+顯示玻璃+Gorilla玻璃+陶瓷基板; 6/26 KOL(川沐)點名殺盤中逆勢撐盤Adam明示加入; 真AI光通訊受惠+品質(ROE17%/營收+20%/獲利+139%) BUT ⚠️估值極貴=2026 PE~71x/fwd54x/P/S12/一年+341%@228貼ATH230.5且**>分析師最高目標$230**(15家buy mean僅$202/median$21",
-      "entry_zone_lo": 185,
-      "entry_zone_hi": 205
+      "entry_zone_lo": 130,
+      "entry_zone_hi": 148
     },
     {
       "id": "3711",
@@ -611,8 +611,8 @@
       "currency": "USD",
       "theme": "AI 主權資料中心/Neocloud(SharonAI ",
       "notes": "AI 主權資料中心/Neocloud(SharonAI Holdings, 美股NASDAQ NCM, USD); 7/5 Serenity 點名(Anthropic 澳洲 1.4GW/$21.6B 外流文件+SharonAI/IREN 建澳洲主權 DC)Adam 明示加入; ⚠️⚠️極投機 de-SPAC 小型故事股=今年2月借殼上市(前 Roth CH/Novus SpinCo)/25員工/營收僅約$150萬但市值$16億(P/S~1000x)/虧損(EPS-3.61)/",
-      "entry_zone_lo": 46,
-      "entry_zone_hi": 60
+      "entry_zone_lo": 57,
+      "entry_zone_hi": 62
     },
     {
       "id": "1519",
