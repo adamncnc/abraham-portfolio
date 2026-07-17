@@ -22,8 +22,8 @@
         "cost_twd": 82882.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 183.65,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_value": 176.95,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244.0
       }
     ],
@@ -144,5 +144,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-17T06:06:35.335997+00:00"
+  "generated_at": "2026-07-17T06:33:09.638039+00:00"
 }

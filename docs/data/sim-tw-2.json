@@ -22,8 +22,8 @@
         "cost_twd": 40963.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 59.9,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_value": 56.735,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 77.599998
       },
       {
@@ -40,8 +40,8 @@
         "cost_twd": 40956.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 183.65,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_value": 176.95,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244.0
       },
       {
@@ -58,8 +58,8 @@
         "cost_twd": 45966.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 57.212,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_value": 55.765,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.300003
       },
       {
@@ -75,9 +75,9 @@
         "group": "EMS",
         "cost_twd": 46988.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 28.78,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_armed": false,
+        "ratchet_value": 26.9875,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 32.799999
       },
       {
@@ -94,8 +94,8 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 51.995,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_value": 53.77,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 63.700001
       },
       {
@@ -111,9 +111,9 @@
         "group": "網通伺服器",
         "cost_twd": 44888.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 180.35,
-        "ratchet_asof": "2026-07-17",
+        "ratchet_armed": false,
+        "ratchet_value": 174.4,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 212.5
       },
       {
@@ -130,9 +130,7 @@
         "cost_twd": 42940.0,
         "fill_ref_close": 83.300003,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 69.755,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "2881.TW",
@@ -148,9 +146,7 @@
         "cost_twd": 64985.0,
         "fill_ref_close": 125.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 110.75,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "2404.TW",
@@ -166,9 +162,7 @@
         "cost_twd": 40648.0,
         "fill_ref_close": 1250.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 1024.25,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "2377.TW",
@@ -184,9 +178,7 @@
         "cost_twd": 60923.0,
         "fill_ref_close": 141.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 123.5,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "8932.TWO",
@@ -202,9 +194,7 @@
         "cost_twd": 49445.0,
         "fill_ref_close": 117.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 95.82,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "8131.TW",
@@ -220,9 +210,7 @@
         "cost_twd": 41463.0,
         "fill_ref_close": 69.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 52.275,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       }
     ],
     "pending_orders": [],
@@ -502,7 +490,7 @@
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.stage-input-2026-07-16.json"
       },
       {
-        "ts": "2026-07-17T14:06:24+08:00",
+        "ts": "2026-07-17T14:11:28+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -1052,5 +1040,5 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-17T06:06:35.333993+00:00"
+  "generated_at": "2026-07-17T06:33:09.636036+00:00"
 }

@@ -98,8 +98,8 @@
       "currency": "TWD",
       "theme": "高速 CCL 銅箔基板龍頭 (AI server M8/",
       "notes": "高速 CCL 銅箔基板龍頭 (AI server M8/M9 板材); 品質最高 ROE 41%/rev+53%/PEG0.23/strong_buy; BUT 52w+480%已大; 進場參考 4300-4700 (近50日線), 認錯 <3600; froth 高檔等回檔分批",
-      "entry_zone_lo": 4300,
-      "entry_zone_hi": 4700
+      "entry_zone_lo": 4050,
+      "entry_zone_hi": 4450
     },
     {
       "id": "2327",
@@ -109,8 +109,8 @@
       "currency": "TWD",
       "theme": "MLCC 被動元件 upcycle (6/16 Rock",
       "notes": "MLCC 被動元件 upcycle (6/16 Rocky 4IB+JPM 訊號); 真賺錢 ROE16%/FCF正; BUT 兩個多月近翻倍 @965>分析師mean目標771=追高; 進場參考 780-880, 認錯 <620; 等回檔",
-      "entry_zone_lo": 780,
-      "entry_zone_hi": 880
+      "entry_zone_lo": 550,
+      "entry_zone_hi": 630
     },
     {
       "id": "mu",
@@ -186,8 +186,8 @@
       "currency": "TWD",
       "theme": "電源管理IC/功率元件",
       "notes": "電源管理IC/功率元件: CPU/GPU多相位降壓控制器+整合power stage(伺服器VRM, 台版MPWR, 這群最直接AI伺服器); 本益比37/fwd~26-28/ROE5.4%/毛利36%/現金厚幾乎無債; ⚠️月營收衰退(2026-05 YoY-9.6%/連3月負, 比Yahoo blended 0%更弱)→等月營收翻正; 獲利+39%靠毛利組合/4分析師目標222.5<現價; 富邦2026 EPS est 8.5; 進場區205-225(50日201+5月起",
-      "entry_zone_lo": 205,
-      "entry_zone_hi": 225
+      "entry_zone_lo": 200,
+      "entry_zone_hi": 220
     },
     {
       "id": "6435",
@@ -197,8 +197,8 @@
       "currency": "TWD",
       "theme": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功",
       "notes": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功率部門分拆, 現泛國巨集團=國巨2327同集團); AI伺服器中壓MOSFET+風扇馬達驅動成長最強非PC應用; ROE22%(這群最佳)/本益比29/獲利+28%/幾乎無債 BUT 毛利24%(離散偏低)/僅1分析師cover目標300; 月營收動能轉強🟡(2026-05 YoY+22.2%且加速11→13.5→22.2, 優於Yahoo blended+4%); ⚠️52w+182%貼ATH306.5; 進場區225",
-      "entry_zone_lo": 225,
-      "entry_zone_hi": 255
+      "entry_zone_lo": 235,
+      "entry_zone_hi": 260
     },
     {
       "id": "8299",
@@ -208,8 +208,8 @@
       "currency": "TWD",
       "theme": "NAND 控制晶片龍頭 (HBF 概念/景氣循環股)",
       "notes": "NAND 控制晶片龍頭 (HBF 概念/景氣循環股): 今年 PE~8 是循環頂峰假便宜 (fwd PE 13.7, TTM EPS 39.7→fwd 170 靠 NAND 漲價上行週期), ROE 37%, analyst mean 2946 (+26%); ⚠️ 營運+自由現金流雙負 (囤 NAND 庫存=循環風險); 進場區 1900-2100 (6/12 hunt#8 分析, 50日線2200下方等回檔), 認錯=NAND 合約價 MoM 轉負無條件離場; HBF 是",
-      "entry_zone_lo": 2060,
-      "entry_zone_hi": 2185
+      "entry_zone_lo": 1550,
+      "entry_zone_hi": 1700
     },
     {
       "id": "onto",
@@ -369,8 +369,8 @@
       "currency": "TWD",
       "theme": "SiP模組(RF前端/PA/WiFi)+光通訊(光收發/",
       "notes": "SiP模組(RF前端/PA/WiFi)+光通訊(光收發/CPO封裝)+MEMS(台股TWSE,但總部中國中山/鴻海子公司); 6/26 CPO題材(訊芯CPO 51.2T小量產+與台積電COUPE合作)Adam明示加入; ⚠️⚠️**全清單最投機=純CPO樂透**: trailing PE 2392(幾乎無獲利EPS0.25)/**營收YoY-21%衰退**/營業利益率-5.2%虧損/**零分析師cover**/中國總部+鴻海子(地緣+流動性低beta0.34); 價值100",
-      "entry_zone_lo": 480,
-      "entry_zone_hi": 540
+      "entry_zone_lo": 365,
+      "entry_zone_hi": 405
     },
     {
       "id": "asml",
@@ -534,8 +534,8 @@
       "currency": "TWD",
       "theme": "封測/記憶體封裝測試(全球第5大OSAT/台灣記憶體封測",
       "notes": "封測/記憶體封裝測試(全球第5大OSAT/台灣記憶體封測龍頭/美光最大封測夥伴; HBM burn-in是AI記憶體出貨卡脖子環節); 6/30 Adam深調後明示加入; 體質中段=毛利17.6%/ROE11%/⚠️FCF-140億(2026 capex US$16億擴產積極)/淨負債167億D/E44%; 估值2026E PE 26.4x(EPS12.77; ⚠️Yahoo forwardPE17.5是用2027 EPS算的假便宜)/trailing40x; 月營收連11月",
-      "entry_zone_lo": 270,
-      "entry_zone_hi": 305
+      "entry_zone_lo": 245,
+      "entry_zone_hi": 270
     },
     {
       "id": "3533",
@@ -578,8 +578,8 @@
       "currency": "TWD",
       "theme": "800G 交換器/CPO 組裝(AI 網通核心)",
       "notes": "800G 交換器/CPO 組裝(AI 網通核心); 狙擊名單 6/11 原始成員(#3), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1850-2050 / 認錯 1430(破200日); 北美雲端 capex 是主風險",
-      "entry_zone_lo": 2280,
-      "entry_zone_hi": 2480
+      "entry_zone_lo": 1880,
+      "entry_zone_hi": 2080
     },
     {
       "id": "3081",
