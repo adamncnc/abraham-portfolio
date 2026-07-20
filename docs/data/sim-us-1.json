@@ -5,27 +5,9 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 614251.2543783318,
-    "realized_pnl_twd": 0,
+    "cash_twd": 691468.7623389559,
+    "realized_pnl_twd": -20011.0,
     "positions": [
-      {
-        "ticker": "GLW",
-        "name": "康寧Corning",
-        "shares": 16,
-        "avg_price": 187.33,
-        "fill_date": "2026-07-13",
-        "fx_at_fill": 32.2239990234375,
-        "stop": 165.0,
-        "stop_rule": "daily_all",
-        "group": "光通訊CPO",
-        "cost_twd": 97229.0,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 130.0415,
-        "ratchet_asof": "2026-07-17",
-        "fill_ref_close": 183.110001,
-        "stop_asof": "2026-07-13"
-      },
       {
         "ticker": "CEG",
         "name": "Constellation",
@@ -40,9 +22,7 @@
         "cost_twd": 99927.0,
         "fill_ref_close": 256.429993,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 230.2134,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "LRCX",
@@ -58,9 +38,7 @@
         "cost_twd": 89640.0,
         "fill_ref_close": 335.429993,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 246.15,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       },
       {
         "ticker": "KLAC",
@@ -76,23 +54,11 @@
         "cost_twd": 98952.0,
         "fill_ref_close": 219.369995,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 158.095,
-        "ratchet_asof": "2026-07-17"
+        "ratchet_armed": false
       }
     ],
     "pending_orders": [],
-    "pending_sells": [
-      {
-        "id": "sell-2026-07-17-GLW-stop_all",
-        "placed_ts": "2026-07-17T05:45:45+08:00",
-        "ticker": "GLW",
-        "name": "康寧Corning",
-        "trigger": "stop_all",
-        "qty_rule": "all",
-        "reason": "2026-07-17 出場檢查：7/16 日收 158.39 < 認錯線 165（daily_all）→ 全數出清；DM 1527430940916453468 先發後寫（§1.6-5）"
-      }
-    ],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -197,6 +163,24 @@
         "stop": 180,
         "opened": true,
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json"
+      },
+      {
+        "ts": "2026-07-20T11:53:08+08:00",
+        "sell_id": "sell-2026-07-17-GLW-stop_all",
+        "ticker": "GLW",
+        "name": "康寧Corning",
+        "action": "sell",
+        "shares": 16,
+        "price": 150.83,
+        "fee": 20.0,
+        "proceeds_twd": 77218.0,
+        "cost_basis_twd": 97229.0,
+        "fx": 32.264,
+        "pnl_twd": -20011.0,
+        "sell_date": "2026-07-17",
+        "qty_rule": "all",
+        "trigger": "stop_all",
+        "reason": "2026-07-17 出場檢查：7/16 日收 158.39 < 認錯線 165（daily_all）→ 全數出清；DM 1527430940916453468 先發後寫（§1.6-5）"
       }
     ],
     "benchmark_spec": {
@@ -210,61 +194,11 @@
         "splits_applied": [],
         "divs_credited": [],
         "projection_origin_v2": {
-          "position": {
-            "ticker": "GLW",
-            "name": "康寧Corning",
-            "shares": 16,
-            "avg_price": 187.33,
-            "fill_date": "2026-07-13",
-            "fx_at_fill": 32.2239990234375,
-            "stop": 165,
-            "stop_rule": "daily_all",
-            "group": "光通訊CPO",
-            "cost_twd": 97229,
-            "half_locked": false,
-            "ratchet_armed": false,
-            "ratchet_value": 125.9975,
-            "ratchet_asof": "2026-07-14",
-            "fill_ref_close": 183.11000061035156
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-13",
-              "value": 165
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-08-29",
-            "kind": "div",
-            "amount": 0.28,
-            "source_count": 1,
-            "key": "div:2025-08-29"
-          },
-          {
-            "date": "2025-11-14",
-            "kind": "div",
-            "amount": 0.28,
-            "source_count": 1,
-            "key": "div:2025-11-14"
-          },
-          {
-            "date": "2026-02-27",
-            "kind": "div",
-            "amount": 0.28,
-            "source_count": 1,
-            "key": "div:2026-02-27"
-          },
-          {
-            "date": "2026-05-29",
-            "kind": "div",
-            "amount": 0.28,
-            "source_count": 1,
-            "key": "div:2026-05-29"
-          }
-        ]
+        "corporate_actions": []
       },
       "CEG": {
         "projection_origin_v2": {
@@ -539,7 +473,19 @@
         "SPY": 0.01
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-20T11:53:58+08:00",
+      "nav_twd": 967232.0,
+      "return_pct": -3.28,
+      "cash_twd": 691469.0,
+      "n_positions": 3,
+      "usdtwd": 32.391,
+      "bench_return_pct": {
+        "SPY": -0.54
+      },
+      "realized_pnl_twd": -20011.0
     }
   ],
-  "generated_at": "2026-07-20T01:59:21.180354+00:00"
+  "generated_at": "2026-07-20T03:54:09.956866+00:00"
 }

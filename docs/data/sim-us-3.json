@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 941391.5586822452,
+    "cash_twd": 860040.3505658561,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -23,46 +23,25 @@
         "fill_ref_close": 1784.869995,
         "half_locked": false,
         "ratchet_armed": false
-      }
-    ],
-    "pending_orders": [
+      },
       {
-        "id": "actionable-2026-07-17-KLAC",
-        "placed_ts": "2026-07-17T07:40:57+08:00",
         "ticker": "KLAC",
         "name": "科磊",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 216.82,
+        "shares": 12,
+        "avg_price": 208.45,
+        "fill_date": "2026-07-17",
+        "fx_at_fill": 32.26430130004883,
         "stop": 190.8,
         "stop_rule": "ta",
+        "stop_asof": "2026-07-17",
         "group": "半導體設備",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-17.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-17.json",
-          "date": "2026-07-17",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "KLAC",
-            "name": "科磊",
-            "yf": "KLAC",
-            "group": "半導體設備",
-            "px": 219.37,
-            "ma20": 243.51,
-            "ma50": 216.82,
-            "ma200_gap": 39.4,
-            "rs63": 18.2,
-            "atr20_pct": 9.3,
-            "setup": "A回檔MA50",
-            "limit": 216.82,
-            "stop": 190.8,
-            "stop_pct": -12.0,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-07-17"
+        "cost_twd": 81351.0,
+        "fill_ref_close": 212.75,
+        "half_locked": false,
+        "ratchet_armed": false
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -96,6 +75,22 @@
         "stop": 1632.41,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-16.json"
+      },
+      {
+        "ts": "2026-07-20T11:53:17+08:00",
+        "order_id": "actionable-2026-07-17-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊",
+        "action": "buy",
+        "shares": 12,
+        "price": 208.45,
+        "fee": 20.0,
+        "cost_twd": 81351.0,
+        "fill_date": "2026-07-17",
+        "fill_how": "開盤",
+        "stop": 190.8,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-17.json"
       }
     ],
     "benchmark_spec": {
@@ -159,6 +154,72 @@
             "amount": 3.177,
             "source_count": 1,
             "key": "div:2026-04-27"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "KLAC": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "KLAC",
+            "name": "科磊",
+            "shares": 12,
+            "avg_price": 208.45,
+            "fill_date": "2026-07-17",
+            "fx_at_fill": 32.26430130004883,
+            "stop": 190.8,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-17",
+            "group": "半導體設備",
+            "cost_twd": 81351.0,
+            "fill_ref_close": 212.75,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-17",
+              "value": 190.8
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-08-18",
+            "kind": "div",
+            "amount": 0.19,
+            "source_count": 1,
+            "key": "div:2025-08-18"
+          },
+          {
+            "date": "2025-11-17",
+            "kind": "div",
+            "amount": 0.19,
+            "source_count": 1,
+            "key": "div:2025-11-17"
+          },
+          {
+            "date": "2026-02-17",
+            "kind": "div",
+            "amount": 0.19,
+            "source_count": 1,
+            "key": "div:2026-02-17"
+          },
+          {
+            "date": "2026-05-18",
+            "kind": "div",
+            "amount": 0.23,
+            "source_count": 1,
+            "key": "div:2026-05-18"
+          },
+          {
+            "date": "2026-06-12",
+            "kind": "split",
+            "ratio": 10.0,
+            "source_count": 1,
+            "key": "split:2026-06-12"
           }
         ],
         "splits_applied": [],
@@ -253,7 +314,19 @@
         "SPY": 0.01
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-20T11:54:09+08:00",
+      "nav_twd": 999340.0,
+      "return_pct": -0.07,
+      "cash_twd": 860040.0,
+      "n_positions": 2,
+      "usdtwd": 32.391,
+      "bench_return_pct": {
+        "SPY": -0.54
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-20T01:59:21.183353+00:00"
+  "generated_at": "2026-07-20T03:54:09.959875+00:00"
 }

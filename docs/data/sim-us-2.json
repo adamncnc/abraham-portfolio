@@ -75,116 +75,7 @@
         "ratchet_armed": false
       }
     ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-07-17-FTRE",
-        "placed_ts": "2026-07-17T07:40:56+08:00",
-        "ticker": "FTRE",
-        "name": "Fortrea Holdings Inc.",
-        "side": "buy",
-        "budget_twd": 93000,
-        "limit": 17.22,
-        "stop": 15.37,
-        "stop_rule": "ta",
-        "group": "Biotechnology",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-17.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-17.json",
-          "date": "2026-07-17",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "FTRE",
-            "name": "Fortrea Holdings Inc.",
-            "yf": "FTRE",
-            "group": "Biotechnology",
-            "px": 17.92,
-            "ma20": 17.22,
-            "ma50": 15.95,
-            "ma200_gap": 36.6,
-            "rs63": 71.0,
-            "atr20_pct": 5.2,
-            "setup": "A回檔MA20",
-            "limit": 17.22,
-            "stop": 15.37,
-            "stop_pct": -10.7,
-            "budget": 93000
-          }
-        },
-        "target_session": "2026-07-17"
-      },
-      {
-        "id": "actionable-2026-07-17-ULCC",
-        "placed_ts": "2026-07-17T07:40:56+08:00",
-        "ticker": "ULCC",
-        "name": "Frontier Group Holdings, Inc.",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 6.16,
-        "stop": 5.42,
-        "stop_rule": "ta",
-        "group": "Airlines",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-17.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-17.json",
-          "date": "2026-07-17",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "ULCC",
-            "name": "Frontier Group Holdings, Inc.",
-            "yf": "ULCC",
-            "group": "Airlines",
-            "px": 6.53,
-            "ma20": 7.27,
-            "ma50": 6.16,
-            "ma200_gap": 34.7,
-            "rs63": 56.0,
-            "atr20_pct": 7.7,
-            "setup": "A回檔MA50",
-            "limit": 6.16,
-            "stop": 5.42,
-            "stop_pct": -12.0,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-07-17"
-      },
-      {
-        "id": "actionable-2026-07-17-GBTG",
-        "placed_ts": "2026-07-17T07:40:56+08:00",
-        "ticker": "GBTG",
-        "name": "Global Business Travel Group, Inc. Class A Common Stock",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 9.39,
-        "stop": 8.83,
-        "stop_rule": "ta",
-        "group": "Travel Services",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-17.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-17.json",
-          "date": "2026-07-17",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "GBTG",
-            "name": "Global Business Travel Group, Inc. Class A Common Stock",
-            "yf": "GBTG",
-            "group": "Travel Services",
-            "px": 9.4,
-            "ma20": 9.39,
-            "ma50": 9.39,
-            "ma200_gap": 25.6,
-            "rs63": 54.0,
-            "atr20_pct": 0.4,
-            "setup": "A回檔MA20",
-            "limit": 9.39,
-            "stop": 8.83,
-            "stop_pct": -6.0,
-            "budget": 150000
-          }
-        },
-        "target_session": "2026-07-17"
-      }
-    ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -396,6 +287,39 @@
         "stop": 53.76,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-16.json"
+      },
+      {
+        "ts": "2026-07-20T11:53:13+08:00",
+        "order_id": "actionable-2026-07-17-FTRE",
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "action": "expire_unfilled",
+        "open": 17.729999542236328,
+        "low": 17.520000457763672,
+        "limit": 17.22,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-20T11:53:13+08:00",
+        "order_id": "actionable-2026-07-17-ULCC",
+        "ticker": "ULCC",
+        "name": "Frontier Group Holdings, Inc.",
+        "action": "expire_unfilled",
+        "open": 6.349999904632568,
+        "low": 6.170000076293945,
+        "limit": 6.16,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-20T11:53:13+08:00",
+        "order_id": "actionable-2026-07-17-GBTG",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class A Common Stock",
+        "action": "expire_unfilled",
+        "open": 9.4399995803833,
+        "low": 9.40999984741211,
+        "limit": 9.39,
+        "fill_mode": null
       }
     ],
     "benchmark_spec": {
@@ -702,7 +626,19 @@
         "SPY": 0.01
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-20T11:54:04+08:00",
+      "nav_twd": 1002164.0,
+      "return_pct": 0.22,
+      "cash_twd": 569919.0,
+      "n_positions": 4,
+      "usdtwd": 32.392,
+      "bench_return_pct": {
+        "SPY": -0.54
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-20T01:59:21.182352+00:00"
+  "generated_at": "2026-07-20T03:54:09.958871+00:00"
 }
