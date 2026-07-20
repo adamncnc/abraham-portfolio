@@ -65,8 +65,8 @@
       "currency": "TWD",
       "theme": "電源管理 IC",
       "notes": "電源管理 IC; 進場區 440-500 (6/19 上修; 舊 400-460 已作廢), 認錯 300; Q1 EPS+114%/毛利 50%, 16 分析師 mean 586; 中國營收為主 KY 股",
-      "entry_zone_lo": 440,
-      "entry_zone_hi": 500
+      "entry_zone_lo": 375,
+      "entry_zone_hi": 415
     },
     {
       "id": "3324",
@@ -252,8 +252,8 @@
       "currency": "TWD",
       "theme": "高壓/大尺寸MLCC(Prosperity Dielec",
       "notes": "高壓/大尺寸MLCC(Prosperity Dielectrics/Walsin集團/禾伸堂同級高壓對手); 6/20深查: 質地MLCC群最佳=毛利25.7%(最高)/幾乎零負債/獲利+70%; AI高壓電容滿載+交期16週(真供需吃緊)+月營收加速(FinMind 2026 Apr+20.4%/May+25.6% YoY單月record, 比禾伸堂+21%更強); BUT股價已先噴=一年+763%@~316/PE97/貼ATH318/無分析師cover/小型波動大; 進場",
-      "entry_zone_lo": 150,
-      "entry_zone_hi": 195
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "3653",
@@ -589,8 +589,8 @@
       "currency": "TWD",
       "theme": "InP 磊晶(光通訊上游, 中國管制外最純受惠, AXT",
       "notes": "InP 磊晶(光通訊上游, 中國管制外最純受惠, AXTI 除名後唯一 InP 純 play); 狙擊名單 6/11 原始成員(#5), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1600-1900(6/19 上修) / 認錯 1190(破200日); 投機級, 估值極貴 P/S 高檔",
-      "entry_zone_lo": 1600,
-      "entry_zone_hi": 1900
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "anet",
