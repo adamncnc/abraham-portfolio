@@ -666,6 +666,17 @@
       "notes": "晶圓級燒機測試設備(wafer-level burn-in; 美股NasdaqGS USD); 產品FOX(晶圓級)+Sonoma(封裝級,撐單顆2000W). 7/16 Adam截圖深調後明示加入(ast-0042). **一次真轉型**: 舊業務EV碳化矽SiC從>95%營收崩到<5%(EV放緩+主動轉型), 轉AI燒機=AI加速器/CPU/網通71%營收+矽光子20%. 催化=FY2026 Q4(截5/31,7/14盤後)beat(營收$18.8M+34% YoY/no",
       "entry_zone_lo": 62,
       "entry_zone_hi": 72
+    },
+    {
+      "id": "be",
+      "type": "us_stock",
+      "symbol": "BE",
+      "name": "Bloom Energy",
+      "currency": "USD",
+      "theme": "固態燃料電池/AI 資料中心現場發電(供應 Nebius",
+      "notes": "固態燃料電池/AI 資料中心現場發電(供應 Nebius 等); 7/20 Adam 加入(當日已做完整 TA); 初步帶 173-195/認錯 166(暫行, 7/28 財報後重驗); 預付成長型估值 fwd PE 47/PS 25, β3.7 日波 16% 部位天生要小",
+      "entry_zone_lo": 173,
+      "entry_zone_hi": 195
     }
   ]
 }
