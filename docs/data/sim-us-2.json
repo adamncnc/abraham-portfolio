@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 569918.6029565898,
+    "cash_twd": 486983.87698206084,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -20,9 +20,9 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 59.184,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_armed": true,
+        "ratchet_value": 62.0844,
+        "ratchet_asof": "2026-07-21",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13"
       },
@@ -40,7 +40,9 @@
         "cost_twd": 104184.0,
         "fill_ref_close": 159.690002,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": true,
+        "ratchet_value": 141.5915,
+        "ratchet_asof": "2026-07-21"
       },
       {
         "ticker": "NUTX",
@@ -56,7 +58,9 @@
         "cost_twd": 82604.0,
         "fill_ref_close": 164.399994,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "ratchet_value": 132.25,
+        "ratchet_asof": "2026-07-21"
       },
       {
         "ticker": "BRKR",
@@ -72,7 +76,27 @@
         "cost_twd": 114656.0,
         "fill_ref_close": 59.25,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": true,
+        "ratchet_value": 51.651,
+        "ratchet_asof": "2026-07-21"
+      },
+      {
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "shares": 170,
+        "avg_price": 14.99,
+        "fill_date": "2026-07-20",
+        "fx_at_fill": 32.28099822998047,
+        "stop": 13.49,
+        "stop_rule": "ta",
+        "stop_asof": "2026-07-20",
+        "group": "Biotechnology",
+        "cost_twd": 82935.0,
+        "fill_ref_close": 14.86,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 11.4754,
+        "ratchet_asof": "2026-07-21"
       }
     ],
     "pending_orders": [],
@@ -320,6 +344,55 @@
         "low": 9.40999984741211,
         "limit": 9.39,
         "fill_mode": null
+      },
+      {
+        "ts": "2026-07-21T05:20:23+08:00",
+        "order_id": "actionable-2026-07-20-NEO",
+        "ticker": "NEO",
+        "name": "NeoGenomics, Inc.",
+        "action": "expire_unfilled",
+        "open": 14.28499984741211,
+        "low": 14.1899995803833,
+        "limit": 13.93,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-21T05:20:23+08:00",
+        "order_id": "actionable-2026-07-20-FTRE",
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "action": "expire_unfilled",
+        "open": 17.56999969482422,
+        "low": 17.530000686645508,
+        "limit": 17.34,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-21T05:20:23+08:00",
+        "order_id": "actionable-2026-07-20-COMP",
+        "ticker": "COMP",
+        "name": "Compass, Inc. Class A Common Stock",
+        "action": "expire_unfilled",
+        "open": 11.890000343322754,
+        "low": 11.664999961853027,
+        "limit": 11.61,
+        "fill_mode": "intraday_from_placed"
+      },
+      {
+        "ts": "2026-07-21T05:20:24+08:00",
+        "order_id": "actionable-2026-07-20-BHVN",
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "action": "buy",
+        "shares": 170,
+        "price": 14.99,
+        "fee": 20.0,
+        "cost_twd": 82935.0,
+        "fill_date": "2026-07-20",
+        "fill_how": "掛單後首價",
+        "stop": 13.49,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-20.json"
       }
     ],
     "benchmark_spec": {
@@ -536,6 +609,36 @@
         "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
+      },
+      "BHVN": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "BHVN",
+            "name": "Biohaven Ltd. Common Shares",
+            "shares": 170,
+            "avg_price": 14.99,
+            "fill_date": "2026-07-20",
+            "fx_at_fill": 32.28099822998047,
+            "stop": 13.49,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-20",
+            "group": "Biotechnology",
+            "cost_twd": 82935.0,
+            "fill_ref_close": 14.859999656677246,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-20",
+              "value": 13.49
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -638,7 +741,19 @@
         "SPY": -0.54
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-21T05:20:33+08:00",
+      "nav_twd": 992022.0,
+      "return_pct": -0.8,
+      "cash_twd": 486984.0,
+      "n_positions": 5,
+      "usdtwd": 32.281,
+      "bench_return_pct": {
+        "SPY": -1.04
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-20T14:15:29.159721+00:00"
+  "generated_at": "2026-07-20T21:20:50.548058+00:00"
 }
