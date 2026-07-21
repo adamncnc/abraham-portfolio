@@ -186,8 +186,8 @@
       "currency": "TWD",
       "theme": "電源管理IC/功率元件",
       "notes": "電源管理IC/功率元件: CPU/GPU多相位降壓控制器+整合power stage(伺服器VRM, 台版MPWR, 這群最直接AI伺服器); 本益比37/fwd~26-28/ROE5.4%/毛利36%/現金厚幾乎無債; ⚠️月營收衰退(2026-05 YoY-9.6%/連3月負, 比Yahoo blended 0%更弱)→等月營收翻正; 獲利+39%靠毛利組合/4分析師目標222.5<現價; 富邦2026 EPS est 8.5; 進場區205-225(50日201+5月起",
-      "entry_zone_lo": 195.0,
-      "entry_zone_hi": 215.0
+      "entry_zone_lo": 195,
+      "entry_zone_hi": 215
     },
     {
       "id": "6435",
@@ -699,6 +699,28 @@
       "notes": "利基型DRAM + NOR Flash + SLC NAND(台股, NT$); 7/21 Adam 明示加入. ★循環已確認轉盈: 2025Q4 官方季報營業利益率 +15.57%(前三季皆虧)、2026Q1 法說 營收382.5億 YoY+91.3%、毛利率53.4%創新高、EPS 2.25. 月營收YoY連13月正(6月+189.9%, 高檔盤旋). 2026資本支出421億(95%設備), 快閃月產能4萬→5萬片(2027). ⚠️估值錨在峰值獲利: fwd PE 3",
       "entry_zone_lo": 138,
       "entry_zone_hi": 152
+    },
+    {
+      "id": "amd",
+      "type": "us_stock",
+      "symbol": "AMD",
+      "name": "超微",
+      "currency": "USD",
+      "theme": "推論側輝達替代",
+      "notes": "推論側輝達替代; 進場區 480-505 (7/21 入清單)",
+      "entry_zone_lo": 480,
+      "entry_zone_hi": 505
+    },
+    {
+      "id": "intc",
+      "type": "us_stock",
+      "symbol": "INTC",
+      "name": "英特爾",
+      "currency": "USD",
+      "theme": "代工轉機+美政府10%持股",
+      "notes": "代工轉機+美政府10%持股; 暫行區 88-98, 7/23 財報後必重畫",
+      "entry_zone_lo": 88,
+      "entry_zone_hi": 98
     }
   ]
 }

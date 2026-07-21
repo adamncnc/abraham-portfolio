@@ -23,8 +23,8 @@
         "fill_ref_close": 256.429993,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 253.5,
-        "px_date": "2026-07-20"
+        "px": 259.04,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "LRCX",
@@ -41,8 +41,8 @@
         "fill_ref_close": 335.429993,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 306.76,
-        "px_date": "2026-07-20"
+        "px": 318.47,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "KLAC",
@@ -59,8 +59,8 @@
         "fill_ref_close": 219.369995,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 207.6,
-        "px_date": "2026-07-20"
+        "px": 214.845,
+        "px_date": "2026-07-21"
       }
     ],
     "pending_orders": [],
@@ -505,6 +505,6 @@
       "realized_pnl_twd": -20011.0
     }
   ],
-  "usdtwd": 32.308998107910156,
-  "generated_at": "2026-07-21T09:20:32.888507+00:00"
+  "usdtwd": 32.3489990234375,
+  "generated_at": "2026-07-21T14:38:51.520370+00:00"
 }

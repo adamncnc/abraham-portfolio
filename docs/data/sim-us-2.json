@@ -25,8 +25,8 @@
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 69.78,
-        "px_date": "2026-07-20"
+        "px": 71.03,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "NTAP",
@@ -43,8 +43,8 @@
         "fill_ref_close": 159.690002,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 161.16,
-        "px_date": "2026-07-20"
+        "px": 165.64,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "NUTX",
@@ -61,8 +61,8 @@
         "fill_ref_close": 164.399994,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 161.47,
-        "px_date": "2026-07-20"
+        "px": 169.35,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "BRKR",
@@ -79,8 +79,8 @@
         "fill_ref_close": 59.25,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 56.17,
-        "px_date": "2026-07-20"
+        "px": 59.065,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "BHVN",
@@ -97,8 +97,8 @@
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 14.86,
-        "px_date": "2026-07-20"
+        "px": 15.32,
+        "px_date": "2026-07-21"
       }
     ],
     "pending_orders": [
@@ -902,6 +902,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.308998107910156,
-  "generated_at": "2026-07-21T09:20:32.889512+00:00"
+  "usdtwd": 32.3489990234375,
+  "generated_at": "2026-07-21T14:38:51.521873+00:00"
 }
