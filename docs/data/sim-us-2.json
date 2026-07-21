@@ -20,11 +20,13 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 62.0844,
-        "ratchet_asof": "2026-07-21",
+        "ratchet_armed": false,
+        "ratchet_value": 59.184,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.050003,
-        "stop_asof": "2026-07-13"
+        "stop_asof": "2026-07-13",
+        "px": 69.78,
+        "px_date": "2026-07-20"
       },
       {
         "ticker": "NTAP",
@@ -40,9 +42,9 @@
         "cost_twd": 104184.0,
         "fill_ref_close": 159.690002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 141.5915,
-        "ratchet_asof": "2026-07-21"
+        "ratchet_armed": false,
+        "px": 161.16,
+        "px_date": "2026-07-20"
       },
       {
         "ticker": "NUTX",
@@ -59,8 +61,8 @@
         "fill_ref_close": 164.399994,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 132.25,
-        "ratchet_asof": "2026-07-21"
+        "px": 161.47,
+        "px_date": "2026-07-20"
       },
       {
         "ticker": "BRKR",
@@ -76,9 +78,9 @@
         "cost_twd": 114656.0,
         "fill_ref_close": 59.25,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 51.651,
-        "ratchet_asof": "2026-07-21"
+        "ratchet_armed": false,
+        "px": 56.17,
+        "px_date": "2026-07-20"
       },
       {
         "ticker": "BHVN",
@@ -95,11 +97,156 @@
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 11.4754,
-        "ratchet_asof": "2026-07-21"
+        "px": 14.86,
+        "px_date": "2026-07-20"
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-21-FTRE",
+        "placed_ts": "2026-07-21T07:46:10+08:00",
+        "ticker": "FTRE",
+        "name": "Fortrea Holdings Inc.",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 17.46,
+        "stop": 15.72,
+        "stop_rule": "ta",
+        "group": "Biotechnology",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+          "date": "2026-07-21",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "FTRE",
+            "name": "Fortrea Holdings Inc.",
+            "yf": "FTRE",
+            "group": "Biotechnology",
+            "px": 17.73,
+            "ma20": 17.46,
+            "ma50": 16.06,
+            "ma200_gap": 34.2,
+            "rs63": 66.4,
+            "atr20_pct": 4.9,
+            "setup": "A回檔MA20",
+            "limit": 17.46,
+            "stop": 15.72,
+            "stop_pct": -10.0,
+            "budget": 100000
+          }
+        },
+        "target_session": "2026-07-21"
+      },
+      {
+        "id": "actionable-2026-07-21-NEO",
+        "placed_ts": "2026-07-21T07:46:11+08:00",
+        "ticker": "NEO",
+        "name": "NeoGenomics, Inc.",
+        "side": "buy",
+        "budget_twd": 102000,
+        "limit": 14.09,
+        "stop": 12.71,
+        "stop_rule": "ta",
+        "group": "Health Care Services",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+          "date": "2026-07-21",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "NEO",
+            "name": "NeoGenomics, Inc.",
+            "yf": "NEO",
+            "group": "Health Care Services",
+            "px": 14.24,
+            "ma20": 14.09,
+            "ma50": 11.56,
+            "ma200_gap": 34.3,
+            "rs63": 66.1,
+            "atr20_pct": 4.8,
+            "setup": "A回檔MA20",
+            "limit": 14.09,
+            "stop": 12.71,
+            "stop_pct": -9.8,
+            "budget": 102000
+          }
+        },
+        "target_session": "2026-07-21"
+      },
+      {
+        "id": "actionable-2026-07-21-VCYT",
+        "placed_ts": "2026-07-21T07:46:11+08:00",
+        "ticker": "VCYT",
+        "name": "Veracyte, Inc.",
+        "side": "buy",
+        "budget_twd": 101000,
+        "limit": 57.72,
+        "stop": 52.03,
+        "stop_rule": "ta",
+        "group": "Health Care Services",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+          "date": "2026-07-21",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "VCYT",
+            "name": "Veracyte, Inc.",
+            "yf": "VCYT",
+            "group": "Health Care Services",
+            "px": 57.26,
+            "ma20": 57.72,
+            "ma50": 50.4,
+            "ma200_gap": 39.8,
+            "rs63": 65.0,
+            "atr20_pct": 5.0,
+            "setup": "A回檔MA20",
+            "limit": 57.72,
+            "stop": 52.03,
+            "stop_pct": -9.9,
+            "budget": 101000
+          }
+        },
+        "target_session": "2026-07-21"
+      },
+      {
+        "id": "actionable-2026-07-21-GBTG",
+        "placed_ts": "2026-07-21T07:46:11+08:00",
+        "ticker": "GBTG",
+        "name": "Global Business Travel Group, Inc. Class A Common Stock",
+        "side": "buy",
+        "budget_twd": 150000,
+        "limit": 9.4,
+        "stop": 8.84,
+        "stop_rule": "ta",
+        "group": "Travel Services",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-21.json",
+          "date": "2026-07-21",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "GBTG",
+            "name": "Global Business Travel Group, Inc. Class A Common Stock",
+            "yf": "GBTG",
+            "group": "Travel Services",
+            "px": 9.41,
+            "ma20": 9.4,
+            "ma50": 9.39,
+            "ma200_gap": 25.5,
+            "rs63": 50.3,
+            "atr20_pct": 0.3,
+            "setup": "A回檔MA20",
+            "limit": 9.4,
+            "stop": 8.84,
+            "stop_pct": -6.0,
+            "budget": 150000
+          }
+        },
+        "target_session": "2026-07-21"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -755,5 +902,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-20T21:20:50.548058+00:00"
+  "usdtwd": 32.308998107910156,
+  "generated_at": "2026-07-21T01:52:49.023390+00:00"
 }

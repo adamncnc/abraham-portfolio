@@ -24,7 +24,9 @@
         "ratchet_armed": true,
         "ratchet_value": 176.95,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 244
+        "fill_ref_close": 244,
+        "px": 223.0,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "8926.TW",
@@ -42,7 +44,9 @@
         "ratchet_armed": false,
         "ratchet_value": 55.765,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 67.300003
+        "fill_ref_close": 67.300003,
+        "px": 64.9,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2312.TW",
@@ -60,7 +64,9 @@
         "ratchet_armed": false,
         "ratchet_value": 26.9875,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 32.799999
+        "fill_ref_close": 32.799999,
+        "px": 32.4,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2356.TW",
@@ -78,7 +84,9 @@
         "ratchet_armed": true,
         "ratchet_value": 53.77,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 63.700001
+        "fill_ref_close": 63.700001,
+        "px": 59.5,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2301.TW",
@@ -96,7 +104,9 @@
         "ratchet_armed": false,
         "ratchet_value": 174.4,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 212.5
+        "fill_ref_close": 212.5,
+        "px": 199.0,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2465.TW",
@@ -112,7 +122,9 @@
         "cost_twd": 42940.0,
         "fill_ref_close": 83.300003,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 76.3,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2881.TW",
@@ -128,7 +140,9 @@
         "cost_twd": 64985.0,
         "fill_ref_close": 125,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 123.5,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2404.TW",
@@ -144,7 +158,9 @@
         "cost_twd": 40648.0,
         "fill_ref_close": 1250,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 1180.0,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2377.TW",
@@ -160,7 +176,9 @@
         "cost_twd": 60923.0,
         "fill_ref_close": 141.5,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 143.0,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "8932.TWO",
@@ -176,7 +194,9 @@
         "cost_twd": 49445.0,
         "fill_ref_close": 117,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 116.5,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "8131.TW",
@@ -192,7 +212,9 @@
         "cost_twd": 41463.0,
         "fill_ref_close": 69,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 67.5,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "3094.TW",
@@ -208,7 +230,9 @@
         "cost_twd": 41480.0,
         "fill_ref_close": 35.650002,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 37.5,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "5536.TWO",
@@ -224,7 +248,9 @@
         "cost_twd": 40738.0,
         "fill_ref_close": 1140.0,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 1190.0,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "3362.TWO",
@@ -240,7 +266,9 @@
         "cost_twd": 41418.0,
         "fill_ref_close": 148.5,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 151.0,
+        "px_date": "2026-07-21"
       }
     ],
     "pending_orders": [
@@ -1459,5 +1487,6 @@
       "realized_pnl_twd": -6373.0
     }
   ],
-  "generated_at": "2026-07-20T21:20:50.546054+00:00"
+  "usdtwd": 32.308998107910156,
+  "generated_at": "2026-07-21T01:52:49.019882+00:00"
 }

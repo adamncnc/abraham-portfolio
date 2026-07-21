@@ -22,9 +22,9 @@
         "cost_twd": 99927.0,
         "fill_ref_close": 256.429993,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 231.5004,
-        "ratchet_asof": "2026-07-21"
+        "ratchet_armed": false,
+        "px": 253.5,
+        "px_date": "2026-07-20"
       },
       {
         "ticker": "LRCX",
@@ -41,8 +41,8 @@
         "fill_ref_close": 335.429993,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 248.0655,
-        "ratchet_asof": "2026-07-21"
+        "px": 306.76,
+        "px_date": "2026-07-20"
       },
       {
         "ticker": "KLAC",
@@ -58,9 +58,9 @@
         "cost_twd": 98952.0,
         "fill_ref_close": 219.369995,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 159.652,
-        "ratchet_asof": "2026-07-21"
+        "ratchet_armed": false,
+        "px": 207.6,
+        "px_date": "2026-07-20"
       }
     ],
     "pending_orders": [],
@@ -505,5 +505,6 @@
       "realized_pnl_twd": -20011.0
     }
   ],
-  "generated_at": "2026-07-20T21:20:50.548058+00:00"
+  "usdtwd": 32.308998107910156,
+  "generated_at": "2026-07-21T01:52:49.022386+00:00"
 }

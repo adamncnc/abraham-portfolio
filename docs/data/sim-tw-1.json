@@ -24,7 +24,9 @@
         "ratchet_armed": false,
         "ratchet_value": 178.15,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 205.0
+        "fill_ref_close": 205.0,
+        "px": 201.5,
+        "px_date": "2026-07-21"
       },
       {
         "ticker": "2449.TW",
@@ -40,7 +42,9 @@
         "cost_twd": 99898.0,
         "fill_ref_close": 286.5,
         "half_locked": false,
-        "ratchet_armed": false
+        "ratchet_armed": false,
+        "px": 275.5,
+        "px_date": "2026-07-21"
       }
     ],
     "pending_orders": [],
@@ -226,5 +230,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-20T21:20:50.544051+00:00"
+  "usdtwd": 32.308998107910156,
+  "generated_at": "2026-07-21T01:52:49.017882+00:00"
 }

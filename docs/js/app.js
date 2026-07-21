@@ -1300,21 +1300,32 @@ function simTableHtml(headers, rows, emptyMsg) {
   return `<table class="sim-table"><thead><tr>${thead}</tr></thead><tbody>${rows.join("")}</tbody></table>`;
 }
 
-// 持倉表: 名稱/股數/成本價/現價(join latest.json 同 ticker; 沒有就顯示成本)/市值/損益%/認錯線.
+// 持倉表: 名稱/股數/成本價/現價/市值/損益%/認錯線.
 // (2026-07-13 Adam: 模擬倉頁不顯示進場區 — 掛單顯示實際限價、持倉不帶分析帶)
+// 現價三層 fallback（2026-07-21「損益%沒算出來」修正）:
+//   ① priceMap (latest.json live tick, 觀察清單名字才有, ~30s 更新)
+//   ② p.px (sync 時全持倉統一抓的價, 倉2/3 全市場名字靠這個)
+//   ③ cost 星號 fallback（兩者皆無, 沿用舊行為）
+// 市值一律換算 TWD：美股 mv = px*股數*usdtwd（舊版直接把 USD 數字掛 NT$ 標籤 = 錯 32 倍）。
 // Position schema is defensive: ticker/name/shares + cost under cost|avg_cost|cost_basis|avg_price, stop.
-function simPositionsHtml(positions, priceMap) {
+function simPositionsHtml(positions, priceMap, opts = {}) {
+  const isUS = !!opts.isUS;
+  const bookFx = opts.usdtwd ?? null;
   const rows = positions.map((p) => {
     const cost = p.cost ?? p.avg_cost ?? p.cost_basis ?? p.avg_price ?? null;
     const live = priceMap[p.ticker];
-    const hasLive = live != null;
-    const px = hasLive ? live : cost;                    // 沒現價 -> 顯示成本 (標註)
-    const mv = px != null && p.shares != null ? px * p.shares : null;
-    const pnlPct = hasLive && cost ? ((live - cost) / cost) * 100 : null;
+    const synced = p.px;
+    const px = live ?? synced ?? cost;                   // ①live ②synced ③成本
+    const hasPrice = live != null || synced != null;
+    const fx = isUS ? (bookFx ?? p.fx_at_fill ?? null) : 1;   // 美股市值換 TWD
+    const mv = px != null && p.shares != null && fx != null ? px * p.shares * fx : null;
+    const pnlPct = hasPrice && cost ? ((px - cost) / cost) * 100 : null;
     const pnlCls = changeClass(pnlPct);                  // 漲紅跌綠 via existing classes
-    const pxCell = hasLive
+    const pxCell = live != null
       ? fmtNum(live, 2)
-      : (cost != null ? `<span class="flat" title="無現價，暫以成本價顯示">${fmtNum(cost, 2)}*</span>` : "–");
+      : (synced != null
+        ? `<span title="同步時抓的價（${escapeHtml(p.px_date || "非即時")}）">${fmtNum(synced, 2)}</span>`
+        : (cost != null ? `<span class="flat" title="無現價，暫以成本價顯示">${fmtNum(cost, 2)}*</span>` : "–"));
     return `<tr>
       <td><b>${escapeHtml(p.name || p.ticker || "–")}</b><br><span class="sim-sub">${escapeHtml(p.ticker || "")}</span></td>
       <td class="num">${fmtNum(p.shares, 0)}</td>
@@ -1326,7 +1337,7 @@ function simPositionsHtml(positions, priceMap) {
     </tr>`;
   });
   return simTableHtml(
-    [["名稱", 0], ["股數", 1], ["成本價", 1], ["現價", 1], ["市值", 1], ["損益%", 1], ["認錯線", 1]],
+    [["名稱", 0], ["股數", 1], ["成本價", 1], ["現價", 1], ["市值(NT$)", 1], ["損益%", 1], ["認錯線", 1]],
     rows,
     "尚無持倉 — 等掛單成交後顯示"
   );
@@ -1500,7 +1511,7 @@ function renderSim(sim, key = "sim") {
   // --- 三張表 ---
   const priceMap = simPriceMap();
   const posEl = document.getElementById(`${key}-positions`);
-  if (posEl) posEl.innerHTML = simPositionsHtml(positions, priceMap);
+  if (posEl) posEl.innerHTML = simPositionsHtml(positions, priceMap, { isUS: key.startsWith("sim-us"), usdtwd: sim && sim.usdtwd });
   const ordEl = document.getElementById(`${key}-orders`);
   if (ordEl) ordEl.innerHTML = simOrdersHtml(orders);
   const trdEl = document.getElementById(`${key}-trades`);

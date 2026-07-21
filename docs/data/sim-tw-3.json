@@ -24,7 +24,9 @@
         "ratchet_armed": true,
         "ratchet_value": 176.95,
         "ratchet_asof": "2026-07-14",
-        "fill_ref_close": 244.0
+        "fill_ref_close": 244.0,
+        "px": 223.0,
+        "px_date": "2026-07-21"
       }
     ],
     "pending_orders": [],
@@ -156,5 +158,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "generated_at": "2026-07-20T21:20:50.546054+00:00"
+  "usdtwd": 32.308998107910156,
+  "generated_at": "2026-07-21T01:52:49.021882+00:00"
 }
