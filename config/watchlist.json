@@ -120,8 +120,8 @@
       "currency": "USD",
       "theme": "記憶體超級循環 (HBM/DRAM) 核心觀察",
       "notes": "記憶體超級循環 (HBM/DRAM) 核心觀察; 6/24 財報 beat-and-raise → 6/25 跳空 ATH 1255, 分析師全面調高(mean 1410/median 1500/strong-buy); fwd PE 7.6x 便宜但建立在循環高峰 EPS(peak-earnings 陷阱)/beta 2.17 高波動; 2026-06-29 post-earnings re-rate: 進場區 1000-1080(回 breakout base 正常回檔)",
-      "entry_zone_lo": 1000,
-      "entry_zone_hi": 1080
+      "entry_zone_lo": 700,
+      "entry_zone_hi": 800
     },
     {
       "id": "gev",
@@ -479,8 +479,8 @@
       "currency": "TWD",
       "theme": "全球前三ABF載板廠(AI GPU/ASIC基板)+台積",
       "notes": "全球前三ABF載板廠(AI GPU/ASIC基板)+台積電CoPoS/Intel玻璃基板開發夥伴; **6/28 我親自完整deep-dive**(取代sonnet screen; Adam納入msg 1520687737). 獲利拐點=2025淨利+36%/1Q26 EPS 3.28=13季新高/AI占比30-40%→2026目標60%+/ABF利用率~90%·ASIC>70%/ABF·BT每季漲3-5%; 估值2026 PE~64x(EPS~15.3谷底復甦)/2027 ",
-      "entry_zone_lo": 850,
-      "entry_zone_hi": 960
+      "entry_zone_lo": 750,
+      "entry_zone_hi": 820
     },
     {
       "id": "8046",
