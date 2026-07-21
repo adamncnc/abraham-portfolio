@@ -677,6 +677,28 @@
       "notes": "固態燃料電池/AI 資料中心現場發電(供應 Nebius 等); 7/20 Adam 加入(當日已做完整 TA); 初步帶 173-195/認錯 166(暫行, 7/28 財報後重驗); 預付成長型估值 fwd PE 47/PS 25, β3.7 日波 16% 部位天生要小",
       "entry_zone_lo": 173,
       "entry_zone_hi": 195
+    },
+    {
+      "id": "2337",
+      "type": "tw_stock",
+      "symbol": "2337.TW",
+      "name": "旺宏",
+      "currency": "TWD",
+      "theme": "NOR Flash/Mask ROM + SLC NAN",
+      "notes": "NOR Flash/Mask ROM + SLC NAND 利基記憶體(台股, NT$); 7/21 Adam 明示加入(記憶體族群補台系腿). 月營收YoY連13月正且加速(2026 4月153.7%→5月175.8%→6月216.1%); 集邦估NOR下半年再漲60-65%、SLC NAND再漲70-75%. ⚠️循環位置落後華邦電一季: 截至最後官方季報(2025Q4)營業利益率仍 -5.08%、TTM EPS -1.77 = 尚無任何一季官方轉盈. ⚠️估值陷阱: f",
+      "entry_zone_lo": 108,
+      "entry_zone_hi": 125
+    },
+    {
+      "id": "2344",
+      "type": "tw_stock",
+      "symbol": "2344.TW",
+      "name": "華邦電",
+      "currency": "TWD",
+      "theme": "利基型DRAM + NOR Flash + SLC NA",
+      "notes": "利基型DRAM + NOR Flash + SLC NAND(台股, NT$); 7/21 Adam 明示加入. ★循環已確認轉盈: 2025Q4 官方季報營業利益率 +15.57%(前三季皆虧)、2026Q1 法說 營收382.5億 YoY+91.3%、毛利率53.4%創新高、EPS 2.25. 月營收YoY連13月正(6月+189.9%, 高檔盤旋). 2026資本支出421億(95%設備), 快閃月產能4萬→5萬片(2027). ⚠️估值錨在峰值獲利: fwd PE 3",
+      "entry_zone_lo": 138,
+      "entry_zone_hi": 152
     }
   ]
 }
