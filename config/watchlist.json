@@ -186,8 +186,8 @@
       "currency": "TWD",
       "theme": "電源管理IC/功率元件",
       "notes": "電源管理IC/功率元件: CPU/GPU多相位降壓控制器+整合power stage(伺服器VRM, 台版MPWR, 這群最直接AI伺服器); 本益比37/fwd~26-28/ROE5.4%/毛利36%/現金厚幾乎無債; ⚠️月營收衰退(2026-05 YoY-9.6%/連3月負, 比Yahoo blended 0%更弱)→等月營收翻正; 獲利+39%靠毛利組合/4分析師目標222.5<現價; 富邦2026 EPS est 8.5; 進場區205-225(50日201+5月起",
-      "entry_zone_lo": 200,
-      "entry_zone_hi": 220
+      "entry_zone_lo": 195.0,
+      "entry_zone_hi": 215.0
     },
     {
       "id": "6435",
