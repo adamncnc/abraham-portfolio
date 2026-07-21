@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 917118.0613,
+    "cash_twd": 918690.694606,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -15,17 +15,17 @@
         "avg_price": 242.0,
         "fill_date": "2026-07-14",
         "fx_at_fill": 1.0,
-        "stop": 212.5,
+        "stop": 207.9017,
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
         "group": "IC設計電源",
         "cost_twd": 82882.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 176.95,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 179.0517,
+        "ratchet_asof": "2026-07-21",
         "fill_ref_close": 244.0,
-        "px": 223.0,
+        "px": 234.5,
         "px_date": "2026-07-21"
       }
     ],
@@ -50,6 +50,20 @@
         "fill_date": "2026-07-14",
         "fill_how": "盤中觸限價",
         "reason": "池內唯一過關（51 檔中 50 檔被擋）／A回檔MA50／僅 1-2 筆→滿倉不減半"
+      },
+      {
+        "ts": "2026-07-21T14:06:55+08:00",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "action": "dividend",
+        "ex_date": "2026-07-21",
+        "projection_key": "div:2026-07-21",
+        "per_share": 4.598343,
+        "per_share_yahoo": 4.598343,
+        "shares_at_ex": 342,
+        "fx": 1.0,
+        "cash_twd": 1573.0,
+        "projection_cash_twd": 1572.633306
       }
     ],
     "benchmark_spec": {
@@ -61,7 +75,9 @@
     "ticker_state": {
       "6719.TW": {
         "splits_applied": [],
-        "divs_credited": [],
+        "divs_credited": [
+          "2026-07-21"
+        ],
         "projection_origin_v2": {
           "position": {
             "ticker": "6719.TW",
@@ -89,7 +105,15 @@
           ]
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": []
+        "corporate_actions": [
+          {
+            "date": "2026-07-21",
+            "kind": "div",
+            "amount": 4.598343,
+            "source_count": 1,
+            "key": "div:2026-07-21"
+          }
+        ]
       }
     },
     "benchmarks_inception": {
@@ -156,8 +180,20 @@
         "0050.TW": -5.97
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-21T14:06:53+08:00",
+      "nav_twd": 998890.0,
+      "return_pct": -0.11,
+      "cash_twd": 918691.0,
+      "n_positions": 1,
+      "usdtwd": 32.259,
+      "bench_return_pct": {
+        "0050.TW": -2.84
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.308998107910156,
-  "generated_at": "2026-07-21T01:52:49.021882+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-07-21T06:06:57.512009+00:00"
 }
