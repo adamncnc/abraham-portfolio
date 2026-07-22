@@ -738,16 +738,21 @@ function volumeBadge(ratio, live) {
 }
 
 // ========== 支撐/壓力 (Adam 2026-07-22「每一檔的支撐線和壓力牆」) ==========
-// Close-based swing clustering + volume-profile (量能密集區) weighting over ~1y of
-// daily bars. Returns { supports, resistances } — at most 2 each, nearest-first.
-// Honest no-draw: <40 bars / no cluster with score ≥2 → empty arrays (創高股上方
-// 本來就沒歷史壓力, 硬畫反而誤導). Method mirrors the ta-stock skill's discipline
-// (swing + 多次觸碰/量能匯合才畫), tuned to run unattended on 66 cards.
+// v2 (Adam 同日回饋「一年等權沒參考價值, 美光 463 不合理」): 改對齊 ta-stock 深掃的
+// 方法——**近期結構優先 + 匯合原則**。swing 觸碰按新舊加權 (近90根 1.0 / 90-180根
+// 0.7 / 更舊 0.45), 加成證據 = 量能密集區 (只看近 120 根的 volume profile, 避免遠古
+// 低價區壟斷分箱) + 主腿 fib 回撤位匯合 + 50/200日均匯合。距現價 >±30% 的位一律
+// 不show (古董位對當下決策無參考價值)。夠格門檻: 近期位 score≥1.5 / 舊位 ≥2.0。
+// 誠實不畫原則不變: 沒有夠格的位就空手, 不硬畫。
+// (美光 7/20 深掃的 ~895-900 = fib 38.2% 回撤 × 7/7 波段低點匯合 — 本 v2 即該邏輯的
+//  自動化版; 台帳 ast-0055。)
 const SR_LOOKBACK = 250;      // ~1y of daily bars
 const SR_SWING_K = 3;         // swing = strict extreme among ±3 bars
 const SR_CLUSTER_PCT = 0.015; // levels within ±1.5% of the cluster mean merge
-const SR_RECENT_BARS = 60;    // a touch in the last ~3 months earns a recency bonus
 const SR_MAX_EACH = 2;
+const SR_RECENT = 90;         // active-structure window (bars)
+const SR_MID = 180;
+const SR_MAX_DIST = 0.30;     // 距現價 >30% 的位不 show (Adam 2026-07-22)
 
 function srLevels(item) {
   const data = item.data || {};
@@ -776,25 +781,48 @@ function srLevels(item) {
   }
   if (!swings.length) return none;
 
-  // 2) volume profile: 30 price bins over the lookback range; top-20% bins = 量能密集區
-  //    (牆之所以是牆 — 那裡堆了很多人的成本). Degrades to no-bonus without the v-tail.
+  // 2) 量能密集區: volume profile over the LAST 120 bars only (active regime) — a
+  //    momentum stock's ancient cheap-price volume would otherwise dominate the bins
+  //    (美光 463 bug 的根因之一). Top-20% bins = HVN. Degrades to no-bonus without v.
   let hvnTest = () => false;
-  const vbars = bars.filter((b) => b.v != null && b.c != null);
-  if (vbars.length >= 60) {
-    const closes0 = bars.map((b) => b.c).filter((c) => c != null);
-    const lo = Math.min(...closes0), hi = Math.max(...closes0);
+  const vwin = bars.slice(-120).filter((b) => b.v != null && b.c != null);
+  if (vwin.length >= 60) {
+    const cs = vwin.map((b) => b.c);
+    const lo = Math.min(...cs), hi = Math.max(...cs);
     if (hi > lo) {
-      const NBINS = 30;
+      const NBINS = 24;
       const binVol = new Array(NBINS).fill(0);
       const binOf = (px) => Math.min(NBINS - 1, Math.max(0, Math.floor(((px - lo) / (hi - lo)) * NBINS)));
-      for (const b of vbars) binVol[binOf(b.c)] += b.v;
+      for (const b of vwin) binVol[binOf(b.c)] += b.v;
       const ranked = [...binVol].sort((a, b) => b - a);
       const thresh = ranked[Math.max(0, Math.floor(NBINS * 0.2) - 1)];
-      if (thresh > 0) hvnTest = (px) => binVol[binOf(px)] >= thresh;
+      if (thresh > 0) hvnTest = (px) => px >= lo && px <= hi && binVol[binOf(px)] >= thresh;
     }
   }
 
-  // 3) greedy price-sorted clustering (join while within ±1.5% of the running mean)
+  // 3) 主腿 fib 回撤位 (ta-stock 核心): dominant leg = min↔max of the last 180 bars,
+  //    amplitude ≥25%; clusters within 2.5% of a 23.6/38.2/50/61.8 retracement earn
+  //    the 匯合 bonus (美光 895 = 38.2% × 7/7 低點 的同款邏輯).
+  const legBars = bars.slice(-SR_MID);
+  const legCloses = legBars.map((b) => b.c).filter((c) => c != null);
+  let fibSet = [];
+  if (legCloses.length >= 40) {
+    const legHi = Math.max(...legCloses), legLo = Math.min(...legCloses);
+    if (legLo > 0 && (legHi - legLo) / legLo >= 0.25) {
+      const hiIdx = legCloses.lastIndexOf(legHi), loIdx = legCloses.indexOf(legLo);
+      const range = legHi - legLo;
+      fibSet = [0.236, 0.382, 0.5, 0.618].map((f) =>
+        loIdx < hiIdx ? legHi - range * f : legLo + range * f);  // 上升腿=回撤 / 下降腿=反彈
+    }
+  }
+  const fibNear = (px) => fibSet.some((f) => Math.abs(px - f) / px <= 0.025);
+  const maNear = (px) => {
+    const m50 = data.fifty_day_avg, m200 = data.two_hundred_day_avg;
+    return (m50 != null && Math.abs(px - m50) / px <= 0.02) ||
+           (m200 != null && Math.abs(px - m200) / px <= 0.02);
+  };
+
+  // 4) greedy price-sorted clustering (join while within ±1.5% of the running mean)
   swings.sort((a, b) => a.px - b.px);
   const clusters = [];
   for (const s of swings) {
@@ -807,15 +835,23 @@ function srLevels(item) {
     }
   }
 
-  // 4) score (touches + 量能密集 + 近期有效性), keep score ≥2, split by side of price
+  // 5) score = Σ 加權觸碰 (近新) + 匯合證據; 近期位 ≥1.5 / 舊位 ≥2.0 才夠格;
+  //    距現價 >30% 一律出局 (nearest-first 選各邊前 2)
   const supports = [], resistances = [];
   for (const cl of clusters) {
-    const touches = cl.pts.length;
-    const recent = cl.pts.some((p) => p.idx >= n - SR_RECENT_BARS);
+    if (Math.abs(cl.mean - price) / price > SR_MAX_DIST) continue;
+    let w = 0, newest = -1;
+    for (const p of cl.pts) {
+      w += p.idx >= n - SR_RECENT ? 1.0 : p.idx >= n - SR_MID ? 0.7 : 0.45;
+      if (p.idx > newest) newest = p.idx;
+    }
     const hvn = hvnTest(cl.mean);
-    const score = touches + (hvn ? 1 : 0) + (recent ? 0.5 : 0);
-    if (score < 2) continue;                 // 單次觸碰又非量能密集 → 不夠格, 不畫
-    const lvl = { px: cl.mean, touches, hvn, score };
+    const fib = fibNear(cl.mean);
+    const ma = maNear(cl.mean);
+    const score = w + (hvn ? 0.75 : 0) + (fib ? 0.75 : 0) + (ma ? 0.5 : 0);
+    const isRecent = newest >= n - SR_RECENT;
+    if (score < (isRecent ? 1.5 : 2.0)) continue;
+    const lvl = { px: cl.mean, touches: cl.pts.length, hvn, fib, ma, score };
     (cl.mean > price ? resistances : supports).push(lvl);
   }
   supports.sort((a, b) => b.px - a.px);      // nearest below current price first
@@ -1018,20 +1054,19 @@ function buildAssetCard(item, section) {
       metrics.push([`量比`, `<span title="與${vi.basis}相比${vi.live ? "（盤中累積，尚未收盤）" : ""}">${volumeBadge(vi.ratio, vi.live)}</span>`]);
     }
   }
-  // 支撐/壓力 (Adam 2026-07-22): 最近的一條 + 距現價%; 沒有夠格的位就誠實不顯示.
+  // 支撐/壓力 (Adam 2026-07-22): 最近的一條 + 距現價% + 匯合證據; 沒夠格的位誠實不顯示.
   if (price !== null && price !== undefined) {
     const sr = srLevels(item);
+    const whyOf = (l) => `${l.touches} 次觸碰${l.hvn ? "・量密" : ""}${l.fib ? "・回撤位" : ""}${l.ma ? "・均線" : ""}`;
     if (sr.resistances.length) {
       const r = sr.resistances[0];
       const d = ((r.px - price) / price) * 100;
-      const why = `${r.touches} 次觸碰${r.hvn ? "・量能密集" : ""}`;
-      metrics.push(["🧱 壓力", `<span title="近一年波段高點群聚（±1.5% 帶）：${why}">${fmtLevel(r.px)} <span class="sr-meta">+${fmtNum(d, 1)}%・${why}</span></span>`]);
+      metrics.push(["🧱 壓力", `<span title="近期波段結構優先（±1.5% 帶）：${whyOf(r)}">${fmtLevel(r.px)} <span class="sr-meta">+${fmtNum(d, 1)}%・${whyOf(r)}</span></span>`]);
     }
     if (sr.supports.length) {
       const s = sr.supports[0];
       const d = ((price - s.px) / price) * 100;
-      const why = `${s.touches} 次觸碰${s.hvn ? "・量能密集" : ""}`;
-      metrics.push(["🛟 支撐", `<span title="近一年波段低點群聚（±1.5% 帶）：${why}">${fmtLevel(s.px)} <span class="sr-meta">−${fmtNum(d, 1)}%・${why}</span></span>`]);
+      metrics.push(["🛟 支撐", `<span title="近期波段結構優先（±1.5% 帶）：${whyOf(s)}">${fmtLevel(s.px)} <span class="sr-meta">−${fmtNum(d, 1)}%・${whyOf(s)}</span></span>`]);
     }
   }
   if (data.expense_ratio !== null && data.expense_ratio !== undefined) {
