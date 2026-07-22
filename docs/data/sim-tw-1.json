@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 800139.6042000001,
+    "cash_twd": 751870.9192000001,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -22,11 +22,11 @@
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 182.875,
-        "ratchet_asof": "2026-07-21",
+        "ratchet_value": 185.4,
+        "ratchet_asof": "2026-07-22",
         "fill_ref_close": 205.0,
-        "px": 200.0,
-        "px_date": "2026-07-20"
+        "px": 211.5,
+        "px_date": "2026-07-22"
       },
       {
         "ticker": "2449.TW",
@@ -43,56 +43,33 @@
         "fill_ref_close": 286.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 214.65,
-        "ratchet_asof": "2026-07-21",
-        "px": 270.5,
-        "px_date": "2026-07-20"
-      }
-    ],
-    "pending_orders": [
+        "ratchet_value": 224.5,
+        "ratchet_asof": "2026-07-22",
+        "px": 295.0,
+        "px_date": "2026-07-22"
+      },
       {
-        "id": "passed-2026-07-21-2330.TW",
-        "placed_ts": "2026-07-21T16:34:19+08:00",
         "ticker": "2330.TW",
         "name": "台積電",
-        "side": "buy",
-        "budget_twd": 50000,
-        "limit": 2410.0,
+        "shares": 20,
+        "avg_price": 2410.0,
+        "fill_date": "2026-07-22",
+        "fx_at_fill": 1.0,
         "stop": 2325.0,
         "stop_rule": "weekly_all",
+        "stop_asof": "2026-07-22",
         "group": "晶圓代工",
-        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-21.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-21.json",
-          "date": "2026-07-21",
-          "kind": "passed",
-          "candidate": {
-            "tk": "2330.TW",
-            "nm": "台積電",
-            "group": "晶圓代工",
-            "px": 2410.0,
-            "bar": "2026-07-21",
-            "zone": "2330-2410",
-            "ma20": 2418.75,
-            "ma50": 2353.4,
-            "froth": 30.2,
-            "stab": "-",
-            "broke50": false,
-            "limit": 2410.0,
-            "stop": 2325,
-            "size": 50000,
-            "half": "貼ATH",
-            "fee_note": "",
-            "rule": "健康回檔→min(收盤, 帶頂)",
-            "depth": 100.0,
-            "unevaluated": [
-              "循環見頂訊號（無法機械判定 → 人工）"
-            ]
-          }
-        },
-        "target_session": "2026-07-22"
+        "cost_twd": 48269.0,
+        "fill_ref_close": 2400.0,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 2193.75,
+        "ratchet_asof": "2026-07-22",
+        "px": 2400.0,
+        "px_date": "2026-07-22"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -129,6 +106,22 @@
         "stop": 258.0,
         "opened": true,
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-16.json"
+      },
+      {
+        "ts": "2026-07-22T14:05:06+08:00",
+        "order_id": "passed-2026-07-21-2330.TW",
+        "ticker": "2330.TW",
+        "name": "台積電",
+        "action": "buy",
+        "shares": 20,
+        "price": 2410.0,
+        "fee": 68.69,
+        "cost_twd": 48269.0,
+        "fill_date": "2026-07-22",
+        "fill_how": "盤中觸限價",
+        "stop": 2325.0,
+        "opened": true,
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-21.json"
       }
     ],
     "benchmark_spec": {
@@ -205,6 +198,65 @@
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "2330.TW": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "2330.TW",
+            "name": "台積電",
+            "shares": 20,
+            "avg_price": 2410.0,
+            "fill_date": "2026-07-22",
+            "fx_at_fill": 1.0,
+            "stop": 2325.0,
+            "stop_rule": "weekly_all",
+            "stop_asof": "2026-07-22",
+            "group": "晶圓代工",
+            "cost_twd": 48269.0,
+            "fill_ref_close": 2400.0,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-22",
+              "value": 2325.0
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-09-16",
+            "kind": "div",
+            "amount": 5.000018,
+            "source_count": 1,
+            "key": "div:2025-09-16"
+          },
+          {
+            "date": "2025-12-11",
+            "kind": "div",
+            "amount": 5.000011,
+            "source_count": 1,
+            "key": "div:2025-12-11"
+          },
+          {
+            "date": "2026-03-17",
+            "kind": "div",
+            "amount": 6.000036,
+            "source_count": 1,
+            "key": "div:2026-03-17"
+          },
+          {
+            "date": "2026-06-11",
+            "kind": "div",
+            "amount": 6.000036,
+            "source_count": 1,
+            "key": "div:2026-06-11"
+          }
+        ],
         "splits_applied": [],
         "divs_credited": []
       }
@@ -285,8 +337,20 @@
         "0050.TW": -2.84
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-22T14:05:16+08:00",
+      "nav_twd": 993331.0,
+      "return_pct": -0.67,
+      "cash_twd": 751871.0,
+      "n_positions": 3,
+      "usdtwd": 32.45,
+      "bench_return_pct": {
+        "0050.TW": -1.0
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.32899856567383,
-  "generated_at": "2026-07-21T21:20:58.092168+00:00"
+  "usdtwd": 32.45000076293945,
+  "generated_at": "2026-07-22T06:06:43.575670+00:00"
 }
