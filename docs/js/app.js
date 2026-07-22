@@ -68,6 +68,18 @@ const CARD_HISTORY = new Map();
 // Entry-zone (進場區) per canvas id: { lo, hi }. Drawn as overlay lines on the
 // trend chart so Adam sees current price vs the pre-set 進場上限/下限.
 const CARD_META = new Map();
+// 圖上覆蓋層擇一顯示 (Adam 2026-07-23): 每卡 'sr'(支撐壓力, 預設) 或 'zone'(進場區金線),
+// 兩組線同畫會混淆。CARD_OVERLAY 只存使用者點過的選擇; 沒點過走 overlayModeFor 預設.
+const CARD_OVERLAY = new Map();
+function overlayModeFor(canvasId) {
+  const m = CARD_META.get(canvasId) || {};
+  const srHas = !!(m.sr && ((m.sr.supports && m.sr.supports.length) || (m.sr.resistances && m.sr.resistances.length)));
+  const zoneHas = m.hi != null;
+  const saved = CARD_OVERLAY.get(canvasId);
+  if (saved === "zone" && zoneHas) return "zone";
+  if (saved === "sr" && srHas) return "sr";
+  return srHas || !zoneHas ? "sr" : "zone";
+}
 // Which MARKET tab (tw/us/idx) the summary cards follow (Adam 2026-07-22: 進場區內/
 // 回檔排行榜 跟著分頁走 — 台股分頁只看台股). Sim/pos tabs keep the last market view.
 let ACTIVE_MARKET_TAB = "tw";
@@ -420,7 +432,8 @@ function renderChart(canvasId, scope) {
   const meta = CARD_META.get(canvasId);
   const yMin = Math.min(...closes);
   const yMax = Math.max(...closes);
-  if (meta && meta.hi != null) {
+  const overlayMode = overlayModeFor(canvasId);  // 'sr' | 'zone' — 擇一畫, 避免兩組線混淆
+  if (overlayMode === "zone" && meta && meta.hi != null) {
     datasets.push({
       label: "進場上限",
       data: new Array(closes.length).fill(meta.hi),
@@ -450,7 +463,7 @@ function renderChart(canvasId, scope) {
   }
   // 支撐/壓力虛線 (Adam 2026-07-22) — 只在 3M/6M 畫 (短刻度圖面小, 線多會糊);
   // 壓力紅/支撐綠 對齊 ta-stock 慣例, 細虛線不搶價格線與進場區金線.
-  if ((scope === "3m" || scope === "6m") && meta && meta.sr) {
+  if (overlayMode === "sr" && (scope === "3m" || scope === "6m") && meta && meta.sr) {
     const srLine = (px, color, label) => ({
       label,
       data: new Array(closes.length).fill(px),
@@ -551,13 +564,25 @@ function renderChart(canvasId, scope) {
   CHART_INSTANCES.set(canvasId, chart);
 }
 
-function chartBlockHtml(canvasId) {
+function chartBlockHtml(canvasId, hasZone, hasSr) {
   const tabs = SCOPES.map((s) => {
     const activeCls = s.key === DEFAULT_SCOPE ? " active" : "";
     return `<button class="scope-btn${activeCls}" data-scope="${s.key}" data-canvas="${canvasId}">${s.label}</button>`;
   }).join("");
+  // 覆蓋層切換鍵 (Adam 2026-07-23): 支撐壓力 / 進場區 擇一, 預設支撐壓力。
+  // 沒資料的那顆 disabled (進場區未設 ≠ 壞掉, 灰色講清楚)。active 依已存選擇或預設.
+  const saved = CARD_OVERLAY.get(canvasId);
+  const mode = (saved === "zone" && hasZone) || (saved === "sr" && hasSr)
+    ? saved
+    : (hasSr || !hasZone ? "sr" : "zone");
+  const ovBtn = (key, label, has, offTitle) =>
+    `<button class="overlay-btn${mode === key && has ? " active" : ""}" data-overlay="${key}" data-canvas="${canvasId}"${has ? "" : ` disabled title="${offTitle}"`}>${label}</button>`;
   return `
     <div class="chart-block">
+      <div class="overlay-toggle">
+        ${ovBtn("sr", "支撐壓力", hasSr, "無夠格的支撐壓力位")}
+        ${ovBtn("zone", "進場區", hasZone, "進場區未設")}
+      </div>
       <div class="chart-canvas-wrap" id="wrap-${canvasId}">
         <canvas id="${canvasId}"></canvas>
       </div>
@@ -614,6 +639,18 @@ document.addEventListener("click", (e) => {
       const card = pinB.closest(".asset-card");
       if (card) card.classList.toggle("pinned", nowPinned);
       applySort(section);
+    }
+    return;
+  }
+  // 覆蓋層切換 (支撐壓力 ↔ 進場區): 記住選擇 → 用當前刻度重畫該卡 (Adam 2026-07-23)
+  const ovB = e.target.closest(".overlay-btn");
+  if (ovB) {
+    const canvasId = ovB.dataset.canvas, mode = ovB.dataset.overlay;
+    if (canvasId && mode && !ovB.disabled) {
+      CARD_OVERLAY.set(canvasId, mode);
+      ovB.parentElement.querySelectorAll(".overlay-btn").forEach((b) => b.classList.toggle("active", b === ovB));
+      const scope = ovB.closest(".chart-block")?.querySelector(".scope-btn.active")?.dataset.scope || DEFAULT_SCOPE;
+      renderChart(canvasId, scope);
     }
     return;
   }
@@ -1121,7 +1158,12 @@ function buildAssetCard(item, section) {
   }
 
   // Trend chart block (all non-error cards)
-  const chartHtml = chartBlockHtml(canvasId);
+  const srPeek = srLevels(item);  // overlay 按鈕 disabled 判定 (與 CARD_META.sr 同一來源函式)
+  const chartHtml = chartBlockHtml(
+    canvasId,
+    item.entry_zone_hi != null,
+    !!(srPeek.supports.length || srPeek.resistances.length)
+  );
 
   const notesHtml = item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
 

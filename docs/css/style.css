@@ -653,6 +653,31 @@ body {
   border-color: var(--accent);
 }
 
+/* 覆蓋層切換 (2026-07-23): 支撐壓力 / 進場區 擇一顯示, 預設支撐壓力.
+   active 配色跟線同語言: 支撐壓力=綠框(對齊支撐綠), 進場區=金框(對齊進場金線). */
+.overlay-toggle {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+  margin: 0 2px 6px;
+}
+.overlay-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+.overlay-btn:hover:not(:disabled) { background: var(--card-hover); color: var(--text); border-color: var(--border-light); }
+.overlay-btn.active { background: rgba(74, 222, 128, 0.16); color: var(--accent); border-color: var(--accent); }
+.overlay-btn.active[data-overlay="zone"] { background: rgba(251, 191, 36, 0.14); color: #fbbf24; border-color: #fbbf24; }
+.overlay-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
 /* Notes */
 .asset-notes {
   margin-top: 12px;
