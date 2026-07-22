@@ -480,6 +480,8 @@ function renderChart(canvasId, scope) {
       tension: 0,
       order: 0,
     });
+    // 夠格的位階全畫 (Adam 2026-07-23 拍板:「真的有多條就留著」, 文字區同步全列) —
+    // srLevels 各邊已 cap 2 條、nearest-first; 與卡片 🧱/🛟 文字列同一來源.
     for (const r of meta.sr.resistances) { overlayVals.push(r.px); datasets.push(srLine(r.px, "rgba(248, 113, 113, 0.55)", "壓力")); }
     for (const s of meta.sr.supports) { overlayVals.push(s.px); datasets.push(srLine(s.px, "rgba(74, 222, 128, 0.55)", "支撐")); }
   }
@@ -1097,19 +1099,18 @@ function buildAssetCard(item, section) {
       metrics.push([`量比`, `<span title="與${vi.basis}相比${vi.live ? "（盤中累積，尚未收盤）" : ""}">${volumeBadge(vi.ratio, vi.live)}</span>`]);
     }
   }
-  // 支撐/壓力 (Adam 2026-07-22): 最近的一條 + 距現價% + 匯合證據; 沒夠格的位誠實不顯示.
+  // 支撐/壓力 (Adam 2026-07-22; 2026-07-23 全列): 夠格的位階全部列出 (nearest 在前),
+  // 每條 = 價位 + 距現價% + 匯合證據; 沒夠格的位誠實不顯示. 圖上虛線與此同一來源.
   if (price !== null && price !== undefined) {
     const sr = srLevels(item);
     const whyOf = (l) => `${l.touches} 次觸碰${l.hvn ? "・量密" : ""}${l.fib ? "・回撤位" : ""}${l.ma ? "・均線" : ""}`;
+    const lvlHtml = (l, sign, d) =>
+      `<span title="近期波段結構優先（±1.5% 帶）：${whyOf(l)}">${fmtLevel(l.px)} <span class="sr-meta">${sign}${fmtNum(d, 1)}%・${whyOf(l)}</span></span>`;
     if (sr.resistances.length) {
-      const r = sr.resistances[0];
-      const d = ((r.px - price) / price) * 100;
-      metrics.push(["🧱 壓力", `<span title="近期波段結構優先（±1.5% 帶）：${whyOf(r)}">${fmtLevel(r.px)} <span class="sr-meta">+${fmtNum(d, 1)}%・${whyOf(r)}</span></span>`]);
+      metrics.push(["🧱 壓力", sr.resistances.map((r) => lvlHtml(r, "+", ((r.px - price) / price) * 100)).join("<br>")]);
     }
     if (sr.supports.length) {
-      const s = sr.supports[0];
-      const d = ((price - s.px) / price) * 100;
-      metrics.push(["🛟 支撐", `<span title="近期波段結構優先（±1.5% 帶）：${whyOf(s)}">${fmtLevel(s.px)} <span class="sr-meta">−${fmtNum(d, 1)}%・${whyOf(s)}</span></span>`]);
+      metrics.push(["🛟 支撐", sr.supports.map((s) => lvlHtml(s, "−", ((price - s.px) / price) * 100)).join("<br>")]);
     }
   }
   if (data.expense_ratio !== null && data.expense_ratio !== undefined) {
