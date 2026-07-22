@@ -448,6 +448,24 @@ function renderChart(canvasId, scope) {
       });
     }
   }
+  // 支撐/壓力虛線 (Adam 2026-07-22) — 只在 3M/6M 畫 (短刻度圖面小, 線多會糊);
+  // 壓力紅/支撐綠 對齊 ta-stock 慣例, 細虛線不搶價格線與進場區金線.
+  if ((scope === "3m" || scope === "6m") && meta && meta.sr) {
+    const srLine = (px, color, label) => ({
+      label,
+      data: new Array(closes.length).fill(px),
+      borderColor: color,
+      borderWidth: 1,
+      borderDash: [2, 3],
+      fill: false,
+      pointRadius: 0,
+      pointHoverRadius: 0,
+      tension: 0,
+      order: 0,
+    });
+    for (const r of meta.sr.resistances) datasets.push(srLine(r.px, "rgba(248, 113, 113, 0.55)", "壓力"));
+    for (const s of meta.sr.supports) datasets.push(srLine(s.px, "rgba(74, 222, 128, 0.55)", "支撐"));
+  }
   const pad = (yMax - yMin) * 0.06 || 1;
 
   // 量能柱 (Adam 2026-07-22): every scope up to 1y — intraday bars (1d~1M) and the
@@ -562,6 +580,7 @@ function initializeCharts(items, section) {
       type: item.type || "",
       dayChange: item.data?.change_pct ?? null,  // drives the line colour (漲紅跌綠, matches the number)
       dayChangeAbs: item.data?.change ?? null,   // 當日漲跌絕對值 (給 1d scope 漲跌數字用)
+      sr: srLevels(item),                        // 支撐/壓力 (2026-07-22) — 3M/6M 虛線用
     });
     renderChart(canvasId, DEFAULT_SCOPE);
   }
@@ -717,6 +736,95 @@ function volumeBadge(ratio, live) {
   if (ratio >= 0.6 || live) return `<span class="vol-chip vol-norm">${fmtNum(ratio, 1)}×</span>`;
   return `<span class="vol-chip vol-dry">縮量 ${fmtNum(ratio, 1)}×</span>`;
 }
+
+// ========== 支撐/壓力 (Adam 2026-07-22「每一檔的支撐線和壓力牆」) ==========
+// Close-based swing clustering + volume-profile (量能密集區) weighting over ~1y of
+// daily bars. Returns { supports, resistances } — at most 2 each, nearest-first.
+// Honest no-draw: <40 bars / no cluster with score ≥2 → empty arrays (創高股上方
+// 本來就沒歷史壓力, 硬畫反而誤導). Method mirrors the ta-stock skill's discipline
+// (swing + 多次觸碰/量能匯合才畫), tuned to run unattended on 66 cards.
+const SR_LOOKBACK = 250;      // ~1y of daily bars
+const SR_SWING_K = 3;         // swing = strict extreme among ±3 bars
+const SR_CLUSTER_PCT = 0.015; // levels within ±1.5% of the cluster mean merge
+const SR_RECENT_BARS = 60;    // a touch in the last ~3 months earns a recency bonus
+const SR_MAX_EACH = 2;
+
+function srLevels(item) {
+  const data = item.data || {};
+  const daily = (data.history && data.history.daily) || [];
+  const price = data.price;
+  const none = { supports: [], resistances: [] };
+  if (price == null || daily.length < 40) return none;
+  const bars = daily.slice(-SR_LOOKBACK);
+  const n = bars.length;
+
+  // 1) close-based swing highs/lows (strict extreme among ±k; unconfirmed tail excluded)
+  const swings = [];
+  for (let i = SR_SWING_K; i < n - SR_SWING_K; i++) {
+    const c = bars[i].c;
+    if (c == null) continue;
+    let isHigh = true, isLow = true;
+    for (let j = i - SR_SWING_K; j <= i + SR_SWING_K; j++) {
+      if (j === i) continue;
+      const cj = bars[j].c;
+      if (cj == null) { isHigh = isLow = false; break; }
+      if (cj >= c) isHigh = false;
+      if (cj <= c) isLow = false;
+      if (!isHigh && !isLow) break;
+    }
+    if (isHigh || isLow) swings.push({ px: c, idx: i });
+  }
+  if (!swings.length) return none;
+
+  // 2) volume profile: 30 price bins over the lookback range; top-20% bins = 量能密集區
+  //    (牆之所以是牆 — 那裡堆了很多人的成本). Degrades to no-bonus without the v-tail.
+  let hvnTest = () => false;
+  const vbars = bars.filter((b) => b.v != null && b.c != null);
+  if (vbars.length >= 60) {
+    const closes0 = bars.map((b) => b.c).filter((c) => c != null);
+    const lo = Math.min(...closes0), hi = Math.max(...closes0);
+    if (hi > lo) {
+      const NBINS = 30;
+      const binVol = new Array(NBINS).fill(0);
+      const binOf = (px) => Math.min(NBINS - 1, Math.max(0, Math.floor(((px - lo) / (hi - lo)) * NBINS)));
+      for (const b of vbars) binVol[binOf(b.c)] += b.v;
+      const ranked = [...binVol].sort((a, b) => b - a);
+      const thresh = ranked[Math.max(0, Math.floor(NBINS * 0.2) - 1)];
+      if (thresh > 0) hvnTest = (px) => binVol[binOf(px)] >= thresh;
+    }
+  }
+
+  // 3) greedy price-sorted clustering (join while within ±1.5% of the running mean)
+  swings.sort((a, b) => a.px - b.px);
+  const clusters = [];
+  for (const s of swings) {
+    const cl = clusters[clusters.length - 1];
+    if (cl && Math.abs(s.px - cl.mean) / cl.mean <= SR_CLUSTER_PCT) {
+      cl.pts.push(s);
+      cl.mean = cl.pts.reduce((sum, p) => sum + p.px, 0) / cl.pts.length;
+    } else {
+      clusters.push({ mean: s.px, pts: [s] });
+    }
+  }
+
+  // 4) score (touches + 量能密集 + 近期有效性), keep score ≥2, split by side of price
+  const supports = [], resistances = [];
+  for (const cl of clusters) {
+    const touches = cl.pts.length;
+    const recent = cl.pts.some((p) => p.idx >= n - SR_RECENT_BARS);
+    const hvn = hvnTest(cl.mean);
+    const score = touches + (hvn ? 1 : 0) + (recent ? 0.5 : 0);
+    if (score < 2) continue;                 // 單次觸碰又非量能密集 → 不夠格, 不畫
+    const lvl = { px: cl.mean, touches, hvn, score };
+    (cl.mean > price ? resistances : supports).push(lvl);
+  }
+  supports.sort((a, b) => b.px - a.px);      // nearest below current price first
+  resistances.sort((a, b) => a.px - b.px);   // nearest above first
+  return { supports: supports.slice(0, SR_MAX_EACH), resistances: resistances.slice(0, SR_MAX_EACH) };
+}
+
+// Level display precision: S/R are cluster means (帶狀概念), don't over-report digits.
+function fmtLevel(px) { return fmtNum(px, px >= 1000 ? 0 : px >= 100 ? 1 : 2); }
 
 // ========== Jump-to-card (search + 排行榜/進場區 rows) ==========
 function jumpToCard(tab, id) {
@@ -908,6 +1016,22 @@ function buildAssetCard(item, section) {
     metrics.push([`📊 ${vi.label}`, `${liveTag}${fmtVolume(vi.vol, item)}`]);
     if (vi.ratio != null && isFinite(vi.ratio)) {
       metrics.push([`量比`, `<span title="與${vi.basis}相比${vi.live ? "（盤中累積，尚未收盤）" : ""}">${volumeBadge(vi.ratio, vi.live)}</span>`]);
+    }
+  }
+  // 支撐/壓力 (Adam 2026-07-22): 最近的一條 + 距現價%; 沒有夠格的位就誠實不顯示.
+  if (price !== null && price !== undefined) {
+    const sr = srLevels(item);
+    if (sr.resistances.length) {
+      const r = sr.resistances[0];
+      const d = ((r.px - price) / price) * 100;
+      const why = `${r.touches} 次觸碰${r.hvn ? "・量能密集" : ""}`;
+      metrics.push(["🧱 壓力", `<span title="近一年波段高點群聚（±1.5% 帶）：${why}">${fmtLevel(r.px)} <span class="sr-meta">+${fmtNum(d, 1)}%・${why}</span></span>`]);
+    }
+    if (sr.supports.length) {
+      const s = sr.supports[0];
+      const d = ((price - s.px) / price) * 100;
+      const why = `${s.touches} 次觸碰${s.hvn ? "・量能密集" : ""}`;
+      metrics.push(["🛟 支撐", `<span title="近一年波段低點群聚（±1.5% 帶）：${why}">${fmtLevel(s.px)} <span class="sr-meta">−${fmtNum(d, 1)}%・${why}</span></span>`]);
     }
   }
   if (data.expense_ratio !== null && data.expense_ratio !== undefined) {

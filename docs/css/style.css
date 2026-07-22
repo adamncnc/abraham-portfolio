@@ -551,6 +551,8 @@ body {
 .vol-dry { background: rgba(139, 149, 167, 0.1); color: var(--text-dim); border: 1px solid rgba(139, 149, 167, 0.2); }
 .vol-norm { background: rgba(255, 255, 255, 0.05); color: var(--text); border: 1px solid var(--border); }
 .vol-live-tag { font-size: 10px; color: var(--info); background: rgba(96, 165, 250, 0.1); border: 1px solid rgba(96, 165, 250, 0.22); border-radius: 999px; padding: 0 6px; font-weight: 600; }
+/* 支撐/壓力 rows (2026-07-22) — 附註 (距%・觸碰次數・量能密集) 淡化不搶主數字 */
+.sr-meta { font-size: 10.5px; color: var(--text-dim); font-weight: 500; }
 
 /* 52W Range bar — 方向與漲紅跌綠一致: 低點端綠 (跌深) → 高點端紅 (漲高) */
 .range-bar-wrap { margin-top: 12px; margin-bottom: 12px; }
