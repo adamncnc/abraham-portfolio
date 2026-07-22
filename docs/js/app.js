@@ -425,15 +425,17 @@ function renderChart(canvasId, scope) {
     order: 1,
   }];
 
-  // y-axis is scaled to the PRICE range only (range high/low) so the trend is
-  // always legible. Entry-zone lines are still drawn, but they do NOT expand the
-  // axis — if the band sits far outside the visible price range it simply clips
-  // out of view. (Adam 2026-06-17: 縱軸由範圍內最大最小值決定；進場區虛線不強求顯示。)
+  // y-axis: price range first, then widened just enough to include the active
+  // overlay lines (Adam 2026-07-23: 按出來的線一定要看得見 — 1d 盤中窄區間常讓
+  // 支撐壓力/進場區整組落在範圍外, 舊規則會整段裁掉、看起來像沒畫).
+  // (取代 2026-06-17「進場區虛線不強求顯示」— 那是線常駐當裝飾時代的規則.)
   const meta = CARD_META.get(canvasId);
   const yMin = Math.min(...closes);
   const yMax = Math.max(...closes);
+  const overlayVals = [];
   const overlayMode = overlayModeFor(canvasId);  // 'sr' | 'zone' — 擇一畫, 避免兩組線混淆
   if (overlayMode === "zone" && meta && meta.hi != null) {
+    overlayVals.push(meta.hi);
     datasets.push({
       label: "進場上限",
       data: new Array(closes.length).fill(meta.hi),
@@ -447,6 +449,7 @@ function renderChart(canvasId, scope) {
       order: 0,
     });
     if (meta.lo != null) {
+      overlayVals.push(meta.lo);
       datasets.push({
         label: "進場下限",
         data: new Array(closes.length).fill(meta.lo),
@@ -461,9 +464,10 @@ function renderChart(canvasId, scope) {
       });
     }
   }
-  // 支撐/壓力虛線 (Adam 2026-07-22) — 只在 3M/6M 畫 (短刻度圖面小, 線多會糊);
-  // 壓力紅/支撐綠 對齊 ta-stock 慣例, 細虛線不搶價格線與進場區金線.
-  if (overlayMode === "sr" && (scope === "3m" || scope === "6m") && meta && meta.sr) {
+  // 支撐/壓力虛線 (Adam 2026-07-22; 2026-07-23 起全刻度) — 有切換鍵、且預設就是
+  // 支撐壓力後, 使用者在哪個刻度按就在哪個刻度看到 (原本只畫 3M/6M → 預設頁 1d
+  // 永遠空白, 看起來像沒做). 壓力紅/支撐綠 對齊 ta-stock 慣例, 細虛線不搶價格線.
+  if (overlayMode === "sr" && meta && meta.sr) {
     const srLine = (px, color, label) => ({
       label,
       data: new Array(closes.length).fill(px),
@@ -476,10 +480,12 @@ function renderChart(canvasId, scope) {
       tension: 0,
       order: 0,
     });
-    for (const r of meta.sr.resistances) datasets.push(srLine(r.px, "rgba(248, 113, 113, 0.55)", "壓力"));
-    for (const s of meta.sr.supports) datasets.push(srLine(s.px, "rgba(74, 222, 128, 0.55)", "支撐"));
+    for (const r of meta.sr.resistances) { overlayVals.push(r.px); datasets.push(srLine(r.px, "rgba(248, 113, 113, 0.55)", "壓力")); }
+    for (const s of meta.sr.supports) { overlayVals.push(s.px); datasets.push(srLine(s.px, "rgba(74, 222, 128, 0.55)", "支撐")); }
   }
-  const pad = (yMax - yMin) * 0.06 || 1;
+  const yLo = overlayVals.length ? Math.min(yMin, ...overlayVals) : yMin;
+  const yHi = overlayVals.length ? Math.max(yMax, ...overlayVals) : yMax;
+  const pad = (yHi - yLo) * 0.06 || 1;
 
   // 量能柱 (Adam 2026-07-22): every scope up to 1y — intraday bars (1d~1M) and the
   // daily v-tail (3M/6M/1y) both carry v now. 2y/5y/All stay off by design (>700 bars
@@ -554,7 +560,7 @@ function renderChart(canvasId, scope) {
       },
       scales: {
         x: { display: false },
-        y: { display: false, min: yMin - pad, max: yMax + pad },
+        y: { display: false, min: yLo - pad, max: yHi + pad },
         // Hidden volume axis: max ×4 keeps the bars in the bottom quarter of the chart.
         ...(volTip ? { yv: { display: false, min: 0, max: volMax * 4.2 } } : {}),
       },
@@ -605,7 +611,7 @@ function initializeCharts(items, section) {
       type: item.type || "",
       dayChange: item.data?.change_pct ?? null,  // drives the line colour (漲紅跌綠, matches the number)
       dayChangeAbs: item.data?.change ?? null,   // 當日漲跌絕對值 (給 1d scope 漲跌數字用)
-      sr: srLevels(item),                        // 支撐/壓力 (2026-07-22) — 3M/6M 虛線用
+      sr: srLevels(item),                        // 支撐/壓力 (2026-07-22) — 覆蓋虛線用 (7/23 起全刻度)
     });
     renderChart(canvasId, DEFAULT_SCOPE);
   }
