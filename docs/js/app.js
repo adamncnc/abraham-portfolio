@@ -1395,9 +1395,12 @@ function activateTab(which, doResize = true) {
   }
   lsSet("abraham.activeTab", which);
   // Summary cards (進場區內/回檔排行) follow the market tab; sim/pos keep the last market view.
-  if ((which === "tw" || which === "us" || which === "idx") && which !== ACTIVE_MARKET_TAB) {
-    ACTIVE_MARKET_TAB = which;
-    if (CURRENT_SNAPSHOT) renderSummary(CURRENT_SNAPSHOT.portfolio_summary, CURRENT_SNAPSHOT);
+  if (which === "tw" || which === "us" || which === "idx") {
+    applySort(which);  // 切分頁 = 重排白名單時機 (Adam 2026-07-23: 自動更新凍結順序, 切分頁時套最新排序)
+    if (which !== ACTIVE_MARKET_TAB) {
+      ACTIVE_MARKET_TAB = which;
+      if (CURRENT_SNAPSHOT) renderSummary(CURRENT_SNAPSHOT.portfolio_summary, CURRENT_SNAPSHOT);
+    }
   }
   if (doResize && which !== "sim") {
     CHART_INSTANCES.forEach((chart, cid) => {
@@ -1478,6 +1481,14 @@ function renderSnapshot(snapshot, opts = {}) {
 
   renderSummary(snapshot.portfolio_summary, snapshot);
 
+  // 自動更新不跳位 (Adam 2026-07-23): 30s live tick / 盤外自動 reload 帶 keepOrder=true —
+  // 先記下重建前的卡片順序, 重建+setupOrdering 後還原 (數字全新、位置不動)。
+  // 重排只發生在使用者動作: 切排序選單 / 重新整理 / ↻ 全部重抓 / 切分頁 (activateTab)。
+  const prevOrder = opts.keepOrder ? ORDER_SECTIONS.map((s) => {
+    const g = document.getElementById(s + "-grid");
+    return [s, g ? Array.from(g.querySelectorAll(".asset-card")).map((c) => c.dataset.card).filter(Boolean) : []];
+  }) : null;
+
   // Render each market tab's grid (台股 / 美股 / 指數含黃金)
   renderGrid("tw", snapshot.tw, "（台股清單為空）");
   renderGrid("us", snapshot.us, "（美股清單為空）");
@@ -1488,9 +1499,19 @@ function renderSnapshot(snapshot, opts = {}) {
   initializeCharts(snapshot.idx, "idx");
 
   setupOrdering();
+  if (prevOrder) {
+    for (const [s, keys] of prevOrder) {
+      const g = document.getElementById(s + "-grid");
+      if (!g || keys.length < 2) continue;
+      for (const key of keys) {
+        const n = g.querySelector('[data-card="' + CSS.escape(key) + '"]');
+        if (n) g.appendChild(n);   // appendChild = move; canvas/chart 不重建 (同 applySort 機制)
+      }
+    }
+  }
 }
 
-async function loadAndRender() {
+async function loadAndRender(opts = {}) {
   const refreshBtn = document.getElementById("refresh-btn");
   refreshBtn.textContent = "…";
   try {
@@ -1498,7 +1519,7 @@ async function loadAndRender() {
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const snapshot = await res.json();
     CURRENT_SNAPSHOT = snapshot;
-    renderSnapshot(snapshot);
+    renderSnapshot(snapshot, opts.keepOrder ? { keepOrder: true } : {});
     loadHoldings();  // 即時持倉分頁 — independent fetch, own error handling
     loadSim();       // 模擬倉分頁 — independent fetch, own error handling
   } catch (err) {
@@ -1988,7 +2009,7 @@ async function fetchQuotesBatched(symbols) {
 // symbol if the relay call partially fails.
 async function liveRefresh() {
   const btn = document.getElementById("live-btn");
-  if (!RELAY_BASE) { await loadAndRender(); return; }
+  if (!RELAY_BASE) { await loadAndRender({ keepOrder: true }); return; }
   if (!CURRENT_SNAPSHOT) await loadAndRender();
   if (!CURRENT_SNAPSHOT) return;
 
@@ -2041,7 +2062,7 @@ async function liveRefresh() {
       ? `${okCount} 檔即時 · ${failCount} 檔未即時(顯示收盤)`
       : `${okCount} 檔即時`;
     CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
-    renderSnapshot(live, { live: true, note });
+    renderSnapshot(live, { live: true, note, keepOrder: true });  // 自動/手動抓即時都不跳位 (Adam 2026-07-23)
     applyLiveToHoldings(quotes, liveTs);   // 即時持倉分頁: 距停損隨這批即時價重算
     SIM_BOOKS.forEach(({ key }) => {       // 模擬倉分頁: 現價 join 吃這批即時價 + 重建被 renderSnapshot 銷毀的淨值圖
       if (SIM_SNAPS[key]) renderSim(SIM_SNAPS[key], key);
@@ -2455,7 +2476,7 @@ let _lastSnapshotLoad = Date.now();  // boot's loadAndRender() just ran
         } else {
           LIVE_MODE = false;                        // markets closed → drop the live latch, don't poll the relay all night (Codex 2026-07-03 P3)
           if (Date.now() - _lastSnapshotLoad >= IDLE_SNAPSHOT_MS) {
-            await loadAndRender();                   // off-hours: reload the committed close-of-day snapshot, throttled (picks up a fresh latest.json)
+            await loadAndRender({ keepOrder: true }); // off-hours auto reload — 同樣不跳位 (Adam 2026-07-23)
             _lastSnapshotLoad = Date.now();
           }
         }
