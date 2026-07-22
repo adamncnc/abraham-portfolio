@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abraham Portfolio Dashboard</title>
-<link rel="stylesheet" href="css/style.css?v=20260722">
+<link rel="stylesheet" href="css/style.css?v=20260722b">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
@@ -39,18 +39,24 @@
   </div>
 </div>
 
-<!-- Market tabs: 台股 / 美股 / 指數 (Adam 2026-06-17: 上方三個標籤頁，各檔分門別類；黃金暫放指數頁) -->
+<!-- Market tabs (Adam 2026-07-22: 最外層五大項; 模擬倉點開才展開六本子分頁) -->
 <nav class="market-tabs" id="market-tabs">
   <button class="market-tab active" data-tab="tw">🇹🇼 台股 <span class="tab-count" id="tab-count-tw">–</span></button>
   <button class="market-tab" data-tab="us">🇺🇸 美股 <span class="tab-count" id="tab-count-us">–</span></button>
   <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
   <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
-  <button class="market-tab" data-tab="sim-tw-1">🇹🇼1 <span class="tab-count" id="tab-count-sim-tw-1">–</span></button>
-  <button class="market-tab" data-tab="sim-tw-2">🇹🇼2 <span class="tab-count" id="tab-count-sim-tw-2">–</span></button>
-  <button class="market-tab" data-tab="sim-tw-3">🇹🇼3 <span class="tab-count" id="tab-count-sim-tw-3">–</span></button>
-  <button class="market-tab" data-tab="sim-us-1">🇺🇸1 <span class="tab-count" id="tab-count-sim-us-1">–</span></button>
-  <button class="market-tab" data-tab="sim-us-2">🇺🇸2 <span class="tab-count" id="tab-count-sim-us-2">–</span></button>
-  <button class="market-tab" data-tab="sim-us-3">🇺🇸3 <span class="tab-count" id="tab-count-sim-us-3">–</span></button>
+  <button class="market-tab" data-tab="sim">🧪 模擬倉 <span class="tab-count" id="tab-count-sim">–</span></button>
+</nav>
+<!-- 模擬倉六本子分頁 — 只在模擬倉大項 active 時顯示; 記住上次看的那本 (abraham.simBook) -->
+<nav class="sim-subtabs" id="sim-subtabs">
+  <span class="sim-subtabs-group">台股</span>
+  <button class="sim-subtab" data-simbook="sim-tw-1">策略1 <span class="tab-count" id="tab-count-sim-tw-1">–</span></button>
+  <button class="sim-subtab" data-simbook="sim-tw-2">策略2 <span class="tab-count" id="tab-count-sim-tw-2">–</span></button>
+  <button class="sim-subtab" data-simbook="sim-tw-3">策略3 <span class="tab-count" id="tab-count-sim-tw-3">–</span></button>
+  <span class="sim-subtabs-group sim-subtabs-group-us">美股</span>
+  <button class="sim-subtab" data-simbook="sim-us-1">策略1 <span class="tab-count" id="tab-count-sim-us-1">–</span></button>
+  <button class="sim-subtab" data-simbook="sim-us-2">策略2 <span class="tab-count" id="tab-count-sim-us-2">–</span></button>
+  <button class="sim-subtab" data-simbook="sim-us-3">策略3 <span class="tab-count" id="tab-count-sim-us-3">–</span></button>
 </nav>
 
 <!-- 台股 -->
@@ -275,10 +281,11 @@
 </section>
 
 <footer class="site-footer">
-  <div>Abraham Financial Advisor Dashboard · v1.0</div>
+  <div class="footer-title">Abraham Financial Advisor Dashboard · v2.0</div>
+  <div class="footer-motto">分析 ≠ 買進建議 · 決策在你 · 執行在券商</div>
   <div class="footer-meta">
-    分析 ≠ 買進建議 · 決策在你 · 執行在券商<br>
-    資料來源：Yahoo Finance via yfinance · 自動更新每個交易日
+    台股即時報價：證交所 MIS（約 15 秒）· 美股即時＋歷史走勢：Yahoo Finance · 台股月營收：FinMind<br>
+    盤中每 30 秒自動更新 · 收盤後自動快照（台股 15:00 / 美股 06:00 台北時間）
   </div>
   <div class="footer-meta">
     <a href="https://github.com/adamncnc/abraham-portfolio" target="_blank">Source on GitHub</a>

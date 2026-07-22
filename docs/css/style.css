@@ -315,6 +315,51 @@ body {
 }
 .market-tab.active .tab-count { background: rgba(96, 165, 250, 0.25); color: var(--info); }
 
+/* 模擬倉六本子分頁 (Adam 2026-07-22: 兩層選單) — 只在模擬倉大項 active 時展開 */
+.sim-subtabs {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: -8px 0 18px;
+  padding: 10px 14px;
+  background: rgba(21, 27, 40, 0.6);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.sim-subtabs.open { display: flex; animation: panelIn 0.18s ease-out; }
+.sim-subtabs-group {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  padding: 0 4px;
+}
+.sim-subtabs-group-us { margin-left: 14px; }
+.sim-subtab {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.sim-subtab:hover { background: var(--card-hover); color: var(--text); border-color: var(--border-light); }
+.sim-subtab.active {
+  background: rgba(96, 165, 250, 0.14);
+  color: var(--text);
+  border-color: var(--info);
+}
+.sim-subtab.active .tab-count { background: rgba(96, 165, 250, 0.25); color: var(--info); }
+
 /* Tab panels — only the active market shows */
 .tab-panel { display: none; }
 .tab-panel.active { display: block; animation: panelIn 0.22s ease-out; }
@@ -658,6 +703,17 @@ body {
   border-top: 1px solid var(--border);
   margin-top: 36px;
 }
+.footer-title { font-weight: 700; color: var(--text); font-size: 13px; }
+.footer-motto {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 14px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
 .footer-meta { margin-top: 8px; line-height: 1.6; }
 .site-footer a { color: var(--info); text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
@@ -681,6 +737,8 @@ body {
     scrollbar-width: thin;
   }
   .market-tab { padding: 8px 14px; font-size: 13px; flex-shrink: 0; }
+  .sim-subtabs.open { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .sim-subtab { flex-shrink: 0; padding: 5px 11px; font-size: 12px; }
 }
 
 /* ── 即時持倉 + ATR 移動停利 分頁 (Adam 2026-07-06) ──────────────────────

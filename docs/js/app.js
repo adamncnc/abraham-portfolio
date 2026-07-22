@@ -568,6 +568,8 @@ function initializeCharts(items, section) {
 document.addEventListener("click", (e) => {
   const tabBtn = e.target.closest(".market-tab");
   if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
+  const simBtn = e.target.closest(".sim-subtab");
+  if (simBtn) { activateSimBook(simBtn.dataset.simbook); return; }
   // 進場區內 / 回檔排行榜 rows + search results → jump to that card (Adam 2026-07-22).
   const jr = e.target.closest(".jump-row");
   if (jr && jr.dataset.jumpTab && jr.dataset.jumpId) {
@@ -1167,21 +1169,56 @@ function bucketSnapshot(snapshot) {
 
 // Switch the visible market tab. Charts created while a panel was display:none
 // render at 0×0, so resize this tab's charts once it becomes visible.
+// Two-level nav (Adam 2026-07-22): 最外層 台股/美股/指數/即時持倉/模擬倉 五大項;
+// 模擬倉 active 時才顯示六本子分頁, 並記住上次看的那本 (abraham.simBook, prefs-synced).
 function activateTab(which, doResize = true) {
   if (!which) return;
+  // Legacy migration: a saved activeTab like "sim-tw-2" (pre-2026-07-22 flat tabs, may
+  // still live in cloud prefs) folds into the 模擬倉 group with that book selected.
+  if (which.startsWith("sim-")) { lsSet("abraham.simBook", which); which = "sim"; }
   document.querySelectorAll(".market-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === which));
-  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
+  const subRow = document.getElementById("sim-subtabs");
+  if (subRow) subRow.classList.toggle("open", which === "sim");
+  if (which === "sim") {
+    activateSimBook(lsGet("abraham.simBook", "sim-tw-1"), doResize);
+  } else {
+    document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
+  }
   lsSet("abraham.activeTab", which);
   // Summary cards (進場區內/回檔排行) follow the market tab; sim/pos keep the last market view.
   if ((which === "tw" || which === "us" || which === "idx") && which !== ACTIVE_MARKET_TAB) {
     ACTIVE_MARKET_TAB = which;
     if (CURRENT_SNAPSHOT) renderSummary(CURRENT_SNAPSHOT.portfolio_summary, CURRENT_SNAPSHOT);
   }
-  if (doResize) {
+  if (doResize && which !== "sim") {
     CHART_INSTANCES.forEach((chart, cid) => {
       if (cid.startsWith("chart-" + which + "-")) { try { chart.resize(); } catch (e) { /* ignore */ } }
     });
   }
+}
+
+function activateSimBook(book, doResize = true) {
+  if (!SIM_BOOKS.some((b) => b.key === book)) book = "sim-tw-1";  // stale/garbage pref -> default
+  document.querySelectorAll(".sim-subtab").forEach((t) => t.classList.toggle("active", t.dataset.simbook === book));
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + book));
+  lsSet("abraham.simBook", book);
+  if (doResize) {
+    CHART_INSTANCES.forEach((chart, cid) => {
+      if (cid.startsWith("chart-" + book + "-")) { try { chart.resize(); } catch (e) { /* ignore */ } }
+    });
+  }
+}
+
+// 模擬倉 top-level badge = 六本 (持倉+掛單) 加總 — refreshed as each book's data lands.
+function updateSimAggregateCount() {
+  let total = 0, any = false;
+  for (const { key } of SIM_BOOKS) {
+    const pf = (SIM_SNAPS[key] && SIM_SNAPS[key].portfolio) || null;
+    if (!pf) continue;
+    any = true;
+    total += (pf.positions || []).length + (pf.pending_orders || []).length;
+  }
+  setText("tab-count-sim", any ? total : "–");
 }
 
 function setText(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
@@ -1690,8 +1727,9 @@ function renderSim(sim, key = "sim") {
       </div>`;
   }
 
-  // --- counts ---
+  // --- counts (sub-tab badge + 模擬倉 top-level aggregate) ---
   setText(`tab-count-${key}`, positions.length + orders.length || "–");
+  updateSimAggregateCount();
   setText(`${key}-count`, `持倉 ${positions.length} · 掛單 ${orders.length}`);
   setText(`${key}-pos-count`, `${positions.length} 檔`);
   setText(`${key}-ord-count`, `${orders.length} 筆`);
