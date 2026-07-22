@@ -450,14 +450,16 @@ function renderChart(canvasId, scope) {
   }
   const pad = (yMax - yMin) * 0.06 || 1;
 
-  // 量能柱 (Adam 2026-07-22): 3M/6M scopes use daily bars carrying the v-tail →
-  // draw bottom-quarter volume bars (紅=漲日/綠=跌日, 漲紅跌綠鐵則; 透明度低不搶價格線).
-  // Coverage guard: only when ≥50% of visible bars have v (partial tails look broken).
+  // 量能柱 (Adam 2026-07-22): every scope up to 1y — intraday bars (1d~1M) and the
+  // daily v-tail (3M/6M/1y) both carry v now. 2y/5y/All stay off by design (>700 bars
+  // → sub-pixel bars, unreadable). 紅=漲/綠=跌 (漲紅跌綠鐵則), 透明度低不搶價格線.
+  // Coverage guard: ≥50% of visible bars need v (partial tails look broken); 1d only
+  // needs 3 bars so the bars appear within minutes of the open.
   let volTip = null, volMax = 0;
-  if (scope === "3m" || scope === "6m") {
+  if (scope !== "2y" && scope !== "5y" && scope !== "all") {
     const vols = points.map((p) => (p && p.v != null ? p.v : null));
     const have = vols.filter((v) => v != null);
-    if (have.length >= Math.max(10, points.length * 0.5)) {
+    if (have.length >= Math.max(scope === "1d" ? 3 : 10, points.length * 0.5)) {
       volMax = Math.max(...have);
       if (volMax > 0) {
         volTip = vols;

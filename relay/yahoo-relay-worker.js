@@ -99,9 +99,9 @@ async function fetchOne(symbol) {
       const m = res && res.meta;
       if (!m) { lastErr = "no meta"; continue; }
       const ts = res.timestamp || [];
-      const closes =
-        (res.indicators && res.indicators.quote && res.indicators.quote[0] &&
-          res.indicators.quote[0].close) || [];
+      const q0 = (res.indicators && res.indicators.quote && res.indicators.quote[0]) || {};
+      const closes = q0.close || [];
+      const barVols = q0.volume || [];   // per-bar volume → 1d 量能柱 (Adam 2026-07-22)
       const off = m.gmtoffset || 0;
       const pad = (n) => String(n).padStart(2, "0");
       const intraday = [];
@@ -114,7 +114,9 @@ async function fetchOne(symbol) {
         const t =
           d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" +
           pad(d.getUTCDate()) + "T" + pad(d.getUTCHours()) + ":" + pad(d.getUTCMinutes());
-        intraday.push({ t, c: Math.round(c * 10000) / 10000 });
+        const bar = { t, c: Math.round(c * 10000) / 10000 };
+        if (barVols[i] != null && Number.isFinite(barVols[i])) bar.v = barVols[i];
+        intraday.push(bar);
       }
       // Latest price incl. pre/post market. The chart META does NOT carry
       // marketState/preMarketPrice/postMarketPrice (verified 2026-07-03 — the old code
@@ -143,10 +145,8 @@ async function fetchOne(symbol) {
       // acceptable for an intraday 「今日量」 readout — frontend labels it 盤中累積).
       let dayVolume = Number.isFinite(m.regularMarketVolume) ? m.regularMarketVolume : null;
       if (dayVolume == null) {
-        const vols = (res.indicators && res.indicators.quote && res.indicators.quote[0] &&
-          res.indicators.quote[0].volume) || [];
         let sum = 0, seen = false;
-        for (const vv of vols) { if (vv != null && Number.isFinite(vv)) { sum += vv; seen = true; } }
+        for (const vv of barVols) { if (vv != null && Number.isFinite(vv)) { sum += vv; seen = true; } }
         dayVolume = seen ? sum : null;
       }
       return { ok: true, price, prevClose: prev, change, changePct, session, asOf: session === "regular" ? rmt : lastBarT, intraday, dayVolume };

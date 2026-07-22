@@ -100,10 +100,13 @@ def fetch_history(symbol: str) -> dict:
         daily_df = None
 
     return {
-        "intraday": _serialize(intraday_df, "%Y-%m-%dT%H:%M"),
-        "intraday_mid": _serialize(mid_df, "%Y-%m-%dT%H:%M"),
-        # vol_tail=190 covers the 6M scope's 180-bar slice + the 20日均量 window.
-        "daily": _serialize(daily_df, "%Y-%m-%d", vol_tail=190),
+        # Intraday series carry v on every bar (Adam 2026-07-22: 1d~1M 也要量能柱) —
+        # both series are short (≤~190 bars) so a full tail is cheap.
+        "intraday": _serialize(intraday_df, "%Y-%m-%dT%H:%M", vol_tail=10000),
+        "intraday_mid": _serialize(mid_df, "%Y-%m-%dT%H:%M", vol_tail=10000),
+        # vol_tail=400 covers the 1y scope's 365-bar slice + the 20日均量 window.
+        # (2y/5y/All stay volume-less by design: >700 bars → sub-pixel bars, unreadable.)
+        "daily": _serialize(daily_df, "%Y-%m-%d", vol_tail=400),
     }
 
 
