@@ -2139,17 +2139,30 @@ function cardIdOf(card, section) {
 }
 
 // 純數值排序模式 -> 方向 (-1 = 大到小 / +1 = 小到大)。圖釘在這些模式不置頂 (純 metric 勝)。
-const METRIC_DIR = { change: -1, growth: -1, eps: -1, pe: 1, zone: 1, drawdown: 1 };
+// 2026-07-23 Adam: +fpe(預估本益比)/qoq(營收季增)/vol(成交量)/volratio(量比), 移除 eps(年EPS)
+const METRIC_DIR = { change: -1, growth: -1, qoq: -1, pe: 1, fpe: 1, vol: -1, volratio: -1, zone: 1, drawdown: 1 };
 
 function sortMetric(item, mode) {
   const d = (item && item.data) || {};
   if (mode === "change") return d.change_pct == null ? -Infinity : d.change_pct;   // 漲跌幅 大->小
   if (mode === "drawdown") return d.dist_from_high_pct == null ? Infinity : d.dist_from_high_pct; // 回檔深度 距52W高 深(負大)->上, 無資料->最後
-  if (mode === "growth") return d.rev_yoy_pct == null ? -Infinity : d.rev_yoy_pct; // 營收成長率 大->小
-  if (mode === "eps")    return d.eps == null ? -Infinity : d.eps;                 // EPS 大->小
+  if (mode === "growth") return d.rev_yoy_pct == null ? -Infinity : d.rev_yoy_pct; // 營收年增率 大->小
+  if (mode === "qoq")    return d.rev_qoq_pct == null ? -Infinity : d.rev_qoq_pct; // 營收季增率 大->小
   if (mode === "pe") {                                                             // 本益比 小->大 (便宜在前)
     const pe = d.trailing_pe;
     return (pe == null || pe <= 0) ? Infinity : pe;                                // 無/負(虧損) -> 最後
+  }
+  if (mode === "fpe") {                                                            // 預估本益比 小->大
+    const pe = d.forward_pe;
+    return (pe == null || pe <= 0) ? Infinity : pe;                                // 無/負 -> 最後
+  }
+  if (mode === "vol") {                                                            // 成交量 大->小 (與卡片 📊 同源: 盤中用今日累積量)
+    const vi = volumeInfo(item);
+    return vi && vi.vol != null ? vi.vol : -Infinity;
+  }
+  if (mode === "volratio") {                                                       // 量比 高->低 (與卡片量比同源)
+    const vi = volumeInfo(item);
+    return vi && vi.ratio != null && isFinite(vi.ratio) ? vi.ratio : -Infinity;
   }
   if (mode === "zone") {                                                           // 距進場區 近->遠
     const hi = item && item.entry_zone_hi, p = d.price;
@@ -2219,7 +2232,12 @@ function setupOrdering() {
     const grid = document.getElementById(section + "-grid");
     if (!grid) continue;
     const sel = document.querySelector('.sort-select[data-section="' + section + '"]');
-    if (sel) sel.value = lsGet("abraham.sort." + section, "default");
+    if (sel) {
+      let saved = lsGet("abraham.sort." + section, "default");
+      // 選項退役防護 (2026-07-23 移除年EPS): 存的模式已不在選單 -> 回預設, 免得 select 變空白
+      if (!sel.querySelector('option[value="' + saved + '"]')) { saved = "default"; lsSet("abraham.sort." + section, saved); }
+      sel.value = saved;
+    }
     if (SORTABLE_INSTANCES[section]) { try { SORTABLE_INSTANCES[section].destroy(); } catch (e) {} delete SORTABLE_INSTANCES[section]; }
     if (window.Sortable && grid.querySelector(".asset-card")) {
       SORTABLE_INSTANCES[section] = window.Sortable.create(grid, {
