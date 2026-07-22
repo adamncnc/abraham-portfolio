@@ -775,11 +775,71 @@ function volumeInfo(item) {
   return null;
 }
 
-function volumeBadge(ratio, live) {
+function volumeBadge(ratio, live, dp = 1) {
   if (ratio == null || !isFinite(ratio)) return "";
-  if (ratio >= 1.5) return `<span class="vol-chip vol-surge">爆量 ${fmtNum(ratio, 1)}×</span>`;
-  if (ratio >= 0.6 || live) return `<span class="vol-chip vol-norm">${fmtNum(ratio, 1)}×</span>`;
-  return `<span class="vol-chip vol-dry">縮量 ${fmtNum(ratio, 1)}×</span>`;
+  if (ratio >= 1.5) return `<span class="vol-chip vol-surge">爆量 ${fmtNum(ratio, dp)}×</span>`;
+  if (ratio >= 0.6 || live) return `<span class="vol-chip vol-norm">${fmtNum(ratio, dp)}×</span>`;
+  return `<span class="vol-chip vol-dry">縮量 ${fmtNum(ratio, dp)}×</span>`;
+}
+
+// ========== 即時量比 (Adam 2026-07-23) ==========
+// 看盤軟體標準口徑: 今日累積量 ÷ (近5個交易日均量 × 已開盤時間比例) — 盤中任一時刻
+// 1.0×=步調正常。跟「量比」(分母=全日均量, 早盤結構性偏低、收盤才準) 是互補讀數。
+// 已開盤分鐘用**報價自己的時間戳** (_quoteTs=relay asOf) 對交易所時區開盤時刻算,
+// 不用瀏覽器牆鐘 — 免疫延遲 feed 與使用者時區。是否在盤中以 relay 的 session 欄
+// 為權威 (MIS/Yahoo 實測值), 不用日曆推測 → 颱風臨時休市/假日自然走收盤路徑。
+// 已知邊界: 美股感恩節前後的半日盤 (13:00 ET 提前收) 收盤後 ratio 會略偏低 (仍以
+// 390 分母計), 屬罕見日、誠實不特判。
+const SESSION_SPEC = {
+  tw: { tz: "Asia/Taipei", openMin: 9 * 60, totalMin: 270 },            // 09:00–13:30
+  us: { tz: "America/New_York", openMin: 9 * 60 + 30, totalMin: 390 },  // 09:30–16:00 (DST 交給 tz)
+};
+function itemSessionMarket(item) {
+  if ((item.type || "") === "commodity") return null;  // 黃金近24h交易, 無「開盤經過時間」概念
+  const s = String(item.symbol || item.id || "");
+  if (isTwLots(item) || /\.TWO?$/i.test(s) || /^\^TWII/.test(s)) return "tw";
+  return "us";
+}
+function dateInTz(tsMs, tz) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: tz, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(tsMs));
+}
+function sessionElapsedMin(market, tsMs) {
+  const spec = SESSION_SPEC[market];
+  if (!spec || tsMs == null || isNaN(tsMs)) return null;
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: spec.tz, hourCycle: "h23", hour: "2-digit", minute: "2-digit" }).formatToParts(new Date(tsMs));
+  let h = 0, m = 0;
+  for (const p of parts) { if (p.type === "hour") h = +p.value; else if (p.type === "minute") m = +p.value; }
+  return Math.max(0, Math.min(spec.totalMin, h * 60 + m - spec.openMin));
+}
+function realtimeVolInfo(item) {
+  const market = itemSessionMarket(item);
+  if (!market) return null;
+  const spec = SESSION_SPEC[market];
+  const data = item.data || {};
+  const daily = (data.history && data.history.daily) || [];
+  const vbars = daily.filter((b) => b && b.v != null && b.v > 0);  // v=0 幻影/停牌 K 不進基準
+  if (vbars.length < 6) return null;
+  const lastBar = vbars[vbars.length - 1];
+  const mean = (arr) => arr.reduce((s, b) => s + b.v, 0) / arr.length;
+
+  if (item._live === true && item._dayVolume != null && item._session !== "pre") {
+    const sess = item._session || "regular";
+    const inSession = sess === "regular";
+    const ts = item._quoteTs != null ? item._quoteTs : (item._liveTs != null ? item._liveTs : Date.now());
+    // 5日基準: dayVolume 那個交易日若已進 daily bars (盤後 fetch 過) 就排除它,
+    // 否則 (盤中/剛收盤) 取含最近完成日在內的 5 根 — 兩態下基準都是「它之前的5個交易日」。
+    const sameDay = String(lastBar.t || "").slice(0, 10) === dateInTz(ts, spec.tz);
+    const baseBars = sameDay ? vbars.slice(-6, -1) : vbars.slice(-5);
+    const base5 = mean(baseBars);
+    if (!base5) return null;
+    // regular: 折算到已開盤分鐘 (前5分鐘按5分計, 防開盤瞬間爆表); post/closed: dayVolume 已是全日量
+    const elapsed = inSession ? Math.max(5, sessionElapsedMin(market, ts) || spec.totalMin) : spec.totalMin;
+    return { ratio: item._dayVolume / (base5 * (elapsed / spec.totalMin)), live: inSession, elapsed: inSession ? elapsed : null, market };
+  }
+  // 收盤路徑: 最近完成日 vs 它之前5日
+  const base5 = mean(vbars.slice(-6, -1));
+  if (!base5) return null;
+  return { ratio: lastBar.v / base5, live: false, elapsed: null, market, asofBar: String(lastBar.t || "").slice(0, 10) };
 }
 
 // ========== 支撐/壓力 (Adam 2026-07-22「每一檔的支撐線和壓力牆」) ==========
@@ -1099,6 +1159,15 @@ function buildAssetCard(item, section) {
       metrics.push([`量比`, `<span title="與${vi.basis}相比${vi.live ? "（盤中累積，尚未收盤）" : ""}">${volumeBadge(vi.ratio, vi.live)}</span>`]);
     }
   }
+  // 即時量比 (Adam 2026-07-23): 累積量÷(5日均量×已開盤時間比例) — 盤中任一時刻
+  // 1×=步調正常, 補「量比」早盤結構性偏低的盲點。收盤後=全日量/5日均量。
+  const rt = realtimeVolInfo(item);
+  if (rt && rt.ratio != null && isFinite(rt.ratio)) {
+    const meta = rt.live
+      ? `已開盤${Math.round(rt.elapsed)}分・相對5日步調`
+      : `收盤全日・相對5日均量${rt.asofBar ? "・" + rt.asofBar.slice(5).replace("-", "/") : ""}`;
+    metrics.push(["⏱️ 即時量比", `<span title="今日累積量÷(近5個交易日均量×已開盤時間比例)，盤中 1×=正常步調">${volumeBadge(rt.ratio, rt.live, 2)}</span> <span class="sr-meta">${meta}</span>`]);
+  }
   // 空單比例 (Adam 2026-07-23): 美股=FINRA 申報空單佔流通股 (雙週更, as-of 必show,
   // 附回補天數+較上月增減); 台股=(融券+借券賣出餘額)/發行股數 (每日盤後, 附兩本張數)。
   // ETF/指數無資料誠實不顯示。
@@ -1331,19 +1400,28 @@ function pullbackCardHtml(snapshot, tab) {
     </div>`;
 }
 
-// ========== 成交量/量比排行榜 (Adam 2026-07-23, 前 10 名, 跟分頁走) ==========
-// 與卡片 📊/量比 同源 (volumeInfo): 盤中=今日累積量(證交所/Yahoo relay), 收盤=最近
-// 交易日量; 量比 vs 20日均量 (v-tail 缺時退回3個月均量)。live tick 重繪 → 盤中會動。
+// ========== 成交量/量比/即時量比排行榜 (Adam 2026-07-23, 前 10 名, 跟分頁走) ==========
+// 與卡片 📊/量比/⏱️ 同源 (volumeInfo / realtimeVolInfo): 盤中=今日累積量(證交所/Yahoo
+// relay), 收盤=最近交易日量; 量比 vs 20日均量; 即時量比=按開盤時間折算 vs 5日步調。
+// live tick 重繪 → 盤中會動。
 function volumeBoardEntries(snapshot, tab, kind) {
   const bucket = (snapshot && snapshot[tab]) || [];
   const out = [];
   for (const item of bucket) {
     if (item.status === "error") continue;
-    const vi = volumeInfo(item);
-    if (!vi) continue;
-    const val = kind === "ratio" ? vi.ratio : vi.vol;
+    let val, live;
+    if (kind === "rt") {
+      const rt = realtimeVolInfo(item);
+      if (!rt) continue;
+      val = rt.ratio; live = rt.live;
+    } else {
+      const vi = volumeInfo(item);
+      if (!vi) continue;
+      val = kind === "ratio" ? vi.ratio : vi.vol;
+      live = vi.live;
+    }
     if (val == null || !isFinite(val)) continue;
-    out.push({ name: item.name || item.id, id: item.id, tab, val, live: vi.live, item });
+    out.push({ name: item.name || item.id, id: item.id, tab, val, live, item });
   }
   out.sort((a, b) => b.val - a.val);                    // 大在前
   return out.slice(0, 10);
@@ -1356,8 +1434,8 @@ function volumeBoardCardHtml(snapshot, tab, kind) {
     body = `<div class="zone-empty">–</div>`;
   } else {
     body = `<div class="pullback-list">` + entries.map((e, i) => {
-      const valHtml = kind === "ratio"
-        ? volumeBadge(e.val, e.live)                     // 沿用卡片爆量/縮量晶片語言
+      const valHtml = kind === "ratio" ? volumeBadge(e.val, e.live)   // 沿用卡片爆量/縮量晶片語言
+        : kind === "rt" ? volumeBadge(e.val, e.live, 2)
         : `<span class="pullback-depth flat">${fmtVolume(e.val, e.item)}</span>`;
       return `<div class="pullback-row jump-row" data-jump-tab="${escapeHtml(e.tab)}" data-jump-id="${escapeHtml(e.id)}" title="點一下跳到這張卡">
         <span class="pullback-rank">${i + 1}</span>
@@ -1367,8 +1445,10 @@ function volumeBoardCardHtml(snapshot, tab, kind) {
     }).join("") + `</div>`;
   }
   const mkt = MARKET_TAB_LABEL[tab] || "";
-  const title = kind === "ratio" ? "⚡ 量比排行" : "📊 成交量排行";
-  const sub = kind === "ratio" ? "相對 20 日均量的倍數 · 前 10 名" : "盤中為今日累積量 · 前 10 名";
+  const title = kind === "ratio" ? "⚡ 量比排行" : kind === "rt" ? "⏱️ 即時量比排行" : "📊 成交量排行";
+  const sub = kind === "ratio" ? "相對 20 日均量的倍數 · 前 10 名"
+    : kind === "rt" ? "依開盤時間折算 · 1×=5日正常步調 · 前 10 名"
+    : "盤中為今日累積量 · 前 10 名";
   return `
     <div class="summary-card pullback-card">
       <div class="summary-label">${title} <span class="summary-label-mkt">${mkt}</span></div>
@@ -1387,10 +1467,11 @@ function renderSummary(summary, snapshot) {
   const pullbackCard = pullbackCardHtml(snapshot, tab);
   const volBoard = volumeBoardCardHtml(snapshot, tab, "vol");       // Adam 2026-07-23
   const ratioBoard = volumeBoardCardHtml(snapshot, tab, "ratio");
+  const rtBoard = volumeBoardCardHtml(snapshot, tab, "rt");         // 即時量比 (Adam 2026-07-23)
 
   // Copilot mode: no tracked positions -> 排行榜 cards only (no empty 總市值 cards).
   if (!summary || !summary.holdings_count) {
-    el.innerHTML = `${zoneCard}${pullbackCard}${volBoard}${ratioBoard}`;
+    el.innerHTML = `${zoneCard}${pullbackCard}${volBoard}${ratioBoard}${rtBoard}`;
     return;
   }
 
@@ -1421,6 +1502,7 @@ function renderSummary(summary, snapshot) {
     ${pullbackCard}
     ${volBoard}
     ${ratioBoard}
+    ${rtBoard}
   `;
 }
 
@@ -2243,7 +2325,8 @@ function cardIdOf(card, section) {
 // 純數值排序模式 -> 方向 (-1 = 大到小 / +1 = 小到大)。圖釘在這些模式不置頂 (純 metric 勝)。
 // 2026-07-23 Adam: +fpe(預估本益比)/qoq(營收季增)/vol(成交量)/volratio(量比), 移除 eps(年EPS)
 // 2026-07-23 Adam: +short(空單比例 高→低; 美股=佔流通股, 台股=融券+借券佔發行股數)
-const METRIC_DIR = { change: -1, growth: -1, qoq: -1, pe: 1, fpe: 1, vol: -1, volratio: -1, short: -1, zone: 1, drawdown: 1 };
+// 2026-07-23 Adam: +rtvol(即時量比 高→低 — 按開盤時間折算, 與卡片 ⏱️ 同源)
+const METRIC_DIR = { change: -1, growth: -1, qoq: -1, pe: 1, fpe: 1, vol: -1, volratio: -1, rtvol: -1, short: -1, zone: 1, drawdown: 1 };
 
 function sortMetric(item, mode) {
   const d = (item && item.data) || {};
@@ -2266,6 +2349,10 @@ function sortMetric(item, mode) {
   if (mode === "volratio") {                                                       // 量比 高->低 (與卡片量比同源)
     const vi = volumeInfo(item);
     return vi && vi.ratio != null && isFinite(vi.ratio) ? vi.ratio : -Infinity;
+  }
+  if (mode === "rtvol") {                                                          // 即時量比 高->低 (與卡片 ⏱️ 同源)
+    const rt = realtimeVolInfo(item);
+    return rt && rt.ratio != null && isFinite(rt.ratio) ? rt.ratio : -Infinity;
   }
   if (mode === "short") return d.short_pct == null ? -Infinity : d.short_pct;      // 空單比例 高->低, 無資料->最後
   if (mode === "zone") {                                                           // 距進場區 近->遠
