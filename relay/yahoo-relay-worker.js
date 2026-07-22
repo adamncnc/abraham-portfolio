@@ -138,7 +138,18 @@ async function fetchOne(symbol) {
       const prev = m.chartPreviousClose ?? m.previousClose ?? null;
       const change = price != null && prev != null ? price - prev : null;  // vs previous close (pre/post shown as move vs 昨收)
       const changePct = change != null && prev ? (change / prev) * 100 : null;
-      return { ok: true, price, prevClose: prev, change, changePct, session, asOf: session === "regular" ? rmt : lastBarT, intraday };
+      // 當日累積成交量 (shares): prefer meta.regularMarketVolume; fall back to summing the
+      // chart bars' volume (includePrePost → may include a little extended-hours volume,
+      // acceptable for an intraday 「今日量」 readout — frontend labels it 盤中累積).
+      let dayVolume = Number.isFinite(m.regularMarketVolume) ? m.regularMarketVolume : null;
+      if (dayVolume == null) {
+        const vols = (res.indicators && res.indicators.quote && res.indicators.quote[0] &&
+          res.indicators.quote[0].volume) || [];
+        let sum = 0, seen = false;
+        for (const vv of vols) { if (vv != null && Number.isFinite(vv)) { sum += vv; seen = true; } }
+        dayVolume = seen ? sum : null;
+      }
+      return { ok: true, price, prevClose: prev, change, changePct, session, asOf: session === "regular" ? rmt : lastBarT, intraday, dayVolume };
     } catch (e) {
       lastErr = String(e);
     }
@@ -213,7 +224,9 @@ async function fetchMisBatch(twSymbols) {
       // fresh (<5min) = live trading; older-but-same-session = the official closing print →
       // frontend labels "closed" as 收盤 (not 慢N分). (Adam 2026-07-06: 收盤後別假裝慢N分)
       const session = nowS - asOf <= 300 ? "regular" : "closed";
-      out[yf] = { price, prevClose: misNum(a.y), asOf, session };
+      // a.v = 當日累積成交量 (張, exchange-official) → ×1000 = shares, matching yfinance units.
+      const volLots = misNum(a.v);
+      out[yf] = { price, prevClose: misNum(a.y), asOf, session, dayVolume: volLots != null ? Math.round(volLots * 1000) : null };
     }
   } catch (e) { /* MIS unreachable → caller keeps the Yahoo quote (honest-but-delayed) */ }
   return out;
@@ -280,6 +293,7 @@ export default {
           session: m.session || "regular",   // "closed" post-13:30 → frontend shows 🕒 收盤, not 慢N分
           asOf: m.asOf,        // MIS quote time (~seconds old live / 13:30 close) → labels the price's REAL time
           intraday,
+          dayVolume: m.dayVolume != null ? m.dayVolume : (base.dayVolume ?? null),  // 證交所當日累積量 (shares); Yahoo fallback
           src: "twse-mis",     // provenance (debugging)
         };
       }

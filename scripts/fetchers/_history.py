@@ -37,7 +37,13 @@ def _sanitize_close(value: Any) -> float | None:
     return round(fvalue, 4)
 
 
-def _serialize(df, ts_format: str) -> list[dict]:
+def _serialize(df, ts_format: str, vol_tail: int = 0) -> list[dict]:
+    """Serialize bars to the compact `[{t, c}]` shape.
+
+    vol_tail > 0 attaches `v` (share volume, int) to the LAST vol_tail bars only —
+    enough for the dashboard's 量比 (20日均量) and 3M/6M volume bars without
+    bloating the 10-year daily series (66 symbols × full history would add ~1MB).
+    """
     if df is None or df.empty:
         return []
     out: list[dict] = []
@@ -49,7 +55,18 @@ def _serialize(df, ts_format: str) -> list[dict]:
             t = ts.strftime(ts_format)
         except Exception:
             t = str(ts)
-        out.append({"t": t, "c": close})
+        out.append({"t": t, "c": close, "_vol": row.get("Volume")})
+    # Attach v to the tail; strip the working key everywhere else.
+    cut = len(out) - vol_tail
+    for i, bar in enumerate(out):
+        vol = bar.pop("_vol", None)
+        if vol_tail and i >= cut:
+            try:
+                fvol = float(vol)
+                if not (math.isnan(fvol) or math.isinf(fvol) or fvol < 0):
+                    bar["v"] = int(fvol)
+            except (TypeError, ValueError):
+                pass
     return out
 
 
@@ -85,7 +102,8 @@ def fetch_history(symbol: str) -> dict:
     return {
         "intraday": _serialize(intraday_df, "%Y-%m-%dT%H:%M"),
         "intraday_mid": _serialize(mid_df, "%Y-%m-%dT%H:%M"),
-        "daily": _serialize(daily_df, "%Y-%m-%d"),
+        # vol_tail=190 covers the 6M scope's 180-bar slice + the 20日均量 window.
+        "daily": _serialize(daily_df, "%Y-%m-%d", vol_tail=190),
     }
 
 

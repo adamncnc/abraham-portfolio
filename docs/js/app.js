@@ -68,6 +68,12 @@ const CARD_HISTORY = new Map();
 // Entry-zone (進場區) per canvas id: { lo, hi }. Drawn as overlay lines on the
 // trend chart so Adam sees current price vs the pre-set 進場上限/下限.
 const CARD_META = new Map();
+// Which MARKET tab (tw/us/idx) the summary cards follow (Adam 2026-07-22: 進場區內/
+// 回檔排行榜 跟著分頁走 — 台股分頁只看台股). Sim/pos tabs keep the last market view.
+let ACTIVE_MARKET_TAB = "tw";
+const MARKET_TAB_LABEL = { tw: "🇹🇼 台股", us: "🇺🇸 美股", idx: "📊 指數" };
+// Search index over all market-tab cards: [{id, name, symbol, tab, hay}] (Adam 2026-07-22).
+let SEARCH_INDEX = [];
 
 // ============================================================================
 // 漲紅跌綠 (台股慣例) — SINGLE SOURCE OF TRUTH for up/down colours.
@@ -444,7 +450,39 @@ function renderChart(canvasId, scope) {
   }
   const pad = (yMax - yMin) * 0.06 || 1;
 
+  // 量能柱 (Adam 2026-07-22): 3M/6M scopes use daily bars carrying the v-tail →
+  // draw bottom-quarter volume bars (紅=漲日/綠=跌日, 漲紅跌綠鐵則; 透明度低不搶價格線).
+  // Coverage guard: only when ≥50% of visible bars have v (partial tails look broken).
+  let volTip = null, volMax = 0;
+  if (scope === "3m" || scope === "6m") {
+    const vols = points.map((p) => (p && p.v != null ? p.v : null));
+    const have = vols.filter((v) => v != null);
+    if (have.length >= Math.max(10, points.length * 0.5)) {
+      volMax = Math.max(...have);
+      if (volMax > 0) {
+        volTip = vols;
+        const volColors = vols.map((v, i) => {
+          if (v == null) return "rgba(0,0,0,0)";
+          const up = i > 0 && closes[i] != null && closes[i - 1] != null ? closes[i] >= closes[i - 1] : true;
+          return up ? "rgba(248, 113, 113, 0.32)" : "rgba(74, 222, 128, 0.32)";
+        });
+        datasets.push({
+          type: "bar",
+          label: "量",
+          data: vols,
+          backgroundColor: volColors,
+          borderWidth: 0,
+          yAxisID: "yv",
+          barPercentage: 1.0,
+          categoryPercentage: 0.85,
+          order: 3,             // higher order → drawn beneath the price line
+        });
+      }
+    }
+  }
+
   const currency = (CARD_META.get(canvasId) || {}).currency || "USD";
+  const twLotsChart = String(cardType).startsWith("tw_");
   const el = document.getElementById(canvasId);
   const chart = new Chart(el, {
     type: "line",
@@ -473,12 +511,19 @@ function renderChart(canvasId, scope) {
           callbacks: {
             title: (items) => fmtChartTs(items[0]?.label),
             label: (ctx) => `價格 ${fmtCurrency(ctx.parsed.y, currency, 2)}`,
+            afterBody: (items) => {
+              if (!volTip || !items.length) return;
+              const v = volTip[items[0].dataIndex];
+              return v != null ? `量 ${fmtVolumeByType(v, twLotsChart)}` : undefined;
+            },
           },
         },
       },
       scales: {
         x: { display: false },
         y: { display: false, min: yMin - pad, max: yMax + pad },
+        // Hidden volume axis: max ×4 keeps the bars in the bottom quarter of the chart.
+        ...(volTip ? { yv: { display: false, min: 0, max: volMax * 4.2 } } : {}),
       },
       animation: { duration: 200 },
     },
@@ -523,6 +568,12 @@ function initializeCharts(items, section) {
 document.addEventListener("click", (e) => {
   const tabBtn = e.target.closest(".market-tab");
   if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
+  // 進場區內 / 回檔排行榜 rows + search results → jump to that card (Adam 2026-07-22).
+  const jr = e.target.closest(".jump-row");
+  if (jr && jr.dataset.jumpTab && jr.dataset.jumpId) {
+    jumpToCard(jr.dataset.jumpTab, jr.dataset.jumpId);
+    return;
+  }
   const rb = e.target.closest(".card-refresh");
   if (rb) {
     refreshOneCard(rb.dataset.section, rb.dataset.cardid, rb.dataset.sym, rb);
@@ -602,6 +653,81 @@ function freshnessBadge(item) {
     return `<span class="freshness snap" title="盤後快照資料">🕒 收盤 ${s}</span>`;
   }
   return "";
+}
+
+// ========== 成交量 (Adam 2026-07-22) ==========
+// TW stocks/ETF trade in 張 (1 張 = 1000 股); yfinance/MIS-relay volumes are SHARES.
+function isTwLots(item) { return String(item.type || "").startsWith("tw_"); }
+function fmtVolumeByType(shares, twLots) {
+  if (shares == null || isNaN(shares)) return "–";
+  if (twLots) {
+    const lots = shares / 1000;
+    if (lots >= 100000) return `${fmtNum(lots / 10000, 1)}萬張`;   // 只有超大量才進萬張 (10,588 張比 1.06萬張易讀)
+    return `${fmtNum(lots, 0)} 張`;
+  }
+  const abs = Math.abs(shares);
+  if (abs >= 1e9) return `${fmtNum(shares / 1e9, 2)}B 股`;
+  if (abs >= 1e6) return `${fmtNum(shares / 1e6, 2)}M 股`;
+  if (abs >= 1e3) return `${fmtNum(shares / 1e3, 1)}K 股`;
+  return `${fmtNum(shares, 0)} 股`;
+}
+function fmtVolume(shares, item) { return fmtVolumeByType(shares, isTwLots(item)); }
+
+// Volume picture for a card, honest about WHICH session the number belongs to.
+//   live session + relay dayVolume → 今日盤中累積量, 量比 = 累積量/20日均 (ramps up intraday)
+//   otherwise → last completed session's volume from the daily series (v-tail),
+//   量比 = that bar / mean(prior ≤20 v-bars). Falls back to snapshot volume/average_volume
+//   (3-month avg) while the v-tail hasn't been fetched yet — tooltip says which basis.
+function volumeInfo(item) {
+  const data = item.data || {};
+  const daily = (data.history && data.history.daily) || [];
+  const vbars = daily.filter((b) => b && b.v != null);
+  let avg20 = null;
+  let lastBar = null;
+  if (vbars.length >= 6) {
+    lastBar = vbars[vbars.length - 1];
+    const prior = vbars.slice(Math.max(0, vbars.length - 21), vbars.length - 1);
+    if (prior.length >= 5) avg20 = prior.reduce((s, b) => s + b.v, 0) / prior.length;
+  }
+  // Relay dayVolume (證交所 MIS / Yahoo) is fresher than the snapshot's last daily bar:
+  // during the session it's 盤中累積, after close it's the official full-day volume.
+  if (item._live === true && item._dayVolume != null) {
+    const sessionLive = item._session !== "closed";
+    const ratio = avg20 ? item._dayVolume / avg20 : (data.average_volume ? item._dayVolume / data.average_volume : null);
+    return { vol: item._dayVolume, label: sessionLive ? "今日量" : "量(最近日)", live: sessionLive, ratio, basis: avg20 ? "20日均量" : "3個月均量" };
+  }
+  if (lastBar && avg20) {
+    const d = String(lastBar.t || "").slice(5).replace("-", "/");
+    return { vol: lastBar.v, label: `量(${d})`, live: false, ratio: lastBar.v / avg20, basis: "20日均量" };
+  }
+  if (data.volume != null) {
+    const ratio = data.average_volume ? data.volume / data.average_volume : null;
+    return { vol: data.volume, label: "量(前日)", live: false, ratio, basis: "3個月均量" };
+  }
+  return null;
+}
+
+function volumeBadge(ratio, live) {
+  if (ratio == null || !isFinite(ratio)) return "";
+  if (ratio >= 1.5) return `<span class="vol-chip vol-surge">爆量 ${fmtNum(ratio, 1)}×</span>`;
+  if (ratio >= 0.6 || live) return `<span class="vol-chip vol-norm">${fmtNum(ratio, 1)}×</span>`;
+  return `<span class="vol-chip vol-dry">縮量 ${fmtNum(ratio, 1)}×</span>`;
+}
+
+// ========== Jump-to-card (search + 排行榜/進場區 rows) ==========
+function jumpToCard(tab, id) {
+  activateTab(tab);
+  // Card nodes exist across tab switches (panels are display:none), but scroll after
+  // the tab paints so scrollIntoView measures the visible layout.
+  requestAnimationFrame(() => {
+    const node = document.querySelector('[data-card="' + CSS.escape(tab + "-" + id) + '"]');
+    if (!node) return;
+    node.scrollIntoView({ behavior: "smooth", block: "center" });
+    node.classList.remove("card-flash");
+    void node.offsetWidth;                 // restart the animation if re-triggered
+    node.classList.add("card-flash");
+    setTimeout(() => node.classList.remove("card-flash"), 2600);
+  });
 }
 
 // ========== Asset Card Builder ==========
@@ -770,6 +896,16 @@ function buildAssetCard(item, section) {
     const label = distFromHighLabel(data.dist_from_high_pct);
     metrics.push(["距 52W 高", `<span class="${cls2}">${fmtPct(data.dist_from_high_pct)} ${label}</span>`]);
   }
+  // 成交量 + 量比 (Adam 2026-07-22): 盤中=今日累積量(證交所/Yahoo), 收盤=最近交易日量;
+  // 量比 vs 20日均量 (v-tail 未抓到前退回 3個月均量), 爆量≥1.5× / 縮量≤0.6×.
+  const vi = volumeInfo(item);
+  if (vi && vi.vol != null) {
+    const liveTag = vi.live ? `<span class="vol-live-tag" title="盤中累積量，收盤前逐步累積屬正常">盤中累積</span> ` : "";
+    metrics.push([`📊 ${vi.label}`, `${liveTag}${fmtVolume(vi.vol, item)}`]);
+    if (vi.ratio != null && isFinite(vi.ratio)) {
+      metrics.push([`量比`, `<span title="與${vi.basis}相比${vi.live ? "（盤中累積，尚未收盤）" : ""}">${volumeBadge(vi.ratio, vi.live)}</span>`]);
+    }
+  }
   if (data.expense_ratio !== null && data.expense_ratio !== undefined) {
     metrics.push(["費用率", `${fmtNum(data.expense_ratio, 2)}%`]);
   }
@@ -856,13 +992,17 @@ function buildAssetCard(item, section) {
 // their configured entry zone [lo, hi]. Powers the top-summary 進場區內 card so
 // Adam sees at a glance which names are at actionable buy levels — none -> 無.
 // (Adam 2026-06-17: 紅圈那塊改列進入進場區的股票名單，沒有就寫「無」。)
-function entryZoneEntries(snapshot) {
+// Per-tab (Adam 2026-07-22: 台股分頁只顯示台股進場區名單, 美股分頁只顯示美股的).
+// Each entry carries its market tab + card id so the row can jump to the card.
+function entryZoneEntries(snapshot, tab) {
   const items = [
     ...((snapshot && snapshot.watchlist) || []),
     ...((snapshot && snapshot.holdings) || []),
   ];
   const out = [];
   for (const item of items) {
+    const itemTab = tabForItem(item);
+    if (tab && itemTab !== tab) continue;            // summary follows the active market tab
     const hi = item.entry_zone_hi;
     if (hi == null) continue;                        // no zone defined -> skip
     const price = item.data && item.data.price;
@@ -878,14 +1018,14 @@ function entryZoneEntries(snapshot) {
       state = "在區內";                               // within the buy zone (incl. hi-only)
       pct = null;
     }
-    out.push({ name: item.name || item.id, state, pct, distTop });
+    out.push({ name: item.name || item.id, id: item.id, tab: itemTab, state, pct, distTop });
   }
   out.sort((a, b) => a.distTop - b.distTop);          // deepest into the zone first
   return out;
 }
 
-function zoneCardHtml(snapshot) {
-  const entries = entryZoneEntries(snapshot);
+function zoneCardHtml(snapshot, tab) {
+  const entries = entryZoneEntries(snapshot, tab);
   let body;
   if (!entries.length) {
     body = `<div class="zone-empty">無</div>`;
@@ -893,33 +1033,80 @@ function zoneCardHtml(snapshot) {
     body = `<div class="zone-list">` + entries.map((e) => {
       const cls = e.state === "破底" ? "zone-below" : "zone-in";
       const tail = e.state === "破底" ? `破底 ${fmtNum(e.pct, 1)}%` : "在區內";
-      return `<div class="zone-row"><span class="zone-name">${escapeHtml(e.name)}</span><span class="${cls}">${tail}</span></div>`;
+      return `<div class="zone-row jump-row" data-jump-tab="${escapeHtml(e.tab)}" data-jump-id="${escapeHtml(e.id)}" title="點一下跳到這張卡"><span class="zone-name">${escapeHtml(e.name)}</span><span class="${cls}">${tail}</span></div>`;
     }).join("") + `</div>`;
   }
+  const mkt = MARKET_TAB_LABEL[tab] || "";
   const sub = entries.length ? `${entries.length} 檔現價落入買進區` : "目前皆在進場區之上";
   return `
-    <div class="summary-card">
-      <div class="summary-label">🎯 進場區內</div>
+    <div class="summary-card zone-card">
+      <div class="summary-label">🎯 進場區內 <span class="summary-label-mkt">${mkt}</span></div>
       ${body}
       <div class="summary-sub">${sub}</div>
     </div>`;
 }
 
+// ========== 回檔深度排行榜 (Adam 2026-07-22, 取代原「觀察清單」計數卡) ==========
+// Depth = 現價 vs 近一個月最高收盤 (Adam 指定一個月高點; close-basis, 含今日 live 價).
+// Top 10 deepest, per market tab. Rows jump to the card on click.
+function pullbackEntries(snapshot, tab) {
+  const bucket = (snapshot && snapshot[tab]) || [];
+  const out = [];
+  for (const item of bucket) {
+    if (item.status === "error") continue;
+    const data = item.data || {};
+    const price = data.price;
+    const daily = (data.history && data.history.daily) || [];
+    if (price == null || daily.length < 5) continue;   // 掛牌太新/沒價 → 不排
+    let hi = price;                                     // 今日 live 價也算候選高點
+    for (let i = Math.max(0, daily.length - 22); i < daily.length; i++) {
+      const c = daily[i] && daily[i].c;
+      if (c != null && c > hi) hi = c;
+    }
+    if (!hi) continue;
+    const depth = ((price - hi) / hi) * 100;            // ≤ 0
+    out.push({ name: item.name || item.id, id: item.id, tab, depth });
+  }
+  out.sort((a, b) => a.depth - b.depth);                // 最深(最負)在前
+  return out.slice(0, 10);
+}
+
+function pullbackCardHtml(snapshot, tab) {
+  const entries = pullbackEntries(snapshot, tab);
+  let body;
+  if (!entries.length) {
+    body = `<div class="zone-empty">–</div>`;
+  } else {
+    body = `<div class="pullback-list">` + entries.map((e, i) => {
+      const depthCls = e.depth <= -0.05 ? "down" : "flat";  // 跌 = 綠 (漲紅跌綠鐵則)
+      return `<div class="pullback-row jump-row" data-jump-tab="${escapeHtml(e.tab)}" data-jump-id="${escapeHtml(e.id)}" title="點一下跳到這張卡">
+        <span class="pullback-rank">${i + 1}</span>
+        <span class="pullback-name">${escapeHtml(e.name)}</span>
+        <span class="pullback-depth ${depthCls}">${fmtNum(e.depth, 1)}%</span>
+      </div>`;
+    }).join("") + `</div>`;
+  }
+  const mkt = MARKET_TAB_LABEL[tab] || "";
+  return `
+    <div class="summary-card pullback-card">
+      <div class="summary-label">📉 回檔深度排行 <span class="summary-label-mkt">${mkt}</span></div>
+      ${body}
+      <div class="summary-sub">距近 1 個月最高收盤的跌幅 · 前 10 名</div>
+    </div>`;
+}
+
 // ========== Portfolio Summary ==========
+// Summary cards follow the active MARKET tab (Adam 2026-07-22): 進場區內 + 回檔深度排行
+// both filter to 台股/美股/指數. The old 觀察清單 count card is retired (排行榜取代).
 function renderSummary(summary, snapshot) {
   const el = document.getElementById("portfolio-summary");
-  const zoneCard = zoneCardHtml(snapshot);
+  const tab = ACTIVE_MARKET_TAB;
+  const zoneCard = zoneCardHtml(snapshot, tab);
+  const pullbackCard = pullbackCardHtml(snapshot, tab);
 
-  // Copilot mode: no tracked positions -> show watchlist count + 進場區內 list
-  // instead of empty 總市值/總成本/損益 cards reading "–".
+  // Copilot mode: no tracked positions -> 進場區內 + 回檔排行 only (no empty 總市值 cards).
   if (!summary || !summary.holdings_count) {
-    el.innerHTML = `
-    <div class="summary-card">
-      <div class="summary-label">觀察清單</div>
-      <div class="summary-value">${summary?.watchlist_count ?? "–"}</div>
-      <div class="summary-sub">追蹤標的</div>
-    </div>
-    ${zoneCard}`;
+    el.innerHTML = `${zoneCard}${pullbackCard}`;
     return;
   }
 
@@ -946,12 +1133,8 @@ function renderSummary(summary, snapshot) {
       </div>
       <div class="summary-sub ${changeClass(pnlPct)}">${fmtPct(pnlPct)}</div>
     </div>
-    <div class="summary-card">
-      <div class="summary-label">觀察清單</div>
-      <div class="summary-value">${summary.watchlist_count}</div>
-      <div class="summary-sub">追蹤中</div>
-    </div>
     ${zoneCard}
+    ${pullbackCard}
   `;
 }
 
@@ -989,6 +1172,11 @@ function activateTab(which, doResize = true) {
   document.querySelectorAll(".market-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === which));
   document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
   lsSet("abraham.activeTab", which);
+  // Summary cards (進場區內/回檔排行) follow the market tab; sim/pos keep the last market view.
+  if ((which === "tw" || which === "us" || which === "idx") && which !== ACTIVE_MARKET_TAB) {
+    ACTIVE_MARKET_TAB = which;
+    if (CURRENT_SNAPSHOT) renderSummary(CURRENT_SNAPSHOT.portfolio_summary, CURRENT_SNAPSHOT);
+  }
   if (doResize) {
     CHART_INSTANCES.forEach((chart, cid) => {
       if (cid.startsWith("chart-" + which + "-")) { try { chart.resize(); } catch (e) { /* ignore */ } }
@@ -1030,6 +1218,7 @@ function renderSnapshot(snapshot, opts = {}) {
 
   // Bucket every tracked item into the 3 market tabs (台股/美股/指數).
   bucketSnapshot(snapshot);
+  buildSearchIndex(snapshot);
 
   // Counts — header pill = grand total; per-tab counts on tab buttons + headers.
   const total = snapshot.tw.length + snapshot.us.length + snapshot.idx.length;
@@ -1582,6 +1771,7 @@ async function liveRefresh() {
         if (q.intraday && q.intraday.length) {
           next.data.history = mergeLiveIntoHistory(next.data.history, q);
         }
+        if (q.dayVolume != null) next._dayVolume = q.dayVolume;  // 今日累積量 (證交所/Yahoo)
         next._live = true;        // fresh live quote applied → green per-card badge
         next._liveTs = liveTs;    // when WE fetched (for delay calc)
         next._quoteTs = q.asOf ? q.asOf * 1000 : null;  // when the PRICE is actually from (Adam 2026-07-06)
@@ -1641,6 +1831,7 @@ async function refreshOneCard(section, id, symbol, btn) {
     if (q.change != null) item.data.change = q.change;
     if (q.changePct != null) item.data.change_pct = q.changePct;
     if (q.intraday && q.intraday.length) item.data.history = mergeLiveIntoHistory(item.data.history, q);
+    if (q.dayVolume != null) item._dayVolume = q.dayVolume;  // 今日累積量 (證交所/Yahoo)
     item.status = "ok";
     item._live = true;             // single-card live quote applied → green badge
     item._liveTs = Date.now();
@@ -1872,6 +2063,74 @@ async function pushPrefs() {
     });
   } catch (e) { /* offline / not set up → the next change re-syncs */ }
 }
+
+// ========== 搜尋欄 (Adam 2026-07-22: 打關鍵字直接跳到那張卡) ==========
+// Index = every card in the 3 market tabs; haystack covers 名稱/代號/主題/筆記.
+function buildSearchIndex(snapshot) {
+  const out = [];
+  for (const tab of ["tw", "us", "idx"]) {
+    for (const item of (snapshot[tab] || [])) {
+      out.push({
+        id: String(item.id),
+        name: item.name || item.id,
+        symbol: item.symbol || "",
+        tab,
+        hay: [item.name, item.symbol, item.id, item.theme, item.notes]
+          .filter(Boolean).join(" ").toLowerCase(),
+      });
+    }
+  }
+  SEARCH_INDEX = out;
+}
+
+function searchMatches(qStr) {
+  const q = qStr.trim().toLowerCase();
+  if (!q) return [];
+  const starts = [], contains = [];
+  for (const e of SEARCH_INDEX) {
+    const nameL = e.name.toLowerCase(), symL = e.symbol.toLowerCase();
+    if (nameL.startsWith(q) || symL.startsWith(q)) starts.push(e);
+    else if (e.hay.includes(q)) contains.push(e);
+  }
+  return [...starts, ...contains].slice(0, 8);
+}
+
+(function setupSearch() {
+  const input = document.getElementById("search-input");
+  const drop = document.getElementById("search-drop");
+  if (!input || !drop) return;
+  let sel = -1;      // keyboard-highlighted row index
+  let rows = [];     // current match entries
+
+  const close = () => { drop.classList.remove("open"); drop.innerHTML = ""; sel = -1; rows = []; };
+  const jump = (e) => { if (!e) return; close(); input.blur(); jumpToCard(e.tab, e.id); };
+
+  const render = () => {
+    if (!rows.length) { close(); return; }
+    drop.innerHTML = rows.map((e, i) => `
+      <div class="search-row${i === sel ? " sel" : ""}" data-i="${i}">
+        <span class="search-row-name">${escapeHtml(e.name)}</span>
+        <span class="search-row-sym">${escapeHtml(e.symbol)}</span>
+        <span class="search-row-tab">${MARKET_TAB_LABEL[e.tab] || ""}</span>
+      </div>`).join("");
+    drop.classList.add("open");
+  };
+
+  input.addEventListener("input", () => { rows = searchMatches(input.value); sel = rows.length ? 0 : -1; render(); });
+  input.addEventListener("focus", () => { if (input.value.trim()) { rows = searchMatches(input.value); sel = rows.length ? 0 : -1; render(); } });
+  input.addEventListener("keydown", (ev) => {
+    if (ev.key === "Enter") { ev.preventDefault(); jump(rows[Math.max(0, sel)] || rows[0]); }
+    else if (ev.key === "ArrowDown") { ev.preventDefault(); if (rows.length) { sel = (sel + 1) % rows.length; render(); } }
+    else if (ev.key === "ArrowUp") { ev.preventDefault(); if (rows.length) { sel = (sel - 1 + rows.length) % rows.length; render(); } }
+    else if (ev.key === "Escape") { close(); input.blur(); }
+  });
+  // mousedown (not click) so the row fires before the input's blur clears the dropdown.
+  drop.addEventListener("mousedown", (ev) => {
+    const row = ev.target.closest(".search-row");
+    if (row) { ev.preventDefault(); jump(rows[Number(row.dataset.i)]); }
+  });
+  input.addEventListener("blur", () => setTimeout(close, 150));
+})();
 
 // Boot: pull the unified settings from the relay KV BEFORE first paint so pinned /
 // custom order / sort mode / active tab match on every device. If the relay or its KV

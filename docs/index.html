@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abraham Portfolio Dashboard</title>
-<link rel="stylesheet" href="css/style.css?v=20260713">
+<link rel="stylesheet" href="css/style.css?v=20260722">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
@@ -29,6 +29,15 @@
 <section class="portfolio-summary" id="portfolio-summary">
   <!-- rendered by app.js -->
 </section>
+
+<!-- 搜尋欄 (Adam 2026-07-22: 打清單關鍵字自動跳到那張卡片；名單變多方便找) -->
+<div class="toolbar" id="toolbar">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input id="search-input" type="search" placeholder="搜尋名稱 / 代號 / 主題…" autocomplete="off" spellcheck="false">
+    <div class="search-drop" id="search-drop"></div>
+  </div>
+</div>
 
 <!-- Market tabs: 台股 / 美股 / 指數 (Adam 2026-06-17: 上方三個標籤頁，各檔分門別類；黃金暫放指數頁) -->
 <nav class="market-tabs" id="market-tabs">
