@@ -22,8 +22,8 @@
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 185.4,
-        "ratchet_asof": "2026-07-22",
+        "ratchet_value": 178.15,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 205.0,
         "px": 211.5,
         "px_date": "2026-07-22"
@@ -43,8 +43,6 @@
         "fill_ref_close": 286.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 224.5,
-        "ratchet_asof": "2026-07-22",
         "px": 295.0,
         "px_date": "2026-07-22"
       },
@@ -63,8 +61,6 @@
         "fill_ref_close": 2400.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 2193.75,
-        "ratchet_asof": "2026-07-22",
         "px": 2400.0,
         "px_date": "2026-07-22"
       }
@@ -351,6 +347,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.45000076293945,
-  "generated_at": "2026-07-22T06:06:43.575670+00:00"
+  "usdtwd": 32.42499923706055,
+  "generated_at": "2026-07-22T15:32:25.615045+00:00"
 }

@@ -25,8 +25,8 @@
         "ratchet_armed": true,
         "ratchet_value": 235.1089,
         "ratchet_asof": "2026-07-22",
-        "px": 262.22,
-        "px_date": "2026-07-21"
+        "px": 270.8,
+        "px_date": "2026-07-22"
       },
       {
         "ticker": "LRCX",
@@ -45,8 +45,8 @@
         "ratchet_armed": false,
         "ratchet_value": 248.064,
         "ratchet_asof": "2026-07-22",
-        "px": 322.0,
-        "px_date": "2026-07-21"
+        "px": 320.3,
+        "px_date": "2026-07-22"
       },
       {
         "ticker": "KLAC",
@@ -65,8 +65,8 @@
         "ratchet_armed": true,
         "ratchet_value": 159.6505,
         "ratchet_asof": "2026-07-22",
-        "px": 217.56,
-        "px_date": "2026-07-21"
+        "px": 217.185,
+        "px_date": "2026-07-22"
       }
     ],
     "pending_orders": [],
@@ -523,6 +523,6 @@
       "realized_pnl_twd": -20011.0
     }
   ],
-  "usdtwd": 32.45000076293945,
-  "generated_at": "2026-07-22T06:06:43.580681+00:00"
+  "usdtwd": 32.42499923706055,
+  "generated_at": "2026-07-22T15:32:25.619046+00:00"
 }

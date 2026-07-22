@@ -721,6 +721,17 @@
       "notes": "代工轉機+美政府10%持股; 暫行區 88-98, 7/23 財報後必重畫",
       "entry_zone_lo": 88,
       "entry_zone_hi": 98
+    },
+    {
+      "id": "cohr",
+      "type": "us_stock",
+      "symbol": "COHR",
+      "name": "Coherent",
+      "currency": "USD",
+      "theme": "光通訊/光子學垂直整合大廠(NYSE USD, InP材",
+      "notes": "光通訊/光子學垂直整合大廠(NYSE USD, InP材料→雷射晶片→光收發模組); 輝達2026/3入股$2B+多年採購框架到2030=賣鏟背書; DC&Comms佔75%年增+40%, 工業25%衰退中; 7/22深調後Adam指示納入(msg 1529510317, 台帳ast-0067): 定調=生意實質轉好(連5季營收加速+毛利率35.2→37.7%連5升)但股價已先付錢(fwd PE38x/EV-EBITDA48x/一年+222%/距ATH440 -28%/破50",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     }
   ]
 }

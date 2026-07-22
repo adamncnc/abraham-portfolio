@@ -25,8 +25,8 @@
         "ratchet_armed": true,
         "ratchet_value": 1524.589,
         "ratchet_asof": "2026-07-22",
-        "px": 1801.51,
-        "px_date": "2026-07-21"
+        "px": 1813.025,
+        "px_date": "2026-07-22"
       },
       {
         "ticker": "KLAC",
@@ -45,8 +45,8 @@
         "ratchet_armed": true,
         "ratchet_value": 157.398,
         "ratchet_asof": "2026-07-22",
-        "px": 217.56,
-        "px_date": "2026-07-21"
+        "px": 217.185,
+        "px_date": "2026-07-22"
       }
     ],
     "pending_orders": [],
@@ -360,6 +360,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.45000076293945,
-  "generated_at": "2026-07-22T06:06:43.583680+00:00"
+  "usdtwd": 32.42499923706055,
+  "generated_at": "2026-07-22T15:32:25.622046+00:00"
 }
