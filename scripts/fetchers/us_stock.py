@@ -77,6 +77,18 @@ def fetch_us_stock(symbol: str) -> dict:
     _rg = _sanitize(info.get("revenueGrowth"))
     rev_yoy_pct = round(_rg * 100, 1) if _rg is not None else None
 
+    # 空單比例 (Adam 2026-07-23): FINRA 雙週申報經 Yahoo 轉載 — 佔流通股比例。
+    # dateShortInterest=申報基準日 (落後約兩週屬資料本質, as-of 必隨數字顯示)。
+    # ETF/指數通常無此數據 → None, 前端誠實隱藏。
+    _spf = _sanitize(info.get("shortPercentOfFloat"))
+    _short_ts = _sanitize(info.get("dateShortInterest"))
+    short_asof = None
+    if _short_ts:
+        try:
+            short_asof = datetime.fromtimestamp(_short_ts, tz=timezone.utc).strftime("%Y-%m-%d")
+        except Exception:  # noqa: BLE001
+            short_asof = None
+
     return {
         "symbol": symbol,
         "quote_type": info.get("quoteType"),
@@ -102,6 +114,12 @@ def fetch_us_stock(symbol: str) -> dict:
         "two_hundred_day_avg": _sanitize(info.get("twoHundredDayAverage")),
         "volume": _sanitize(info.get("regularMarketVolume")),
         "average_volume": _sanitize(info.get("averageVolume")),
+        "short_pct": round(_spf * 100, 2) if _spf is not None else None,
+        "short_days_to_cover": _sanitize(info.get("shortRatio")),
+        "short_shares": _sanitize(info.get("sharesShort")),
+        "short_shares_prior": _sanitize(info.get("sharesShortPriorMonth")),
+        "short_asof": short_asof,
+        "short_basis": "float" if _spf is not None else None,
         "net_assets": net_assets,
         "dividend_yield_pct": _sanitize(dividend_yield),
         "trailing_pe": _sanitize(info.get("trailingPE")),

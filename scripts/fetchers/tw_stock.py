@@ -79,6 +79,39 @@ def _tw_revenue_growth(symbol: str):
         return empty
 
 
+def _tw_short_balance(symbol: str):
+    """台股空單: FinMind TaiwanDailyShortSaleBalances (anonymous, 同月營收管道)。
+    融券餘額 (Margin, 散戶信用) + 借券賣出餘額 (SBL, 法人) — 台股沒有美式 short
+    interest 申報, 這兩本每日盤後公布的餘額就是可見空單全貌。單位=股。
+    抓近 14 天取最後一筆 (T 日資料晚間才出 → 正常落後 0-1 交易日, asof=資料日)。
+    任何失敗 graceful 回全 None dict, 不影響主 fetch (同 _tw_revenue_growth 模式)。"""
+    empty = {"margin": None, "sbl": None, "asof": None}
+    code = symbol.split(".")[0]
+    try:
+        import requests
+        r = requests.get(
+            "https://api.finmindtrade.com/api/v4/data",
+            params={
+                "dataset": "TaiwanDailyShortSaleBalances",
+                "data_id": code,
+                "start_date": (datetime.now() - timedelta(days=14)).strftime("%Y-%m-%d"),
+            },
+            headers={"User-Agent": "Mozilla/5.0"}, timeout=20,
+        )
+        j = r.json()
+        rows = j.get("data") or []
+        if j.get("msg") != "success" or not rows:
+            return empty
+        row = rows[-1]
+        return {
+            "margin": row.get("MarginShortSalesCurrentDayBalance"),
+            "sbl": row.get("SBLShortSalesCurrentDayBalance"),
+            "asof": row.get("date"),
+        }
+    except Exception:  # noqa: BLE001
+        return empty
+
+
 def fetch_tw_stock(symbol: str) -> dict:
     ticker = yf.Ticker(symbol)
     info = ticker.info or {}
@@ -129,6 +162,18 @@ def fetch_tw_stock(symbol: str) -> dict:
 
     tw_rev = _tw_revenue_growth(symbol)
 
+    # 空單比例 (Adam 2026-07-23): (融券+借券賣出餘額)/發行股數。發行股數用 Yahoo
+    # sharesOutstanding; 拿不到分母就整組 None (寧可不顯示也不給錯基準的比例)。
+    tw_short = _tw_short_balance(symbol)
+    shares_out = _sanitize(info.get("sharesOutstanding"))
+    short_total = None
+    if tw_short["margin"] is not None or tw_short["sbl"] is not None:
+        short_total = (tw_short["margin"] or 0) + (tw_short["sbl"] or 0)
+    short_pct = (
+        round(short_total / shares_out * 100, 2)
+        if (short_total is not None and shares_out) else None
+    )
+
     return {
         "symbol": symbol,
         "quote_type": info.get("quoteType"),
@@ -150,6 +195,11 @@ def fetch_tw_stock(symbol: str) -> dict:
         "two_hundred_day_avg": _sanitize(info.get("twoHundredDayAverage")),
         "volume": _sanitize(info.get("regularMarketVolume")),
         "average_volume": _sanitize(info.get("averageVolume")),
+        "short_pct": short_pct,
+        "short_margin_shares": tw_short["margin"],
+        "short_sbl_shares": tw_short["sbl"],
+        "short_asof": tw_short["asof"],
+        "short_basis": "outstanding" if short_pct is not None else None,
         "net_assets": net_assets,
         "dividend_yield_pct": _sanitize(dividend_yield),
         "trailing_pe": _sanitize(info.get("trailingPE")),
