@@ -1393,6 +1393,10 @@ function entryZoneEntries(snapshot, tab) {
   return out;
 }
 
+// 總覽卡拖曳 (Adam 2026-07-23「排行榜/進場區內卡片也做成可以拖曳更動位置」):
+// 每張 summary card 帶 data-sum key + ⠿ handle, 順序存 abraham.sumorder (prefs-synced)。
+const SUMMARY_DRAG_HANDLE = '<span class="drag-handle" title="按住拖拉排序">⠿</span>';
+
 function zoneCardHtml(snapshot, tab) {
   const entries = entryZoneEntries(snapshot, tab);
   let body;
@@ -1408,8 +1412,8 @@ function zoneCardHtml(snapshot, tab) {
   const mkt = MARKET_TAB_LABEL[tab] || "";
   const sub = entries.length ? `${entries.length} 檔現價落入買進區` : "目前皆在進場區之上";
   return `
-    <div class="summary-card zone-card">
-      <div class="summary-label">🎯 進場區內 <span class="summary-label-mkt">${mkt}</span></div>
+    <div class="summary-card zone-card" data-sum="zone">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}🎯 進場區內 <span class="summary-label-mkt">${mkt}</span></div>
       ${body}
       <div class="summary-sub">${sub}</div>
     </div>`;
@@ -1457,8 +1461,8 @@ function pullbackCardHtml(snapshot, tab) {
   }
   const mkt = MARKET_TAB_LABEL[tab] || "";
   return `
-    <div class="summary-card pullback-card">
-      <div class="summary-label">📉 回檔深度排行 <span class="summary-label-mkt">${mkt}</span></div>
+    <div class="summary-card pullback-card" data-sum="pullback">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}📉 回檔深度排行 <span class="summary-label-mkt">${mkt}</span></div>
       ${body}
       <div class="summary-sub">距近 1 個月最高收盤的跌幅 · 前 10 名</div>
     </div>`;
@@ -1521,8 +1525,8 @@ function volumeBoardCardHtml(snapshot, tab, kind) {
     : kind === "burst" ? "近10分鐘 vs 正常步調 · 盤中限定 · ≥3×=突波"
     : "盤中為今日累積量 · 前 10 名";
   return `
-    <div class="summary-card pullback-card">
-      <div class="summary-label">${title} <span class="summary-label-mkt">${mkt}</span></div>
+    <div class="summary-card pullback-card" data-sum="${kind}">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}${title} <span class="summary-label-mkt">${mkt}</span></div>
       ${body}
       <div class="summary-sub">${sub}</div>
     </div>`;
@@ -1534,16 +1538,20 @@ function volumeBoardCardHtml(snapshot, tab, kind) {
 function renderSummary(summary, snapshot) {
   const el = document.getElementById("portfolio-summary");
   const tab = ACTIVE_MARKET_TAB;
-  const zoneCard = zoneCardHtml(snapshot, tab);
-  const pullbackCard = pullbackCardHtml(snapshot, tab);
-  const volBoard = volumeBoardCardHtml(snapshot, tab, "vol");       // Adam 2026-07-23
-  const ratioBoard = volumeBoardCardHtml(snapshot, tab, "ratio");
-  const rtBoard = volumeBoardCardHtml(snapshot, tab, "rt");         // 即時量比 (Adam 2026-07-23)
-  const burstBoard = volumeBoardCardHtml(snapshot, tab, "burst");   // 突波偵測 (Adam 2026-07-23「加」)
+  // Keyed cards (Adam 2026-07-23 拖曳): default order = 陳列順序; saved abraham.sumorder wins.
+  const boards = [
+    { k: "zone", html: zoneCardHtml(snapshot, tab) },
+    { k: "pullback", html: pullbackCardHtml(snapshot, tab) },
+    { k: "vol", html: volumeBoardCardHtml(snapshot, tab, "vol") },       // Adam 2026-07-23
+    { k: "ratio", html: volumeBoardCardHtml(snapshot, tab, "ratio") },
+    { k: "rt", html: volumeBoardCardHtml(snapshot, tab, "rt") },         // 即時量比 (Adam 2026-07-23)
+    { k: "burst", html: volumeBoardCardHtml(snapshot, tab, "burst") },   // 突波偵測 (Adam 2026-07-23「加」)
+  ];
 
   // Copilot mode: no tracked positions -> 排行榜 cards only (no empty 總市值 cards).
   if (!summary || !summary.holdings_count) {
-    el.innerHTML = `${zoneCard}${pullbackCard}${volBoard}${ratioBoard}${rtBoard}${burstBoard}`;
+    el.innerHTML = orderSummaryCards(boards).map((c) => c.html).join("");
+    initSummaryDrag(el);
     return;
   }
 
@@ -1552,31 +1560,31 @@ function renderSummary(summary, snapshot) {
   const pnl = summary.total_unrealized_pnl_usd_equiv;
   const pnlPct = summary.total_unrealized_pnl_pct;
 
-  el.innerHTML = `
-    <div class="summary-card">
-      <div class="summary-label">總市值</div>
+  const cards = [
+    { k: "mv", html: `
+    <div class="summary-card" data-sum="mv">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}總市值</div>
       <div class="summary-value">${mv ? fmtCompactCurrency(mv, "USD") : "–"}</div>
       <div class="summary-sub">持倉 ${summary.holdings_count} 檔</div>
-    </div>
-    <div class="summary-card">
-      <div class="summary-label">總成本</div>
+    </div>` },
+    { k: "cost", html: `
+    <div class="summary-card" data-sum="cost">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}總成本</div>
       <div class="summary-value">${cost ? fmtCompactCurrency(cost, "USD") : "–"}</div>
       <div class="summary-sub">已投入資金</div>
-    </div>
-    <div class="summary-card">
-      <div class="summary-label">未實現損益</div>
+    </div>` },
+    { k: "pnl", html: `
+    <div class="summary-card" data-sum="pnl">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}未實現損益</div>
       <div class="summary-value ${changeClass(pnl)}">
         ${pnl !== null && pnl !== undefined ? fmtCompactCurrency(pnl, "USD") : "–"}
       </div>
       <div class="summary-sub ${changeClass(pnlPct)}">${fmtPct(pnlPct)}</div>
-    </div>
-    ${zoneCard}
-    ${pullbackCard}
-    ${volBoard}
-    ${ratioBoard}
-    ${rtBoard}
-    ${burstBoard}
-  `;
+    </div>` },
+  ].concat(boards);
+
+  el.innerHTML = orderSummaryCards(cards).map((c) => c.html).join("");
+  initSummaryDrag(el);
 }
 
 // ========== Market tabs (台股 / 美股 / 指數) ==========
@@ -2373,6 +2381,38 @@ async function refreshOneCard(section, id, symbol, btn) {
 // DOM nodes are re-appended in place so charts/canvas are preserved (no rebuild).
 const ORDER_SECTIONS = ["tw", "us", "idx"];
 const SORTABLE_INSTANCES = {};
+let SUMMARY_SORTABLE = null;
+
+// 總覽卡順序 (Adam 2026-07-23): saved key ranks win; 沒存過/新卡 keep default 相對位置
+// (1e9+i pattern, 同 applySort custom mode)。saved 裡的未知 key 直接忽略。
+function orderSummaryCards(cards, savedJson) {
+  let order = [];
+  try { order = JSON.parse(savedJson != null ? savedJson : lsGet("abraham.sumorder", "[]")) || []; } catch (e) { order = []; }
+  const rank = new Map(order.map((k, i) => [String(k), i]));
+  return cards
+    .map((c, i) => [c, rank.has(c.k) ? rank.get(c.k) : 1e9 + i])
+    .sort((a, b) => a[1] - b[1])
+    .map((p) => p[0]);
+}
+
+// Sortable binds to the CONTAINER (#portfolio-summary, 常駐 node) and resolves items
+// per interaction, so one init survives every innerHTML re-render — create once, lazily
+// from renderSummary (boot / tab switch / refresh 都經過那裡).
+function initSummaryDrag(el) {
+  if (SUMMARY_SORTABLE || typeof window === "undefined" || !window.Sortable || !el) return;
+  SUMMARY_SORTABLE = window.Sortable.create(el, {
+    handle: ".drag-handle",
+    animation: 150,
+    ghostClass: "sortable-ghost",
+    chosenClass: "sortable-chosen",
+    dragClass: "sortable-drag",
+    onEnd: () => {
+      const keys = Array.from(el.querySelectorAll("[data-sum]"))
+        .map((c) => c.getAttribute("data-sum")).filter(Boolean);
+      lsSet("abraham.sumorder", JSON.stringify(keys));
+    },
+  });
+}
 
 function lsGet(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : v; } catch (e) { return d; } }
 function lsSet(k, v) { try { localStorage.setItem(k, v); if (!PREFS_SYNCING && k.indexOf("abraham.") === 0) schedulePrefsPush(); } catch (e) { /* private mode / quota — ignore */ } }
