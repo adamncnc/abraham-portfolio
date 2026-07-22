@@ -741,12 +741,23 @@ function fmtVolumeByType(shares, twLots) {
 }
 function fmtVolume(shares, item) { return fmtVolumeByType(shares, isTwLots(item)); }
 
+// ⚠️ relay 的 session="regular" 是它的初始預設值 — 台股隔夜空檔 (Yahoo fallback 路徑,
+// 非 post 非 pre) 也會掛著 "regular" 回來 (2026-07-23 凌晨 05:35 實測)。所以「盤中」
+// 判定必須加報價新鮮度: regular 且報價時戳在 30 分鐘內才算 live, 否則按收盤處理
+// (數字仍可用 — dayVolume 是該日全量 — 只是不能標「盤中/今日累積中」)。
+// _quoteTs 缺席時放行 (=舊行為; 真實 relay 一律帶 asOf)。
+function sessionFreshLive(item, nowMs) {
+  if (item._session !== "regular" && item._session != null) return false;  // pre/post/closed
+  if (item._quoteTs == null) return true;
+  return ((nowMs != null ? nowMs : Date.now()) - item._quoteTs) <= 30 * 60 * 1000;
+}
+
 // Volume picture for a card, honest about WHICH session the number belongs to.
 //   live session + relay dayVolume → 今日盤中累積量, 量比 = 累積量/20日均 (ramps up intraday)
 //   otherwise → last completed session's volume from the daily series (v-tail),
 //   量比 = that bar / mean(prior ≤20 v-bars). Falls back to snapshot volume/average_volume
 //   (3-month avg) while the v-tail hasn't been fetched yet — tooltip says which basis.
-function volumeInfo(item) {
+function volumeInfo(item, nowMs) {
   const data = item.data || {};
   const daily = (data.history && data.history.daily) || [];
   const vbars = daily.filter((b) => b && b.v != null);
@@ -760,7 +771,7 @@ function volumeInfo(item) {
   // Relay dayVolume (證交所 MIS / Yahoo) is fresher than the snapshot's last daily bar:
   // during the session it's 盤中累積, after close it's the official full-day volume.
   if (item._live === true && item._dayVolume != null) {
-    const sessionLive = item._session !== "closed";
+    const sessionLive = item._session !== "closed" && item._session !== "post" && sessionFreshLive(item, nowMs);
     const ratio = avg20 ? item._dayVolume / avg20 : (data.average_volume ? item._dayVolume / data.average_volume : null);
     return { vol: item._dayVolume, label: sessionLive ? "今日量" : "量(最近日)", live: sessionLive, ratio, basis: avg20 ? "20日均量" : "3個月均量" };
   }
@@ -811,7 +822,7 @@ function sessionElapsedMin(market, tsMs) {
   for (const p of parts) { if (p.type === "hour") h = +p.value; else if (p.type === "minute") m = +p.value; }
   return Math.max(0, Math.min(spec.totalMin, h * 60 + m - spec.openMin));
 }
-function realtimeVolInfo(item) {
+function realtimeVolInfo(item, nowMs) {
   const market = itemSessionMarket(item);
   if (!market) return null;
   const spec = SESSION_SPEC[market];
@@ -823,9 +834,10 @@ function realtimeVolInfo(item) {
   const mean = (arr) => arr.reduce((s, b) => s + b.v, 0) / arr.length;
 
   if (item._live === true && item._dayVolume != null && item._session !== "pre") {
-    const sess = item._session || "regular";
-    const inSession = sess === "regular";
-    const ts = item._quoteTs != null ? item._quoteTs : (item._liveTs != null ? item._liveTs : Date.now());
+    // 盤中判定 = session regular 且報價新鮮 (30分內) — 隔夜殘留的 "regular" 按收盤處理
+    // (elapsed=全日, 數字仍正確, 只是不標「已開盤N分」)。
+    const inSession = sessionFreshLive(item, nowMs);
+    const ts = item._quoteTs != null ? item._quoteTs : (item._liveTs != null ? item._liveTs : (nowMs != null ? nowMs : Date.now()));
     // 5日基準: dayVolume 那個交易日若已進 daily bars (盤後 fetch 過) 就排除它,
     // 否則 (盤中/剛收盤) 取含最近完成日在內的 5 根 — 兩態下基準都是「它之前的5個交易日」。
     const sameDay = String(lastBar.t || "").slice(0, 10) === dateInTz(ts, spec.tz);
@@ -833,7 +845,8 @@ function realtimeVolInfo(item) {
     const base5 = mean(baseBars);
     if (!base5) return null;
     // regular: 折算到已開盤分鐘 (前5分鐘按5分計, 防開盤瞬間爆表); post/closed: dayVolume 已是全日量
-    const elapsed = inSession ? Math.max(5, sessionElapsedMin(market, ts) || spec.totalMin) : spec.totalMin;
+    const em = sessionElapsedMin(market, ts);
+    const elapsed = inSession ? Math.max(5, em == null ? spec.totalMin : em) : spec.totalMin;
     return { ratio: item._dayVolume / (base5 * (elapsed / spec.totalMin)), live: inSession, elapsed: inSession ? elapsed : null, market };
   }
   // 收盤路徑: 最近完成日 vs 它之前5日
