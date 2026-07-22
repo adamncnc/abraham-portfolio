@@ -607,7 +607,9 @@ body {
 }
 .chart-canvas-wrap {
   position: relative;
-  height: 110px;
+  /* 110→150 (Adam 2026-07-23): 覆蓋層切換鈕排進圖表框後 K 線被壓扁 —
+     加高補回鈕列吃掉的空間, 也還給「y 軸為含覆蓋線而放寬」的價格線垂直解析度. */
+  height: 150px;
   margin-bottom: 8px;
 }
 .chart-canvas-wrap.empty {
@@ -616,7 +618,7 @@ body {
   justify-content: center;
   color: var(--text-dim);
   font-size: 11px;
-  height: 110px;
+  height: 150px;
   background: rgba(45, 53, 72, 0.28);
   border-radius: 8px;
 }
