@@ -25,8 +25,8 @@
         "ratchet_value": 178.15,
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 205.0,
-        "px": 207.5,
-        "px_date": "2026-07-21"
+        "px": 206.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2449.TW",
@@ -43,8 +43,8 @@
         "fill_ref_close": 286.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 279.0,
-        "px_date": "2026-07-21"
+        "px": 287.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2330.TW",
@@ -61,8 +61,8 @@
         "fill_ref_close": 2400.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 2410.0,
-        "px_date": "2026-07-21"
+        "px": 2375.0,
+        "px_date": "2026-07-23"
       }
     ],
     "pending_orders": [],
@@ -347,6 +347,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.38399887084961,
-  "generated_at": "2026-07-22T21:20:59.788547+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-07-23T02:42:45.490440+00:00"
 }

@@ -69,7 +69,51 @@
         "px_date": "2026-07-22"
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "passed-2026-07-23-POWI",
+        "placed_ts": "2026-07-23T07:43:13+08:00",
+        "ticker": "POWI",
+        "name": "Power Integrations",
+        "side": "buy",
+        "budget_twd": 100000,
+        "limit": 72.49,
+        "stop": 55.0,
+        "stop_rule": "daily_all",
+        "group": "IC設計電源",
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json",
+          "date": "2026-07-23",
+          "kind": "passed",
+          "candidate": {
+            "tk": "POWI",
+            "nm": "Power Integrations",
+            "group": "IC設計電源",
+            "px": 72.48999786376953,
+            "bar": "2026-07-22",
+            "zone": "60-76",
+            "ma20": 74.04,
+            "ma50": 76.49,
+            "froth": 35.6,
+            "stab": "2日縮量紅K",
+            "broke50": true,
+            "limit": 72.49,
+            "stop": 55,
+            "size": 100000,
+            "half": "-",
+            "fee_note": "",
+            "rule": "破50有企穩→帶內最高結構支撐",
+            "depth": 78.1,
+            "unevaluated": [
+              "月營收（美股無月度揭露，改看季報 → 人工）",
+              "循環見頂訊號（無法機械判定 → 人工）"
+            ]
+          }
+        },
+        "target_session": "2026-07-23"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -535,6 +579,6 @@
       "realized_pnl_twd": -20011.0
     }
   ],
-  "usdtwd": 32.38399887084961,
-  "generated_at": "2026-07-22T21:20:59.792886+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-07-23T02:42:45.496452+00:00"
 }

@@ -25,8 +25,8 @@
         "ratchet_value": 176.95,
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244,
-        "px": 234.5,
-        "px_date": "2026-07-21"
+        "px": 235.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "8926.TW",
@@ -45,8 +45,8 @@
         "ratchet_value": 55.765,
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.300003,
-        "px": 65.2,
-        "px_date": "2026-07-21"
+        "px": 64.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2312.TW",
@@ -65,8 +65,8 @@
         "ratchet_value": 26.9875,
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 32.799999,
-        "px": 33.1,
-        "px_date": "2026-07-21"
+        "px": 32.65,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2356.TW",
@@ -85,8 +85,8 @@
         "ratchet_value": 53.77,
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 63.700001,
-        "px": 60.1,
-        "px_date": "2026-07-21"
+        "px": 62.7,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2301.TW",
@@ -105,8 +105,8 @@
         "ratchet_value": 174.4,
         "ratchet_asof": "2026-07-14",
         "fill_ref_close": 212.5,
-        "px": 207.0,
-        "px_date": "2026-07-21"
+        "px": 219.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2465.TW",
@@ -123,8 +123,8 @@
         "fill_ref_close": 83.300003,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 77.5,
-        "px_date": "2026-07-21"
+        "px": 81.3,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2881.TW",
@@ -141,8 +141,8 @@
         "fill_ref_close": 125,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 123.5,
-        "px_date": "2026-07-21"
+        "px": 126.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2404.TW",
@@ -159,8 +159,8 @@
         "fill_ref_close": 1250,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 1150.0,
-        "px_date": "2026-07-21"
+        "px": 1170.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2377.TW",
@@ -177,8 +177,8 @@
         "fill_ref_close": 141.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 146.0,
-        "px_date": "2026-07-21"
+        "px": 151.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "8932.TWO",
@@ -195,8 +195,8 @@
         "fill_ref_close": 117,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 118.5,
-        "px_date": "2026-07-21"
+        "px": 117.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "8131.TW",
@@ -213,8 +213,8 @@
         "fill_ref_close": 69,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 67.4,
-        "px_date": "2026-07-21"
+        "px": 70.3,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "3094.TW",
@@ -231,8 +231,8 @@
         "fill_ref_close": 35.650002,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 38.65,
-        "px_date": "2026-07-21"
+        "px": 36.2,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "5536.TWO",
@@ -249,8 +249,8 @@
         "fill_ref_close": 1140.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 1190.0,
-        "px_date": "2026-07-21"
+        "px": 1200.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "3362.TWO",
@@ -267,8 +267,8 @@
         "fill_ref_close": 148.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 151.5,
-        "px_date": "2026-07-21"
+        "px": 160.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2645.TW",
@@ -285,8 +285,8 @@
         "fill_ref_close": 215.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 215.0,
-        "px_date": "2026-07-21"
+        "px": 192.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2885.TW",
@@ -303,8 +303,8 @@
         "fill_ref_close": 61.299999,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 61.3,
-        "px_date": "2026-07-21"
+        "px": 62.4,
+        "px_date": "2026-07-23"
       }
     ],
     "pending_orders": [],
@@ -1548,6 +1548,6 @@
       "realized_pnl_twd": -8980.0
     }
   ],
-  "usdtwd": 32.38399887084961,
-  "generated_at": "2026-07-22T21:20:59.788547+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-07-23T02:42:45.492444+00:00"
 }

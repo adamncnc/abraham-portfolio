@@ -20,9 +20,9 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 63.1131,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_armed": false,
+        "ratchet_value": 59.184,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
         "px": 70.15,
@@ -42,9 +42,7 @@
         "cost_twd": 104184.0,
         "fill_ref_close": 159.690002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 144.913,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_armed": false,
         "px": 166.54,
         "px_date": "2026-07-22"
       },
@@ -63,8 +61,6 @@
         "fill_ref_close": 164.399994,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 135.1488,
-        "ratchet_asof": "2026-07-23",
         "px": 157.21,
         "px_date": "2026-07-22"
       },
@@ -82,9 +78,7 @@
         "cost_twd": 114656.0,
         "fill_ref_close": 59.25,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 52.2692,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_armed": false,
         "px": 59.74,
         "px_date": "2026-07-22"
       },
@@ -102,9 +96,7 @@
         "cost_twd": 82935.0,
         "fill_ref_close": 14.86,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 12.3467,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_armed": false,
         "px": 14.75,
         "px_date": "2026-07-22"
       },
@@ -122,9 +114,7 @@
         "cost_twd": 101771.0,
         "fill_ref_close": 14.45,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 12.323,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_armed": false,
         "px": 14.01,
         "px_date": "2026-07-22"
       },
@@ -142,9 +132,7 @@
         "cost_twd": 100226.0,
         "fill_ref_close": 59.529999,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 50.6465,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_armed": false,
         "px": 58.01,
         "px_date": "2026-07-22"
       }
@@ -943,6 +931,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.38399887084961,
-  "generated_at": "2026-07-22T21:20:59.793890+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-07-23T02:42:45.496452+00:00"
 }

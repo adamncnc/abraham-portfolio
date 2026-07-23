@@ -867,11 +867,55 @@ function realtimeVolInfo(item, nowMs) {
 // v1 已知口徑 (已對 Adam 講明): 分母是攤平步調 (無歷史分線可做同時段基準) → 開盤/
 // 尾盤自然量大的時段倍數天生偏高, 「突波」章門檻 3× 抵消; 進行中的末根 5min bar
 // 未走完會稀釋 rate → 取 max(末根/5, 末兩根/10) 緩解。
+// ── 即時量 tick 差分 (2026-07-23 修): 台股 MIS 只給「價+當日累積量」、分線點無量,
+// Yahoo 分線有量但台股延遲 ~20 分 → 開盤頭 25 分突波啞火。改法: 每次 live tick 記
+// {quoteTs, 累積量, 價}, 用差分算「近幾分鐘每分鐘量」= 真即時。頁面開著 ~2 分鐘武裝;
+// tick 不足時回退分線路徑 (US 分線近即時, 回退品質仍好)。
+const LIVE_VOL_TICKS = new Map();          // item.id -> [{ts, vol, px}]
+const VOL_TICK_WINDOW_MS = 11 * 60 * 1000; // 保留 ~11 分 (口徑=近10分)
+const VOL_TICK_MIN_SPAN_MS = 90 * 1000;    // 至少 90 秒的差分才算得出 rate
+
+function trackVolTick(id, ts, vol, px) {
+  if (ts == null || vol == null || !isFinite(vol)) return;
+  const key = String(id);
+  let arr = LIVE_VOL_TICKS.get(key);
+  if (!arr) { arr = []; LIVE_VOL_TICKS.set(key, arr); }
+  const last = arr[arr.length - 1];
+  if (last && vol < last.vol) arr.length = 0;         // 累積量倒退 = 換日/換源 → 重來
+  if (last && ts <= last.ts) { last.vol = vol; if (px != null) last.px = px; }  // 同刻更新
+  else arr.push({ ts, vol, px });
+  const cut = ts - VOL_TICK_WINDOW_MS;
+  while (arr.length && arr[0].ts < cut) arr.shift();
+}
+
+// tick 差分路徑: ≥2 tick、跨度 ≥90s、最新 tick 就是當前報價 → 每分鐘量 vs 5日正常步調
+function burstFromTicks(item, spec, nowMs) {
+  const arr = LIVE_VOL_TICKS.get(String(item.id));
+  if (!arr || arr.length < 2) return null;
+  const first = arr[0], last = arr[arr.length - 1];
+  const spanMs = last.ts - first.ts;
+  if (spanMs < VOL_TICK_MIN_SPAN_MS) return null;
+  const now = nowMs != null ? nowMs : Date.now();
+  if (now - last.ts > 3 * 60 * 1000) return null;     // tick 斷流 >3 分 → 不出陳舊值
+  const daily = (((item.data || {}).history || {}).daily || []).filter((b) => b && b.v != null && b.v > 0);
+  if (daily.length < 6) return null;
+  const base5 = fiveDayBase(daily, dateInTz(last.ts, spec.tz));
+  if (!base5) return null;
+  const rate = (last.vol - first.vol) / (spanMs / 60000);   // 股/分鐘
+  const ratio = rate / (base5 / spec.totalMin);
+  if (!isFinite(ratio) || ratio < 0) return null;
+  const chgPct = first.px ? ((last.px - first.px) / first.px) * 100 : null;
+  const dir = chgPct == null || Math.abs(chgPct) < 0.2 ? "flat" : (chgPct > 0 ? "up" : "down");
+  return { ratio, dir, chgPct, market: null, src: "tick" };
+}
+
 function burstVolInfo(item, nowMs) {
   const market = itemSessionMarket(item);
   if (!market) return null;
   const spec = SESSION_SPEC[market];
   if (!(item._live === true && item._quoteTs != null && sessionFreshLive(item, nowMs))) return null;
+  const tick = burstFromTicks(item, spec, nowMs);
+  if (tick) { tick.market = market; return tick; }    // 即時差分優先 (真·近10分)
   const data = item.data || {};
   const daily = ((data.history && data.history.daily) || []).filter((b) => b && b.v != null && b.v > 0);
   const intra = ((data.history && data.history.intraday) || []).filter((b) => b && b.v != null && classifySession(b.t, item.type) === "reg");
@@ -887,7 +931,7 @@ function burstVolInfo(item, nowMs) {
   const ref = intra.length >= 3 ? intra[intra.length - 3] : prev; // 視窗起點前一根收價
   const chgPct = ref && ref.c ? ((last.c - ref.c) / ref.c) * 100 : null;
   const dir = chgPct == null || Math.abs(chgPct) < 0.2 ? "flat" : (chgPct > 0 ? "up" : "down");
-  return { ratio, dir, chgPct, market };
+  return { ratio, dir, chgPct, market, src: "bar" };
 }
 function burstChip(ratio) {
   if (ratio == null || !isFinite(ratio)) return "";
@@ -2336,6 +2380,9 @@ async function liveRefresh() {
         next._live = true;        // fresh live quote applied → green per-card badge
         next._liveTs = liveTs;    // when WE fetched (for delay calc)
         next._quoteTs = q.asOf ? q.asOf * 1000 : null;  // when the PRICE is actually from (Adam 2026-07-06)
+        if (q.dayVolume != null && next._quoteTs != null) {
+          trackVolTick(item.id, next._quoteTs, q.dayVolume, q.price);  // 突波 tick 差分 (2026-07-23)
+        }
         next._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
         delete next.data.stale;   // a fresh quote supersedes any carried-forward stale flag
       } else {
