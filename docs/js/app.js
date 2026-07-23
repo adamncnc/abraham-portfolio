@@ -1630,6 +1630,52 @@ function volumeBoardCardHtml(snapshot, tab, kind) {
     </div>`;
 }
 
+// ========== 漲幅/跌幅排行榜 (Adam 2026-07-23「漲幅前10 跌幅前10 兩張卡片」) ==========
+// 依即時單日漲跌幅 change_pct 排序 (liveRefresh 每 tick 更新, 見 2375/2440 → 盤中會動),
+// 跟分頁走。漲幅榜 = 只收上漲 (chg>0) 由大到小前 10; 跌幅榜 = 只收下跌 (chg<0) 由小到大
+// 前 10 (看盤軟體慣例: 漲幅榜不混入下跌股)。全部紅漲綠跌 (漲幅榜恆紅/跌幅榜恆綠), 可點跳卡。
+function changeBoardEntries(snapshot, tab, dir) {
+  const bucket = (snapshot && snapshot[tab]) || [];
+  const out = [];
+  for (const item of bucket) {
+    if (item.status === "error") continue;
+    const chg = (item.data || {}).change_pct;
+    if (chg == null || !isFinite(chg)) continue;
+    if (dir === "gain" ? chg > 0 : chg < 0) {
+      out.push({ name: item.name || item.id, id: item.id, tab, chg });
+    }
+  }
+  out.sort((a, b) => (dir === "gain" ? b.chg - a.chg : a.chg - b.chg));  // 漲幅大在前 / 跌幅深在前
+  return out.slice(0, 10);
+}
+
+function changeBoardCardHtml(snapshot, tab, dir) {
+  const entries = changeBoardEntries(snapshot, tab, dir);
+  let body;
+  if (!entries.length) {
+    body = `<div class="zone-empty">–</div>`;
+  } else {
+    body = `<div class="pullback-list">` + entries.map((e, i) => {
+      const cc = changeClass(e.chg);                       // up=紅 / down=綠 (漲紅跌綠鐵則)
+      const nameCls = cc === "up" || cc === "down" ? cc : "";
+      return `<div class="pullback-row jump-row" data-jump-tab="${escapeHtml(e.tab)}" data-jump-id="${escapeHtml(e.id)}" title="點一下跳到這張卡">
+        <span class="pullback-rank">${i + 1}</span>
+        <span class="pullback-name ${nameCls}">${escapeHtml(e.name)}</span>
+        <span class="pullback-depth ${cc || "flat"}">${fmtPct(e.chg)}</span>
+      </div>`;
+    }).join("") + `</div>`;
+  }
+  const mkt = MARKET_TAB_LABEL[tab] || "";
+  const title = dir === "gain" ? "🔺 漲幅排行" : "🔻 跌幅排行";
+  const sub = dir === "gain" ? "即時單日漲幅 · 前 10 名" : "即時單日跌幅 · 前 10 名";
+  return `
+    <div class="summary-card pullback-card" data-sum="${dir === "gain" ? "gainers" : "losers"}">
+      <div class="summary-label">${SUMMARY_DRAG_HANDLE}${title} <span class="summary-label-mkt">${mkt}</span></div>
+      ${body}
+      <div class="summary-sub">${sub}</div>
+    </div>`;
+}
+
 // ========== Portfolio Summary ==========
 // Summary cards follow the active MARKET tab (Adam 2026-07-22): 進場區內 + 回檔深度排行
 // both filter to 台股/美股/指數. The old 觀察清單 count card is retired (排行榜取代).
@@ -1640,6 +1686,8 @@ function renderSummary(summary, snapshot) {
   const boards = [
     { k: "zone", html: zoneCardHtml(snapshot, tab) },
     { k: "pullback", html: pullbackCardHtml(snapshot, tab) },
+    { k: "gainers", html: changeBoardCardHtml(snapshot, tab, "gain") },  // Adam 2026-07-23 漲幅前10
+    { k: "losers", html: changeBoardCardHtml(snapshot, tab, "lose") },   // Adam 2026-07-23 跌幅前10
     { k: "vol", html: volumeBoardCardHtml(snapshot, tab, "vol") },       // Adam 2026-07-23
     { k: "ratio", html: volumeBoardCardHtml(snapshot, tab, "ratio") },
     { k: "rt", html: volumeBoardCardHtml(snapshot, tab, "rt") },         // 即時量比 (Adam 2026-07-23)
