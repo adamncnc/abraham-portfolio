@@ -193,6 +193,7 @@ body {
 .pullback-row:nth-child(-n+3) .pullback-rank { color: var(--info); background: rgba(96, 165, 250, 0.14); }
 .pullback-name { font-weight: 700; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pullback-depth { font-weight: 700; font-size: 12.5px; white-space: nowrap; }
+.board-chg { font-size: 11px; font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; flex: none; }
 
 /* 可點跳卡的列 (進場區內 / 排行榜 / 搜尋結果) */
 .jump-row { cursor: pointer; transition: background 0.12s; }
@@ -683,6 +684,26 @@ body {
 .overlay-btn.active, .overlay-btn.active:hover { background: rgba(74, 222, 128, 0.16); color: var(--accent); border-color: var(--accent); }
 .overlay-btn.active[data-overlay="zone"], .overlay-btn.active[data-overlay="zone"]:hover { background: rgba(251, 191, 36, 0.14); color: #fbbf24; border-color: #fbbf24; }
 .overlay-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+/* K線下方資訊板塊 (Adam 2026-07-23): 簡介+下個大日子+深讀新聞.
+   新聞標籤循漲紅跌綠鐵則: 利多紅 / 利空綠 / 中性灰. */
+.asset-info {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+}
+.asset-intro { color: var(--text-dim); line-height: 1.55; }
+.asset-bigday { margin-top: 7px; font-size: 12px; }
+.asset-bigday b { font-variant-numeric: tabular-nums; }
+.asset-newslist { margin-top: 7px; display: flex; flex-direction: column; gap: 4px; }
+.asset-news-row { display: flex; align-items: baseline; gap: 6px; line-height: 1.45; }
+.news-date { color: var(--text-dim); font-variant-numeric: tabular-nums; flex: none; font-size: 11px; }
+.news-tag { flex: none; font-size: 10px; font-weight: 700; padding: 0 6px; border-radius: 999px; border: 1px solid; }
+.news-tag.tag-bull { color: #f87171; border-color: rgba(248, 113, 113, 0.45); background: rgba(248, 113, 113, 0.08); }
+.news-tag.tag-bear { color: #4ade80; border-color: rgba(74, 222, 128, 0.45); background: rgba(74, 222, 128, 0.08); }
+.news-tag.tag-neutral { color: var(--text-dim); border-color: var(--border); background: rgba(255, 255, 255, 0.04); }
+.news-text { opacity: 0.92; }
 
 /* Notes */
 .asset-notes {

@@ -1042,6 +1042,53 @@ function jumpToCard(tab, id) {
   });
 }
 
+// ========== K線下方資訊板塊 (Adam 2026-07-23) ==========
+// 每檔個股卡的文字區改成三層：①簡介（產業/產品/族群）②下個大日子（財報/法說，過期自動隱藏）
+// ③深讀新聞 ≤5 條、一季內（>92 天自動過期），每條 日期+利多/中性/利空 標籤（漲紅跌綠同色語言）。
+// 資料源 docs/data/stock-profiles.json（深讀班維護）；無 profile → 回退 config notes（指數頁等）。
+const PROFILES_URL = "./data/stock-profiles.json";
+const STOCK_PROFILES = {};            // id -> {intro, next_event:{d,t}, news:[{d,s,t}]}
+const NEWS_MAX = 5;
+const NEWS_MAX_AGE_DAYS = 92;         // 「一季內」(Adam: 超過 3 個月過期)
+
+async function loadProfiles() {
+  try {
+    const res = await fetch(PROFILES_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) return;
+    const j = await res.json();
+    const p = (j && j.profiles) || {};
+    for (const k of Object.keys(STOCK_PROFILES)) delete STOCK_PROFILES[k];
+    Object.assign(STOCK_PROFILES, p);
+  } catch (e) { /* fail-soft：載不到就全卡回退 notes，不擋 dashboard */ }
+}
+
+function fmtNewsDate(d) { return String(d).slice(5).replace("-", "/"); }  // 2026-07-22 -> 07/22
+
+function stockInfoHtml(item, nowMs) {
+  const p = STOCK_PROFILES[String(item.id)];
+  if (!p) return item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
+  const now = nowMs != null ? nowMs : Date.now();
+  const today = dateInTz(now, "Asia/Taipei");
+  let html = `<div class="asset-info">`;
+  if (p.intro) html += `<div class="asset-intro">${escapeHtml(p.intro)}</div>`;
+  const ev = p.next_event;
+  if (ev && ev.d && String(ev.d) >= today) {
+    html += `<div class="asset-bigday">📅 <b>${escapeHtml(fmtNewsDate(ev.d))}</b> ${escapeHtml(ev.t || "")}</div>`;
+  }
+  const cutoff = dateInTz(now - NEWS_MAX_AGE_DAYS * 86400e3, "Asia/Taipei");
+  const news = (p.news || [])
+    .filter((n) => n && n.d && n.t && String(n.d) >= cutoff)
+    .sort((a, b) => (a.d < b.d ? 1 : a.d > b.d ? -1 : 0))
+    .slice(0, NEWS_MAX);
+  if (news.length) {                    // 沒新聞就整段省略 (Adam: 沒有新聞就不用標)
+    html += `<div class="asset-newslist">` + news.map((n) => {
+      const cls = n.s === "利多" ? "tag-bull" : n.s === "利空" ? "tag-bear" : "tag-neutral";
+      return `<div class="asset-news-row"><span class="news-date">${escapeHtml(fmtNewsDate(n.d))}</span><span class="news-tag ${cls}">${escapeHtml(n.s || "中性")}</span><span class="news-text">${escapeHtml(n.t)}</span></div>`;
+    }).join("") + `</div>`;
+  }
+  return html + `</div>`;
+}
+
 // ========== Asset Card Builder ==========
 function buildAssetCard(item, section) {
   const data = item.data || {};
@@ -1329,7 +1376,7 @@ function buildAssetCard(item, section) {
     !!(srPeek.supports.length || srPeek.resistances.length)
   );
 
-  const notesHtml = item.notes ? `<div class="asset-notes">📝 ${escapeHtml(item.notes)}</div>` : "";
+  const notesHtml = stockInfoHtml(item);
 
   // Drag handle in every sortable market tab (台股 / 美股 / 指數).
   const dragHandle = sortable
@@ -1493,7 +1540,8 @@ function volumeBoardEntries(snapshot, tab, kind) {
       live = vi.live;
     }
     if (val == null || !isFinite(val)) continue;
-    out.push({ name: item.name || item.id, id: item.id, tab, val, live, dir, item });
+    const chg = (item.data || {}).change_pct;   // 即時單日漲跌幅 (Adam 2026-07-23: 榜內附註+紅漲綠跌著色)
+    out.push({ name: item.name || item.id, id: item.id, tab, val, live, dir, chg, item });
   }
   out.sort((a, b) => b.val - a.val);                    // 大在前
   return out.slice(0, 10);
@@ -1505,15 +1553,21 @@ function volumeBoardCardHtml(snapshot, tab, kind) {
   if (!entries.length) {
     body = `<div class="zone-empty">${kind === "burst" ? "盤中限定・目前收盤" : "–"}</div>`;
   } else {
+    // vol/ratio/rt 三榜 (Adam 2026-07-23): 名稱+資訊文字紅漲綠跌、量值後附即時漲跌幅;
+    // 量比/即時量比的爆量/縮量晶片維持自己的色系 (爆量恆紅), 只有其餘文字跟漲跌轉色。
     body = `<div class="pullback-list">` + entries.map((e, i) => {
+      const cc = kind === "burst" ? "" : changeClass(e.chg);
+      const nameCls = cc === "up" || cc === "down" ? cc : "";   // 平盤/無資料的名稱不轉灰, 維持預設色
       const valHtml = kind === "ratio" ? volumeBadge(e.val, e.live)   // 沿用卡片爆量/縮量晶片語言
         : kind === "rt" ? volumeBadge(e.val, e.live, 2)
         : kind === "burst" ? `${burstDirTag(e.dir, true)} ${burstChip(e.val)}`
-        : `<span class="pullback-depth flat">${fmtVolume(e.val, e.item)}</span>`;
+        : `<span class="pullback-depth ${cc || "flat"}">${fmtVolume(e.val, e.item)}</span>`;
+      const chgHtml = kind !== "burst" && e.chg != null
+        ? `<span class="board-chg ${cc || "flat"}">${fmtPct(e.chg)}</span>` : "";
       return `<div class="pullback-row jump-row" data-jump-tab="${escapeHtml(e.tab)}" data-jump-id="${escapeHtml(e.id)}" title="點一下跳到這張卡">
         <span class="pullback-rank">${i + 1}</span>
-        <span class="pullback-name">${escapeHtml(e.name)}</span>
-        ${valHtml}
+        <span class="pullback-name ${nameCls}">${escapeHtml(e.name)}</span>
+        ${valHtml}${chgHtml}
       </div>`;
     }).join("") + `</div>`;
   }
@@ -1756,6 +1810,7 @@ async function loadAndRender(opts = {}) {
     const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const snapshot = await res.json();
+    await loadProfiles();   // 個股簡介/大日子/深讀新聞 — 先載好再 render, 卡片一次到位
     CURRENT_SNAPSHOT = snapshot;
     renderSnapshot(snapshot, opts.keepOrder ? { keepOrder: true } : {});
     loadHoldings();  // 即時持倉分頁 — independent fetch, own error handling
