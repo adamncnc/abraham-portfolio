@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 751870.9192000001,
+    "cash_twd": 754170.9192000001,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -15,17 +15,17 @@
         "avg_price": 217.0,
         "fill_date": "2026-07-14",
         "fx_at_fill": 1.0,
-        "stop": 185.0,
+        "stop": 180.0,
         "stop_rule": "weekly_all",
         "stop_asof": "2026-07-14",
         "group": "重電電網",
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 178.15,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 185.7,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 205.0,
-        "px": 206.5,
+        "px": 211.5,
         "px_date": "2026-07-23"
       },
       {
@@ -43,7 +43,9 @@
         "fill_ref_close": 286.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 287.5,
+        "ratchet_value": 224.5,
+        "ratchet_asof": "2026-07-23",
+        "px": 286.0,
         "px_date": "2026-07-23"
       },
       {
@@ -61,7 +63,9 @@
         "fill_ref_close": 2400.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 2375.0,
+        "ratchet_value": 2208.5,
+        "ratchet_asof": "2026-07-23",
+        "px": 2405.0,
         "px_date": "2026-07-23"
       }
     ],
@@ -118,6 +122,20 @@
         "stop": 2325.0,
         "opened": true,
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-21.json"
+      },
+      {
+        "ts": "2026-07-23T14:05:27+08:00",
+        "ticker": "1503.TW",
+        "name": "士電",
+        "action": "dividend",
+        "ex_date": "2026-07-23",
+        "projection_key": "div:2026-07-23",
+        "per_share": 5.0,
+        "per_share_yahoo": 5.0,
+        "shares_at_ex": 460,
+        "fx": 1.0,
+        "cash_twd": 2300.0,
+        "projection_cash_twd": 2300.0
       }
     ],
     "benchmark_spec": {
@@ -129,7 +147,9 @@
     "ticker_state": {
       "1503.TW": {
         "splits_applied": [],
-        "divs_credited": [],
+        "divs_credited": [
+          "2026-07-23"
+        ],
         "projection_origin_v2": {
           "position": {
             "ticker": "1503.TW",
@@ -164,6 +184,13 @@
             "amount": 4.5,
             "source_count": 1,
             "key": "div:2025-07-24"
+          },
+          {
+            "date": "2026-07-23",
+            "kind": "div",
+            "amount": 5.0,
+            "source_count": 1,
+            "key": "div:2026-07-23"
           }
         ]
       },
@@ -345,8 +372,20 @@
         "0050.TW": -1.0
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-23T14:05:24+08:00",
+      "nav_twd": 992797.0,
+      "return_pct": -0.72,
+      "cash_twd": 754171.0,
+      "n_positions": 3,
+      "usdtwd": 32.275,
+      "bench_return_pct": {
+        "0050.TW": -0.95
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.25899887084961,
-  "generated_at": "2026-07-23T02:42:45.490440+00:00"
+  "usdtwd": 32.27199935913086,
+  "generated_at": "2026-07-23T06:06:40.739740+00:00"
 }

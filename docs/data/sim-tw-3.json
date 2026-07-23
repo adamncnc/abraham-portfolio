@@ -22,10 +22,10 @@
         "cost_twd": 82882.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 182.1352,
-        "ratchet_asof": "2026-07-22",
+        "ratchet_value": 184.0852,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 244.0,
-        "px": 235.0,
+        "px": 232.5,
         "px_date": "2026-07-23"
       }
     ],
@@ -52,7 +52,7 @@
         "reason": "池內唯一過關（51 檔中 50 檔被擋）／A回檔MA50／僅 1-2 筆→滿倉不減半"
       },
       {
-        "ts": "2026-07-22T15:15:46+08:00",
+        "ts": "2026-07-23T14:06:38+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -204,8 +204,20 @@
         "0050.TW": -1.0
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-23T14:06:36+08:00",
+      "nav_twd": 998206.0,
+      "return_pct": -0.18,
+      "cash_twd": 918691.0,
+      "n_positions": 1,
+      "usdtwd": 32.273,
+      "bench_return_pct": {
+        "0050.TW": -0.95
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.25899887084961,
-  "generated_at": "2026-07-23T02:42:45.494448+00:00"
+  "usdtwd": 32.27199935913086,
+  "generated_at": "2026-07-23T06:06:40.743740+00:00"
 }

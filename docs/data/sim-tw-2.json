@@ -22,10 +22,10 @@
         "cost_twd": 40956.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 176.95,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 184.0852,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 244,
-        "px": 235.0,
+        "px": 232.5,
         "px_date": "2026-07-23"
       },
       {
@@ -42,10 +42,10 @@
         "cost_twd": 45966.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 55.765,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 57.992,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 67.300003,
-        "px": 64.0,
+        "px": 64.3,
         "px_date": "2026-07-23"
       },
       {
@@ -61,11 +61,11 @@
         "group": "EMS",
         "cost_twd": 23494.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 26.9875,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_armed": true,
+        "ratchet_value": 28.78,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 32.799999,
-        "px": 32.65,
+        "px": 32.5,
         "px_date": "2026-07-23"
       },
       {
@@ -82,10 +82,10 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 53.77,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 52.905,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 63.700001,
-        "px": 62.7,
+        "px": 63.0,
         "px_date": "2026-07-23"
       },
       {
@@ -101,11 +101,11 @@
         "group": "網通伺服器",
         "cost_twd": 44888.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 174.4,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_armed": true,
+        "ratchet_value": 180.35,
+        "ratchet_asof": "2026-07-23",
         "fill_ref_close": 212.5,
-        "px": 219.5,
+        "px": 218.0,
         "px_date": "2026-07-23"
       },
       {
@@ -122,8 +122,10 @@
         "cost_twd": 42940.0,
         "fill_ref_close": 83.300003,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 81.3,
+        "ratchet_armed": true,
+        "ratchet_value": 69.755,
+        "ratchet_asof": "2026-07-23",
+        "px": 82.7,
         "px_date": "2026-07-23"
       },
       {
@@ -141,7 +143,9 @@
         "fill_ref_close": 125,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 126.5,
+        "ratchet_value": 114.85,
+        "ratchet_asof": "2026-07-23",
+        "px": 128.5,
         "px_date": "2026-07-23"
       },
       {
@@ -158,8 +162,10 @@
         "cost_twd": 40648.0,
         "fill_ref_close": 1250,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 1170.0,
+        "ratchet_armed": true,
+        "ratchet_value": 1024.25,
+        "ratchet_asof": "2026-07-23",
+        "px": 1165.0,
         "px_date": "2026-07-23"
       },
       {
@@ -176,8 +182,10 @@
         "cost_twd": 60923.0,
         "fill_ref_close": 141.5,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 151.0,
+        "ratchet_armed": true,
+        "ratchet_value": 134.675,
+        "ratchet_asof": "2026-07-23",
+        "px": 152.0,
         "px_date": "2026-07-23"
       },
       {
@@ -195,7 +203,9 @@
         "fill_ref_close": 117,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 117.0,
+        "ratchet_value": 96.525,
+        "ratchet_asof": "2026-07-23",
+        "px": 115.5,
         "px_date": "2026-07-23"
       },
       {
@@ -213,7 +223,9 @@
         "fill_ref_close": 69,
         "half_locked": false,
         "ratchet_armed": false,
-        "px": 70.3,
+        "ratchet_value": 54.685,
+        "ratchet_asof": "2026-07-23",
+        "px": 68.7,
         "px_date": "2026-07-23"
       },
       {
@@ -230,8 +242,10 @@
         "cost_twd": 41480.0,
         "fill_ref_close": 35.650002,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 36.2,
+        "ratchet_armed": true,
+        "ratchet_value": 29.0425,
+        "ratchet_asof": "2026-07-23",
+        "px": 36.85,
         "px_date": "2026-07-23"
       },
       {
@@ -248,8 +262,10 @@
         "cost_twd": 40738.0,
         "fill_ref_close": 1140.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 1200.0,
+        "ratchet_armed": true,
+        "ratchet_value": 932.25,
+        "ratchet_asof": "2026-07-23",
+        "px": 1195.0,
         "px_date": "2026-07-23"
       },
       {
@@ -266,8 +282,10 @@
         "cost_twd": 41418.0,
         "fill_ref_close": 148.5,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 160.5,
+        "ratchet_armed": true,
+        "ratchet_value": 122.275,
+        "ratchet_asof": "2026-07-23",
+        "px": 163.0,
         "px_date": "2026-07-23"
       },
       {
@@ -284,8 +302,10 @@
         "cost_twd": 41364.0,
         "fill_ref_close": 215.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 192.5,
+        "ratchet_armed": true,
+        "ratchet_value": 168.425,
+        "ratchet_asof": "2026-07-23",
+        "px": 198.0,
         "px_date": "2026-07-23"
       },
       {
@@ -302,8 +322,10 @@
         "cost_twd": 70946.0,
         "fill_ref_close": 61.299999,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 62.4,
+        "ratchet_armed": true,
+        "ratchet_value": 56.85,
+        "ratchet_asof": "2026-07-23",
+        "px": 63.3,
         "px_date": "2026-07-23"
       }
     ],
@@ -763,7 +785,7 @@
         "fill_mode": null
       },
       {
-        "ts": "2026-07-22T15:17:05+08:00",
+        "ts": "2026-07-23T14:06:26+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -777,7 +799,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-07-22T15:17:05+08:00",
+        "ts": "2026-07-23T14:06:26+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -1546,8 +1568,20 @@
         "0050.TW": -1.0
       },
       "realized_pnl_twd": -8980.0
+    },
+    {
+      "ts": "2026-07-23T14:06:13+08:00",
+      "nav_twd": 992903.0,
+      "return_pct": -0.71,
+      "cash_twd": 250803.0,
+      "n_positions": 16,
+      "usdtwd": 32.286,
+      "bench_return_pct": {
+        "0050.TW": -0.95
+      },
+      "realized_pnl_twd": -8980.0
     }
   ],
-  "usdtwd": 32.25899887084961,
-  "generated_at": "2026-07-23T02:42:45.492444+00:00"
+  "usdtwd": 32.27199935913086,
+  "generated_at": "2026-07-23T06:06:40.741740+00:00"
 }
