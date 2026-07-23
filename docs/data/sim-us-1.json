@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 691468.7623389559,
+    "cash_twd": 591960.8622655154,
     "realized_pnl_twd": -20011.0,
     "positions": [
       {
@@ -23,10 +23,10 @@
         "fill_ref_close": 256.429993,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 246.9384,
-        "ratchet_asof": "2026-07-23",
-        "px": 274.9,
-        "px_date": "2026-07-22"
+        "ratchet_value": 247.7989,
+        "ratchet_asof": "2026-07-24",
+        "px": 275.6,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "LRCX",
@@ -43,10 +43,10 @@
         "fill_ref_close": 335.429993,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 252.8505,
-        "ratchet_asof": "2026-07-23",
-        "px": 319.29,
-        "px_date": "2026-07-22"
+        "ratchet_value": 253.4565,
+        "ratchet_asof": "2026-07-24",
+        "px": 319.78,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "KLAC",
@@ -63,57 +63,33 @@
         "fill_ref_close": 219.369995,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 162.2671,
-        "ratchet_asof": "2026-07-23",
-        "px": 214.69,
-        "px_date": "2026-07-22"
-      }
-    ],
-    "pending_orders": [
+        "ratchet_value": 162.886,
+        "ratchet_asof": "2026-07-24",
+        "px": 218.73,
+        "px_date": "2026-07-23"
+      },
       {
-        "id": "passed-2026-07-23-POWI",
-        "placed_ts": "2026-07-23T07:43:13+08:00",
         "ticker": "POWI",
         "name": "Power Integrations",
-        "side": "buy",
-        "budget_twd": 100000,
-        "limit": 72.49,
+        "shares": 43,
+        "avg_price": 71.18,
+        "fill_date": "2026-07-23",
+        "fx_at_fill": 32.29999923706055,
         "stop": 55.0,
         "stop_rule": "daily_all",
+        "stop_asof": "2026-07-23",
         "group": "IC設計電源",
-        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json",
-          "date": "2026-07-23",
-          "kind": "passed",
-          "candidate": {
-            "tk": "POWI",
-            "nm": "Power Integrations",
-            "group": "IC設計電源",
-            "px": 72.48999786376953,
-            "bar": "2026-07-22",
-            "zone": "60-76",
-            "ma20": 74.04,
-            "ma50": 76.49,
-            "froth": 35.6,
-            "stab": "2日縮量紅K",
-            "broke50": true,
-            "limit": 72.49,
-            "stop": 55,
-            "size": 100000,
-            "half": "-",
-            "fee_note": "",
-            "rule": "破50有企穩→帶內最高結構支撐",
-            "depth": 78.1,
-            "unevaluated": [
-              "月營收（美股無月度揭露，改看季報 → 人工）",
-              "循環見頂訊號（無法機械判定 → 人工）"
-            ]
-          }
-        },
-        "target_session": "2026-07-23"
+        "cost_twd": 99508.0,
+        "fill_ref_close": 70.870003,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 57.5305,
+        "ratchet_asof": "2026-07-24",
+        "px": 70.87,
+        "px_date": "2026-07-23"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -237,6 +213,22 @@
         "qty_rule": "all",
         "trigger": "stop_all",
         "reason": "2026-07-17 出場檢查：7/16 日收 158.39 < 認錯線 165（daily_all）→ 全數出清；DM 1527430940916453468 先發後寫（§1.6-5）"
+      },
+      {
+        "ts": "2026-07-24T05:20:07+08:00",
+        "order_id": "passed-2026-07-23-POWI",
+        "ticker": "POWI",
+        "name": "Power Integrations",
+        "action": "buy",
+        "shares": 43,
+        "price": 71.18,
+        "fee": 20.0,
+        "cost_twd": 99508.0,
+        "fill_date": "2026-07-23",
+        "fill_how": "開盤",
+        "stop": 55.0,
+        "opened": true,
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
       }
     ],
     "benchmark_spec": {
@@ -439,6 +431,65 @@
         ],
         "splits_applied": [],
         "divs_credited": []
+      },
+      "POWI": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "POWI",
+            "name": "Power Integrations",
+            "shares": 43,
+            "avg_price": 71.18,
+            "fill_date": "2026-07-23",
+            "fx_at_fill": 32.29999923706055,
+            "stop": 55.0,
+            "stop_rule": "daily_all",
+            "stop_asof": "2026-07-23",
+            "group": "IC設計電源",
+            "cost_twd": 99508.0,
+            "fill_ref_close": 70.87000274658203,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-23",
+              "value": 55.0
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2025-08-29",
+            "kind": "div",
+            "amount": 0.21,
+            "source_count": 1,
+            "key": "div:2025-08-29"
+          },
+          {
+            "date": "2025-11-28",
+            "kind": "div",
+            "amount": 0.21,
+            "source_count": 1,
+            "key": "div:2025-11-28"
+          },
+          {
+            "date": "2026-02-27",
+            "kind": "div",
+            "amount": 0.215,
+            "source_count": 1,
+            "key": "div:2026-02-27"
+          },
+          {
+            "date": "2026-05-29",
+            "kind": "div",
+            "amount": 0.215,
+            "source_count": 1,
+            "key": "div:2026-05-29"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -577,8 +628,20 @@
         "SPY": -0.01
       },
       "realized_pnl_twd": -20011.0
+    },
+    {
+      "ts": "2026-07-24T05:20:18+08:00",
+      "nav_twd": 978756.0,
+      "return_pct": -2.12,
+      "cash_twd": 591961.0,
+      "n_positions": 4,
+      "usdtwd": 32.3,
+      "bench_return_pct": {
+        "SPY": -1.5
+      },
+      "realized_pnl_twd": -20011.0
     }
   ],
-  "usdtwd": 32.27199935913086,
-  "generated_at": "2026-07-23T06:06:40.744741+00:00"
+  "usdtwd": 32.29999923706055,
+  "generated_at": "2026-07-23T21:20:59.186575+00:00"
 }
