@@ -1778,6 +1778,10 @@ function activateTab(which, doResize = true) {
     document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
   }
   lsSet("abraham.activeTab", which);
+  // Adam 2026-07-24: 即時持倉(pos)/模擬倉(sim) 兩分頁隱藏排行榜/進場區總覽卡列（那兩頁有自己的內容）;
+  // 回 台股/美股/指數 再顯示。切分頁時 renderSummary 仍會更新 innerHTML，但元素維持 display:none 不露出。
+  const summaryEl = document.getElementById("portfolio-summary");
+  if (summaryEl) summaryEl.style.display = (which === "pos" || which === "sim") ? "none" : "";
   // Summary cards (進場區內/回檔排行) follow the market tab; sim/pos keep the last market view.
   if (which === "tw" || which === "us" || which === "idx") {
     applySort(which);  // 切分頁 = 重排白名單時機 (Adam 2026-07-23: 自動更新凍結順序, 切分頁時套最新排序)
