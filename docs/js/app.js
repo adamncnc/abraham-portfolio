@@ -1877,6 +1877,21 @@ function renderSnapshot(snapshot, opts = {}) {
     return [s, g ? Array.from(g.querySelectorAll(".asset-card")).map((c) => c.dataset.card).filter(Boolean) : []];
   }) : null;
 
+  // 自動更新保留使用者選的時間軸 (Adam 2026-07-24): 30s 即時 / 抓即時 / 盤外 reload 會整批重畫卡片,
+  // 重畫後每張圖的 scope-btn 都被設回預設(1d) → 使用者研究某檔時每 30 秒被打回預設, 很煩。
+  // 先記下各卡當下 active 的 scope(只記非預設的), 重畫完再還原。只在 keepOrder(非破壞性自動更新)時做 —
+  // 初次載入 / ↻全部重抓 / F5 走一般 render(keepOrder=false) → 回預設, 符合 Adam「不要有記憶性、
+  // 頁面重新整理再回預設」(不寫 localStorage, reload 自然清空)。
+  const prevScopes = opts.keepOrder ? (() => {
+    const m = new Map();
+    document.querySelectorAll("#tw-grid .asset-card, #us-grid .asset-card, #idx-grid .asset-card").forEach((c) => {
+      const key = c.dataset.card;
+      const s = c.querySelector(".scope-btn.active")?.dataset.scope;
+      if (key && s && s !== DEFAULT_SCOPE) m.set(key, s);
+    });
+    return m;
+  })() : null;
+
   // Render each market tab's grid (台股 / 美股 / 指數含黃金)
   renderGrid("tw", snapshot.tw, "（台股清單為空）");
   renderGrid("us", snapshot.us, "（美股清單為空）");
@@ -1895,6 +1910,17 @@ function renderSnapshot(snapshot, opts = {}) {
         const n = g.querySelector('[data-card="' + CSS.escape(key) + '"]');
         if (n) g.appendChild(n);   // appendChild = move; canvas/chart 不重建 (同 applySort 機制)
       }
+    }
+  }
+
+  // 還原各卡使用者手動切的時間軸(scope) — 與 refreshOneCard(line ~2513) 相同機制: 點一下該
+  // scope-btn, 委派在 document(line 622) 的 click handler 會設 active + renderChart 重畫成該刻度。
+  // 只還原非預設的卡(通常只有使用者剛切過的 1-2 張), 不多花 render。
+  if (prevScopes && prevScopes.size) {
+    for (const [key, s] of prevScopes) {
+      const node = document.querySelector('[data-card="' + CSS.escape(key) + '"]');
+      const sb = node && node.querySelector('.scope-btn[data-scope="' + s + '"]');
+      if (sb) sb.click();
     }
   }
 }
