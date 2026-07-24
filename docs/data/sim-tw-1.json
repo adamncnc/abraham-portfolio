@@ -5,7 +5,7 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 754170.9192000001,
+    "cash_twd": 704446.1622500002,
     "realized_pnl_twd": 0.0,
     "positions": [
       {
@@ -23,10 +23,10 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 185.7,
-        "ratchet_asof": "2026-07-23",
+        "ratchet_asof": "2026-07-24",
         "fill_ref_close": 205.0,
-        "px": 211.5,
-        "px_date": "2026-07-22"
+        "px": 204.5,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "2449.TW",
@@ -43,10 +43,10 @@
         "fill_ref_close": 286.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 224.5,
-        "ratchet_asof": "2026-07-23",
-        "px": 295.0,
-        "px_date": "2026-07-22"
+        "ratchet_value": 224.65,
+        "ratchet_asof": "2026-07-24",
+        "px": 271.0,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "2330.TW",
@@ -64,56 +64,32 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 2208.5,
-        "ratchet_asof": "2026-07-23",
-        "px": 2400.0,
-        "px_date": "2026-07-22"
-      }
-    ],
-    "pending_orders": [
+        "ratchet_asof": "2026-07-24",
+        "px": 2350.0,
+        "px_date": "2026-07-24"
+      },
       {
-        "id": "passed-2026-07-23-2455.TW",
-        "placed_ts": "2026-07-23T15:21:08+08:00",
         "ticker": "2455.TW",
         "name": "全新",
-        "side": "buy",
-        "budget_twd": 50000,
-        "limit": 345.0,
+        "shares": 148,
+        "avg_price": 335.5,
+        "fill_date": "2026-07-24",
+        "fx_at_fill": 1.0,
         "stop": 250.0,
         "stop_rule": "daily_all",
+        "stop_asof": "2026-07-24",
         "group": "光通訊CPO",
-        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json",
-          "date": "2026-07-23",
-          "kind": "passed",
-          "candidate": {
-            "tk": "2455.TW",
-            "nm": "全新",
-            "group": "光通訊CPO",
-            "px": 345.0,
-            "bar": "2026-07-23",
-            "zone": "335-365",
-            "ma20": 330.07,
-            "ma50": 368.17,
-            "froth": 44.1,
-            "stab": "站回MA20",
-            "broke50": true,
-            "limit": 345.0,
-            "stop": 250,
-            "size": 50000,
-            "half": "低信心",
-            "fee_note": "",
-            "rule": "破50有企穩→帶內最高結構支撐（帶內無結構→帶中）",
-            "depth": 33.3,
-            "unevaluated": [
-              "循環見頂訊號（無法機械判定 → 人工）",
-              "查不到**未來**財報日（最近一次 2025-07-28 已過）→ 下單前必須人工確認"
-            ]
-          }
-        },
-        "target_session": "2026-07-24"
+        "cost_twd": 49725.0,
+        "fill_ref_close": 333.0,
+        "half_locked": false,
+        "ratchet_armed": false,
+        "ratchet_value": 252.9181,
+        "ratchet_asof": "2026-07-24",
+        "px": 333.0,
+        "px_date": "2026-07-24"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -168,7 +144,23 @@
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-21.json"
       },
       {
-        "ts": "2026-07-23T15:14:55+08:00",
+        "ts": "2026-07-24T14:05:21+08:00",
+        "order_id": "passed-2026-07-23-2455.TW",
+        "ticker": "2455.TW",
+        "name": "全新",
+        "action": "buy",
+        "shares": 148,
+        "price": 335.5,
+        "fee": 70.76,
+        "cost_twd": 49725.0,
+        "fill_date": "2026-07-24",
+        "fill_how": "開盤",
+        "stop": 250.0,
+        "opened": true,
+        "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
+      },
+      {
+        "ts": "2026-07-24T14:05:37+08:00",
         "ticker": "1503.TW",
         "name": "士電",
         "action": "dividend",
@@ -222,13 +214,6 @@
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [
-          {
-            "date": "2025-07-24",
-            "kind": "div",
-            "amount": 4.5,
-            "source_count": 1,
-            "key": "div:2025-07-24"
-          },
           {
             "date": "2026-07-23",
             "kind": "div",
@@ -322,6 +307,44 @@
             "amount": 6.000036,
             "source_count": 1,
             "key": "div:2026-06-11"
+          }
+        ],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "2455.TW": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "2455.TW",
+            "name": "全新",
+            "shares": 148,
+            "avg_price": 335.5,
+            "fill_date": "2026-07-24",
+            "fx_at_fill": 1.0,
+            "stop": 250.0,
+            "stop_rule": "daily_all",
+            "stop_asof": "2026-07-24",
+            "group": "光通訊CPO",
+            "cost_twd": 49725.0,
+            "fill_ref_close": 333.0,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-24",
+              "value": 250.0
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [
+          {
+            "date": "2026-06-26",
+            "kind": "div",
+            "amount": 2.620557,
+            "source_count": 1,
+            "key": "div:2026-06-26"
           }
         ],
         "splits_applied": [],
@@ -428,8 +451,20 @@
         "0050.TW": -0.95
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-24T14:05:34+08:00",
+      "nav_twd": 983146.0,
+      "return_pct": -1.69,
+      "cash_twd": 704446.0,
+      "n_positions": 4,
+      "usdtwd": 32.366,
+      "bench_return_pct": {
+        "0050.TW": -3.03
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.29999923706055,
-  "generated_at": "2026-07-23T21:20:59.183285+00:00"
+  "usdtwd": 32.356998443603516,
+  "generated_at": "2026-07-24T06:06:57.743867+00:00"
 }
