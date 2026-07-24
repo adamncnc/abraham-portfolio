@@ -23,10 +23,10 @@
         "fill_ref_close": 1784.869995,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 1545.4504,
-        "ratchet_asof": "2026-07-24",
-        "px": 1803.0,
-        "px_date": "2026-07-23"
+        "ratchet_value": 1549.9531,
+        "ratchet_asof": "2026-07-25",
+        "px": 1757.09,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "KLAC",
@@ -43,10 +43,10 @@
         "fill_ref_close": 212.75,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 162.246,
-        "ratchet_asof": "2026-07-24",
-        "px": 218.73,
-        "px_date": "2026-07-23"
+        "ratchet_value": 163.4175,
+        "ratchet_asof": "2026-07-25",
+        "px": 210.52,
+        "px_date": "2026-07-24"
       }
     ],
     "pending_orders": [],
@@ -382,8 +382,20 @@
         "SPY": -1.5
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-25T05:20:54+08:00",
+      "nav_twd": 998482.0,
+      "return_pct": -0.15,
+      "cash_twd": 860040.0,
+      "n_positions": 2,
+      "usdtwd": 32.321,
+      "bench_return_pct": {
+        "SPY": -1.34
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.356998443603516,
-  "generated_at": "2026-07-24T06:06:57.751896+00:00"
+  "usdtwd": 32.32099914550781,
+  "generated_at": "2026-07-24T21:20:58.792419+00:00"
 }

@@ -21,12 +21,12 @@
         "cost_twd": 128638.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 63.3014,
-        "ratchet_asof": "2026-07-24",
+        "ratchet_value": 63.4934,
+        "ratchet_asof": "2026-07-25",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 70.33,
-        "px_date": "2026-07-23"
+        "px": 69.43,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "NTAP",
@@ -43,10 +43,10 @@
         "fill_ref_close": 159.690002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 145.0337,
-        "ratchet_asof": "2026-07-24",
-        "px": 164.64,
-        "px_date": "2026-07-23"
+        "ratchet_value": 146.32,
+        "ratchet_asof": "2026-07-25",
+        "px": 167.74,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "NUTX",
@@ -64,9 +64,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 135.1488,
-        "ratchet_asof": "2026-07-24",
-        "px": 153.56,
-        "px_date": "2026-07-23"
+        "ratchet_asof": "2026-07-25",
+        "px": 145.87,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "BRKR",
@@ -83,10 +83,10 @@
         "fill_ref_close": 59.25,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 53.942,
-        "ratchet_asof": "2026-07-24",
-        "px": 62.15,
-        "px_date": "2026-07-23"
+        "ratchet_value": 54.0525,
+        "ratchet_asof": "2026-07-25",
+        "px": 60.45,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "BHVN",
@@ -103,10 +103,10 @@
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 12.3804,
-        "ratchet_asof": "2026-07-24",
-        "px": 14.65,
-        "px_date": "2026-07-23"
+        "ratchet_value": 12.3789,
+        "ratchet_asof": "2026-07-25",
+        "px": 14.32,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "NEO",
@@ -123,10 +123,10 @@
         "fill_ref_close": 14.45,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 12.377,
-        "ratchet_asof": "2026-07-24",
-        "px": 14.24,
-        "px_date": "2026-07-23"
+        "ratchet_value": 12.4295,
+        "ratchet_asof": "2026-07-25",
+        "px": 13.89,
+        "px_date": "2026-07-24"
       },
       {
         "ticker": "VCYT",
@@ -143,10 +143,10 @@
         "fill_ref_close": 59.529999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 50.9462,
-        "ratchet_asof": "2026-07-24",
-        "px": 57.88,
-        "px_date": "2026-07-23"
+        "ratchet_value": 51.1442,
+        "ratchet_asof": "2026-07-25",
+        "px": 56.61,
+        "px_date": "2026-07-24"
       }
     ],
     "pending_orders": [],
@@ -953,8 +953,20 @@
         "SPY": -1.5
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-25T05:20:37+08:00",
+      "nav_twd": 992454.0,
+      "return_pct": -0.75,
+      "cash_twd": 284987.0,
+      "n_positions": 7,
+      "usdtwd": 32.321,
+      "bench_return_pct": {
+        "SPY": -1.34
+      },
+      "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.356998443603516,
-  "generated_at": "2026-07-24T06:06:57.749889+00:00"
+  "usdtwd": 32.32099914550781,
+  "generated_at": "2026-07-24T21:20:58.792419+00:00"
 }

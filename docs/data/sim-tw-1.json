@@ -25,8 +25,8 @@
         "ratchet_value": 185.7,
         "ratchet_asof": "2026-07-24",
         "fill_ref_close": 205.0,
-        "px": 204.5,
-        "px_date": "2026-07-24"
+        "px": 211.5,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2449.TW",
@@ -45,8 +45,8 @@
         "ratchet_armed": false,
         "ratchet_value": 224.65,
         "ratchet_asof": "2026-07-24",
-        "px": 271.0,
-        "px_date": "2026-07-24"
+        "px": 286.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2330.TW",
@@ -65,8 +65,8 @@
         "ratchet_armed": false,
         "ratchet_value": 2208.5,
         "ratchet_asof": "2026-07-24",
-        "px": 2350.0,
-        "px_date": "2026-07-24"
+        "px": 2405.0,
+        "px_date": "2026-07-23"
       },
       {
         "ticker": "2455.TW",
@@ -85,8 +85,8 @@
         "ratchet_armed": false,
         "ratchet_value": 252.9181,
         "ratchet_asof": "2026-07-24",
-        "px": 333.0,
-        "px_date": "2026-07-24"
+        "px": 345.0,
+        "px_date": "2026-07-23"
       }
     ],
     "pending_orders": [],
@@ -160,7 +160,7 @@
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
       },
       {
-        "ts": "2026-07-24T14:05:37+08:00",
+        "ts": "2026-07-24T15:13:30+08:00",
         "ticker": "1503.TW",
         "name": "士電",
         "action": "dividend",
@@ -465,6 +465,6 @@
       "realized_pnl_twd": 0.0
     }
   ],
-  "usdtwd": 32.356998443603516,
-  "generated_at": "2026-07-24T06:06:57.743867+00:00"
+  "usdtwd": 32.32099914550781,
+  "generated_at": "2026-07-24T21:20:58.786549+00:00"
 }
