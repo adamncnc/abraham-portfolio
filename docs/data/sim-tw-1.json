@@ -203,7 +203,7 @@
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
       },
       {
-        "ts": "2026-07-27T14:05:32+08:00",
+        "ts": "2026-07-27T15:12:52+08:00",
         "ticker": "1503.TW",
         "name": "士電",
         "action": "dividend",
@@ -536,6 +536,6 @@
       "realized_pnl_twd": 0
     }
   ],
-  "usdtwd": 32.33599853515625,
-  "generated_at": "2026-07-27T06:06:53.102043+00:00"
+  "usdtwd": 32.305999755859375,
+  "generated_at": "2026-07-27T08:17:20.581585+00:00"
 }

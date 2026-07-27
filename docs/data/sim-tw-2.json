@@ -22,8 +22,8 @@
         "cost_twd": 40956.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 187.4602,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_value": 176.95,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244,
         "px": 222.5,
         "px_date": "2026-07-27"
@@ -42,8 +42,8 @@
         "cost_twd": 45966.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 58.427,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_value": 55.765,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.300003,
         "px": 63.5,
         "px_date": "2026-07-27"
@@ -61,9 +61,9 @@
         "group": "EMS",
         "cost_twd": 23494.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 28.87,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
+        "ratchet_value": 26.9875,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 32.799999,
         "px": 31.95,
         "px_date": "2026-07-27"
@@ -82,8 +82,8 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 54.195,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_value": 53.77,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 63.700001,
         "px": 63.8,
         "px_date": "2026-07-27"
@@ -101,9 +101,9 @@
         "group": "網通伺服器",
         "cost_twd": 44888.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 180.35,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
+        "ratchet_value": 174.4,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 212.5,
         "px": 212.0,
         "px_date": "2026-07-27"
@@ -122,9 +122,7 @@
         "cost_twd": 42940.0,
         "fill_ref_close": 83.300003,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 69.755,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 79.0,
         "px_date": "2026-07-27"
       },
@@ -142,9 +140,7 @@
         "cost_twd": 64985.0,
         "fill_ref_close": 125,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 116.95,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 130.0,
         "px_date": "2026-07-27"
       },
@@ -162,9 +158,7 @@
         "cost_twd": 60923.0,
         "fill_ref_close": 141.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 134.675,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 146.5,
         "px_date": "2026-07-27"
       },
@@ -182,9 +176,7 @@
         "cost_twd": 41480.0,
         "fill_ref_close": 35.650002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 29.6125,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 35.55,
         "px_date": "2026-07-27"
       },
@@ -202,9 +194,7 @@
         "cost_twd": 40738.0,
         "fill_ref_close": 1140.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 942.75,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 1105.0,
         "px_date": "2026-07-27"
       },
@@ -222,9 +212,7 @@
         "cost_twd": 41418.0,
         "fill_ref_close": 148.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 126.95,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 165.5,
         "px_date": "2026-07-27"
       },
@@ -242,9 +230,7 @@
         "cost_twd": 41364.0,
         "fill_ref_close": 215.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 168.425,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 194.0,
         "px_date": "2026-07-27"
       },
@@ -262,9 +248,7 @@
         "cost_twd": 70946.0,
         "fill_ref_close": 61.299999,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 58.205,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 64.7,
         "px_date": "2026-07-27"
       },
@@ -282,9 +266,7 @@
         "cost_twd": 41459.0,
         "fill_ref_close": 61.700001,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 50.375,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 61.7,
         "px_date": "2026-07-27"
       },
@@ -302,14 +284,89 @@
         "cost_twd": 45993.0,
         "fill_ref_close": 17.85,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 15.0075,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_armed": false,
         "px": 17.85,
         "px_date": "2026-07-27"
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-27-1810.TW",
+        "placed_ts": "2026-07-27T15:23:45+08:00",
+        "ticker": "1810.TW",
+        "name": "和成",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 26.2,
+        "stop": 23.05,
+        "stop_rule": "ta",
+        "group": "ind-08",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-27.halfsize.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-27.halfsize.json",
+          "date": "2026-07-27",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "1810",
+            "name": "和成",
+            "yf": "1810.TW",
+            "group": "ind-08",
+            "px": 26.5,
+            "ma20": 26.2,
+            "ma50": 22.47,
+            "ma200_gap": 37.8,
+            "rs63": 36.4,
+            "atr20_pct": 9.1,
+            "setup": "A回檔MA20",
+            "limit": 26.2,
+            "stop": 23.05,
+            "stop_pct": -12,
+            "budget": 41500,
+            "_full_budget": 83000,
+            "_halved_reason": "§3.4.5 首批半倉：過 1-4 關候選 4 筆 (和成/瑞昱/長榮航/大聯大) ≥3 → 每筆預算×50%"
+          }
+        },
+        "target_session": "2026-07-28"
+      },
+      {
+        "id": "actionable-2026-07-27-2379.TW",
+        "placed_ts": "2026-07-27T15:23:46+08:00",
+        "ticker": "2379.TW",
+        "name": "瑞昱",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 768.0,
+        "stop": 675.0,
+        "stop_rule": "ta",
+        "group": "ind-24",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-27.halfsize.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-27.halfsize.json",
+          "date": "2026-07-27",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2379",
+            "name": "瑞昱",
+            "yf": "2379.TW",
+            "group": "ind-24",
+            "px": 762,
+            "ma20": 768.15,
+            "ma50": 700.44,
+            "ma200_gap": 36.3,
+            "rs63": 29.3,
+            "atr20_pct": 6,
+            "setup": "A回檔MA20",
+            "limit": 768,
+            "stop": 675,
+            "stop_pct": -12,
+            "budget": 41500,
+            "_full_budget": 83000,
+            "_halved_reason": "§3.4.5 首批半倉：過 1-4 關候選 4 筆 (和成/瑞昱/長榮航/大聯大) ≥3 → 每筆預算×50%"
+          }
+        },
+        "target_session": "2026-07-28"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -910,7 +967,7 @@
         "reason": "週五收盤破認錯線 66（現64.6）→全數出清（ta weekly）"
       },
       {
-        "ts": "2026-07-27T14:06:39+08:00",
+        "ts": "2026-07-27T15:19:48+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -924,7 +981,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-07-27T14:06:39+08:00",
+        "ts": "2026-07-27T15:19:48+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -1698,8 +1755,32 @@
         "0050.TW": -3.27
       },
       "realized_pnl_twd": -23643.0
+    },
+    {
+      "ts": "2026-07-27T15:19:22+08:00",
+      "nav_twd": 978420.0,
+      "return_pct": -2.16,
+      "cash_twd": 280243.0,
+      "n_positions": 15,
+      "usdtwd": 32.301,
+      "bench_return_pct": {
+        "0050.TW": -3.27
+      },
+      "realized_pnl_twd": -23643.0
+    },
+    {
+      "ts": "2026-07-27T15:19:52+08:00",
+      "nav_twd": 978420.0,
+      "return_pct": -2.16,
+      "cash_twd": 280243.0,
+      "n_positions": 15,
+      "usdtwd": 32.301,
+      "bench_return_pct": {
+        "0050.TW": -3.27
+      },
+      "realized_pnl_twd": -23643.0
     }
   ],
-  "usdtwd": 32.33599853515625,
-  "generated_at": "2026-07-27T06:06:53.104048+00:00"
+  "usdtwd": 32.305999755859375,
+  "generated_at": "2026-07-27T08:17:20.583585+00:00"
 }
