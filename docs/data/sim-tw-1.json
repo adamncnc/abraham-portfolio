@@ -22,7 +22,7 @@
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 185.7,
+        "ratchet_value": 185.925,
         "ratchet_asof": "2026-07-27",
         "fill_ref_close": 205,
         "px": 202.0,
@@ -43,9 +43,9 @@
         "fill_ref_close": 286.5,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 224.65,
+        "ratchet_value": 228.55,
         "ratchet_asof": "2026-07-27",
-        "px": 273.0,
+        "px": 276.0,
         "px_date": "2026-07-27"
       },
       {
@@ -83,9 +83,9 @@
         "fill_ref_close": 333,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 252.9181,
+        "ratchet_value": 255.825,
         "ratchet_asof": "2026-07-27",
-        "px": 328.5,
+        "px": 326.5,
         "px_date": "2026-07-27"
       }
     ],
@@ -203,7 +203,7 @@
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
       },
       {
-        "ts": "2026-07-27T10:32:07+08:00",
+        "ts": "2026-07-27T14:05:32+08:00",
         "ticker": "1503.TW",
         "name": "士電",
         "action": "dividend",
@@ -522,8 +522,20 @@
         "0050.TW": -3.03
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-27T14:05:28+08:00",
+      "nav_twd": 982664.0,
+      "return_pct": -1.73,
+      "cash_twd": 704446.0,
+      "n_positions": 4,
+      "usdtwd": 32.34,
+      "bench_return_pct": {
+        "0050.TW": -3.27
+      },
+      "realized_pnl_twd": 0
     }
   ],
-  "usdtwd": 32.375,
-  "generated_at": "2026-07-27T05:27:26.288784+00:00"
+  "usdtwd": 32.33599853515625,
+  "generated_at": "2026-07-27T06:06:53.102043+00:00"
 }
