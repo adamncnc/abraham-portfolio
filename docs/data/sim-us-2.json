@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 284987.073320536,
-    "realized_pnl_twd": 0,
+    "cash_twd": 356061.6175158546,
+    "realized_pnl_twd": -11529.0,
     "positions": [
       {
         "ticker": "RAL",
@@ -20,13 +20,13 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 59.184,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_armed": true,
+        "ratchet_value": 63.4664,
+        "ratchet_asof": "2026-07-28",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 69.43,
-        "px_date": "2026-07-24"
+        "px": 69.83,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "NTAP",
@@ -42,27 +42,11 @@
         "cost_twd": 104184.0,
         "fill_ref_close": 159.690002,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 167.74,
-        "px_date": "2026-07-24"
-      },
-      {
-        "ticker": "NUTX",
-        "name": "Nutex Health Inc.",
-        "shares": 15,
-        "avg_price": 169.44,
-        "fill_date": "2026-07-16",
-        "fx_at_fill": 32.24700164794922,
-        "stop": 149.37,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-16",
-        "group": "Medical Care Facilities",
-        "cost_twd": 82604.0,
-        "fill_ref_close": 164.399994,
-        "half_locked": false,
-        "ratchet_armed": false,
-        "px": 145.87,
-        "px_date": "2026-07-24"
+        "ratchet_armed": true,
+        "ratchet_value": 148.1805,
+        "ratchet_asof": "2026-07-28",
+        "px": 169.8,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "BRKR",
@@ -78,9 +62,11 @@
         "cost_twd": 114656.0,
         "fill_ref_close": 59.25,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 60.45,
-        "px_date": "2026-07-24"
+        "ratchet_armed": true,
+        "ratchet_value": 54.053,
+        "ratchet_asof": "2026-07-28",
+        "px": 60.05,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "BHVN",
@@ -96,9 +82,11 @@
         "cost_twd": 82935.0,
         "fill_ref_close": 14.86,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 14.32,
-        "px_date": "2026-07-24"
+        "ratchet_armed": true,
+        "ratchet_value": 12.4838,
+        "ratchet_asof": "2026-07-28",
+        "px": 14.51,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "NEO",
@@ -114,9 +102,11 @@
         "cost_twd": 101771.0,
         "fill_ref_close": 14.45,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 13.89,
-        "px_date": "2026-07-24"
+        "ratchet_armed": true,
+        "ratchet_value": 12.4295,
+        "ratchet_asof": "2026-07-28",
+        "px": 13.14,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "VCYT",
@@ -132,60 +122,15 @@
         "cost_twd": 100226.0,
         "fill_ref_close": 59.529999,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 56.61,
-        "px_date": "2026-07-24"
+        "ratchet_armed": true,
+        "ratchet_value": 51.1442,
+        "ratchet_asof": "2026-07-28",
+        "px": 55.61,
+        "px_date": "2026-07-27"
       }
     ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-07-27-PSNL",
-        "placed_ts": "2026-07-27T07:39:08+08:00",
-        "ticker": "PSNL",
-        "name": "Personalis, Inc.",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 11.32,
-        "stop": 9.96,
-        "stop_rule": "ta",
-        "group": "Diagnostics & Research",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-27.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-27.json",
-          "date": "2026-07-27",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "PSNL",
-            "name": "Personalis, Inc.",
-            "yf": "PSNL",
-            "group": "Diagnostics & Research",
-            "px": 11.78,
-            "ma20": 13.94,
-            "ma50": 11.32,
-            "ma200_gap": 31.6,
-            "rs63": 95.4,
-            "atr20_pct": 10.5,
-            "setup": "A回檔MA50",
-            "limit": 11.32,
-            "stop": 9.96,
-            "stop_pct": -12,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-07-27"
-      }
-    ],
-    "pending_sells": [
-      {
-        "id": "sell-NUTX-2026-07-27",
-        "ticker": "NUTX",
-        "name": "Nutex Health Inc.",
-        "placed_ts": "2026-07-27T08:05:00+08:00",
-        "trigger": "stop_all",
-        "qty_rule": "all",
-        "reason": "2026-07-24 週五收盤 145.87 跌破認錯線 149.37 → 全數出清（ta weekly，§5.1）；股數成交當下重算；DM 1531082840601792552 先發後寫（§1.6-5）"
-      }
-    ],
+    "pending_orders": [],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -532,6 +477,35 @@
         "low": 9.40999984741211,
         "limit": 9.4,
         "fill_mode": null
+      },
+      {
+        "ts": "2026-07-28T05:20:31+08:00",
+        "order_id": "actionable-2026-07-27-PSNL",
+        "ticker": "PSNL",
+        "name": "Personalis, Inc.",
+        "action": "expire_unfilled",
+        "open": 11.949999809265137,
+        "low": 11.569999694824219,
+        "limit": 11.32,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-28T05:20:36+08:00",
+        "sell_id": "sell-NUTX-2026-07-27",
+        "ticker": "NUTX",
+        "name": "Nutex Health Inc.",
+        "action": "sell",
+        "shares": 15,
+        "price": 148.13,
+        "fee": 20.0,
+        "proceeds_twd": 71075.0,
+        "cost_basis_twd": 82604.0,
+        "fx": 32.278,
+        "pnl_twd": -11529.0,
+        "sell_date": "2026-07-27",
+        "qty_rule": "all",
+        "trigger": "stop_all",
+        "reason": "2026-07-24 週五收盤 145.87 跌破認錯線 149.37 → 全數出清（ta weekly，§5.1）；股數成交當下重算；DM 1531082840601792552 先發後寫（§1.6-5）"
       }
     ],
     "benchmark_spec": {
@@ -721,28 +695,8 @@
       },
       "NUTX": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "NUTX",
-            "name": "Nutex Health Inc.",
-            "shares": 15,
-            "avg_price": 169.44,
-            "fill_date": "2026-07-16",
-            "fx_at_fill": 32.24700164794922,
-            "stop": 149.37,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-16",
-            "group": "Medical Care Facilities",
-            "cost_twd": 82604,
-            "fill_ref_close": 164.39999389648438,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-16",
-              "value": 149.37
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -1000,8 +954,20 @@
         "SPY": -1.34
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-28T05:20:42+08:00",
+      "nav_twd": 987146.0,
+      "return_pct": -1.29,
+      "cash_twd": 356062.0,
+      "n_positions": 6,
+      "usdtwd": 32.278,
+      "bench_return_pct": {
+        "SPY": -1.45
+      },
+      "realized_pnl_twd": -11529.0
     }
   ],
-  "usdtwd": 32.305999755859375,
-  "generated_at": "2026-07-27T08:17:20.588585+00:00"
+  "usdtwd": 32.27799987792969,
+  "generated_at": "2026-07-27T21:21:04.098971+00:00"
 }

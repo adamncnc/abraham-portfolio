@@ -24,9 +24,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 247.9463,
-        "ratchet_asof": "2026-07-27",
-        "px": 274.35,
-        "px_date": "2026-07-24"
+        "ratchet_asof": "2026-07-28",
+        "px": 270.0,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "LRCX",
@@ -44,9 +44,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 256.095,
-        "ratchet_asof": "2026-07-27",
-        "px": 305.21,
-        "px_date": "2026-07-24"
+        "ratchet_asof": "2026-07-28",
+        "px": 291.61,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "KLAC",
@@ -64,9 +64,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 164.0575,
-        "ratchet_asof": "2026-07-27",
-        "px": 210.52,
-        "px_date": "2026-07-24"
+        "ratchet_asof": "2026-07-28",
+        "px": 203.36,
+        "px_date": "2026-07-27"
       },
       {
         "ticker": "POWI",
@@ -84,9 +84,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 57.502,
-        "ratchet_asof": "2026-07-27",
-        "px": 63.46,
-        "px_date": "2026-07-24"
+        "ratchet_asof": "2026-07-28",
+        "px": 63.41,
+        "px_date": "2026-07-27"
       }
     ],
     "pending_orders": [],
@@ -652,8 +652,20 @@
         "SPY": -1.34
       },
       "realized_pnl_twd": -20011.0
+    },
+    {
+      "ts": "2026-07-28T05:20:20+08:00",
+      "nav_twd": 951749.0,
+      "return_pct": -4.83,
+      "cash_twd": 591961.0,
+      "n_positions": 4,
+      "usdtwd": 32.278,
+      "bench_return_pct": {
+        "SPY": -1.45
+      },
+      "realized_pnl_twd": -20011.0
     }
   ],
-  "usdtwd": 32.305999755859375,
-  "generated_at": "2026-07-27T08:17:20.587585+00:00"
+  "usdtwd": 32.27799987792969,
+  "generated_at": "2026-07-27T21:21:04.096970+00:00"
 }
