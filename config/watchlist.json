@@ -263,8 +263,8 @@
       "currency": "TWD",
       "theme": "高階晶片均熱片IHS/導線架/vapor chamber",
       "notes": "高階晶片均熱片IHS/導線架/vapor chamber/液冷(AI散熱鏈核心,IHS給CPU/GPU封裝); 品質最佳=ROE30%/毛利41%/op margin32%/淨現金/D-E0.40+月營收加速(FinMind Apr+26.9%/May+37.7% YoY近record); ⚠️**6/26 EPS更正重畫進場區**: 原『fwd EPS117/PE34』錯誤(誤用Yahoo遠期EPS123), 真2026 EPS=Factset 55.78/Yahoo cu",
-      "entry_zone_lo": 2700,
-      "entry_zone_hi": 3100
+      "entry_zone_lo": 3180,
+      "entry_zone_hi": 3450
     },
     {
       "id": "gold",
@@ -303,8 +303,8 @@
       "currency": "USD",
       "theme": "NAND快閃記憶體大廠(2025/2自威騰WDC分拆",
       "notes": "NAND快閃記憶體大廠(2025/2自威騰WDC分拆;美股NasdaqGS USD); 記憶體超級循環最純NAND玩法、今早deep-read+6.4%出現→Adam明示加入; 基本面爆發=營收YoY+251%/fwd EPS 6x ramp(29→183)/fwd PE12.4/ROE39%/毛利56%/無配息; ⚠️⚠️循環股: 股價一年暴衝@~2274貼ATH2354/50日1400(+62%延伸)/200日613/>分析師mean目標1751(22家buy)=追高無邊",
-      "entry_zone_lo": 1400,
-      "entry_zone_hi": 1650
+      "entry_zone_lo": 1150,
+      "entry_zone_hi": 1350
     },
     {
       "id": "2449",
@@ -314,8 +314,8 @@
       "currency": "TWD",
       "theme": "半導體測試大廠(晶圓測試/最終測試/燒機測試/SLT)=",
       "notes": "半導體測試大廠(晶圓測試/最終測試/燒機測試/SLT)=AI賣鏟子(每顆GPU/ASIC出貨前都要測; GPU燒機需求明顯增加+ASIC測試翻倍); 6/23深析+Adam明示加入; 體質好=毛利37%/營益率27%/ROE17.6%/營收YoY+39%(Yahoo數待FinMind驗)/fwd EPS 6.51→15.47(2.4x ramp)/fwd PE21.9不貴; ⚠️近單季獲利YoY−47%(擴產折舊+短期淡)/FCF負(猛蓋測試產能); ✅這批熱門股唯一現價33",
-      "entry_zone_lo": 290,
-      "entry_zone_hi": 320
+      "entry_zone_lo": 258,
+      "entry_zone_hi": 278
     },
     {
       "id": "powi",
@@ -325,8 +325,8 @@
       "currency": "USD",
       "theme": "高壓電源轉換IC(美股NasdaqGS USD)",
       "notes": "高壓電源轉換IC(美股NasdaqGS USD); 全球唯一量產1250V/1700V高壓GaN+輝達Kyber 800V designed-in=AI機房800V供電最純玩法; 品質好=零負債/毛利54%/FCF正/配息1%; 6/26 AOSL/POWI對照深查Adam明示加入; ⚠️獲利在景氣低點=trailing PE282/2026 PE~64x/2027~46x貴; 現價$84.8>分析師mean目標$76(5家buy/median$85,近期Stifel$95 ",
-      "entry_zone_lo": 60,
-      "entry_zone_hi": 76
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "2455",
@@ -336,8 +336,8 @@
       "currency": "TWD",
       "theme": "磊晶龍頭(Visual Photonics/VPEC,T",
       "notes": "磊晶龍頭(Visual Photonics/VPEC,TWSE): 主體GaAs磊晶全球前三(市佔~26%)+光電子(InP/EML給1.6T光模組)為高成長小占比(~22.5%rev但2026E+72%); 6/26礦產戰爭文章分析Adam明示加入; InP缺貨題材受惠(中國管制銦70%/6吋InP+250%/自家剛發調價函)BUT『InP最純受惠』略誇大=主體仍GaAs; 品質好=毛利36%/op24%/ROE16%/PEG0.83/10家strong_buy mean3",
-      "entry_zone_lo": 335,
-      "entry_zone_hi": 365
+      "entry_zone_lo": 292,
+      "entry_zone_hi": 322
     },
     {
       "id": "glw",
@@ -380,8 +380,8 @@
       "currency": "USD",
       "theme": "半導體EUV曝光機獨佔(美股ADR NasdaqGS U",
       "notes": "半導體EUV曝光機獨佔(美股ADR NasdaqGS USD); 全球唯一EUV供應商=先進製程守門員(7nm↓+先進DRAM都得用); 6/26四大設備天王介紹Adam明示加入; 品質頂級ROE52%/毛利53%/配息0.5%/四檔最大市值7096億; ⚠️trailing PE62/fwd38; 現價$1841略>分析師mean$1748(+5%四檔最不延伸)/median$1787/15家strong_buy; 從ATH$1959 -6%/52w+131%/50日$16",
-      "entry_zone_lo": 1600,
-      "entry_zone_hi": 1750
+      "entry_zone_lo": 1560,
+      "entry_zone_hi": 1700
     },
     {
       "id": "lrcx",
@@ -402,8 +402,8 @@
       "currency": "USD",
       "theme": "半導體設備最全才(美股NasdaqGS USD)",
       "notes": "半導體設備最全才(美股NasdaqGS USD); 蝕刻/沉積/離子佈植/拋光/檢測幾乎都做=美國最大設備廠/最分散最穩; 6/26四大設備天王介紹Adam明示加入; 品質好ROE40%/毛利49%/獲利+34%/配息0.3%; ⚠️trailing PE63/fwd41; 現價$668站ATH$669且>分析師mean$532(+26%追高)/median$525/35家strong_buy; 52w+265%/50日$464; 進場區510-570(分析師均標帶等大回檔)",
-      "entry_zone_lo": 510,
-      "entry_zone_hi": 570
+      "entry_zone_lo": 480,
+      "entry_zone_hi": 540
     },
     {
       "id": "klac",
@@ -468,8 +468,8 @@
       "currency": "USD",
       "theme": "資料基礎設施半導體(美股NasdaqGS USD)",
       "notes": "資料基礎設施半導體(美股NasdaqGS USD); 三條AI線: ①客製ASIC/XPU(搶博通客製AI晶片生意) ②Structera CXL記憶體壓縮(CDB硬體即時壓縮,1GB當2-4倍/最高3.64x) ③光通訊/CPO/DSP/共封裝光學; **6/28 深查完成**(Adam問記憶體壓縮技術後加入→深調). 品質好=毛利51.5%/ROE16%/低負債D-E29/FCF正; **Q1 FY27(5月底)營收$24.18億+28%/資料中心76%+27%/客製晶片",
-      "entry_zone_lo": 220,
-      "entry_zone_hi": 265
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "3037",
@@ -490,8 +490,8 @@
       "currency": "TWD",
       "theme": "ABF IC載板專家(FCBGA/flip-chip",
       "notes": "ABF IC載板專家(FCBGA/flip-chip; CoPoS玻璃核心架構需ABF build-up層); 6/28 Step 11 主動發現納入(原不在清單, Adam拍板msg 1520687737). 這波找到獲利動能最猛者=EPS+530%YoY/營益率12%/D-E2.5最乾淨/rev+32%; 估值trailing PE370x假貴/fwd PE41x; 12家strong_buy mean$973<現價(略高於均標); 現$1125貼ATH$1145/50日",
-      "entry_zone_lo": 950,
-      "entry_zone_hi": 1050
+      "entry_zone_lo": 960,
+      "entry_zone_hi": 1090
     },
     {
       "id": "2049",
@@ -501,8 +501,8 @@
       "currency": "TWD",
       "theme": "機器人/線性傳動(滾珠螺桿+線性滑軌, 人形機器人關節/",
       "notes": "機器人/線性傳動(滾珠螺桿+線性滑軌, 人形機器人關節/致動器核心供應鏈); 6/28 graphify候選深查Adam納入. 情境=主題回檔(從5月高426已−28%@307/跌破季線340但站長期均線249上/52w區間~52%中段); 營收真加速(FinMind月營收YoY 2月−3%→3月+17%→4月+21%→5月+28%回升又加速)BUT獲利還弱(ROE僅4%/毛利6.5%=機具下行谷底, 貴在賭未來人形機器人放量)/預估PE~30x不離譜/trailing71x",
-      "entry_zone_lo": 270,
-      "entry_zone_hi": 300
+      "entry_zone_lo": 292,
+      "entry_zone_hi": 316
     },
     {
       "id": "6223",
@@ -512,8 +512,8 @@
       "currency": "TWD",
       "theme": "探針卡+晶圓測試(probe card/wafer te",
       "notes": "探針卡+晶圓測試(probe card/wafer test=AI賣鏟子; 吃HBM測試+矽光子CPO測試); 6/28 graphify候選深查Adam納入. 情境=結構確認貼歷史新高+froth(6/23創ATH7250/現6500@52w區間88%/比長期均線高+98%極延伸); 體質全場最強=ROE28%/毛利25%/月營收YoY+58%加速(5月MoM+28%)/earnings+70%/11家strong_buy mean7503; BUT最貴=trailingP",
-      "entry_zone_lo": 5700,
-      "entry_zone_hi": 6100
+      "entry_zone_lo": 5000,
+      "entry_zone_hi": 5550
     },
     {
       "id": "oust",
@@ -718,9 +718,9 @@
       "name": "英特爾",
       "currency": "USD",
       "theme": "代工轉機+美政府10%持股",
-      "notes": "代工轉機+美政府10%持股; 暫行區 88-98, 7/23 財報後必重畫",
-      "entry_zone_lo": 88,
-      "entry_zone_hi": 98
+      "notes": "代工轉機+美政府10%持股; ★2026-07-26 財報後重畫完成(舊暫行區 88-98 作廢). 7/23 盤後財報→7/24 單日 -7.89% 收 92.32(週線連三黑 120.35→109.84→95.04→92.32); 50日均115.27(現價低20%)/200日均65.76(現價高40%)/距ATH142.35 -35.1%/52w +346%. TTM EPS -2.09(仍虧)、淨利率-19.8%、ROE-10.7% BUT 營收+25.4%($570",
+      "entry_zone_lo": 79,
+      "entry_zone_hi": 92
     },
     {
       "id": "cohr",
@@ -730,6 +730,17 @@
       "currency": "USD",
       "theme": "光通訊/光子學垂直整合大廠(NYSE USD, InP材",
       "notes": "光通訊/光子學垂直整合大廠(NYSE USD, InP材料→雷射晶片→光收發模組); 輝達2026/3入股$2B+多年採購框架到2030=賣鏟背書; DC&Comms佔75%年增+40%, 工業25%衰退中; 7/22深調後Adam指示納入(msg 1529510317, 台帳ast-0067): 定調=生意實質轉好(連5季營收加速+毛利率35.2→37.7%連5升)但股價已先付錢(fwd PE38x/EV-EBITDA48x/一年+222%/距ATH440 -28%/破50",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "7769",
+      "type": "tw_stock",
+      "symbol": "7769.TW",
+      "name": "鴻勁",
+      "currency": "TWD",
+      "theme": "半導體測試分選機（test handler）",
+      "notes": "半導體測試分選機（test handler）；2026-07-27 Adam 指示加入。四檔測試鏈深調體質最佳：毛利56%/營益率50%/ROE36%/近零負債(D-E 0.132)/現金568億/FCF+92億；預估PE 28.8為同批最便宜；16位分析師目標9,358。⚠️進場區未設——7/30 除息54.99 + 8/3 財報，事件後才畫。⚠️內部人持股54%流通薄。",
       "entry_zone_lo": null,
       "entry_zone_hi": null
     }
