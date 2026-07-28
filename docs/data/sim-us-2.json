@@ -20,9 +20,9 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 63.4664,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
+        "ratchet_value": 59.184,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
         "px": 69.83,
@@ -42,9 +42,7 @@
         "cost_twd": 104184.0,
         "fill_ref_close": 159.690002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 148.1805,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
         "px": 169.8,
         "px_date": "2026-07-27"
       },
@@ -62,9 +60,7 @@
         "cost_twd": 114656.0,
         "fill_ref_close": 59.25,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 54.053,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
         "px": 60.05,
         "px_date": "2026-07-27"
       },
@@ -82,9 +78,7 @@
         "cost_twd": 82935.0,
         "fill_ref_close": 14.86,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 12.4838,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
         "px": 14.51,
         "px_date": "2026-07-27"
       },
@@ -102,9 +96,7 @@
         "cost_twd": 101771.0,
         "fill_ref_close": 14.45,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 12.4295,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
         "px": 13.14,
         "px_date": "2026-07-27"
       },
@@ -122,14 +114,85 @@
         "cost_twd": 100226.0,
         "fill_ref_close": 59.529999,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 51.1442,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
         "px": 55.61,
         "px_date": "2026-07-27"
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-28-PSNL",
+        "placed_ts": "2026-07-28T07:45:07+08:00",
+        "ticker": "PSNL",
+        "name": "Personalis, Inc.",
+        "side": "buy",
+        "budget_twd": 83000,
+        "limit": 11.43,
+        "stop": 10.06,
+        "stop_rule": "ta",
+        "group": "Diagnostics & Research",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
+          "date": "2026-07-28",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "PSNL",
+            "name": "Personalis, Inc.",
+            "yf": "PSNL",
+            "group": "Diagnostics & Research",
+            "px": 11.98,
+            "ma20": 13.89,
+            "ma50": 11.43,
+            "ma200_gap": 33.5,
+            "rs63": 92.9,
+            "atr20_pct": 10.1,
+            "setup": "A回檔MA50",
+            "limit": 11.43,
+            "stop": 10.06,
+            "stop_pct": -12.0,
+            "budget": 83000
+          }
+        },
+        "target_session": "2026-07-28"
+      },
+      {
+        "id": "actionable-2026-07-28-GH",
+        "placed_ts": "2026-07-28T07:45:07+08:00",
+        "ticker": "GH",
+        "name": "Guardant Health, Inc.",
+        "side": "buy",
+        "budget_twd": 85000,
+        "limit": 137.81,
+        "stop": 121.71,
+        "stop_rule": "ta",
+        "group": "Diagnostics & Research",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
+          "date": "2026-07-28",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "GH",
+            "name": "Guardant Health, Inc.",
+            "yf": "GH",
+            "group": "Diagnostics & Research",
+            "px": 145.47,
+            "ma20": 157.05,
+            "ma50": 137.81,
+            "ma200_gap": 37.8,
+            "rs63": 60.2,
+            "atr20_pct": 5.5,
+            "setup": "A回檔MA50",
+            "limit": 137.81,
+            "stop": 121.71,
+            "stop_pct": -11.7,
+            "budget": 85000
+          }
+        },
+        "target_session": "2026-07-28"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -968,6 +1031,6 @@
       "realized_pnl_twd": -11529.0
     }
   ],
-  "usdtwd": 32.27799987792969,
-  "generated_at": "2026-07-27T21:21:04.098971+00:00"
+  "usdtwd": 32.41899871826172,
+  "generated_at": "2026-07-28T06:07:32.391064+00:00"
 }
