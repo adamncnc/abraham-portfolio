@@ -22,11 +22,11 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 63.4664,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_asof": "2026-08-01",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 67.0,
-        "px_date": "2026-07-30"
+        "px": 65.37,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "NTAP",
@@ -43,10 +43,10 @@
         "fill_ref_close": 159.690002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 152.1395,
-        "ratchet_asof": "2026-07-31",
-        "px": 173.98,
-        "px_date": "2026-07-30"
+        "ratchet_value": 156.2276,
+        "ratchet_asof": "2026-08-01",
+        "px": 178.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "BRKR",
@@ -63,10 +63,10 @@
         "fill_ref_close": 59.25,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 55.7337,
-        "ratchet_asof": "2026-07-31",
-        "px": 64.34,
-        "px_date": "2026-07-30"
+        "ratchet_value": 55.733,
+        "ratchet_asof": "2026-08-01",
+        "px": 62.84,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "BHVN",
@@ -83,10 +83,10 @@
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 12.6405,
-        "ratchet_asof": "2026-07-31",
-        "px": 13.82,
-        "px_date": "2026-07-30"
+        "ratchet_value": 12.672,
+        "ratchet_asof": "2026-08-01",
+        "px": 13.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "NEO",
@@ -104,9 +104,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 13.414,
-        "ratchet_asof": "2026-07-31",
-        "px": 15.88,
-        "px_date": "2026-07-30"
+        "ratchet_asof": "2026-08-01",
+        "px": 15.29,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "VCYT",
@@ -124,9 +124,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 51.1772,
-        "ratchet_asof": "2026-07-31",
-        "px": 59.78,
-        "px_date": "2026-07-30"
+        "ratchet_asof": "2026-08-01",
+        "px": 46.32,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "TENB",
@@ -143,10 +143,10 @@
         "fill_ref_close": 32.549999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 24.1695,
-        "ratchet_asof": "2026-07-31",
-        "px": 32.55,
-        "px_date": "2026-07-30"
+        "ratchet_value": 24.2385,
+        "ratchet_asof": "2026-08-01",
+        "px": 32.64,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
@@ -1152,8 +1152,20 @@
         "SPY": -0.75
       },
       "realized_pnl_twd": -16473.0
+    },
+    {
+      "ts": "2026-08-01T05:20:41+08:00",
+      "nav_twd": 995810.0,
+      "return_pct": -0.42,
+      "cash_twd": 310452.0,
+      "n_positions": 7,
+      "usdtwd": 32.295,
+      "bench_return_pct": {
+        "SPY": -0.33
+      },
+      "realized_pnl_twd": -16473.0
     }
   ],
-  "usdtwd": 32.428001403808594,
-  "generated_at": "2026-07-31T06:07:06.850520+00:00"
+  "usdtwd": 32.29499816894531,
+  "generated_at": "2026-07-31T21:21:02.423200+00:00"
 }

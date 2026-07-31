@@ -25,8 +25,8 @@
         "ratchet_value": 189.9352,
         "ratchet_asof": "2026-07-31",
         "fill_ref_close": 244,
-        "px": 199.0,
-        "px_date": "2026-07-31"
+        "px": 188.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "8926.TW",
@@ -45,8 +45,8 @@
         "ratchet_value": 58.532,
         "ratchet_asof": "2026-07-31",
         "fill_ref_close": 67.300003,
-        "px": 59.0,
-        "px_date": "2026-07-31"
+        "px": 58.8,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2312.TW",
@@ -65,8 +65,8 @@
         "ratchet_value": 28.87,
         "ratchet_asof": "2026-07-31",
         "fill_ref_close": 32.799999,
-        "px": 30.0,
-        "px_date": "2026-07-31"
+        "px": 27.65,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2356.TW",
@@ -85,8 +85,8 @@
         "ratchet_value": 54.195,
         "ratchet_asof": "2026-07-31",
         "fill_ref_close": 63.700001,
-        "px": 61.8,
-        "px_date": "2026-07-31"
+        "px": 57.5,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2301.TW",
@@ -105,8 +105,8 @@
         "ratchet_value": 180.35,
         "ratchet_asof": "2026-07-31",
         "fill_ref_close": 212.5,
-        "px": 209.0,
-        "px_date": "2026-07-31"
+        "px": 190.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2465.TW",
@@ -125,8 +125,8 @@
         "ratchet_armed": true,
         "ratchet_value": 69.755,
         "ratchet_asof": "2026-07-31",
-        "px": 73.4,
-        "px_date": "2026-07-31"
+        "px": 67.6,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2881.TW",
@@ -145,8 +145,8 @@
         "ratchet_armed": true,
         "ratchet_value": 117.625,
         "ratchet_asof": "2026-07-31",
-        "px": 130.0,
-        "px_date": "2026-07-31"
+        "px": 124.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2377.TW",
@@ -165,8 +165,8 @@
         "ratchet_armed": true,
         "ratchet_value": 134.675,
         "ratchet_asof": "2026-07-31",
-        "px": 142.0,
-        "px_date": "2026-07-31"
+        "px": 136.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "3094.TW",
@@ -185,8 +185,8 @@
         "ratchet_armed": true,
         "ratchet_value": 29.665,
         "ratchet_asof": "2026-07-31",
-        "px": 34.85,
-        "px_date": "2026-07-31"
+        "px": 31.7,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "5536.TWO",
@@ -205,8 +205,8 @@
         "ratchet_armed": true,
         "ratchet_value": 953.55,
         "ratchet_asof": "2026-07-31",
-        "px": 925.0,
-        "px_date": "2026-07-31"
+        "px": 906.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "3362.TWO",
@@ -225,8 +225,8 @@
         "ratchet_armed": true,
         "ratchet_value": 134.125,
         "ratchet_asof": "2026-07-31",
-        "px": 172.0,
-        "px_date": "2026-07-31"
+        "px": 156.5,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2645.TW",
@@ -245,8 +245,8 @@
         "ratchet_armed": true,
         "ratchet_value": 168.425,
         "ratchet_asof": "2026-07-31",
-        "px": 183.0,
-        "px_date": "2026-07-31"
+        "px": 176.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2885.TW",
@@ -265,8 +265,8 @@
         "ratchet_armed": true,
         "ratchet_value": 60.495,
         "ratchet_asof": "2026-07-31",
-        "px": 68.1,
-        "px_date": "2026-07-31"
+        "px": 63.1,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "1301.TW",
@@ -285,8 +285,8 @@
         "ratchet_armed": true,
         "ratchet_value": 50.375,
         "ratchet_asof": "2026-07-31",
-        "px": 55.0,
-        "px_date": "2026-07-31"
+        "px": 54.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "3576.TW",
@@ -305,8 +305,8 @@
         "ratchet_armed": true,
         "ratchet_value": 15.0075,
         "ratchet_asof": "2026-07-31",
-        "px": 16.3,
-        "px_date": "2026-07-31"
+        "px": 15.65,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "1810.TW",
@@ -325,8 +325,8 @@
         "ratchet_armed": false,
         "ratchet_value": 17.53,
         "ratchet_asof": "2026-07-31",
-        "px": 24.4,
-        "px_date": "2026-07-31"
+        "px": 23.5,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "2379.TW",
@@ -345,8 +345,8 @@
         "ratchet_armed": false,
         "ratchet_value": 606.45,
         "ratchet_asof": "2026-07-31",
-        "px": 683.0,
-        "px_date": "2026-07-31"
+        "px": 697.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "1326.TW",
@@ -365,8 +365,8 @@
         "ratchet_armed": true,
         "ratchet_value": 42.325,
         "ratchet_asof": "2026-07-31",
-        "px": 57.4,
-        "px_date": "2026-07-31"
+        "px": 56.4,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "6505.TW",
@@ -385,12 +385,165 @@
         "ratchet_armed": false,
         "ratchet_value": 52.56,
         "ratchet_asof": "2026-07-31",
-        "px": 70.8,
-        "px_date": "2026-07-31"
+        "px": 71.6,
+        "px_date": "2026-07-30"
       }
     ],
-    "pending_orders": [],
-    "pending_sells": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-31-2618.TW",
+        "placed_ts": "2026-07-31T15:20:42+08:00",
+        "ticker": "2618.TW",
+        "name": "長榮航",
+        "side": "buy",
+        "budget_twd": 71500,
+        "limit": 41.7,
+        "stop": 38.75,
+        "stop_rule": "ta",
+        "group": "ind-15",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-31.halfsize-2618-6409-3702.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-31.halfsize-2618-6409-3702.json",
+          "date": "2026-07-31",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2618",
+            "name": "長榮航",
+            "yf": "2618.TW",
+            "group": "ind-15",
+            "px": 43.3,
+            "ma20": 41.72,
+            "ma50": 40.31,
+            "ma200_gap": 17.1,
+            "rs63": 18.5,
+            "atr20_pct": 3.4,
+            "setup": "A回檔MA20",
+            "limit": 41.7,
+            "stop": 38.75,
+            "stop_pct": -7.0,
+            "budget": 71500,
+            "budget_full": 143000
+          }
+        },
+        "target_session": "2026-08-03"
+      },
+      {
+        "id": "actionable-2026-07-31-6409.TW",
+        "placed_ts": "2026-07-31T15:20:42+08:00",
+        "ticker": "6409.TW",
+        "name": "旭隼",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 940.0,
+        "stop": 827.0,
+        "stop_rule": "ta",
+        "group": "ind-31",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-31.halfsize-2618-6409-3702.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-31.halfsize-2618-6409-3702.json",
+          "date": "2026-07-31",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "6409",
+            "name": "旭隼",
+            "yf": "6409.TW",
+            "group": "ind-31",
+            "px": 957.0,
+            "ma20": 1043.25,
+            "ma50": 940.66,
+            "ma200_gap": 2.2,
+            "rs63": 13.2,
+            "atr20_pct": 7.5,
+            "setup": "A回檔MA50",
+            "limit": 940.0,
+            "stop": 827.0,
+            "stop_pct": -12.0,
+            "budget": 41500,
+            "budget_full": 83000
+          }
+        },
+        "target_session": "2026-08-03"
+      },
+      {
+        "id": "actionable-2026-07-31-3702.TW",
+        "placed_ts": "2026-07-31T15:20:42+08:00",
+        "ticker": "3702.TW",
+        "name": "大聯大",
+        "side": "buy",
+        "budget_twd": 48500,
+        "limit": 112.0,
+        "stop": 100.5,
+        "stop_rule": "ta",
+        "group": "ind-29",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-31.halfsize-2618-6409-3702.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-31.halfsize-2618-6409-3702.json",
+          "date": "2026-07-31",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "3702",
+            "name": "大聯大",
+            "yf": "3702.TW",
+            "group": "ind-29",
+            "px": 112.5,
+            "ma20": 112.1,
+            "ma50": 112.42,
+            "ma200_gap": 34.1,
+            "rs63": 0.6,
+            "atr20_pct": 5.1,
+            "setup": "A回檔MA20",
+            "limit": 112.0,
+            "stop": 100.5,
+            "stop_pct": -10.3,
+            "budget": 48500,
+            "budget_full": 97000
+          }
+        },
+        "target_session": "2026-08-03"
+      }
+    ],
+    "pending_sells": [
+      {
+        "id": "stop_all-2026-07-31-6719.TW",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "placed_ts": "2026-07-31T15:40:00+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "target_session": "2026-08-03",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1532648497）。"
+      },
+      {
+        "id": "stop_all-2026-07-31-8926.TW",
+        "ticker": "8926.TW",
+        "name": "台汽電",
+        "placed_ts": "2026-07-31T15:40:00+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "target_session": "2026-08-03",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1532648497）。"
+      },
+      {
+        "id": "stop_all-2026-07-31-2312.TW",
+        "ticker": "2312.TW",
+        "name": "金寶",
+        "placed_ts": "2026-07-31T15:40:00+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "target_session": "2026-08-03",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1532648497）。"
+      },
+      {
+        "id": "stop_all-2026-07-31-5536.TWO",
+        "ticker": "5536.TWO",
+        "name": "聖暉*",
+        "placed_ts": "2026-07-31T15:40:00+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "target_session": "2026-08-03",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1532648497）。"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -1317,7 +1470,7 @@
         "reason": "日收 15.65 跌破認錯線 15.9 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
       },
       {
-        "ts": "2026-07-31T14:06:50+08:00",
+        "ts": "2026-07-31T15:11:57+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -1331,7 +1484,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-07-31T14:06:50+08:00",
+        "ts": "2026-07-31T15:11:57+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -2331,6 +2484,6 @@
       "realized_pnl_twd": -54043.0
     }
   ],
-  "usdtwd": 32.428001403808594,
-  "generated_at": "2026-07-31T06:07:06.845929+00:00"
+  "usdtwd": 32.29499816894531,
+  "generated_at": "2026-07-31T21:21:02.417688+00:00"
 }

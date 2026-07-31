@@ -24,9 +24,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 249.7523,
-        "ratchet_asof": "2026-07-31",
-        "px": 263.56,
-        "px_date": "2026-07-30"
+        "ratchet_asof": "2026-08-01",
+        "px": 262.75,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "POWI",
@@ -43,10 +43,10 @@
         "fill_ref_close": 70.870003,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 57.502,
-        "ratchet_asof": "2026-07-31",
-        "px": 60.87,
-        "px_date": "2026-07-30"
+        "ratchet_value": 58.1238,
+        "ratchet_asof": "2026-08-01",
+        "px": 60.71,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
@@ -591,8 +591,20 @@
         "SPY": -0.75
       },
       "realized_pnl_twd": -56718.0
+    },
+    {
+      "ts": "2026-08-01T05:20:21+08:00",
+      "nav_twd": 929979.0,
+      "return_pct": -7.0,
+      "cash_twd": 743846.0,
+      "n_positions": 2,
+      "usdtwd": 32.295,
+      "bench_return_pct": {
+        "SPY": -0.33
+      },
+      "realized_pnl_twd": -56718.0
     }
   ],
-  "usdtwd": 32.428001403808594,
-  "generated_at": "2026-07-31T06:07:06.849521+00:00"
+  "usdtwd": 32.29499816894531,
+  "generated_at": "2026-07-31T21:21:02.421695+00:00"
 }

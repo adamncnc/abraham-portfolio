@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 895779.2899503444,
-    "realized_pnl_twd": -5006.0,
+    "cash_twd": 913435.6991434756,
+    "realized_pnl_twd": -7688.0,
     "positions": [
       {
         "ticker": "ASML",
@@ -23,15 +23,15 @@
         "fill_ref_close": 1784.869995,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 1547.9182,
-        "ratchet_asof": "2026-07-31",
-        "px": 1651.4399,
-        "px_date": "2026-07-30"
+        "ratchet_value": 1554.3457,
+        "ratchet_asof": "2026-08-01",
+        "px": 1629.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "KLAC",
         "name": "科磊",
-        "shares": 6,
+        "shares": 3,
         "avg_price": 208.45,
         "fill_date": "2026-07-17",
         "fx_at_fill": 32.26430130004883,
@@ -39,28 +39,18 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-17",
         "group": "半導體設備",
-        "cost_twd": 40676.0,
+        "cost_twd": 20338.0,
         "fill_ref_close": 212.75,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 170.019,
-        "ratchet_asof": "2026-07-31",
-        "px": 180.33,
-        "px_date": "2026-07-30"
+        "ratchet_value": 174.3645,
+        "ratchet_asof": "2026-08-01",
+        "px": 182.82,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [
-      {
-        "id": "stop_half-2026-07-31-KLAC",
-        "ticker": "KLAC",
-        "name": "科磊",
-        "placed_ts": "2026-07-31T07:40:00+08:00",
-        "trigger": "stop_half",
-        "qty_rule": "half",
-        "reason": "日收 180.33 跌破認錯線 190.8 → 賣一半（第二次破線，前次已鎖半）；2026-07-31 07:3x check 機械判定，已 DM Adam"
-      }
-    ],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -129,7 +119,25 @@
         "reason": "日收 170.19 跌破認錯線 190.8 → 賣一半；2026-07-30 07:3x check 機械判定，已 DM Adam"
       },
       {
-        "ts": "2026-07-31T07:31:46+08:00",
+        "ts": "2026-08-01T05:20:53+08:00",
+        "sell_id": "stop_half-2026-07-31-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊",
+        "action": "sell",
+        "shares": 3,
+        "price": 188.35,
+        "fee": 20.0,
+        "proceeds_twd": 17656.0,
+        "cost_basis_twd": 20338.0,
+        "fx": 32.395,
+        "pnl_twd": -2682.0,
+        "sell_date": "2026-07-31",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 180.33 跌破認錯線 190.8 → 賣一半（第二次破線，前次已鎖半）；2026-07-31 07:3x check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-08-01T05:21:00+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -486,8 +494,20 @@
         "SPY": -0.75
       },
       "realized_pnl_twd": -5006.0
+    },
+    {
+      "ts": "2026-08-01T05:20:57+08:00",
+      "nav_twd": 983757.0,
+      "return_pct": -1.62,
+      "cash_twd": 913436.0,
+      "n_positions": 2,
+      "usdtwd": 32.295,
+      "bench_return_pct": {
+        "SPY": -0.33
+      },
+      "realized_pnl_twd": -7688.0
     }
   ],
-  "usdtwd": 32.428001403808594,
-  "generated_at": "2026-07-31T06:07:06.852521+00:00"
+  "usdtwd": 32.29499816894531,
+  "generated_at": "2026-07-31T21:21:02.425388+00:00"
 }
