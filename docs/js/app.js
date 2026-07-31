@@ -757,7 +757,15 @@ function sessionFreshLive(item, nowMs) {
 //   otherwise → last completed session's volume from the daily series (v-tail),
 //   量比 = that bar / mean(prior ≤20 v-bars). Falls back to snapshot volume/average_volume
 //   (3-month avg) while the v-tail hasn't been fetched yet — tooltip says which basis.
+// 指數沒有「成交股數」這回事 — Yahoo 對 ^TWII 一律回 0，照著印就變成「今日量 0 股 /
+// 量比 0.0×」這種看起來像真的假數字 (Adam 2026-07-31 截圖指出)。指數一律不出量能三行:
+// 寧可空白，也不給一個假的 0。ETF (EWT) 是真有量的商品，不在此列 (type=us_etf)。
+function isIndexItem(item) {
+  return !!item && item.type === "index";
+}
+
 function volumeInfo(item, nowMs) {
+  if (isIndexItem(item)) return null;
   const data = item.data || {};
   const daily = (data.history && data.history.daily) || [];
   const vbars = daily.filter((b) => b && b.v != null);
@@ -833,6 +841,7 @@ function fiveDayBase(vbars, sameDayStr) {
 }
 
 function realtimeVolInfo(item, nowMs) {
+  if (isIndexItem(item)) return null;   // 指數無成交股數 → 量比類一律空白，不印假 0
   const market = itemSessionMarket(item);
   if (!market) return null;
   const spec = SESSION_SPEC[market];
@@ -910,6 +919,7 @@ function burstFromTicks(item, spec, nowMs) {
 }
 
 function burstVolInfo(item, nowMs) {
+  if (isIndexItem(item)) return null;   // 同上：指數不做突波偵測
   const market = itemSessionMarket(item);
   if (!market) return null;
   const spec = SESSION_SPEC[market];
@@ -2454,11 +2464,12 @@ async function liveRefresh() {
         if (q.intraday && q.intraday.length) {
           next.data.history = mergeLiveIntoHistory(next.data.history, q);
         }
-        if (q.dayVolume != null) next._dayVolume = q.dayVolume;  // 今日累積量 (證交所/Yahoo)
+        // 今日累積量 (證交所/Yahoo)。指數擋掉 — 它沒有成交股數，Yahoo 給的 0 不是資料是雜訊。
+        if (q.dayVolume != null && !isIndexItem(item)) next._dayVolume = q.dayVolume;
         next._live = true;        // fresh live quote applied → green per-card badge
         next._liveTs = liveTs;    // when WE fetched (for delay calc)
         next._quoteTs = q.asOf ? q.asOf * 1000 : null;  // when the PRICE is actually from (Adam 2026-07-06)
-        if (q.dayVolume != null && next._quoteTs != null) {
+        if (q.dayVolume != null && next._quoteTs != null && !isIndexItem(item)) {
           trackVolTick(item.id, next._quoteTs, q.dayVolume, q.price);  // 突波 tick 差分 (2026-07-23)
         }
         next._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後

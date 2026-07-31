@@ -164,11 +164,24 @@ async function fetchOne(symbol) {
 // keep Yahoo for intraday history + as the fallback when MIS is unreachable/off-hours.
 // Crucially asOf = the MIS quote's own time, so the dashboard can label the price's REAL
 // time (delay ≈ 0) instead of the fetch time. (Adam 2026-07-06: 資料不對也不即時)
+// 台股「指數」也走 MIS (Adam 2026-07-31「台股指數要改用證交所即時來源」)。
+// 個股早就吃 MIS 了，指數卻被漏掉 — 因為下面的 regex 只認純數字代號，^TWII 不符合，
+// 於是大盤那張卡一直掛在 Yahoo 的 ~20 分延遲上。MIS 的 t00 頻道就是交易所自己的
+// 加權指數即時快照 (盤中每 5 秒更新、13:30 後凍結在正式收盤值)。
+const MIS_INDEX_CHANNEL = {
+  "^TWII": "tse_t00.tw",   // 發行量加權股價指數 (TAIEX)
+  "^TWOII": "otc_o00.tw",  // 櫃買指數 (目前未列在 indices.json，先備著)
+};
 function misChannel(sym) {
-  // 2330.TW → tse_2330.tw ; 6488.TWO → otc_6488.tw ; non-TW → null
+  // ^TWII → tse_t00.tw ; 2330.TW → tse_2330.tw ; 6488.TWO → otc_6488.tw ; 其他 → null
+  const idx = MIS_INDEX_CHANNEL[String(sym || "").toUpperCase()];
+  if (idx) return idx;
   const m = /^(\d{3,6})\.(TW|TWO)$/i.exec(sym || "");
   if (!m) return null;
   return (m[2].toUpperCase() === "TWO" ? "otc" : "tse") + "_" + m[1] + ".tw";
+}
+function isMisIndexChannel(ch) {
+  return ch === "tse_t00.tw" || ch === "otc_o00.tw";
 }
 function misNum(v) {
   if (v == null) return null;
@@ -181,10 +194,15 @@ function misNum(v) {
 async function fetchMisBatch(twSymbols) {
   const out = {};
   const chans = [];
-  const bySym = {};   // stock-code → yf symbol
+  const bySym = {};   // stock-code (or index code t00/o00) → yf symbol
+  const idxCodes = new Set();
   for (const s of twSymbols) {
     const ch = misChannel(s);
-    if (ch) { chans.push(ch); bySym[ch.replace(/^(tse|otc)_/, "").replace(/\.tw$/, "")] = s; }
+    if (!ch) continue;
+    const code = ch.replace(/^(tse|otc)_/, "").replace(/\.tw$/, "");
+    chans.push(ch);
+    bySym[code] = s;
+    if (isMisIndexChannel(ch)) idxCodes.add(code);
   }
   if (!chans.length) return out;
   const url = "https://mis.twse.com.tw/stock/api/getStockInfo.jsp?json=1&delay=0&_=" +
@@ -225,8 +243,11 @@ async function fetchMisBatch(twSymbols) {
       // frontend labels "closed" as 收盤 (not 慢N分). (Adam 2026-07-06: 收盤後別假裝慢N分)
       const session = nowS - asOf <= 300 ? "regular" : "closed";
       // a.v = 當日累積成交量 (張, exchange-official) → ×1000 = shares, matching yfinance units.
-      const volLots = misNum(a.v);
-      out[yf] = { price, prevClose: misNum(a.y), asOf, session, dayVolume: volLots != null ? Math.round(volLots * 1000) : null };
+      // 指數頻道沒有 a.v (指數本來就沒有「成交股數」) → isIndex 讓 caller 明確送出 null，
+      // 不要回頭去撿 Yahoo 對 ^TWII 回的 0 (那個 0 會被前端印成「今日量 0 股 / 量比 0.0×」).
+      const isIndex = idxCodes.has(code);
+      const volLots = isIndex ? null : misNum(a.v);
+      out[yf] = { price, prevClose: misNum(a.y), asOf, session, isIndex, dayVolume: volLots != null ? Math.round(volLots * 1000) : null };
     }
   } catch (e) { /* MIS unreachable → caller keeps the Yahoo quote (honest-but-delayed) */ }
   return out;
@@ -293,7 +314,8 @@ export default {
           session: m.session || "regular",   // "closed" post-13:30 → frontend shows 🕒 收盤, not 慢N分
           asOf: m.asOf,        // MIS quote time (~seconds old live / 13:30 close) → labels the price's REAL time
           intraday,
-          dayVolume: m.dayVolume != null ? m.dayVolume : (base.dayVolume ?? null),  // 證交所當日累積量 (shares); Yahoo fallback
+          // 證交所當日累積量 (shares); Yahoo fallback。指數例外: 一律 null，不撿 Yahoo 的 0。
+          dayVolume: m.isIndex ? null : (m.dayVolume != null ? m.dayVolume : (base.dayVolume ?? null)),
           src: "twse-mis",     // provenance (debugging)
         };
       }
