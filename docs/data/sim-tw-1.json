@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 704446.1622500002,
-    "realized_pnl_twd": 0,
+    "cash_twd": 704842.9622500002,
+    "realized_pnl_twd": -17.0,
     "positions": [
       {
         "ticker": "1503.TW",
@@ -22,31 +22,31 @@
         "cost_twd": 99962.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 185.925,
-        "ratchet_asof": "2026-07-27",
+        "ratchet_value": 186.225,
+        "ratchet_asof": "2026-07-29",
         "fill_ref_close": 205,
-        "px": 190.5,
-        "px_date": "2026-07-28"
+        "px": 193.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2449.TW",
         "name": "京元電KYEC",
-        "shares": 326,
-        "avg_price": 306.0,
+        "shares": 342,
+        "avg_price": 291.4286,
         "fill_date": "2026-07-17",
         "fx_at_fill": 1,
-        "stop": 258.0,
+        "stop": 244.7619,
         "stop_rule": "daily_all",
         "stop_asof": "2026-07-17",
         "group": "封測載板",
-        "cost_twd": 99898.0,
-        "fill_ref_close": 286.5,
+        "cost_twd": 99810.0,
+        "fill_ref_close": 272.857143,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 228.55,
-        "ratchet_asof": "2026-07-27",
-        "px": 236.0,
-        "px_date": "2026-07-28"
+        "ratchet_value": 216.6667,
+        "ratchet_asof": "2026-07-29",
+        "px": 223.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2330.TW",
@@ -64,9 +64,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 2208.5,
-        "ratchet_asof": "2026-07-27",
-        "px": 2280.0,
-        "px_date": "2026-07-28"
+        "ratchet_asof": "2026-07-29",
+        "px": 2390.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2455.TW",
@@ -84,9 +84,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 255.825,
-        "ratchet_asof": "2026-07-27",
-        "px": 302.5,
-        "px_date": "2026-07-28"
+        "ratchet_asof": "2026-07-29",
+        "px": 286.0,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [
@@ -203,7 +203,7 @@
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
       },
       {
-        "ts": "2026-07-27T15:12:52+08:00",
+        "ts": "2026-07-29T15:56:18+08:00",
         "ticker": "1503.TW",
         "name": "士電",
         "action": "dividend",
@@ -215,6 +215,54 @@
         "fx": 1.0,
         "cash_twd": 2300.0,
         "projection_cash_twd": 2300.0
+      },
+      {
+        "ts": "2026-07-29T15:56:18+08:00",
+        "ticker": "2449.TW",
+        "name": "京元電KYEC",
+        "action": "dividend",
+        "ex_date": "2026-07-28",
+        "projection_key": "div:2026-07-28",
+        "per_share": 1.0,
+        "per_share_yahoo": 1.0,
+        "shares_at_ex": 326,
+        "fx": 1.0,
+        "cash_twd": 326.0,
+        "projection_cash_twd": 326.0
+      },
+      {
+        "ts": "2026-07-29T15:56:18+08:00",
+        "ticker": "2449.TW",
+        "name": "京元電KYEC",
+        "action": "cash_in_lieu",
+        "date": "2026-07-28",
+        "projection_key": "lieu:split:2026-07-28",
+        "fraction": 0.3,
+        "price": 236.0,
+        "fx": 1.0,
+        "proceeds_twd": 70.8,
+        "projection_cash_twd": 70.80000000000268,
+        "cost_basis_twd": 88.0,
+        "pnl_twd": -17.0
+      },
+      {
+        "ts": "2026-07-29T15:56:18+08:00",
+        "ticker": "2449.TW",
+        "name": "京元電KYEC",
+        "action": "split",
+        "date": "2026-07-28",
+        "projection_key": "split:2026-07-28",
+        "ratio": 1.05,
+        "eligible_shares": 326,
+        "eligible_after": 342,
+        "fraction_cashed": 0.3,
+        "before": {
+          "shares": 326,
+          "avg": 306.0
+        },
+        "after": {
+          "shares": 342
+        }
       }
     ],
     "benchmark_spec": {
@@ -292,9 +340,29 @@
           ]
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [],
-        "splits_applied": [],
-        "divs_credited": []
+        "corporate_actions": [
+          {
+            "date": "2026-07-28",
+            "kind": "div",
+            "amount": 1.0,
+            "source_count": 1,
+            "key": "div:2026-07-28"
+          },
+          {
+            "date": "2026-07-28",
+            "kind": "split",
+            "ratio": 1.05,
+            "source_count": 1,
+            "key": "split:2026-07-28"
+          }
+        ],
+        "splits_applied": [
+          "2026-07-28"
+        ],
+        "divs_credited": [
+          "2026-07-28"
+        ],
+        "last_split_date": "2026-07-28"
       },
       "2330.TW": {
         "projection_origin_v2": {
@@ -536,6 +604,6 @@
       "realized_pnl_twd": 0
     }
   ],
-  "usdtwd": 32.41899871826172,
-  "generated_at": "2026-07-28T06:07:32.384065+00:00"
+  "usdtwd": 32.42100143432617,
+  "generated_at": "2026-07-31T02:44:25.524699+00:00"
 }

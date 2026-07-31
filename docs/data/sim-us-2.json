@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 356061.6175158546,
-    "realized_pnl_twd": -11529.0,
+    "cash_twd": 310452.2691001975,
+    "realized_pnl_twd": -16473.0,
     "positions": [
       {
         "ticker": "RAL",
@@ -20,13 +20,13 @@
         "group": "Electronic Equipment & Instruments",
         "cost_twd": 128638.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 59.184,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_armed": true,
+        "ratchet_value": 63.4664,
+        "ratchet_asof": "2026-07-31",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 69.83,
-        "px_date": "2026-07-27"
+        "px": 67.0,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "NTAP",
@@ -42,9 +42,11 @@
         "cost_twd": 104184.0,
         "fill_ref_close": 159.690002,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 169.8,
-        "px_date": "2026-07-27"
+        "ratchet_armed": true,
+        "ratchet_value": 152.1395,
+        "ratchet_asof": "2026-07-31",
+        "px": 173.98,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "BRKR",
@@ -60,14 +62,16 @@
         "cost_twd": 114656.0,
         "fill_ref_close": 59.25,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 60.05,
-        "px_date": "2026-07-27"
+        "ratchet_armed": true,
+        "ratchet_value": 55.7337,
+        "ratchet_asof": "2026-07-31",
+        "px": 64.34,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "BHVN",
         "name": "Biohaven Ltd. Common Shares",
-        "shares": 170,
+        "shares": 85,
         "avg_price": 14.99,
         "fill_date": "2026-07-20",
         "fx_at_fill": 32.28099822998047,
@@ -75,12 +79,14 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-20",
         "group": "Biotechnology",
-        "cost_twd": 82935.0,
+        "cost_twd": 41468.0,
         "fill_ref_close": 14.86,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 14.51,
-        "px_date": "2026-07-27"
+        "ratchet_armed": true,
+        "ratchet_value": 12.6405,
+        "ratchet_asof": "2026-07-31",
+        "px": 13.82,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "NEO",
@@ -96,9 +102,11 @@
         "cost_twd": 101771.0,
         "fill_ref_close": 14.45,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 13.14,
-        "px_date": "2026-07-27"
+        "ratchet_armed": true,
+        "ratchet_value": 13.414,
+        "ratchet_asof": "2026-07-31",
+        "px": 15.88,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "VCYT",
@@ -114,85 +122,34 @@
         "cost_twd": 100226.0,
         "fill_ref_close": 59.529999,
         "half_locked": false,
-        "ratchet_armed": false,
-        "px": 55.61,
-        "px_date": "2026-07-27"
-      }
-    ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-07-28-PSNL",
-        "placed_ts": "2026-07-28T07:45:07+08:00",
-        "ticker": "PSNL",
-        "name": "Personalis, Inc.",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 11.43,
-        "stop": 10.06,
-        "stop_rule": "ta",
-        "group": "Diagnostics & Research",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
-          "date": "2026-07-28",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "PSNL",
-            "name": "Personalis, Inc.",
-            "yf": "PSNL",
-            "group": "Diagnostics & Research",
-            "px": 11.98,
-            "ma20": 13.89,
-            "ma50": 11.43,
-            "ma200_gap": 33.5,
-            "rs63": 92.9,
-            "atr20_pct": 10.1,
-            "setup": "A回檔MA50",
-            "limit": 11.43,
-            "stop": 10.06,
-            "stop_pct": -12.0,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-07-28"
+        "ratchet_armed": true,
+        "ratchet_value": 51.1772,
+        "ratchet_asof": "2026-07-31",
+        "px": 59.78,
+        "px_date": "2026-07-30"
       },
       {
-        "id": "actionable-2026-07-28-GH",
-        "placed_ts": "2026-07-28T07:45:07+08:00",
-        "ticker": "GH",
-        "name": "Guardant Health, Inc.",
-        "side": "buy",
-        "budget_twd": 85000,
-        "limit": 137.81,
-        "stop": 121.71,
+        "ticker": "TENB",
+        "name": "Tenable Holdings, Inc.",
+        "shares": 90,
+        "avg_price": 27.95,
+        "fill_date": "2026-07-30",
+        "fx_at_fill": 32.393001556396484,
+        "stop": 27.69,
         "stop_rule": "ta",
-        "group": "Diagnostics & Research",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-07-28.json",
-          "date": "2026-07-28",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "GH",
-            "name": "Guardant Health, Inc.",
-            "yf": "GH",
-            "group": "Diagnostics & Research",
-            "px": 145.47,
-            "ma20": 157.05,
-            "ma50": 137.81,
-            "ma200_gap": 37.8,
-            "rs63": 60.2,
-            "atr20_pct": 5.5,
-            "setup": "A回檔MA50",
-            "limit": 137.81,
-            "stop": 121.71,
-            "stop_pct": -11.7,
-            "budget": 85000
-          }
-        },
-        "target_session": "2026-07-28"
+        "stop_asof": "2026-07-30",
+        "group": "Software - Infrastructure",
+        "cost_twd": 82132.0,
+        "fill_ref_close": 32.549999,
+        "half_locked": false,
+        "ratchet_armed": true,
+        "ratchet_value": 24.1695,
+        "ratchet_asof": "2026-07-31",
+        "px": 32.55,
+        "px_date": "2026-07-30"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -569,6 +526,106 @@
         "qty_rule": "all",
         "trigger": "stop_all",
         "reason": "2026-07-24 週五收盤 145.87 跌破認錯線 149.37 → 全數出清（ta weekly，§5.1）；股數成交當下重算；DM 1531082840601792552 先發後寫（§1.6-5）"
+      },
+      {
+        "ts": "2026-07-29T05:20:28+08:00",
+        "order_id": "actionable-2026-07-28-PSNL",
+        "ticker": "PSNL",
+        "name": "Personalis, Inc.",
+        "action": "expire_unfilled",
+        "open": 11.819999694824219,
+        "low": 11.550000190734863,
+        "limit": 11.43,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-29T05:20:28+08:00",
+        "order_id": "actionable-2026-07-28-GH",
+        "ticker": "GH",
+        "name": "Guardant Health, Inc.",
+        "action": "expire_unfilled",
+        "open": 145.4499969482422,
+        "low": 141.3300018310547,
+        "limit": 137.81,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-30T05:20:29+08:00",
+        "order_id": "actionable-2026-07-29-QURE",
+        "ticker": "QURE",
+        "name": "uniQure N.V.",
+        "action": "expire_unfilled",
+        "open": 38.16999816894531,
+        "low": 38.0,
+        "limit": 35.73,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-31T05:20:28+08:00",
+        "order_id": "actionable-2026-07-30-PSNL",
+        "ticker": "PSNL",
+        "name": "Personalis, Inc.",
+        "action": "expire_unfilled",
+        "open": 11.890000343322754,
+        "low": 11.84000015258789,
+        "limit": 11.64,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-31T05:20:28+08:00",
+        "order_id": "actionable-2026-07-30-GH",
+        "ticker": "GH",
+        "name": "Guardant Health, Inc.",
+        "action": "expire_unfilled",
+        "open": 146.1300048828125,
+        "low": 145.4550018310547,
+        "limit": 139.7,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-31T05:20:28+08:00",
+        "order_id": "actionable-2026-07-30-ULCC",
+        "ticker": "ULCC",
+        "name": "Frontier Group Holdings, Inc.",
+        "action": "expire_unfilled",
+        "open": 6.699999809265137,
+        "low": 6.579999923706055,
+        "limit": 6.38,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-07-31T05:20:28+08:00",
+        "order_id": "actionable-2026-07-30-TENB",
+        "ticker": "TENB",
+        "name": "Tenable Holdings, Inc.",
+        "action": "buy",
+        "shares": 90,
+        "price": 27.95,
+        "fee": 20.0,
+        "cost_twd": 82132.0,
+        "fill_date": "2026-07-30",
+        "fill_how": "開盤",
+        "stop": 27.69,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.us2-pick-2026-07-30.json"
+      },
+      {
+        "ts": "2026-07-31T05:20:34+08:00",
+        "sell_id": "stop_half-2026-07-30-BHVN",
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "action": "sell",
+        "shares": 85,
+        "price": 13.5,
+        "fee": 20.0,
+        "proceeds_twd": 36523.0,
+        "cost_basis_twd": 41468.0,
+        "fx": 32.393,
+        "pnl_twd": -4944.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 13.43 跌破認錯線 13.49 → 賣一半；2026-07-30 07:3x check 機械判定，已 DM Adam"
       }
     ],
     "benchmark_spec": {
@@ -855,6 +912,36 @@
         "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
+      },
+      "TENB": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "TENB",
+            "name": "Tenable Holdings, Inc.",
+            "shares": 90,
+            "avg_price": 27.95,
+            "fill_date": "2026-07-30",
+            "fx_at_fill": 32.393001556396484,
+            "stop": 27.69,
+            "stop_rule": "ta",
+            "stop_asof": "2026-07-30",
+            "group": "Software - Infrastructure",
+            "cost_twd": 82132.0,
+            "fill_ref_close": 32.54999923706055,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-07-30",
+              "value": 27.69
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -1029,8 +1116,44 @@
         "SPY": -1.45
       },
       "realized_pnl_twd": -11529.0
+    },
+    {
+      "ts": "2026-07-29T05:20:38+08:00",
+      "nav_twd": 991381.0,
+      "return_pct": -0.86,
+      "cash_twd": 356062.0,
+      "n_positions": 6,
+      "usdtwd": 32.359,
+      "bench_return_pct": {
+        "SPY": -0.96
+      },
+      "realized_pnl_twd": -11529.0
+    },
+    {
+      "ts": "2026-07-30T05:20:39+08:00",
+      "nav_twd": 998118.0,
+      "return_pct": -0.19,
+      "cash_twd": 356062.0,
+      "n_positions": 6,
+      "usdtwd": 32.342,
+      "bench_return_pct": {
+        "SPY": -2.54
+      },
+      "realized_pnl_twd": -11529.0
+    },
+    {
+      "ts": "2026-07-31T05:20:40+08:00",
+      "nav_twd": 1029830.0,
+      "return_pct": 2.98,
+      "cash_twd": 310452.0,
+      "n_positions": 7,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": -0.75
+      },
+      "realized_pnl_twd": -16473.0
     }
   ],
-  "usdtwd": 32.41899871826172,
-  "generated_at": "2026-07-28T06:07:32.391064+00:00"
+  "usdtwd": 32.42100143432617,
+  "generated_at": "2026-07-31T02:44:25.530709+00:00"
 }

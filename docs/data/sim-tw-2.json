@@ -5,13 +5,13 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 197954.6856117536,
-    "realized_pnl_twd": -23643.0,
+    "cash_twd": 295468.75887910044,
+    "realized_pnl_twd": -42329.0,
     "positions": [
       {
         "ticker": "6719.TW",
         "name": "力智",
-        "shares": 169,
+        "shares": 85,
         "avg_price": 242.0,
         "fill_date": "2026-07-14",
         "fx_at_fill": 1,
@@ -19,14 +19,14 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
         "group": "IC設計電源",
-        "cost_twd": 40956.0,
+        "cost_twd": 20599.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 187.4602,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_value": 176.95,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244,
-        "px": 208.5,
-        "px_date": "2026-07-28"
+        "px": 196.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "8926.TW",
@@ -42,16 +42,16 @@
         "cost_twd": 45966.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 58.532,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_value": 55.765,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.300003,
-        "px": 61.9,
-        "px_date": "2026-07-28"
+        "px": 59.9,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2312.TW",
         "name": "金寶",
-        "shares": 689,
+        "shares": 345,
         "avg_price": 34.05,
         "fill_date": "2026-07-14",
         "fx_at_fill": 1,
@@ -59,14 +59,14 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
         "group": "EMS",
-        "cost_twd": 23494.0,
+        "cost_twd": 11764.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 28.87,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
+        "ratchet_value": 26.9875,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 32.799999,
-        "px": 29.7,
-        "px_date": "2026-07-28"
+        "px": 29.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2356.TW",
@@ -82,16 +82,16 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 54.195,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_value": 53.77,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 63.700001,
-        "px": 58.8,
-        "px_date": "2026-07-28"
+        "px": 61.2,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2301.TW",
         "name": "光寶科",
-        "shares": 208,
+        "shares": 104,
         "avg_price": 215.5,
         "fill_date": "2026-07-14",
         "fx_at_fill": 1,
@@ -99,14 +99,14 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
         "group": "網通伺服器",
-        "cost_twd": 44888.0,
+        "cost_twd": 22444.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 180.35,
-        "ratchet_asof": "2026-07-28",
+        "ratchet_armed": false,
+        "ratchet_value": 174.4,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 212.5,
-        "px": 194.0,
-        "px_date": "2026-07-28"
+        "px": 209.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2465.TW",
@@ -122,11 +122,9 @@
         "cost_twd": 42940.0,
         "fill_ref_close": 83.300003,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 69.755,
-        "ratchet_asof": "2026-07-28",
-        "px": 74.6,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 72.9,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2881.TW",
@@ -142,11 +140,9 @@
         "cost_twd": 64985.0,
         "fill_ref_close": 125,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 117.025,
-        "ratchet_asof": "2026-07-28",
-        "px": 125.5,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 128.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2377.TW",
@@ -162,16 +158,14 @@
         "cost_twd": 60923.0,
         "fill_ref_close": 141.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 134.675,
-        "ratchet_asof": "2026-07-28",
-        "px": 139.0,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 140.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3094.TW",
         "name": "聯傑",
-        "shares": 1149,
+        "shares": 575,
         "avg_price": 36.05,
         "fill_date": "2026-07-20",
         "fx_at_fill": 1.0,
@@ -179,19 +173,17 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-20",
         "group": "ind-24",
-        "cost_twd": 41480.0,
+        "cost_twd": 20758.0,
         "fill_ref_close": 35.650002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 29.665,
-        "ratchet_asof": "2026-07-28",
-        "px": 32.8,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 34.85,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "5536.TWO",
         "name": "聖暉*",
-        "shares": 36,
+        "shares": 18,
         "avg_price": 1130.0,
         "fill_date": "2026-07-20",
         "fx_at_fill": 1.0,
@@ -199,14 +191,12 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-20",
         "group": "ind-31",
-        "cost_twd": 40738.0,
+        "cost_twd": 20369.0,
         "fill_ref_close": 1140.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 946.5,
-        "ratchet_asof": "2026-07-28",
-        "px": 1015.0,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 923.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3362.TWO",
@@ -222,16 +212,14 @@
         "cost_twd": 41418.0,
         "fill_ref_close": 148.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 126.95,
-        "ratchet_asof": "2026-07-28",
-        "px": 158.0,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 169.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2645.TW",
         "name": "長榮航太",
-        "shares": 201,
+        "shares": 101,
         "avg_price": 205.5,
         "fill_date": "2026-07-21",
         "fx_at_fill": 1.0,
@@ -239,14 +227,12 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-21",
         "group": "ind-15",
-        "cost_twd": 41364.0,
+        "cost_twd": 20785.0,
         "fill_ref_close": 215.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 168.425,
-        "ratchet_asof": "2026-07-28",
-        "px": 185.5,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 182.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2885.TW",
@@ -262,11 +248,9 @@
         "cost_twd": 70946.0,
         "fill_ref_close": 61.299999,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 58.205,
-        "ratchet_asof": "2026-07-28",
-        "px": 63.5,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 67.6,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1301.TW",
@@ -282,11 +266,9 @@
         "cost_twd": 41459.0,
         "fill_ref_close": 61.700001,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 50.375,
-        "ratchet_asof": "2026-07-28",
-        "px": 57.5,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 55.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3576.TW",
@@ -302,11 +284,9 @@
         "cost_twd": 45993.0,
         "fill_ref_close": 17.85,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 15.0075,
-        "ratchet_asof": "2026-07-28",
-        "px": 16.85,
-        "px_date": "2026-07-28"
+        "ratchet_armed": false,
+        "px": 16.5,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1810.TW",
@@ -323,10 +303,8 @@
         "fill_ref_close": 24.85,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 17.53,
-        "ratchet_asof": "2026-07-28",
-        "px": 24.85,
-        "px_date": "2026-07-28"
+        "px": 24.3,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2379.TW",
@@ -343,14 +321,194 @@
         "fill_ref_close": 731.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 598.7,
-        "ratchet_asof": "2026-07-28",
-        "px": 731.0,
-        "px_date": "2026-07-28"
+        "px": 668.0,
+        "px_date": "2026-07-31"
       }
     ],
-    "pending_orders": [],
-    "pending_sells": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-07-29-1326.TW",
+        "placed_ts": "2026-07-29T15:27:33+08:00",
+        "ticker": "1326.TW",
+        "name": "台化",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 56.5,
+        "stop": 49.7,
+        "stop_rule": "ta",
+        "group": "ind-03",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-29.halfsize-1326.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-29.halfsize-1326.json",
+          "date": "2026-07-29",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "1326",
+            "name": "台化",
+            "yf": "1326.TW",
+            "group": "ind-03",
+            "px": 58.5,
+            "ma20": 65.33,
+            "ma50": 56.6,
+            "ma200_gap": 36.4,
+            "rs63": 12.5,
+            "atr20_pct": 8.7,
+            "setup": "A回檔MA50",
+            "limit": 56.5,
+            "stop": 49.7,
+            "stop_pct": -12.0,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-30"
+      },
+      {
+        "id": "actionable-2026-07-30-6505.TW",
+        "placed_ts": "2026-07-30T15:25:04+08:00",
+        "ticker": "6505.TW",
+        "name": "台塑化",
+        "side": "buy",
+        "budget_twd": 41500,
+        "limit": 72.0,
+        "stop": 63.3,
+        "stop_rule": "ta",
+        "group": "ind-23",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-30.halfsize-6505-2618.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-30.halfsize-6505-2618.json",
+          "date": "2026-07-30",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "6505",
+            "name": "台塑化",
+            "yf": "6505.TW",
+            "group": "ind-23",
+            "px": 71.6,
+            "ma20": 72.09,
+            "ma50": 60.58,
+            "ma200_gap": 34.1,
+            "rs63": 31.0,
+            "atr20_pct": 8.4,
+            "setup": "A回檔MA20",
+            "limit": 72.0,
+            "stop": 63.3,
+            "stop_pct": -12.0,
+            "budget": 41500
+          }
+        },
+        "target_session": "2026-07-31"
+      },
+      {
+        "id": "actionable-2026-07-30-2618.TW",
+        "placed_ts": "2026-07-30T15:25:04+08:00",
+        "ticker": "2618.TW",
+        "name": "長榮航",
+        "side": "buy",
+        "budget_twd": 74500,
+        "limit": 41.7,
+        "stop": 38.9,
+        "stop_rule": "ta",
+        "group": "ind-15",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-30.halfsize-6505-2618.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-30.halfsize-6505-2618.json",
+          "date": "2026-07-30",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2618",
+            "name": "長榮航",
+            "yf": "2618.TW",
+            "group": "ind-15",
+            "px": 41.75,
+            "ma20": 41.75,
+            "ma50": 40.13,
+            "ma200_gap": 13.0,
+            "rs63": 21.2,
+            "atr20_pct": 3.3,
+            "setup": "A回檔MA20",
+            "limit": 41.7,
+            "stop": 38.9,
+            "stop_pct": -6.7,
+            "budget": 74500
+          }
+        },
+        "target_session": "2026-07-31"
+      }
+    ],
+    "pending_sells": [
+      {
+        "id": "stop_half-2026-07-30-6719",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 188.0 跌破認錯線 207.9017 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-8926",
+        "ticker": "8926.TW",
+        "name": "台汽電",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 58.8 跌破認錯線 60.6 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-2312",
+        "ticker": "2312.TW",
+        "name": "金寶",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 27.65 跌破認錯線 30.45 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-2301",
+        "ticker": "2301.TW",
+        "name": "光寶科",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 190.0 跌破認錯線 192.0 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-2465",
+        "ticker": "2465.TW",
+        "name": "麗臺",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 67.6 跌破認錯線 71.2 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-5536",
+        "ticker": "5536.TWO",
+        "name": "聖暉*",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 906.0 跌破認錯線 994.0 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-2645",
+        "ticker": "2645.TW",
+        "name": "長榮航太",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 176.0 跌破認錯線 182.5 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "id": "stop_half-2026-07-30-3576",
+        "ticker": "3576.TW",
+        "name": "聯合再生",
+        "placed_ts": "2026-07-30T15:35:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 15.65 跌破認錯線 15.9 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -982,7 +1140,115 @@
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-07-27.halfsize.json"
       },
       {
-        "ts": "2026-07-28T14:07:12+08:00",
+        "ts": "2026-07-30T14:06:04+08:00",
+        "sell_id": "stop_half-2026-07-29-6719.TW",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "action": "sell",
+        "shares": 84,
+        "price": 198.0,
+        "fee": 73.6,
+        "proceeds_twd": 16558.0,
+        "cost_basis_twd": 20357.0,
+        "fx": 1.0,
+        "pnl_twd": -3798.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 199.0 跌破認錯線 207.9017（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-30T14:06:04+08:00",
+        "sell_id": "stop_half-2026-07-29-2312.TW",
+        "ticker": "2312.TW",
+        "name": "金寶",
+        "action": "sell",
+        "shares": 344,
+        "price": 28.8,
+        "fee": 49.72,
+        "proceeds_twd": 9857.0,
+        "cost_basis_twd": 11730.0,
+        "fx": 1.0,
+        "pnl_twd": -1872.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 29.1 跌破認錯線 30.45（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-30T14:06:05+08:00",
+        "sell_id": "stop_half-2026-07-29-2301.TW",
+        "ticker": "2301.TW",
+        "name": "光寶科",
+        "action": "sell",
+        "shares": 104,
+        "price": 185.0,
+        "fee": 85.14,
+        "proceeds_twd": 19155.0,
+        "cost_basis_twd": 22444.0,
+        "fx": 1.0,
+        "pnl_twd": -3289.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 185.0 跌破認錯線 192.0（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-30T14:06:05+08:00",
+        "sell_id": "stop_half-2026-07-29-3094.TW",
+        "ticker": "3094.TW",
+        "name": "聯傑",
+        "action": "sell",
+        "shares": 574,
+        "price": 30.3,
+        "fee": 76.96,
+        "proceeds_twd": 17315.0,
+        "cost_basis_twd": 20722.0,
+        "fx": 1.0,
+        "pnl_twd": -3407.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 30.75 跌破認錯線 31.7（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-30T14:06:05+08:00",
+        "sell_id": "stop_half-2026-07-29-5536.TWO",
+        "ticker": "5536.TWO",
+        "name": "聖暉*",
+        "action": "sell",
+        "shares": 18,
+        "price": 924.0,
+        "fee": 73.6,
+        "proceeds_twd": 16558.0,
+        "cost_basis_twd": 20369.0,
+        "fx": 1.0,
+        "pnl_twd": -3811.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 944.0 跌破認錯線 994.0（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-30T14:06:05+08:00",
+        "sell_id": "stop_half-2026-07-29-2645.TW",
+        "ticker": "2645.TW",
+        "name": "長榮航太",
+        "action": "sell",
+        "shares": 100,
+        "price": 181.5,
+        "fee": 80.31,
+        "proceeds_twd": 18070.0,
+        "cost_basis_twd": 20579.0,
+        "fx": 1.0,
+        "pnl_twd": -2509.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 182.0 跌破認錯線 182.5（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-30T15:16:34+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -996,7 +1262,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-07-28T14:07:12+08:00",
+        "ts": "2026-07-30T15:16:34+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -1882,8 +2148,32 @@
         "0050.TW": -7.35
       },
       "realized_pnl_twd": -23643.0
+    },
+    {
+      "ts": "2026-07-29T14:06:30+08:00",
+      "nav_twd": 925630.0,
+      "return_pct": -7.44,
+      "cash_twd": 197955.0,
+      "n_positions": 17,
+      "usdtwd": 32.421,
+      "bench_return_pct": {
+        "0050.TW": -10.62
+      },
+      "realized_pnl_twd": -23643.0
+    },
+    {
+      "ts": "2026-07-30T14:06:28+08:00",
+      "nav_twd": 907514.0,
+      "return_pct": -9.25,
+      "cash_twd": 295469.0,
+      "n_positions": 17,
+      "usdtwd": 32.457,
+      "bench_return_pct": {
+        "0050.TW": -10.81
+      },
+      "realized_pnl_twd": -42329.0
     }
   ],
-  "usdtwd": 32.41899871826172,
-  "generated_at": "2026-07-28T06:07:32.386065+00:00"
+  "usdtwd": 32.42100143432617,
+  "generated_at": "2026-07-31T02:44:25.526202+00:00"
 }

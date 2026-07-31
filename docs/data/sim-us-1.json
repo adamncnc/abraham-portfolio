@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 591960.8622655154,
-    "realized_pnl_twd": -20011.0,
+    "cash_twd": 743845.8102065114,
+    "realized_pnl_twd": -56718.0,
     "positions": [
       {
         "ticker": "CEG",
@@ -23,50 +23,10 @@
         "fill_ref_close": 256.429993,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 247.9463,
-        "ratchet_asof": "2026-07-28",
-        "px": 270.0,
-        "px_date": "2026-07-27"
-      },
-      {
-        "ticker": "LRCX",
-        "name": "科林Lam",
-        "shares": 8,
-        "avg_price": 346.1,
-        "fill_date": "2026-07-15",
-        "fx_at_fill": 32.143001556396484,
-        "stop": 280.0,
-        "stop_rule": "daily_all",
-        "stop_asof": "2026-07-15",
-        "group": "半導體設備",
-        "cost_twd": 89640.0,
-        "fill_ref_close": 335.429993,
-        "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 256.095,
-        "ratchet_asof": "2026-07-28",
-        "px": 291.61,
-        "px_date": "2026-07-27"
-      },
-      {
-        "ticker": "KLAC",
-        "name": "科磊KLA",
-        "shares": 14,
-        "avg_price": 217.76,
-        "fill_date": "2026-07-16",
-        "fx_at_fill": 32.24700164794922,
-        "stop": 180.0,
-        "stop_rule": "daily_all",
-        "stop_asof": "2026-07-16",
-        "group": "半導體設備",
-        "cost_twd": 98952.0,
-        "fill_ref_close": 219.369995,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 164.0575,
-        "ratchet_asof": "2026-07-28",
-        "px": 203.36,
-        "px_date": "2026-07-27"
+        "ratchet_value": 249.7523,
+        "ratchet_asof": "2026-07-31",
+        "px": 263.56,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "POWI",
@@ -84,9 +44,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 57.502,
-        "ratchet_asof": "2026-07-28",
-        "px": 63.41,
-        "px_date": "2026-07-27"
+        "ratchet_asof": "2026-07-31",
+        "px": 60.87,
+        "px_date": "2026-07-30"
       }
     ],
     "pending_orders": [],
@@ -229,6 +189,42 @@
         "stop": 55.0,
         "opened": true,
         "reason": "pipeline passed；來源 C:\\Users\\Adam\\Abraham\\.book1-gates-2026-07-23.json"
+      },
+      {
+        "ts": "2026-07-30T05:20:13+08:00",
+        "sell_id": "LRCX-2026-07-29T07:44:57+08:00-stop_all",
+        "ticker": "LRCX",
+        "name": "科林Lam",
+        "action": "sell",
+        "shares": 8,
+        "price": 264.51,
+        "fee": 20.0,
+        "proceeds_twd": 67791.0,
+        "cost_basis_twd": 89640.0,
+        "fx": 32.342,
+        "pnl_twd": -21849.0,
+        "sell_date": "2026-07-29",
+        "qty_rule": "all",
+        "trigger": "stop_all",
+        "reason": "日收 269.61 < 認錯線 280（daily_all，§5.1 倉1 hunt-list stop）"
+      },
+      {
+        "ts": "2026-07-31T05:20:11+08:00",
+        "sell_id": "stop_all-2026-07-30-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊KLA",
+        "action": "sell",
+        "shares": 14,
+        "price": 186.86,
+        "fee": 20.0,
+        "proceeds_twd": 84094.0,
+        "cost_basis_twd": 98952.0,
+        "fx": 32.393,
+        "pnl_twd": -14858.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "all",
+        "trigger": "stop_all",
+        "reason": "日收 170.19 跌破認錯線 180.0 → 全數出清；2026-07-30 07:3x check 機械判定，已 DM Adam"
       }
     ],
     "benchmark_spec": {
@@ -309,126 +305,21 @@
       },
       "LRCX": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "LRCX",
-            "name": "科林Lam",
-            "shares": 8,
-            "avg_price": 346.1,
-            "fill_date": "2026-07-15",
-            "fx_at_fill": 32.143001556396484,
-            "stop": 280,
-            "stop_rule": "daily_all",
-            "stop_asof": "2026-07-15",
-            "group": "半導體設備",
-            "cost_twd": 89640,
-            "fill_ref_close": 335.42999267578125,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-15",
-              "value": 280
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-09-24",
-            "kind": "div",
-            "amount": 0.26,
-            "source_count": 1,
-            "key": "div:2025-09-24"
-          },
-          {
-            "date": "2025-12-03",
-            "kind": "div",
-            "amount": 0.26,
-            "source_count": 1,
-            "key": "div:2025-12-03"
-          },
-          {
-            "date": "2026-03-04",
-            "kind": "div",
-            "amount": 0.26,
-            "source_count": 1,
-            "key": "div:2026-03-04"
-          },
-          {
-            "date": "2026-06-17",
-            "kind": "div",
-            "amount": 0.26,
-            "source_count": 1,
-            "key": "div:2026-06-17"
-          }
-        ],
+        "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
       },
       "KLAC": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "KLAC",
-            "name": "科磊KLA",
-            "shares": 14,
-            "avg_price": 217.76,
-            "fill_date": "2026-07-16",
-            "fx_at_fill": 32.24700164794922,
-            "stop": 180,
-            "stop_rule": "daily_all",
-            "stop_asof": "2026-07-16",
-            "group": "半導體設備",
-            "cost_twd": 98952,
-            "fill_ref_close": 219.3699951171875,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-16",
-              "value": 180
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-08-18",
-            "kind": "div",
-            "amount": 0.19,
-            "source_count": 1,
-            "key": "div:2025-08-18"
-          },
-          {
-            "date": "2025-11-17",
-            "kind": "div",
-            "amount": 0.19,
-            "source_count": 1,
-            "key": "div:2025-11-17"
-          },
-          {
-            "date": "2026-02-17",
-            "kind": "div",
-            "amount": 0.19,
-            "source_count": 1,
-            "key": "div:2026-02-17"
-          },
-          {
-            "date": "2026-05-18",
-            "kind": "div",
-            "amount": 0.23,
-            "source_count": 1,
-            "key": "div:2026-05-18"
-          },
-          {
-            "date": "2026-06-12",
-            "kind": "split",
-            "ratio": 10.0,
-            "source_count": 1,
-            "key": "split:2026-06-12"
-          }
-        ],
+        "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
       },
@@ -664,8 +555,44 @@
         "SPY": -1.45
       },
       "realized_pnl_twd": -20011.0
+    },
+    {
+      "ts": "2026-07-29T05:20:17+08:00",
+      "nav_twd": 931456.0,
+      "return_pct": -6.85,
+      "cash_twd": 591961.0,
+      "n_positions": 4,
+      "usdtwd": 32.359,
+      "bench_return_pct": {
+        "SPY": -0.96
+      },
+      "realized_pnl_twd": -20011.0
+    },
+    {
+      "ts": "2026-07-30T05:20:19+08:00",
+      "nav_twd": 915596.0,
+      "return_pct": -8.44,
+      "cash_twd": 659752.0,
+      "n_positions": 3,
+      "usdtwd": 32.342,
+      "bench_return_pct": {
+        "SPY": -2.54
+      },
+      "realized_pnl_twd": -41860.0
+    },
+    {
+      "ts": "2026-07-31T05:20:17+08:00",
+      "nav_twd": 931082.0,
+      "return_pct": -6.89,
+      "cash_twd": 743846.0,
+      "n_positions": 2,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": -0.75
+      },
+      "realized_pnl_twd": -56718.0
     }
   ],
-  "usdtwd": 32.41899871826172,
-  "generated_at": "2026-07-28T06:07:32.390065+00:00"
+  "usdtwd": 32.42100143432617,
+  "generated_at": "2026-07-31T02:44:25.529206+00:00"
 }

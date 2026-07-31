@@ -186,8 +186,8 @@
       "currency": "TWD",
       "theme": "電源管理IC/功率元件",
       "notes": "電源管理IC/功率元件: CPU/GPU多相位降壓控制器+整合power stage(伺服器VRM, 台版MPWR, 這群最直接AI伺服器); 本益比37/fwd~26-28/ROE5.4%/毛利36%/現金厚幾乎無債; ⚠️月營收衰退(2026-05 YoY-9.6%/連3月負, 比Yahoo blended 0%更弱)→等月營收翻正; 獲利+39%靠毛利組合/4分析師目標222.5<現價; 富邦2026 EPS est 8.5; 進場區205-225(50日201+5月起",
-      "entry_zone_lo": 195,
-      "entry_zone_hi": 215
+      "entry_zone_lo": 190.4,
+      "entry_zone_hi": 210.4
     },
     {
       "id": "6435",
@@ -197,8 +197,8 @@
       "currency": "TWD",
       "theme": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功",
       "notes": "MOSFET/IGBT/高壓IC設計(原茂達Anpec功率部門分拆, 現泛國巨集團=國巨2327同集團); AI伺服器中壓MOSFET+風扇馬達驅動成長最強非PC應用; ROE22%(這群最佳)/本益比29/獲利+28%/幾乎無債 BUT 毛利24%(離散偏低)/僅1分析師cover目標300; 月營收動能轉強🟡(2026-05 YoY+22.2%且加速11→13.5→22.2, 優於Yahoo blended+4%); ⚠️52w+182%貼ATH306.5; 進場區225",
-      "entry_zone_lo": 235,
-      "entry_zone_hi": 260
+      "entry_zone_lo": 227.5,
+      "entry_zone_hi": 252.5
     },
     {
       "id": "8299",
@@ -263,8 +263,8 @@
       "currency": "TWD",
       "theme": "高階晶片均熱片IHS/導線架/vapor chamber",
       "notes": "高階晶片均熱片IHS/導線架/vapor chamber/液冷(AI散熱鏈核心,IHS給CPU/GPU封裝); 品質最佳=ROE30%/毛利41%/op margin32%/淨現金/D-E0.40+月營收加速(FinMind Apr+26.9%/May+37.7% YoY近record); ⚠️**6/26 EPS更正重畫進場區**: 原『fwd EPS117/PE34』錯誤(誤用Yahoo遠期EPS123), 真2026 EPS=Factset 55.78/Yahoo cu",
-      "entry_zone_lo": 3180,
-      "entry_zone_hi": 3450
+      "entry_zone_lo": 3158.28,
+      "entry_zone_hi": 3428.28
     },
     {
       "id": "gold",
@@ -534,8 +534,8 @@
       "currency": "TWD",
       "theme": "封測/記憶體封裝測試(全球第5大OSAT/台灣記憶體封測",
       "notes": "封測/記憶體封裝測試(全球第5大OSAT/台灣記憶體封測龍頭/美光最大封測夥伴; HBM burn-in是AI記憶體出貨卡脖子環節); 6/30 Adam深調後明示加入; 體質中段=毛利17.6%/ROE11%/⚠️FCF-140億(2026 capex US$16億擴產積極)/淨負債167億D/E44%; 估值2026E PE 26.4x(EPS12.77; ⚠️Yahoo forwardPE17.5是用2027 EPS算的假便宜)/trailing40x; 月營收連11月",
-      "entry_zone_lo": 245,
-      "entry_zone_hi": 270
+      "entry_zone_lo": 240.5,
+      "entry_zone_hi": 265.5
     },
     {
       "id": "3533",
@@ -578,8 +578,8 @@
       "currency": "TWD",
       "theme": "800G 交換器/CPO 組裝(AI 網通核心)",
       "notes": "800G 交換器/CPO 組裝(AI 網通核心); 狙擊名單 6/11 原始成員(#3), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1850-2050 / 認錯 1430(破200日); 北美雲端 capex 是主風險",
-      "entry_zone_lo": 1880,
-      "entry_zone_hi": 2080
+      "entry_zone_lo": 1865.0,
+      "entry_zone_hi": 2065.0
     },
     {
       "id": "3081",
@@ -633,8 +633,8 @@
       "currency": "TWD",
       "theme": "重電/變壓器+多角化集團(士林電機 Shihlin El",
       "notes": "重電/變壓器+多角化集團(士林電機 Shihlin Electric, TWSE; 汽車零件/EV動力/機車/開關/工控/家電+重電變壓器); 7/7 Adam「華城 士電 兩檔加入清單」明示加入. 北美AI資料中心變壓器訂單確認+過UL認證+3月起新單漲價15-20%(需求強能漲價)+能見度2029-30. ⚠️多角化集團=重電變壓器只是其中一段, 美國變壓器是成長引擎非全部; 體質中等(毛利21%/ROE9.5%比華城低)+僅2分析師cover(薄). 月營收比華城健康(",
-      "entry_zone_lo": 200,
-      "entry_zone_hi": 220
+      "entry_zone_lo": 195.0,
+      "entry_zone_hi": 215.0
     },
     {
       "id": "avgo",
@@ -675,8 +675,8 @@
       "currency": "USD",
       "theme": "固態燃料電池/AI 資料中心現場發電(供應 Nebius",
       "notes": "固態燃料電池/AI 資料中心現場發電(供應 Nebius 等); 7/20 Adam 加入(當日已做完整 TA); 初步帶 173-195/認錯 166(暫行, 7/28 財報後重驗); 預付成長型估值 fwd PE 47/PS 25, β3.7 日波 16% 部位天生要小",
-      "entry_zone_lo": 173,
-      "entry_zone_hi": 195
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     },
     {
       "id": "2337",
@@ -754,6 +754,17 @@
       "notes": "類比IC與嵌入式處理器龍頭，工業車用資料中心電源三大腿。（Texas Instruments，NasdaqGS USD；⚠️自有晶圓廠 IDM 非 fabless）2026-07-27 Adam 明示加入（源＝當日午班 graphify 新候選 → 盤後深調）。**三檔深調中品質最佳、唯一無疑慮**：ROE 35%／毛利 58%／營益率 42.6%／單季獲利 +52.9%／營收 +22.8%／FCF $35.5億／31 位分析師（全清單覆蓋最深）／機構持股 94%、內部人僅 ",
       "entry_zone_lo": 255,
       "entry_zone_hi": 275
+    },
+    {
+      "id": "form",
+      "type": "us_stock",
+      "symbol": "FORM",
+      "name": "FormFactor",
+      "currency": "USD",
+      "theme": "FormFactor 探針卡龍頭(晶圓測試耗材)",
+      "notes": "FormFactor 探針卡龍頭(晶圓測試耗材); NasdaqGS USD, 族群=半導體設備(同 ONTO/NVMI/KLAC/AMAT/LRCX/AEHR). Adam 2026-07-31 明示加入觀察清單(msg 1532576168820084846), 前一日我已深調. 一手源=SEC 8-K 0001039399-26-000030 附件 EX-99.01(非媒體轉述; EDGAR 需自帶 User-Agent). Q2 FY26(截 6/27): 營收 $2",
+      "entry_zone_lo": 93,
+      "entry_zone_hi": 99
     }
   ]
 }

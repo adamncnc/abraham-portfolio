@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 860040.3505658561,
-    "realized_pnl_twd": 0.0,
+    "cash_twd": 895779.2899503444,
+    "realized_pnl_twd": -5006.0,
     "positions": [
       {
         "ticker": "ASML",
@@ -15,7 +15,7 @@
         "avg_price": 1797.48,
         "fill_date": "2026-07-16",
         "fx_at_fill": 32.24700164794922,
-        "stop": 1632.41,
+        "stop": 1630.272,
         "stop_rule": "ta",
         "stop_asof": "2026-07-16",
         "group": "半導體設備",
@@ -23,15 +23,15 @@
         "fill_ref_close": 1784.869995,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 1549.9531,
-        "ratchet_asof": "2026-07-28",
-        "px": 1655.26,
-        "px_date": "2026-07-27"
+        "ratchet_value": 1547.9182,
+        "ratchet_asof": "2026-07-31",
+        "px": 1651.4399,
+        "px_date": "2026-07-30"
       },
       {
         "ticker": "KLAC",
         "name": "科磊",
-        "shares": 12,
+        "shares": 6,
         "avg_price": 208.45,
         "fill_date": "2026-07-17",
         "fx_at_fill": 32.26430130004883,
@@ -39,18 +39,28 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-17",
         "group": "半導體設備",
-        "cost_twd": 81351.0,
+        "cost_twd": 40676.0,
         "fill_ref_close": 212.75,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 163.4175,
-        "ratchet_asof": "2026-07-28",
-        "px": 203.36,
-        "px_date": "2026-07-27"
+        "ratchet_value": 170.019,
+        "ratchet_asof": "2026-07-31",
+        "px": 180.33,
+        "px_date": "2026-07-30"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [],
+    "pending_sells": [
+      {
+        "id": "stop_half-2026-07-31-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊",
+        "placed_ts": "2026-07-31T07:40:00+08:00",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 180.33 跌破認錯線 190.8 → 賣一半（第二次破線，前次已鎖半）；2026-07-31 07:3x check 機械判定，已 DM Adam"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -99,6 +109,38 @@
         "stop": 190.8,
         "opened": true,
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-07-17.json"
+      },
+      {
+        "ts": "2026-07-31T05:20:51+08:00",
+        "sell_id": "stop_half-2026-07-30-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊",
+        "action": "sell",
+        "shares": 6,
+        "price": 186.86,
+        "fee": 20.0,
+        "proceeds_twd": 35670.0,
+        "cost_basis_twd": 40676.0,
+        "fx": 32.393,
+        "pnl_twd": -5006.0,
+        "sell_date": "2026-07-30",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 170.19 跌破認錯線 190.8 → 賣一半；2026-07-30 07:3x check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-31T07:31:46+08:00",
+        "ticker": "ASML",
+        "name": "ASML",
+        "action": "dividend",
+        "ex_date": "2026-07-28",
+        "projection_key": "div:2026-07-28",
+        "per_share": 2.138,
+        "per_share_yahoo": 2.138,
+        "shares_at_ex": 1,
+        "fx": 32.302,
+        "cash_twd": 69.0,
+        "projection_cash_twd": 69.0616720199585
       }
     ],
     "benchmark_spec": {
@@ -136,13 +178,6 @@
         "corporate_action_projection_version": 2,
         "corporate_actions": [
           {
-            "date": "2025-07-29",
-            "kind": "div",
-            "amount": 1.847,
-            "source_count": 1,
-            "key": "div:2025-07-29"
-          },
-          {
             "date": "2025-10-29",
             "kind": "div",
             "amount": 1.864,
@@ -162,10 +197,19 @@
             "amount": 3.177,
             "source_count": 1,
             "key": "div:2026-04-27"
+          },
+          {
+            "date": "2026-07-28",
+            "kind": "div",
+            "amount": 2.138,
+            "source_count": 1,
+            "key": "div:2026-07-28"
           }
         ],
         "splits_applied": [],
-        "divs_credited": []
+        "divs_credited": [
+          "2026-07-28"
+        ]
       },
       "KLAC": {
         "projection_origin_v2": {
@@ -406,8 +450,44 @@
         "SPY": -1.45
       },
       "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-29T05:20:53+08:00",
+      "nav_twd": 985352.0,
+      "return_pct": -1.46,
+      "cash_twd": 860040.0,
+      "n_positions": 2,
+      "usdtwd": 32.359,
+      "bench_return_pct": {
+        "SPY": -0.96
+      },
+      "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-30T05:20:55+08:00",
+      "nav_twd": 976314.0,
+      "return_pct": -2.37,
+      "cash_twd": 860110.0,
+      "n_positions": 2,
+      "usdtwd": 32.342,
+      "bench_return_pct": {
+        "SPY": -2.54
+      },
+      "realized_pnl_twd": 0.0
+    },
+    {
+      "ts": "2026-07-31T05:20:56+08:00",
+      "nav_twd": 984323.0,
+      "return_pct": -1.57,
+      "cash_twd": 895780.0,
+      "n_positions": 2,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": -0.75
+      },
+      "realized_pnl_twd": -5006.0
     }
   ],
-  "usdtwd": 32.41899871826172,
-  "generated_at": "2026-07-28T06:07:32.393575+00:00"
+  "usdtwd": 32.42100143432617,
+  "generated_at": "2026-07-31T02:44:25.531713+00:00"
 }
