@@ -5,13 +5,13 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 952398.872956,
-    "realized_pnl_twd": -7733.0,
+    "cash_twd": 969746.7673310001,
+    "realized_pnl_twd": -10984.0,
     "positions": [
       {
         "ticker": "6719.TW",
         "name": "力智",
-        "shares": 171,
+        "shares": 86,
         "avg_price": 242.0,
         "fill_date": "2026-07-14",
         "fx_at_fill": 1.0,
@@ -19,28 +19,18 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-14",
         "group": "IC設計電源",
-        "cost_twd": 41441.0,
+        "cost_twd": 20842.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 176.95,
-        "ratchet_asof": "2026-07-14",
+        "ratchet_value": 189.9352,
+        "ratchet_asof": "2026-07-31",
         "fill_ref_close": 244.0,
-        "px": 196.0,
+        "px": 199.0,
         "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [
-      {
-        "id": "stop_half-2026-07-30-6719",
-        "ticker": "6719.TW",
-        "name": "力智",
-        "placed_ts": "2026-07-30T15:35:00+08:00",
-        "trigger": "stop_half",
-        "qty_rule": "half",
-        "reason": "日收 188.0 跌破認錯線 207.9017 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
-      }
-    ],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -80,7 +70,25 @@
         "reason": "日收 199.0 跌破認錯線 207.9017（ta）→ 賣一半；2026-07-29 check 機械判定，已 DM Adam"
       },
       {
-        "ts": "2026-07-30T15:16:38+08:00",
+        "ts": "2026-07-31T14:06:59+08:00",
+        "sell_id": "stop_half-2026-07-30-6719",
+        "ticker": "6719.TW",
+        "name": "力智",
+        "action": "sell",
+        "shares": 85,
+        "price": 205.0,
+        "fee": 77.11,
+        "proceeds_twd": 17348.0,
+        "cost_basis_twd": 20599.0,
+        "fx": 1.0,
+        "pnl_twd": -3251.0,
+        "sell_date": "2026-07-31",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 188.0 跌破認錯線 207.9017 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-07-31T14:07:04+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -316,8 +324,20 @@
         "0050.TW": -10.81
       },
       "realized_pnl_twd": -7733.0
+    },
+    {
+      "ts": "2026-07-31T14:07:02+08:00",
+      "nav_twd": 986861.0,
+      "return_pct": -1.31,
+      "cash_twd": 969747.0,
+      "n_positions": 1,
+      "usdtwd": 32.428,
+      "bench_return_pct": {
+        "0050.TW": -1.94
+      },
+      "realized_pnl_twd": -10984.0
     }
   ],
-  "usdtwd": 32.42100143432617,
-  "generated_at": "2026-07-31T02:44:25.528206+00:00"
+  "usdtwd": 32.428001403808594,
+  "generated_at": "2026-07-31T06:07:06.848517+00:00"
 }
