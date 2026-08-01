@@ -22,11 +22,11 @@
         "cost_twd": 10421.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 189.9352,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_value": 176.95,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244,
-        "px": 188.0,
-        "px_date": "2026-07-30"
+        "px": 199.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "8926.TW",
@@ -42,11 +42,11 @@
         "cost_twd": 22983.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 58.532,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_value": 55.765,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 67.300003,
-        "px": 58.8,
-        "px_date": "2026-07-30"
+        "px": 59.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2312.TW",
@@ -61,12 +61,12 @@
         "group": "EMS",
         "cost_twd": 5899.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 28.87,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_armed": false,
+        "ratchet_value": 26.9875,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 32.799999,
-        "px": 27.65,
-        "px_date": "2026-07-30"
+        "px": 30.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2356.TW",
@@ -82,11 +82,11 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 54.195,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_value": 53.77,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 63.700001,
-        "px": 57.5,
-        "px_date": "2026-07-30"
+        "px": 61.8,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2301.TW",
@@ -101,12 +101,12 @@
         "group": "網通伺服器",
         "cost_twd": 11222.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 180.35,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_armed": false,
+        "ratchet_value": 174.4,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 212.5,
-        "px": 190.0,
-        "px_date": "2026-07-30"
+        "px": 209.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2465.TW",
@@ -122,11 +122,9 @@
         "cost_twd": 21470.0,
         "fill_ref_close": 83.300003,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 69.755,
-        "ratchet_asof": "2026-07-31",
-        "px": 67.6,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 73.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2881.TW",
@@ -142,11 +140,9 @@
         "cost_twd": 64985.0,
         "fill_ref_close": 125,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 117.625,
-        "ratchet_asof": "2026-07-31",
-        "px": 124.0,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 130.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2377.TW",
@@ -162,11 +158,9 @@
         "cost_twd": 60923.0,
         "fill_ref_close": 141.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 134.675,
-        "ratchet_asof": "2026-07-31",
-        "px": 136.0,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 142.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3094.TW",
@@ -182,11 +176,9 @@
         "cost_twd": 20758.0,
         "fill_ref_close": 35.650002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 29.665,
-        "ratchet_asof": "2026-07-31",
-        "px": 31.7,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 34.85,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "5536.TWO",
@@ -202,11 +194,9 @@
         "cost_twd": 10184.0,
         "fill_ref_close": 1140.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 953.55,
-        "ratchet_asof": "2026-07-31",
-        "px": 906.0,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 925.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3362.TWO",
@@ -222,11 +212,9 @@
         "cost_twd": 41418.0,
         "fill_ref_close": 148.5,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 134.125,
-        "ratchet_asof": "2026-07-31",
-        "px": 156.5,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 172.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2645.TW",
@@ -242,11 +230,9 @@
         "cost_twd": 10495.0,
         "fill_ref_close": 215.0,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 168.425,
-        "ratchet_asof": "2026-07-31",
-        "px": 176.0,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 183.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2885.TW",
@@ -262,11 +248,9 @@
         "cost_twd": 70946.0,
         "fill_ref_close": 61.299999,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 60.495,
-        "ratchet_asof": "2026-07-31",
-        "px": 63.1,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 68.1,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1301.TW",
@@ -282,11 +266,9 @@
         "cost_twd": 41459.0,
         "fill_ref_close": 61.700001,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 50.375,
-        "ratchet_asof": "2026-07-31",
-        "px": 54.0,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 55.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3576.TW",
@@ -302,11 +284,9 @@
         "cost_twd": 23005.0,
         "fill_ref_close": 17.85,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 15.0075,
-        "ratchet_asof": "2026-07-31",
-        "px": 15.65,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 16.3,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1810.TW",
@@ -323,10 +303,8 @@
         "fill_ref_close": 24.85,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 17.53,
-        "ratchet_asof": "2026-07-31",
-        "px": 23.5,
-        "px_date": "2026-07-30"
+        "px": 24.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2379.TW",
@@ -343,10 +321,8 @@
         "fill_ref_close": 731.0,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 606.45,
-        "ratchet_asof": "2026-07-31",
-        "px": 697.0,
-        "px_date": "2026-07-30"
+        "px": 683.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1326.TW",
@@ -362,11 +338,9 @@
         "cost_twd": 41474.0,
         "fill_ref_close": 56.400002,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 42.325,
-        "ratchet_asof": "2026-07-31",
-        "px": 56.4,
-        "px_date": "2026-07-30"
+        "ratchet_armed": false,
+        "px": 57.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "6505.TW",
@@ -383,10 +357,8 @@
         "fill_ref_close": 70.800003,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 52.56,
-        "ratchet_asof": "2026-07-31",
-        "px": 71.6,
-        "px_date": "2026-07-30"
+        "px": 70.8,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [
@@ -1470,7 +1442,7 @@
         "reason": "日收 15.65 跌破認錯線 15.9 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
       },
       {
-        "ts": "2026-07-31T15:11:57+08:00",
+        "ts": "2026-08-01T14:06:36+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -1484,7 +1456,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-07-31T15:11:57+08:00",
+        "ts": "2026-08-01T14:06:36+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -2485,5 +2457,5 @@
     }
   ],
   "usdtwd": 32.29499816894531,
-  "generated_at": "2026-07-31T21:21:02.417688+00:00"
+  "generated_at": "2026-08-01T06:06:47.788508+00:00"
 }

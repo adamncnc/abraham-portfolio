@@ -22,11 +22,11 @@
         "cost_twd": 20842.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 189.9352,
-        "ratchet_asof": "2026-07-31",
+        "ratchet_value": 176.95,
+        "ratchet_asof": "2026-07-14",
         "fill_ref_close": 244.0,
-        "px": 188.0,
-        "px_date": "2026-07-30"
+        "px": 199.0,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
@@ -99,7 +99,7 @@
         "reason": "日收 188.0 跌破認錯線 207.9017 → 賣一半；2026-07-30 收盤後 check 機械判定，已 DM Adam"
       },
       {
-        "ts": "2026-07-31T15:12:05+08:00",
+        "ts": "2026-08-01T14:06:46+08:00",
         "ticker": "6719.TW",
         "name": "力智",
         "action": "dividend",
@@ -350,5 +350,5 @@
     }
   ],
   "usdtwd": 32.29499816894531,
-  "generated_at": "2026-07-31T21:21:02.419691+00:00"
+  "generated_at": "2026-08-01T06:06:47.790520+00:00"
 }
