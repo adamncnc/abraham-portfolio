@@ -22,7 +22,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 63.4664,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
         "px": 65.37,
@@ -43,8 +43,8 @@
         "fill_ref_close": 159.690002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 156.2276,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_value": 156.228,
+        "ratchet_asof": "2026-08-03",
         "px": 178.5,
         "px_date": "2026-07-31"
       },
@@ -64,7 +64,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 55.733,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "px": 62.84,
         "px_date": "2026-07-31"
       },
@@ -83,8 +83,8 @@
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 12.672,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_value": 12.671,
+        "ratchet_asof": "2026-08-03",
         "px": 13.5,
         "px_date": "2026-07-31"
       },
@@ -104,7 +104,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 13.414,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "px": 15.29,
         "px_date": "2026-07-31"
       },
@@ -124,7 +124,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 51.1772,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "px": 46.32,
         "px_date": "2026-07-31"
       },
@@ -143,14 +143,24 @@
         "fill_ref_close": 32.549999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 24.2385,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_value": 24.237,
+        "ratchet_asof": "2026-08-03",
         "px": 32.64,
         "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [],
+    "pending_sells": [
+      {
+        "id": "stop_all-2026-07-31-VCYT",
+        "ticker": "VCYT",
+        "name": "Veracyte, Inc.",
+        "placed_ts": "2026-08-03T11:03:04+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -1166,6 +1176,6 @@
       "realized_pnl_twd": -16473.0
     }
   ],
-  "usdtwd": 32.29499816894531,
-  "generated_at": "2026-08-01T06:06:47.794534+00:00"
+  "usdtwd": 32.43299865722656,
+  "generated_at": "2026-08-03T06:07:02.694484+00:00"
 }

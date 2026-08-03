@@ -24,7 +24,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 1554.3457,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "px": 1629.0,
         "px_date": "2026-07-31"
       },
@@ -44,13 +44,32 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 174.3645,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "px": 182.82,
         "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [],
+    "pending_sells": [
+      {
+        "id": "stop_all-2026-07-31-ASML",
+        "ticker": "ASML",
+        "name": "ASML",
+        "placed_ts": "2026-08-03T11:03:04+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
+      },
+      {
+        "id": "stop_all-2026-07-31-KLAC",
+        "ticker": "KLAC",
+        "name": "科磊",
+        "placed_ts": "2026-08-03T11:03:04+08:00",
+        "trigger": "stop_all",
+        "qty_rule": "all",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -137,7 +156,7 @@
         "reason": "日收 180.33 跌破認錯線 190.8 → 賣一半（第二次破線，前次已鎖半）；2026-07-31 07:3x check 機械判定，已 DM Adam"
       },
       {
-        "ts": "2026-08-01T05:21:00+08:00",
+        "ts": "2026-08-03T10:57:47+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -508,6 +527,6 @@
       "realized_pnl_twd": -7688.0
     }
   ],
-  "usdtwd": 32.29499816894531,
-  "generated_at": "2026-08-01T06:06:47.794534+00:00"
+  "usdtwd": 32.43299865722656,
+  "generated_at": "2026-08-03T06:07:02.695488+00:00"
 }

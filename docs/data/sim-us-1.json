@@ -24,7 +24,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 249.7523,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_asof": "2026-08-03",
         "px": 262.75,
         "px_date": "2026-07-31"
       },
@@ -43,8 +43,8 @@
         "fill_ref_close": 70.870003,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 58.1238,
-        "ratchet_asof": "2026-08-01",
+        "ratchet_value": 58.123,
+        "ratchet_asof": "2026-08-03",
         "px": 60.71,
         "px_date": "2026-07-31"
       }
@@ -605,6 +605,6 @@
       "realized_pnl_twd": -56718.0
     }
   ],
-  "usdtwd": 32.29499816894531,
-  "generated_at": "2026-08-01T06:06:47.792527+00:00"
+  "usdtwd": 32.43299865722656,
+  "generated_at": "2026-08-03T06:07:02.692480+00:00"
 }

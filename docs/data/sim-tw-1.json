@@ -26,7 +26,7 @@
         "ratchet_asof": "2026-07-29",
         "fill_ref_close": 205,
         "px": 195.0,
-        "px_date": "2026-07-31"
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "2449.TW",
@@ -45,8 +45,8 @@
         "ratchet_armed": false,
         "ratchet_value": 216.6667,
         "ratchet_asof": "2026-07-29",
-        "px": 223.5,
-        "px_date": "2026-07-31"
+        "px": 233.5,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "2330.TW",
@@ -65,8 +65,8 @@
         "ratchet_armed": false,
         "ratchet_value": 2208.5,
         "ratchet_asof": "2026-07-29",
-        "px": 2425.0,
-        "px_date": "2026-07-31"
+        "px": 2370.0,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "2455.TW",
@@ -85,8 +85,8 @@
         "ratchet_armed": false,
         "ratchet_value": 255.825,
         "ratchet_asof": "2026-07-29",
-        "px": 292.0,
-        "px_date": "2026-07-31"
+        "px": 321.0,
+        "px_date": "2026-08-03"
       }
     ],
     "pending_orders": [
@@ -604,6 +604,6 @@
       "realized_pnl_twd": 0
     }
   ],
-  "usdtwd": 32.29499816894531,
-  "generated_at": "2026-08-01T06:06:47.787006+00:00"
+  "usdtwd": 32.43299865722656,
+  "generated_at": "2026-08-03T06:07:02.686454+00:00"
 }
