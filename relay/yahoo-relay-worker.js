@@ -188,6 +188,20 @@ function misNum(v) {
   const n = parseFloat(v);
   return Number.isFinite(n) && n > 0 ? n : null;
 }
+// Top-of-book price from a MIS five-level string like "865.0000_864.0000_863.0000_..._".
+// Deliberately NOT split("_")[0]: when a stock is LOCKED at its daily limit, MIS pads the
+// live side with a leading "0.0000" level and blanks the opposite side to "-" (verified
+// against live MIS 2026-08-03 on 10 limit-up names, incl. 3037 欣興 / 6223 旺矽). Index [0]
+// then reads 0 → misNum → null → both sides null → the entire MIS row was skipped and the
+// dashboard silently served Yahoo's 20-60 min stale quote, precisely on the days that move
+// most. Scan for the first POSITIVE level instead.
+function misBookTop(s) {
+  for (const part of String(s == null ? "" : s).split("_")) {
+    const n = misNum(part);
+    if (n != null) return n;
+  }
+  return null;
+}
 // Fetch MIS for a batch of yf TW symbols. Returns { yfSym: { price, prevClose, asOf(sec) } }.
 // Only returns entries whose quote is fresh (<10 min) → self-gates to trading hours; stale
 // off-hours ticks are skipped so we never override Yahoo's close with a frozen MIS value.
@@ -233,9 +247,11 @@ async function fetchMisBatch(twSymbols) {
       // to the best bid/ask midpoint (spread is 1 tick for liquid names → ≈ last).
       let price = misNum(a.z);
       if (price == null) {
-        const bid = misNum((a.b || "").split("_")[0]);
-        const ask = misNum((a.a || "").split("_")[0]);
+        const bid = misBookTop(a.b);
+        const ask = misBookTop(a.a);
         if (bid != null && ask != null) price = Math.round(((bid + ask) / 2) * 100) / 100;
+        // Exactly one side present = locked at the daily limit (up → no asks, down → no
+        // bids). The live side IS the limit price, so use it rather than giving up.
         else price = bid != null ? bid : ask;
       }
       if (price == null) continue;
