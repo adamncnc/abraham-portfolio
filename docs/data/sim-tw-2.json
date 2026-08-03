@@ -25,8 +25,8 @@
         "ratchet_value": 54.195,
         "ratchet_asof": "2026-08-03",
         "fill_ref_close": 63.700001,
-        "px": 63.9,
-        "px_date": "2026-08-03"
+        "px": 61.8,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2301.TW",
@@ -45,8 +45,8 @@
         "ratchet_value": 183.0,
         "ratchet_asof": "2026-08-03",
         "fill_ref_close": 212.5,
-        "px": 229.5,
-        "px_date": "2026-08-03"
+        "px": 209.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2465.TW",
@@ -65,8 +65,8 @@
         "ratchet_armed": true,
         "ratchet_value": 69.755,
         "ratchet_asof": "2026-08-03",
-        "px": 75.5,
-        "px_date": "2026-08-03"
+        "px": 73.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2881.TW",
@@ -85,8 +85,8 @@
         "ratchet_armed": true,
         "ratchet_value": 117.625,
         "ratchet_asof": "2026-08-03",
-        "px": 129.5,
-        "px_date": "2026-08-03"
+        "px": 130.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2377.TW",
@@ -105,8 +105,8 @@
         "ratchet_armed": true,
         "ratchet_value": 134.675,
         "ratchet_asof": "2026-08-03",
-        "px": 143.0,
-        "px_date": "2026-08-03"
+        "px": 142.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3094.TW",
@@ -125,8 +125,8 @@
         "ratchet_armed": true,
         "ratchet_value": 29.665,
         "ratchet_asof": "2026-08-03",
-        "px": 35.15,
-        "px_date": "2026-08-03"
+        "px": 34.85,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3362.TWO",
@@ -145,8 +145,8 @@
         "ratchet_armed": true,
         "ratchet_value": 135.675,
         "ratchet_asof": "2026-08-03",
-        "px": 180.0,
-        "px_date": "2026-08-03"
+        "px": 172.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2645.TW",
@@ -165,8 +165,8 @@
         "ratchet_armed": true,
         "ratchet_value": 168.425,
         "ratchet_asof": "2026-08-03",
-        "px": 184.5,
-        "px_date": "2026-08-03"
+        "px": 183.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2885.TW",
@@ -185,8 +185,8 @@
         "ratchet_armed": true,
         "ratchet_value": 60.495,
         "ratchet_asof": "2026-08-03",
-        "px": 68.0,
-        "px_date": "2026-08-03"
+        "px": 68.1,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1301.TW",
@@ -205,8 +205,8 @@
         "ratchet_armed": true,
         "ratchet_value": 50.63,
         "ratchet_asof": "2026-08-03",
-        "px": 53.8,
-        "px_date": "2026-08-03"
+        "px": 55.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3576.TW",
@@ -225,8 +225,8 @@
         "ratchet_armed": true,
         "ratchet_value": 15.0075,
         "ratchet_asof": "2026-08-03",
-        "px": 16.65,
-        "px_date": "2026-08-03"
+        "px": 16.3,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1810.TW",
@@ -245,8 +245,8 @@
         "ratchet_armed": false,
         "ratchet_value": 17.53,
         "ratchet_asof": "2026-08-03",
-        "px": 23.85,
-        "px_date": "2026-08-03"
+        "px": 24.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "2379.TW",
@@ -265,8 +265,8 @@
         "ratchet_armed": false,
         "ratchet_value": 606.45,
         "ratchet_asof": "2026-08-03",
-        "px": 704.0,
-        "px_date": "2026-08-03"
+        "px": 683.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "1326.TW",
@@ -285,8 +285,8 @@
         "ratchet_armed": true,
         "ratchet_value": 42.97,
         "ratchet_asof": "2026-08-03",
-        "px": 56.3,
-        "px_date": "2026-08-03"
+        "px": 57.4,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "6505.TW",
@@ -305,8 +305,8 @@
         "ratchet_armed": false,
         "ratchet_value": 52.56,
         "ratchet_asof": "2026-08-03",
-        "px": 67.7,
-        "px_date": "2026-08-03"
+        "px": 70.8,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "6409.TW",
@@ -325,8 +325,8 @@
         "ratchet_armed": false,
         "ratchet_value": 732.25,
         "ratchet_asof": "2026-08-03",
-        "px": 934.0,
-        "px_date": "2026-08-03"
+        "px": 957.0,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "3702.TW",
@@ -345,11 +345,48 @@
         "ratchet_armed": true,
         "ratchet_value": 97.925,
         "ratchet_asof": "2026-08-03",
-        "px": 116.0,
-        "px_date": "2026-08-03"
+        "px": 112.5,
+        "px_date": "2026-07-31"
       }
     ],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-08-03-2357.TW",
+        "placed_ts": "2026-08-03T15:24:53+08:00",
+        "ticker": "2357.TW",
+        "name": "華碩",
+        "side": "buy",
+        "budget_twd": 63500,
+        "limit": 754.0,
+        "stop": 694.0,
+        "stop_rule": "ta",
+        "group": "EMS",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\AppData\\Local\\Temp\\claude\\C--Users-Adam-Abraham\\230aae33-d8bf-486b-9a2d-552d60682a36\\scratchpad\\tw2_stage_input.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\AppData\\Local\\Temp\\claude\\C--Users-Adam-Abraham\\230aae33-d8bf-486b-9a2d-552d60682a36\\scratchpad\\tw2_stage_input.json",
+          "date": "2026-08-03",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "2357",
+            "name": "華碩",
+            "yf": "2357.TW",
+            "group": "EMS",
+            "px": 799.0,
+            "ma20": 728.55,
+            "ma50": 754.48,
+            "ma200_gap": 26.7,
+            "rs63": 28.6,
+            "atr20_pct": 3.7,
+            "setup": "A回檔MA50",
+            "limit": 754.0,
+            "stop": 694.0,
+            "stop_pct": -7.9,
+            "budget": 63500
+          }
+        },
+        "target_session": "2026-08-04"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -1392,7 +1429,7 @@
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1532648497）。"
       },
       {
-        "ts": "2026-08-03T14:06:49+08:00",
+        "ts": "2026-08-03T15:11:35+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -1406,7 +1443,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-08-03T14:06:49+08:00",
+        "ts": "2026-08-03T15:11:35+08:00",
         "ticker": "6719.TW",
         "name": "6719.TW",
         "action": "dividend",
@@ -2369,6 +2406,6 @@
       "realized_pnl_twd": -61923.0
     }
   ],
-  "usdtwd": 32.43299865722656,
-  "generated_at": "2026-08-03T06:07:02.688472+00:00"
+  "usdtwd": 32.39699935913086,
+  "generated_at": "2026-08-03T21:20:55.513817+00:00"
 }

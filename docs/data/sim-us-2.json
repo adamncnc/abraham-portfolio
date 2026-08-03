@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 310452.2691001975,
-    "realized_pnl_twd": -16473.0,
+    "cash_twd": 392410.1991664725,
+    "realized_pnl_twd": -34741.0,
     "positions": [
       {
         "ticker": "RAL",
@@ -22,11 +22,11 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 63.4664,
-        "ratchet_asof": "2026-08-03",
+        "ratchet_asof": "2026-08-04",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 65.37,
-        "px_date": "2026-07-31"
+        "px": 65.15,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "NTAP",
@@ -43,10 +43,10 @@
         "fill_ref_close": 159.690002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 156.228,
-        "ratchet_asof": "2026-08-03",
-        "px": 178.5,
-        "px_date": "2026-07-31"
+        "ratchet_value": 160.8543,
+        "ratchet_asof": "2026-08-04",
+        "px": 182.92,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "BRKR",
@@ -64,9 +64,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 55.733,
-        "ratchet_asof": "2026-08-03",
-        "px": 62.84,
-        "px_date": "2026-07-31"
+        "ratchet_asof": "2026-08-04",
+        "px": 64.31,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "BHVN",
@@ -83,10 +83,10 @@
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 12.671,
-        "ratchet_asof": "2026-08-03",
-        "px": 13.5,
-        "px_date": "2026-07-31"
+        "ratchet_value": 12.6935,
+        "ratchet_asof": "2026-08-04",
+        "px": 13.37,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "NEO",
@@ -104,29 +104,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 13.414,
-        "ratchet_asof": "2026-08-03",
-        "px": 15.29,
-        "px_date": "2026-07-31"
-      },
-      {
-        "ticker": "VCYT",
-        "name": "Veracyte, Inc.",
-        "shares": 55,
-        "avg_price": 56.0,
-        "fill_date": "2026-07-21",
-        "fx_at_fill": 32.32899856567383,
-        "stop": 52.03,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-21",
-        "group": "Health Care Services",
-        "cost_twd": 100226.0,
-        "fill_ref_close": 59.529999,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 51.1772,
-        "ratchet_asof": "2026-08-03",
-        "px": 46.32,
-        "px_date": "2026-07-31"
+        "ratchet_asof": "2026-08-04",
+        "px": 15.84,
+        "px_date": "2026-08-03"
       },
       {
         "ticker": "TENB",
@@ -143,24 +123,14 @@
         "fill_ref_close": 32.549999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 24.237,
-        "ratchet_asof": "2026-08-03",
-        "px": 32.64,
-        "px_date": "2026-07-31"
+        "ratchet_value": 26.789,
+        "ratchet_asof": "2026-08-04",
+        "px": 34.97,
+        "px_date": "2026-08-03"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [
-      {
-        "id": "stop_all-2026-07-31-VCYT",
-        "ticker": "VCYT",
-        "name": "Veracyte, Inc.",
-        "placed_ts": "2026-08-03T11:03:04+08:00",
-        "trigger": "stop_all",
-        "qty_rule": "all",
-        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
-      }
-    ],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -636,6 +606,24 @@
         "qty_rule": "half",
         "trigger": "stop_half",
         "reason": "日收 13.43 跌破認錯線 13.49 → 賣一半；2026-07-30 07:3x check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-08-04T05:20:31+08:00",
+        "sell_id": "stop_all-2026-07-31-VCYT",
+        "ticker": "VCYT",
+        "name": "Veracyte, Inc.",
+        "action": "sell",
+        "shares": 55,
+        "price": 46.36,
+        "fee": 20.0,
+        "proceeds_twd": 81958.0,
+        "cost_basis_twd": 100226.0,
+        "fx": 32.397,
+        "pnl_twd": -18268.0,
+        "sell_date": "2026-08-03",
+        "qty_rule": "all",
+        "trigger": "stop_all",
+        "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
       }
     ],
     "benchmark_spec": {
@@ -865,28 +853,8 @@
       },
       "VCYT": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "VCYT",
-            "name": "Veracyte, Inc.",
-            "shares": 55,
-            "avg_price": 56,
-            "fill_date": "2026-07-21",
-            "fx_at_fill": 32.32899856567383,
-            "stop": 52.03,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-21",
-            "group": "Health Care Services",
-            "cost_twd": 100226,
-            "fill_ref_close": 59.529998779296875,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-21",
-              "value": 52.03
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -1174,8 +1142,20 @@
         "SPY": -0.33
       },
       "realized_pnl_twd": -16473.0
+    },
+    {
+      "ts": "2026-08-04T05:20:37+08:00",
+      "nav_twd": 1013144.0,
+      "return_pct": 1.31,
+      "cash_twd": 392410.0,
+      "n_positions": 6,
+      "usdtwd": 32.397,
+      "bench_return_pct": {
+        "SPY": 1.4
+      },
+      "realized_pnl_twd": -34741.0
     }
   ],
-  "usdtwd": 32.43299865722656,
-  "generated_at": "2026-08-03T06:07:02.694484+00:00"
+  "usdtwd": 32.39699935913086,
+  "generated_at": "2026-08-03T21:20:55.519930+00:00"
 }
