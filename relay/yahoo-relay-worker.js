@@ -137,7 +137,19 @@ async function fetchOne(symbol) {
                 : "regular";
       }
       if (price == null) { lastErr = "no price"; continue; }  // partial payload — retry rather than report a null-price "ok"
-      const prev = m.chartPreviousClose ?? m.previousClose ?? null;
+      // Baseline for change%. During REGULAR hours the price being compared is that same
+      // session's live/last print, so Yahoo's chartPreviousClose (the prior session's close)
+      // is the right partner.
+      // In PRE/POST it is NOT: Yahoo has not rolled the day yet, so regularMarketPrice is
+      // still the LAST REGULAR CLOSE and chartPreviousClose is the close BEFORE that — i.e.
+      // one session too far back. Pairing a pre-market print with it silently skips a whole
+      // trading day (verified live 2026-08-03 pre-market: MU showed −6.99% vs the true
+      // −1.16%; AAPL −7.64% vs −0.31%; AMD/SNDK/ASML even had the SIGN inverted — red while
+      // actually up). The correct baseline in extended hours is the last regular close,
+      // which is exactly what regularMarketPrice holds at that moment.
+      const prev = session === "regular"
+        ? (m.chartPreviousClose ?? m.previousClose ?? null)
+        : (m.regularMarketPrice ?? m.chartPreviousClose ?? m.previousClose ?? null);
       const change = price != null && prev != null ? price - prev : null;  // vs previous close (pre/post shown as move vs 昨收)
       const changePct = change != null && prev ? (change / prev) * 100 : null;
       // 當日累積成交量 (shares): prefer meta.regularMarketVolume; fall back to summing the
