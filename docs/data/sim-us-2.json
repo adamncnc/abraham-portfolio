@@ -5,8 +5,8 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 392410.1991664725,
-    "realized_pnl_twd": -34741.0,
+    "cash_twd": 327368.93899381836,
+    "realized_pnl_twd": -37294.0,
     "positions": [
       {
         "ticker": "RAL",
@@ -22,11 +22,11 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 63.4664,
-        "ratchet_asof": "2026-08-04",
+        "ratchet_asof": "2026-08-05",
         "fill_ref_close": 67.050003,
         "stop_asof": "2026-07-13",
-        "px": 65.37,
-        "px_date": "2026-07-31"
+        "px": 66.9,
+        "px_date": "2026-08-04"
       },
       {
         "ticker": "NTAP",
@@ -43,10 +43,10 @@
         "fill_ref_close": 159.690002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 160.8543,
-        "ratchet_asof": "2026-08-04",
-        "px": 178.5,
-        "px_date": "2026-07-31"
+        "ratchet_value": 167.165,
+        "ratchet_asof": "2026-08-05",
+        "px": 190.46,
+        "px_date": "2026-08-04"
       },
       {
         "ticker": "BRKR",
@@ -64,14 +64,14 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 55.733,
-        "ratchet_asof": "2026-08-04",
-        "px": 62.84,
-        "px_date": "2026-07-31"
+        "ratchet_asof": "2026-08-05",
+        "px": 50.3,
+        "px_date": "2026-08-04"
       },
       {
         "ticker": "BHVN",
         "name": "Biohaven Ltd. Common Shares",
-        "shares": 85,
+        "shares": 43,
         "avg_price": 14.99,
         "fill_date": "2026-07-20",
         "fx_at_fill": 32.28099822998047,
@@ -79,14 +79,14 @@
         "stop_rule": "ta",
         "stop_asof": "2026-07-20",
         "group": "Biotechnology",
-        "cost_twd": 41468.0,
+        "cost_twd": 20978.0,
         "fill_ref_close": 14.86,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 12.6935,
-        "ratchet_asof": "2026-08-04",
-        "px": 13.5,
-        "px_date": "2026-07-31"
+        "ratchet_value": 12.8322,
+        "ratchet_asof": "2026-08-05",
+        "px": 13.75,
+        "px_date": "2026-08-04"
       },
       {
         "ticker": "NEO",
@@ -103,10 +103,10 @@
         "fill_ref_close": 14.45,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 13.414,
-        "ratchet_asof": "2026-08-04",
-        "px": 15.29,
-        "px_date": "2026-07-31"
+        "ratchet_value": 13.8,
+        "ratchet_asof": "2026-08-05",
+        "px": 16.29,
+        "px_date": "2026-08-04"
       },
       {
         "ticker": "TENB",
@@ -123,96 +123,34 @@
         "fill_ref_close": 32.549999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 26.789,
-        "ratchet_asof": "2026-08-04",
-        "px": 32.64,
-        "px_date": "2026-07-31"
-      }
-    ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-08-04-QLYS",
-        "placed_ts": "2026-08-04T07:42:42+08:00",
-        "ticker": "QLYS",
-        "name": "Qualys, Inc.",
-        "side": "buy",
-        "budget_twd": 85000,
-        "limit": 148.69,
-        "stop": 131.32,
-        "stop_rule": "ta",
-        "group": "Systems Software",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "QLYS",
-            "name": "Qualys, Inc.",
-            "yf": "QLYS",
-            "group": "Systems Software",
-            "px": 154.89,
-            "ma20": 148.69,
-            "ma50": 128.86,
-            "ma200_gap": 30.2,
-            "rs63": 69.8,
-            "atr20_pct": 5.6,
-            "setup": "A回檔MA20",
-            "limit": 148.69,
-            "stop": 131.32,
-            "stop_pct": -11.7,
-            "budget": 85000
-          }
-        },
-        "target_session": "2026-08-04"
+        "ratchet_value": 27.8865,
+        "ratchet_asof": "2026-08-05",
+        "px": 35.94,
+        "px_date": "2026-08-04"
       },
       {
-        "id": "actionable-2026-08-04-IART",
-        "placed_ts": "2026-08-04T07:42:42+08:00",
         "ticker": "IART",
         "name": "Integra LifeSciences Holdings Corporation",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 17.65,
+        "shares": 144,
+        "avg_price": 17.65,
+        "fill_date": "2026-08-04",
+        "fx_at_fill": 32.393001556396484,
         "stop": 15.53,
         "stop_rule": "ta",
+        "stop_asof": "2026-08-04",
         "group": "Health Care Equipment",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "IART",
-            "name": "Integra LifeSciences Holdings Corporation",
-            "yf": "IART",
-            "group": "Health Care Equipment",
-            "px": 17.88,
-            "ma20": 18.46,
-            "ma50": 17.65,
-            "ma200_gap": 34.0,
-            "rs63": 58.2,
-            "atr20_pct": 6.3,
-            "setup": "A回檔MA50",
-            "limit": 17.65,
-            "stop": 15.53,
-            "stop_pct": -12.0,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-08-04"
+        "cost_twd": 82978.0,
+        "fill_ref_close": 17.9,
+        "half_locked": false,
+        "ratchet_armed": true,
+        "ratchet_value": 14.6735,
+        "ratchet_asof": "2026-08-05",
+        "px": 17.9,
+        "px_date": "2026-08-04"
       }
     ],
-    "pending_sells": [
-      {
-        "ticker": "BHVN",
-        "name": "Biohaven Ltd. Common Shares",
-        "trigger": "stop_half",
-        "qty_rule": "half",
-        "reason": "日收 13.37 跌破認錯線 13.49（ta 機械停損，§5.1）",
-        "placed_ts": "2026-08-04T07:43:14+08:00"
-      }
-    ],
+    "pending_orders": [],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -706,6 +644,51 @@
         "qty_rule": "all",
         "trigger": "stop_all",
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
+      },
+      {
+        "ts": "2026-08-05T05:20:28+08:00",
+        "order_id": "actionable-2026-08-04-QLYS",
+        "ticker": "QLYS",
+        "name": "Qualys, Inc.",
+        "action": "expire_unfilled",
+        "open": 152.25999450683594,
+        "low": 151.77499389648438,
+        "limit": 148.69,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-08-05T05:20:29+08:00",
+        "order_id": "actionable-2026-08-04-IART",
+        "ticker": "IART",
+        "name": "Integra LifeSciences Holdings Corporation",
+        "action": "buy",
+        "shares": 144,
+        "price": 17.65,
+        "fee": 20.0,
+        "cost_twd": 82978.0,
+        "fill_date": "2026-08-04",
+        "fill_how": "盤中觸限價",
+        "stop": 15.53,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json"
+      },
+      {
+        "ts": "2026-08-05T05:20:35+08:00",
+        "sell_id": "BHVN-2026-08-04T07:43:14+08:00-stop_half",
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "action": "sell",
+        "shares": 42,
+        "price": 13.66,
+        "fee": 20.0,
+        "proceeds_twd": 17937.0,
+        "cost_basis_twd": 20490.0,
+        "fx": 32.393,
+        "pnl_twd": -2553.0,
+        "sell_date": "2026-08-04",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 13.37 跌破認錯線 13.49（ta 機械停損，§5.1）"
       }
     ],
     "benchmark_spec": {
@@ -1002,6 +985,36 @@
         "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
+      },
+      "IART": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "IART",
+            "name": "Integra LifeSciences Holdings Corporation",
+            "shares": 144,
+            "avg_price": 17.65,
+            "fill_date": "2026-08-04",
+            "fx_at_fill": 32.393001556396484,
+            "stop": 15.53,
+            "stop_rule": "ta",
+            "stop_asof": "2026-08-04",
+            "group": "Health Care Equipment",
+            "cost_twd": 82978.0,
+            "fill_ref_close": 17.899999618530273,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-08-04",
+              "value": 15.53
+            }
+          ]
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
       }
     },
     "benchmarks_inception": {
@@ -1236,8 +1249,20 @@
         "SPY": 1.4
       },
       "realized_pnl_twd": -34741.0
+    },
+    {
+      "ts": "2026-08-05T05:20:42+08:00",
+      "nav_twd": 1000416.0,
+      "return_pct": 0.04,
+      "cash_twd": 327369.0,
+      "n_positions": 7,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": 3.22
+      },
+      "realized_pnl_twd": -37294.0
     }
   ],
-  "usdtwd": 32.375,
-  "generated_at": "2026-08-04T06:07:02.044856+00:00"
+  "usdtwd": 32.393001556396484,
+  "generated_at": "2026-08-04T21:21:05.485397+00:00"
 }

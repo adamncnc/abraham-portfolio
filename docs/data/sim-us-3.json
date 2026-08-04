@@ -5,47 +5,31 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 981523.5012215985,
+    "cash_twd": 837797.0503012812,
     "realized_pnl_twd": -18546.0,
-    "positions": [],
-    "pending_orders": [
+    "positions": [
       {
-        "id": "actionable-2026-08-04-AMZN",
-        "placed_ts": "2026-08-04T07:42:53+08:00",
         "ticker": "AMZN",
         "name": "Amazon",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 284.02,
+        "shares": 16,
+        "avg_price": 276.06,
+        "fill_date": "2026-08-04",
+        "fx_at_fill": 32.393001556396484,
         "stop": 266.2,
         "stop_rule": "ta",
+        "stop_asof": "2026-08-04",
         "group": "雲端大型科技",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "AMZN",
-            "name": "Amazon",
-            "yf": "AMZN",
-            "group": "雲端大型科技",
-            "px": 284.02,
-            "ma20": 245.85,
-            "ma50": 247.01,
-            "ma200_gap": 20.7,
-            "rs63": 0.8,
-            "atr20_pct": 3.1,
-            "setup": "B突破",
-            "limit": 284.02,
-            "stop": 266.2,
-            "stop_pct": -6.3,
-            "budget": 150000
-          }
-        },
-        "target_session": "2026-08-04"
+        "cost_twd": 143726.0,
+        "fill_ref_close": 277.420013,
+        "half_locked": false,
+        "ratchet_armed": true,
+        "ratchet_value": 250.3885,
+        "ratchet_asof": "2026-08-05",
+        "px": 277.42,
+        "px_date": "2026-08-04"
       }
     ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -169,7 +153,23 @@
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
       },
       {
-        "ts": "2026-08-04T07:32:30+08:00",
+        "ts": "2026-08-05T05:20:51+08:00",
+        "order_id": "actionable-2026-08-04-AMZN",
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "action": "buy",
+        "shares": 16,
+        "price": 276.06,
+        "fee": 20.0,
+        "cost_twd": 143726.0,
+        "fill_date": "2026-08-04",
+        "fill_how": "開盤",
+        "stop": 266.2,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json"
+      },
+      {
+        "ts": "2026-08-05T05:21:03+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -214,6 +214,36 @@
         "projection_origin_v2": {
           "position": null,
           "stop_facts": []
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "AMZN": {
+        "projection_origin_v2": {
+          "position": {
+            "ticker": "AMZN",
+            "name": "Amazon",
+            "shares": 16,
+            "avg_price": 276.06,
+            "fill_date": "2026-08-04",
+            "fx_at_fill": 32.393001556396484,
+            "stop": 266.2,
+            "stop_rule": "ta",
+            "stop_asof": "2026-08-04",
+            "group": "雲端大型科技",
+            "cost_twd": 143726.0,
+            "fill_ref_close": 277.4200134277344,
+            "half_locked": false,
+            "ratchet_armed": false
+          },
+          "stop_facts": [
+            {
+              "asof": "2026-08-04",
+              "value": 266.2
+            }
+          ]
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -453,8 +483,20 @@
         "SPY": 1.4
       },
       "realized_pnl_twd": -18546.0
+    },
+    {
+      "ts": "2026-08-05T05:21:00+08:00",
+      "nav_twd": 981581.0,
+      "return_pct": -1.84,
+      "cash_twd": 837797.0,
+      "n_positions": 1,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": 3.22
+      },
+      "realized_pnl_twd": -18546.0
     }
   ],
-  "usdtwd": 32.375,
-  "generated_at": "2026-08-04T06:07:02.045861+00:00"
+  "usdtwd": 32.393001556396484,
+  "generated_at": "2026-08-04T21:21:05.487445+00:00"
 }
