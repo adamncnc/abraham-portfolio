@@ -202,33 +202,61 @@ const YF_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHT
 // Obtain a (cookie, crumb) pair, cached in KV so we don't re-handshake every refresh.
 // force=true skips the cache — used once after a 401, in case the cached pair went stale.
 async function getYahooAuth(env, force) {
-  if (!force && env && env.PREFS) {
-    try {
-      const cached = await env.PREFS.get(CRUMB_KEY, { type: "json" });
-      if (cached && cached.crumb && cached.cookie && Date.now() - cached.at < CRUMB_TTL_MS) return cached;
-    } catch (e) { /* KV miss/unbound → fall through to a fresh handshake */ }
+  // Always read the cache, even when forcing: the handshake is measurably flaky (Yahoo
+  // does not always return Set-Cookie to a Worker — observed failing and succeeding
+  // seconds apart on 2026-08-04), and a stale crumb that might still work beats no crumb
+  // at all. A dead one just 401s, which costs one forced retry.
+  let cached = null;
+  if (env && env.PREFS) {
+    try { cached = await env.PREFS.get(CRUMB_KEY, { type: "json" }); } catch (e) { /* KV miss/unbound */ }
+    if (cached && (!cached.crumb || !cached.cookie)) cached = null;
+    if (!force && cached && Date.now() - cached.at < CRUMB_TTL_MS) return cached;
   }
-  let seed;
-  try {
-    seed = await fetch("https://fc.yahoo.com/", { headers: { "User-Agent": YF_UA }, cf: { cacheTtl: 0 } });
-  } catch (e) { return null; }
-  // 404 is EXPECTED here — we only want the Set-Cookie. Do not treat it as failure.
-  // Multiple Set-Cookie headers fold differently across runtimes (Workers vs undici), and
-  // a naive split(",") also breaks on the comma inside a cookie's Expires date. Prefer the
-  // structured getSetCookie() where available and only fall back to the folded string.
-  const jar = typeof seed.headers.getSetCookie === "function"
-    ? seed.headers.getSetCookie()
-    : String(seed.headers.get("set-cookie") || "").split(/,(?=\s*[A-Za-z0-9_-]+=)/);
-  const cookie = jar.map((p) => String(p).trim().split(";")[0]).filter((p) => /^A[13]=/.test(p)).join("; ");
-  if (!cookie) return null;
+  // Cookie seeding differs by egress network — measured from the Worker 2026-08-04 via
+  // ?onDebug=1 rather than reasoned about:
+  //   fc.yahoo.com            → 404, ZERO Set-Cookie   (works from a residential IP, not from CF)
+  //   finance.yahoo.com/      → 200, ZERO Set-Cookie
+  //   finance.yahoo.com/quote → 200, ZERO Set-Cookie
+  //   getcrumb w/ HTML Accept → 406, but SETS A1/A3/A1S ← the only one that works from CF
+  // So we probe candidates in CF-first order and take the first that yields A1/A3. The
+  // non-2xx status on the winning call is expected: we want its Set-Cookie, not its body.
+  const SEEDS = [
+    ["https://query1.finance.yahoo.com/v1/test/getcrumb", "text/html,application/xhtml+xml"],
+    ["https://fc.yahoo.com/", "text/html,application/xhtml+xml"],
+    ["https://finance.yahoo.com/", "text/html,application/xhtml+xml"],
+  ];
+  let cookie = "";
+  // On a forced retry sweep the list twice: the failure mode is transient (Yahoo simply
+  // omits Set-Cookie sometimes), so a second pass usually lands it.
+  for (const [seedUrl, accept] of (force ? SEEDS.concat(SEEDS) : SEEDS)) {
+    let seed;
+    try {
+      seed = await fetch(seedUrl, {
+        headers: { "User-Agent": YF_UA, Accept: accept, "Accept-Language": "en-US,en;q=0.9" },
+        cf: { cacheTtl: 0 },
+      });
+    } catch (e) { continue; }
+    // Multiple Set-Cookie headers fold differently across runtimes (Workers vs undici), and
+    // a naive split(",") also breaks on the comma inside a cookie's Expires date. Prefer the
+    // structured getSetCookie() where available and only fall back to the folded string.
+    const jar = typeof seed.headers.getSetCookie === "function"
+      ? seed.headers.getSetCookie()
+      : String(seed.headers.get("set-cookie") || "").split(/,(?=\s*[A-Za-z0-9_-]+=)/);
+    cookie = jar.map((p) => String(p).trim().split(";")[0]).filter((p) => /^A[13]=/.test(p)).join("; ");
+    if (cookie) break;
+  }
+  // Handshake failed. Returning null would silently drop the whole overnight overlay for
+  // this refresh; a stale crumb is strictly better — if it is dead the quote call 401s and
+  // triggers exactly one forced retry, which is the path that repairs it.
+  if (!cookie) return cached;
   const cr = await fetch("https://query1.finance.yahoo.com/v1/test/getcrumb", {
     headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*", Cookie: cookie },
     cf: { cacheTtl: 0 },
   });
-  if (!cr.ok) return null;
+  if (!cr.ok) return cached;
   const crumb = (await cr.text()).trim();
   // A crumb looks like "5hQs7ms2rhT" — reject an HTML error page masquerading as one.
-  if (!crumb || crumb.length > 32 || /[<>{}\s]/.test(crumb)) return null;
+  if (!crumb || crumb.length > 32 || /[<>{}\s]/.test(crumb)) return cached;
   const auth = { crumb, cookie, at: Date.now() };
   if (env && env.PREFS) { try { await env.PREFS.put(CRUMB_KEY, JSON.stringify(auth)); } catch (e) { /* non-fatal */ } }
   return auth;
@@ -399,6 +427,102 @@ export default {
 
     // Cross-device settings sync
     if (u.pathname === "/prefs") return handlePrefs(request, env);
+
+    // Diagnostic: ?onDebug=1 reports each step of the overnight handshake. The overlay
+    // worked from a laptop but not from the Worker, and the difference is environmental
+    // (Cloudflare egress IPs, Set-Cookie surface) — guessing which is exactly the habit
+    // that wastes rounds. Truncates the cookie; the A3 value is an anonymous Yahoo cookie,
+    // not user data, but there is no reason to publish it in full.
+    if (u.searchParams.get("onDebug") === "1") {
+      const d = { ua: YF_UA.slice(0, 24) + "…", seeds: [] };
+      try {
+        // fc.yahoo.com returns 404 with ZERO Set-Cookie from Cloudflare egress (measured
+        // 2026-08-04) even though it seeds the cookie fine from a residential IP. Probe
+        // several candidates and report what each actually returns.
+        let cookie = "";
+        for (const seedUrl of [
+          "https://fc.yahoo.com/",
+          "https://finance.yahoo.com/",
+          "https://finance.yahoo.com/quote/AMZN/",
+          "https://query1.finance.yahoo.com/v1/test/getcrumb",
+        ]) {
+          let row = { url: seedUrl.replace("https://", "") };
+          try {
+            const seed = await fetch(seedUrl, {
+              headers: { "User-Agent": YF_UA, Accept: "text/html,application/xhtml+xml", "Accept-Language": "en-US,en;q=0.9" },
+              cf: { cacheTtl: 0 },
+            });
+            row.status = seed.status;
+            const jar = typeof seed.headers.getSetCookie === "function"
+              ? seed.headers.getSetCookie()
+              : String(seed.headers.get("set-cookie") || "").split(/,(?=\s*[A-Za-z0-9_-]+=)/);
+            row.jarCount = jar.filter(Boolean).length;
+            row.names = jar.map((p) => String(p).trim().split("=")[0]).filter(Boolean).slice(0, 8);
+            const c = jar.map((p) => String(p).trim().split(";")[0]).filter((p) => /^A[13]=/.test(p)).join("; ");
+            row.aCookie = c.length;
+            if (c && !cookie) cookie = c;
+          } catch (e) { row.err = String(e).slice(0, 80); }
+          d.seeds.push(row);
+        }
+        d.cookieLen = cookie.length;
+        // Also: does getcrumb work at all from CF without any cookie?
+        try {
+          const bare = await fetch("https://query1.finance.yahoo.com/v1/test/getcrumb", {
+            headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*" }, cf: { cacheTtl: 0 },
+          });
+          d.bareCrumbStatus = bare.status;
+          d.bareCrumbSample = (await bare.text()).trim().slice(0, 40);
+        } catch (e) { d.bareCrumbErr = String(e).slice(0, 80); }
+        if (cookie) {
+          const cr = await fetch("https://query1.finance.yahoo.com/v1/test/getcrumb", {
+            headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*", Cookie: cookie },
+            cf: { cacheTtl: 0 },
+          });
+          d.crumbStatus = cr.status;
+          const body = (await cr.text()).trim();
+          d.crumbLen = body.length;
+          d.crumbSample = body.slice(0, 40);
+          if (cr.ok && body && body.length <= 32 && !/[<>{}\s]/.test(body)) {
+            const qr = await fetch(
+              "https://query1.finance.yahoo.com/v7/finance/quote?symbols=AMZN&fields=" +
+              encodeURIComponent(ON_FIELDS) + "&overnightPrice=true&lang=en-US&region=US&crumb=" +
+              encodeURIComponent(body),
+              { headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*", Cookie: cookie }, cf: { cacheTtl: 0 } }
+            );
+            d.quoteStatus = qr.status;
+            const qt = await qr.text();
+            d.quoteSample = qt.slice(0, 300);
+          }
+        }
+      } catch (e) { d.error = String(e); }
+      // Exercise the PRODUCTION path too — the raw handshake above can succeed while the
+      // real code path still yields nothing (KV cache, marketState gate, field shape).
+      try {
+        const auth = await getYahooAuth(env, true);
+        d.prodAuth = auth ? { crumb: auth.crumb, cookieLen: auth.cookie.length } : null;
+        if (auth) {
+          const r = await fetch(
+            "https://query1.finance.yahoo.com/v7/finance/quote?symbols=AMZN&fields=" +
+            encodeURIComponent(ON_FIELDS) + "&overnightPrice=true&lang=en-US&region=US&crumb=" +
+            encodeURIComponent(auth.crumb),
+            { headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*", Cookie: auth.cookie }, cf: { cacheTtl: 0 } }
+          );
+          const jj = await r.json();
+          const q = jj && jj.quoteResponse && jj.quoteResponse.result && jj.quoteResponse.result[0];
+          d.prodQuote = q ? {
+            marketState: q.marketState,
+            onPriceType: typeof q.overnightMarketPrice,
+            onPrice: q.overnightMarketPrice,
+            onTimeType: typeof q.overnightMarketTime,
+            onTime: q.overnightMarketTime,
+            regType: typeof q.regularMarketPrice,
+            reg: q.regularMarketPrice,
+          } : { note: "no result", keys: Object.keys(jj || {}) };
+        }
+        d.prodBatch = await fetchOvernightBatch(["AMZN", "PLTR"], env);
+      } catch (e) { d.prodError = String(e).slice(0, 200); }
+      return jsonResponse(d);
+    }
 
     // Live-quote relay (default route)
     const raw = u.searchParams.get("symbols") || u.searchParams.get("symbol") || "";
