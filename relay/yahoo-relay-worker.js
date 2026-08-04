@@ -169,6 +169,116 @@ async function fetchOne(symbol) {
   return { ok: false, error: lastErr };
 }
 
+// ── Yahoo 隔夜盤 (OVERNIGHT / Blue Ocean ATS) overlay for US symbols ───────────
+// US equities now trade a THIRD session — 20:00–04:00 ET on the Blue Ocean ATS ("BOATS"),
+// which is neither pre nor post. The chart endpoint this worker already uses CANNOT see it:
+// its bars stop at the 19:59 post-market close and currentTradingPeriod only ever carries
+// pre/regular/post — verified 2026-08-04 against ?overnightPrice=true / ?includeOvernight=true
+// on v8/finance/chart, all identical. So overnight needs the QUOTE endpoint instead.
+//
+// Two non-obvious requirements, both verified live 2026-08-04 00:4x ET:
+//   1. The query param `overnightPrice=true` is the switch. WITHOUT it the API does not
+//      merely omit the fields — it reports marketState "PREPRE" and nulls every overnight
+//      field, i.e. it actively looks like "no overnight session exists". With it, the same
+//      request returns marketState "OVERNIGHT" plus live prices.
+//   2. v7/finance/quote requires a cookie + crumb (bare request → HTTP 401). A cheap
+//      GET https://fc.yahoo.com/ 404s but sets the A3 cookie, which is enough for
+//      /v1/test/getcrumb — no need to pull the 1.2 MB quote page.
+//
+// Baseline: overnightMarketPrice === regularMarketPrice + overnightMarketChange for every
+// symbol tested (38/38), i.e. the move is quoted against the REGULAR CLOSE, not the
+// post-market close. Same trap as the pre/post baseline bug fixed 2026-08-03 — pairing it
+// with chartPreviousClose would silently skip a whole session.
+//
+// Coverage is partial and thin: 38/39 watchlist US names had a quote (HUBB none), but the
+// last print ranged from 0 min to 255 min old (NVMI/TLN/POWI last traded 20:35 ET and then
+// nothing for four hours). We therefore pass overnightMarketTime through as asOf so the
+// frontend's existing 慢N分 badge tells the truth instead of dressing a 4-hour-old print
+// as live.
+const CRUMB_KEY = "yahoo-crumb-v1";
+const CRUMB_TTL_MS = 30 * 60 * 1000;
+const YF_UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
+
+// Obtain a (cookie, crumb) pair, cached in KV so we don't re-handshake every refresh.
+// force=true skips the cache — used once after a 401, in case the cached pair went stale.
+async function getYahooAuth(env, force) {
+  if (!force && env && env.PREFS) {
+    try {
+      const cached = await env.PREFS.get(CRUMB_KEY, { type: "json" });
+      if (cached && cached.crumb && cached.cookie && Date.now() - cached.at < CRUMB_TTL_MS) return cached;
+    } catch (e) { /* KV miss/unbound → fall through to a fresh handshake */ }
+  }
+  let seed;
+  try {
+    seed = await fetch("https://fc.yahoo.com/", { headers: { "User-Agent": YF_UA }, cf: { cacheTtl: 0 } });
+  } catch (e) { return null; }
+  // 404 is EXPECTED here — we only want the Set-Cookie. Do not treat it as failure.
+  // Multiple Set-Cookie headers fold differently across runtimes (Workers vs undici), and
+  // a naive split(",") also breaks on the comma inside a cookie's Expires date. Prefer the
+  // structured getSetCookie() where available and only fall back to the folded string.
+  const jar = typeof seed.headers.getSetCookie === "function"
+    ? seed.headers.getSetCookie()
+    : String(seed.headers.get("set-cookie") || "").split(/,(?=\s*[A-Za-z0-9_-]+=)/);
+  const cookie = jar.map((p) => String(p).trim().split(";")[0]).filter((p) => /^A[13]=/.test(p)).join("; ");
+  if (!cookie) return null;
+  const cr = await fetch("https://query1.finance.yahoo.com/v1/test/getcrumb", {
+    headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*", Cookie: cookie },
+    cf: { cacheTtl: 0 },
+  });
+  if (!cr.ok) return null;
+  const crumb = (await cr.text()).trim();
+  // A crumb looks like "5hQs7ms2rhT" — reject an HTML error page masquerading as one.
+  if (!crumb || crumb.length > 32 || /[<>{}\s]/.test(crumb)) return null;
+  const auth = { crumb, cookie, at: Date.now() };
+  if (env && env.PREFS) { try { await env.PREFS.put(CRUMB_KEY, JSON.stringify(auth)); } catch (e) { /* non-fatal */ } }
+  return auth;
+}
+
+const ON_FIELDS = "symbol,marketState,regularMarketPrice,overnightMarketPrice,overnightMarketChange,overnightMarketChangePercent,overnightMarketTime";
+
+// Returns { SYM: { price, prevClose, changePct, asOf(sec) } } for symbols currently quoting
+// in the overnight session. Empty object on any failure → callers keep the Yahoo chart
+// quote, so this overlay can never make the dashboard worse than before it existed.
+async function fetchOvernightBatch(usSymbols, env) {
+  const out = {};
+  if (!usSymbols.length) return out;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const auth = await getYahooAuth(env, attempt > 0);
+    if (!auth) return out;
+    const url =
+      "https://query1.finance.yahoo.com/v7/finance/quote?symbols=" +
+      encodeURIComponent(usSymbols.join(",")) +
+      "&fields=" + encodeURIComponent(ON_FIELDS) +
+      "&overnightPrice=true&lang=en-US&region=US&crumb=" + encodeURIComponent(auth.crumb);
+    let r;
+    try {
+      r = await fetch(url, {
+        headers: { "User-Agent": YF_UA, Accept: "application/json,text/plain,*/*", Cookie: auth.cookie },
+        cf: { cacheTtl: 0 },
+      });
+    } catch (e) { return out; }
+    if (r.status === 401 || r.status === 403) continue;  // stale crumb → one forced re-handshake
+    if (!r.ok) return out;
+    let j;
+    try { j = await r.json(); } catch (e) { return out; }
+    const res = (j && j.quoteResponse && j.quoteResponse.result) || [];
+    for (const q of res) {
+      if (!q || q.marketState !== "OVERNIGHT") continue;   // only during the overnight window
+      const price = q.overnightMarketPrice, prev = q.regularMarketPrice, ts = q.overnightMarketTime;
+      // A symbol Blue Ocean doesn't carry returns nulls — skip it rather than invent a price.
+      if (!Number.isFinite(price) || !Number.isFinite(prev) || !Number.isFinite(ts)) continue;
+      out[q.symbol] = {
+        price,
+        prevClose: prev,
+        changePct: Number.isFinite(q.overnightMarketChangePercent) ? q.overnightMarketChangePercent : null,
+        asOf: ts,
+      };
+    }
+    return out;
+  }
+  return out;
+}
+
 // ── TWSE MIS 官方即時報價 (near-real-time ~5-10s) for .TW / .TWO ───────────────
 // Yahoo's free TW feed lags ~20 min (regularMarketTime is ~20 min behind the tape).
 // TWSE MIS is the exchange's own snapshot — what broker apps show — delayed only a few
@@ -345,6 +455,33 @@ export default {
           // 證交所當日累積量 (shares); Yahoo fallback。指數例外: 一律 null，不撿 Yahoo 的 0。
           dayVolume: m.isIndex ? null : (m.dayVolume != null ? m.dayVolume : (base.dayVolume ?? null)),
           src: "twse-mis",     // provenance (debugging)
+        };
+      }
+    }
+
+    // Overlay the US overnight session (Blue Ocean ATS) — the chart endpoint above simply
+    // cannot see it, so without this the card sits on the 19:59 post-market print all night
+    // and the freshness badge just counts the minutes up (Adam 2026-08-04, AMZN 慢520分).
+    // Deliberately does NOT touch `intraday`: the sparkline is one regular-day x-axis, and
+    // hanging an 04:00-ET point off the end would stretch the whole chart to draw one dot.
+    const usSyms = symbols.filter((s) => !misChannel(s) && !s.startsWith("^") && !s.includes("="));
+    if (usSyms.length) {
+      const on = await fetchOvernightBatch(usSyms, env);
+      for (const s of usSyms) {
+        const o = on[s];
+        if (!o) continue;   // no overnight quote for this name → Yahoo's regular/post stands
+        const base = quotes[s] || {};
+        const change = Math.round((o.price - o.prevClose) * 10000) / 10000;
+        quotes[s] = {
+          ...base,
+          ok: true,
+          price: o.price,
+          prevClose: o.prevClose,          // = last REGULAR close (verified: price = prev + change)
+          change,
+          changePct: o.changePct != null ? o.changePct : (o.prevClose ? (change / o.prevClose) * 100 : null),
+          session: "overnight",            // frontend renders 隔夜 + honest 慢N分 from asOf
+          asOf: o.asOf,                    // the overnight print's OWN time (0–255 min old in testing)
+          src: "yahoo-overnight",          // provenance (debugging)
         };
       }
     }
