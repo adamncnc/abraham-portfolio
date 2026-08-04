@@ -8,7 +8,44 @@
     "cash_twd": 981523.5012215985,
     "realized_pnl_twd": -18546.0,
     "positions": [],
-    "pending_orders": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-08-04-AMZN",
+        "placed_ts": "2026-08-04T07:42:53+08:00",
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "side": "buy",
+        "budget_twd": 150000,
+        "limit": 284.02,
+        "stop": 266.2,
+        "stop_rule": "ta",
+        "group": "雲端大型科技",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json",
+          "date": "2026-08-04",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "AMZN",
+            "name": "Amazon",
+            "yf": "AMZN",
+            "group": "雲端大型科技",
+            "px": 284.02,
+            "ma20": 245.85,
+            "ma50": 247.01,
+            "ma200_gap": 20.7,
+            "rs63": 0.8,
+            "atr20_pct": 3.1,
+            "setup": "B突破",
+            "limit": 284.02,
+            "stop": 266.2,
+            "stop_pct": -6.3,
+            "budget": 150000
+          }
+        },
+        "target_session": "2026-08-04"
+      }
+    ],
     "pending_sells": [],
     "trades": [
       {
@@ -132,7 +169,7 @@
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
       },
       {
-        "ts": "2026-08-04T05:20:54+08:00",
+        "ts": "2026-08-04T07:32:30+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -418,6 +455,6 @@
       "realized_pnl_twd": -18546.0
     }
   ],
-  "usdtwd": 32.39699935913086,
-  "generated_at": "2026-08-03T21:20:55.520929+00:00"
+  "usdtwd": 32.36399841308594,
+  "generated_at": "2026-08-04T01:50:20.936538+00:00"
 }
