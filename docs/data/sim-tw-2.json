@@ -22,10 +22,10 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 54.195,
-        "ratchet_asof": "2026-08-03",
+        "ratchet_value": 54.255,
+        "ratchet_asof": "2026-08-04",
         "fill_ref_close": 63.700001,
-        "px": 64.1,
+        "px": 66.0,
         "px_date": "2026-08-04"
       },
       {
@@ -42,8 +42,8 @@
         "cost_twd": 11222.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 183.0,
-        "ratchet_asof": "2026-08-03",
+        "ratchet_value": 204.3,
+        "ratchet_asof": "2026-08-04",
         "fill_ref_close": 212.5,
         "px": 252.0,
         "px_date": "2026-08-04"
@@ -64,8 +64,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 69.755,
-        "ratchet_asof": "2026-08-03",
-        "px": 76.6,
+        "ratchet_asof": "2026-08-04",
+        "px": 78.0,
         "px_date": "2026-08-04"
       },
       {
@@ -84,7 +84,7 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 117.625,
-        "ratchet_asof": "2026-08-03",
+        "ratchet_asof": "2026-08-04",
         "px": 128.5,
         "px_date": "2026-08-04"
       },
@@ -104,8 +104,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 134.675,
-        "ratchet_asof": "2026-08-03",
-        "px": 145.5,
+        "ratchet_asof": "2026-08-04",
+        "px": 149.5,
         "px_date": "2026-08-04"
       },
       {
@@ -124,8 +124,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 29.665,
-        "ratchet_asof": "2026-08-03",
-        "px": 36.0,
+        "ratchet_asof": "2026-08-04",
+        "px": 35.4,
         "px_date": "2026-08-04"
       },
       {
@@ -144,8 +144,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 135.675,
-        "ratchet_asof": "2026-08-03",
-        "px": 192.5,
+        "ratchet_asof": "2026-08-04",
+        "px": 179.5,
         "px_date": "2026-08-04"
       },
       {
@@ -163,9 +163,9 @@
         "fill_ref_close": 215.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 168.425,
-        "ratchet_asof": "2026-08-03",
-        "px": 186.0,
+        "ratchet_value": 169.85,
+        "ratchet_asof": "2026-08-04",
+        "px": 188.0,
         "px_date": "2026-08-04"
       },
       {
@@ -183,9 +183,9 @@
         "fill_ref_close": 61.299999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 60.495,
-        "ratchet_asof": "2026-08-03",
-        "px": 69.4,
+        "ratchet_value": 61.02,
+        "ratchet_asof": "2026-08-04",
+        "px": 69.0,
         "px_date": "2026-08-04"
       },
       {
@@ -203,9 +203,9 @@
         "fill_ref_close": 61.700001,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 50.63,
-        "ratchet_asof": "2026-08-03",
-        "px": 54.5,
+        "ratchet_value": 50.705,
+        "ratchet_asof": "2026-08-04",
+        "px": 55.3,
         "px_date": "2026-08-04"
       },
       {
@@ -224,8 +224,8 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 15.0075,
-        "ratchet_asof": "2026-08-03",
-        "px": 16.8,
+        "ratchet_asof": "2026-08-04",
+        "px": 16.6,
         "px_date": "2026-08-04"
       },
       {
@@ -243,9 +243,9 @@
         "fill_ref_close": 24.85,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 17.53,
-        "ratchet_asof": "2026-08-03",
-        "px": 24.85,
+        "ratchet_value": 17.7,
+        "ratchet_asof": "2026-08-04",
+        "px": 24.9,
         "px_date": "2026-08-04"
       },
       {
@@ -264,8 +264,8 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 606.45,
-        "ratchet_asof": "2026-08-03",
-        "px": 699.0,
+        "ratchet_asof": "2026-08-04",
+        "px": 723.0,
         "px_date": "2026-08-04"
       },
       {
@@ -283,9 +283,9 @@
         "fill_ref_close": 56.400002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 42.97,
-        "ratchet_asof": "2026-08-03",
-        "px": 57.8,
+        "ratchet_value": 44.07,
+        "ratchet_asof": "2026-08-04",
+        "px": 58.2,
         "px_date": "2026-08-04"
       },
       {
@@ -304,8 +304,8 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 52.56,
-        "ratchet_asof": "2026-08-03",
-        "px": 67.4,
+        "ratchet_asof": "2026-08-04",
+        "px": 68.2,
         "px_date": "2026-08-04"
       },
       {
@@ -322,10 +322,10 @@
         "cost_twd": 41419.0,
         "fill_ref_close": 934.0,
         "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 732.25,
-        "ratchet_asof": "2026-08-03",
-        "px": 929.0,
+        "ratchet_armed": true,
+        "ratchet_value": 753.05,
+        "ratchet_asof": "2026-08-04",
+        "px": 941.0,
         "px_date": "2026-08-04"
       },
       {
@@ -343,50 +343,13 @@
         "fill_ref_close": 116.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 97.925,
-        "ratchet_asof": "2026-08-03",
-        "px": 117.0,
+        "ratchet_value": 98.825,
+        "ratchet_asof": "2026-08-04",
+        "px": 117.5,
         "px_date": "2026-08-04"
       }
     ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-08-03-2357.TW",
-        "placed_ts": "2026-08-03T15:24:53+08:00",
-        "ticker": "2357.TW",
-        "name": "華碩",
-        "side": "buy",
-        "budget_twd": 63500,
-        "limit": 754.0,
-        "stop": 694.0,
-        "stop_rule": "ta",
-        "group": "EMS",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\AppData\\Local\\Temp\\claude\\C--Users-Adam-Abraham\\230aae33-d8bf-486b-9a2d-552d60682a36\\scratchpad\\tw2_stage_input.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\AppData\\Local\\Temp\\claude\\C--Users-Adam-Abraham\\230aae33-d8bf-486b-9a2d-552d60682a36\\scratchpad\\tw2_stage_input.json",
-          "date": "2026-08-03",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "2357",
-            "name": "華碩",
-            "yf": "2357.TW",
-            "group": "EMS",
-            "px": 799.0,
-            "ma20": 728.55,
-            "ma50": 754.48,
-            "ma200_gap": 26.7,
-            "rs63": 28.6,
-            "atr20_pct": 3.7,
-            "setup": "A回檔MA50",
-            "limit": 754.0,
-            "stop": 694.0,
-            "stop_pct": -7.9,
-            "budget": 63500
-          }
-        },
-        "target_session": "2026-08-04"
-      }
-    ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -1429,7 +1392,18 @@
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1532648497）。"
       },
       {
-        "ts": "2026-08-03T15:11:35+08:00",
+        "ts": "2026-08-04T14:05:55+08:00",
+        "order_id": "actionable-2026-08-03-2357.TW",
+        "ticker": "2357.TW",
+        "name": "華碩",
+        "action": "expire_unfilled",
+        "open": 781.0,
+        "low": 781.0,
+        "limit": 754.0,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-08-04T14:06:49+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -1443,7 +1417,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-08-03T15:11:35+08:00",
+        "ts": "2026-08-04T14:06:49+08:00",
         "ticker": "6719.TW",
         "name": "6719.TW",
         "action": "dividend",
@@ -2404,8 +2378,20 @@
         "0050.TW": -2.75
       },
       "realized_pnl_twd": -61923.0
+    },
+    {
+      "ts": "2026-08-04T14:06:35+08:00",
+      "nav_twd": 958636.0,
+      "return_pct": -4.14,
+      "cash_twd": 267725.0,
+      "n_positions": 17,
+      "usdtwd": 32.455,
+      "bench_return_pct": {
+        "0050.TW": -4.03
+      },
+      "realized_pnl_twd": -61923.0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.928518+00:00"
+  "usdtwd": 32.375,
+  "generated_at": "2026-08-04T06:07:02.038835+00:00"
 }

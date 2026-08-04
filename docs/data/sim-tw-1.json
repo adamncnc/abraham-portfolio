@@ -25,7 +25,7 @@
         "ratchet_value": 186.225,
         "ratchet_asof": "2026-07-29",
         "fill_ref_close": 205,
-        "px": 194.5,
+        "px": 195.0,
         "px_date": "2026-08-04"
       },
       {
@@ -45,7 +45,7 @@
         "ratchet_armed": false,
         "ratchet_value": 216.6667,
         "ratchet_asof": "2026-07-29",
-        "px": 230.5,
+        "px": 245.5,
         "px_date": "2026-08-04"
       },
       {
@@ -65,7 +65,7 @@
         "ratchet_armed": false,
         "ratchet_value": 2208.5,
         "ratchet_asof": "2026-07-29",
-        "px": 2325.0,
+        "px": 2320.0,
         "px_date": "2026-08-04"
       },
       {
@@ -604,6 +604,6 @@
       "realized_pnl_twd": 0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.926503+00:00"
+  "usdtwd": 32.375,
+  "generated_at": "2026-08-04T06:07:02.036834+00:00"
 }

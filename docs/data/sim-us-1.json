@@ -25,8 +25,8 @@
         "ratchet_armed": true,
         "ratchet_value": 249.7523,
         "ratchet_asof": "2026-08-04",
-        "px": 273.71,
-        "px_date": "2026-08-03"
+        "px": 262.75,
+        "px_date": "2026-07-31"
       },
       {
         "ticker": "POWI",
@@ -45,8 +45,8 @@
         "ratchet_armed": false,
         "ratchet_value": 58.3225,
         "ratchet_asof": "2026-08-04",
-        "px": 60.4,
-        "px_date": "2026-08-03"
+        "px": 60.71,
+        "px_date": "2026-07-31"
       }
     ],
     "pending_orders": [],
@@ -617,6 +617,6 @@
       "realized_pnl_twd": -56718.0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.932529+00:00"
+  "usdtwd": 32.375,
+  "generated_at": "2026-08-04T06:07:02.043349+00:00"
 }
