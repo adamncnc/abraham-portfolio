@@ -698,11 +698,14 @@ function freshnessBadge(item) {
     if (item._session === "closed") {
       return `<span class="freshness snap" title="今日收盤價（證交所）；市場已收盤，非即時">🕒 收盤 ${hhmm(qts)}</span>`;
     }
-    const lbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "即時";
+    // 隔夜 = Blue Ocean ATS 20:00–04:00 ET — a real third session, not pre and not post.
+    // Its 慢N分 is meaningful and often LARGE: liquidity is thin, so a name can go hours
+    // between prints (NVMI/TLN/POWI: 255 min, measured 2026-08-04). Never smooth that over.
+    const lbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : item._session === "overnight" ? "隔夜" : "即時";
     const delayMin = item._quoteTs && item._liveTs ? Math.round((item._liveTs - item._quoteTs) / 60000) : 0;
     if (delayMin >= 3) {
       // Don't call a lagged quote 「即時」— that's the very thing Adam flagged. Use 報價.
-      const dlbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : "報價";
+      const dlbl = item._session === "pre" ? "盤前" : item._session === "post" ? "盤後" : item._session === "overnight" ? "隔夜" : "報價";
       return `<span class="freshness delayed" title="這是該價格本身的成交時間；資料源延遲約 ${delayMin} 分鐘（非即時）">🟡 ${dlbl} ${hhmm(qts)}·慢${delayMin}分</span>`;
     }
     return `<span class="freshness fresh" title="報價成交時間（幾乎即時）">🟢 ${lbl} ${hhmm(qts)}</span>`;
