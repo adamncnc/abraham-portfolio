@@ -545,8 +545,8 @@
       "currency": "TWD",
       "theme": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-",
       "notes": "AI伺服器連接器/CPU插座龍頭(嘉澤+鴻騰佔全球70-80%/AMD EPYC伺服器最大插座供應商/SOCAMM記憶體連接器+NPO插座+液冷快接頭); 6/30 Adam深調後明示加入; 體質最佳=毛利50.8%(連接器同業Amphenol才33%)/ROE19%/淨現金136億幾乎零負債(D/E2%)=堡壘級資產負債表; 估值2026E PE 22x(EPS95.96; ⚠️Yahoo forwardPE16.2是用2027 EPS假便宜)/這群最低; Q1伺服器業務+",
-      "entry_zone_lo": 1800,
-      "entry_zone_hi": 1920
+      "entry_zone_lo": 1765.07,
+      "entry_zone_hi": 1885.07
     },
     {
       "id": "nvmi",
@@ -765,6 +765,17 @@
       "notes": "FormFactor 探針卡龍頭(晶圓測試耗材); NasdaqGS USD, 族群=半導體設備(同 ONTO/NVMI/KLAC/AMAT/LRCX/AEHR). Adam 2026-07-31 明示加入觀察清單(msg 1532576168820084846), 前一日我已深調. 一手源=SEC 8-K 0001039399-26-000030 附件 EX-99.01(非媒體轉述; EDGAR 需自帶 User-Agent). Q2 FY26(截 6/27): 營收 $2",
       "entry_zone_lo": 93,
       "entry_zone_hi": 99
+    },
+    {
+      "id": "pltr",
+      "type": "us_stock",
+      "symbol": "PLTR",
+      "name": "Palantir",
+      "currency": "USD",
+      "theme": "Palantir Technologies — 企業/政",
+      "notes": "Palantir Technologies — 企業/政府 AI 作業平台(Gotham 國防・Foundry 商用・AIP). NasdaqGS USD. Adam 2026-08-04 明示加入觀察清單(msg 1534010646126133489), 當日深調. 一手源=SEC 8-K 0001321655-26-000039 附件 99.1(非媒體轉述). Q2 FY26(截 6/30, 8/3 美股盤後公布): 營收 $1,935.5M(YoY +92.8%/Qo",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
     }
   ]
 }

@@ -129,8 +129,90 @@
         "px_date": "2026-08-03"
       }
     ],
-    "pending_orders": [],
-    "pending_sells": [],
+    "pending_orders": [
+      {
+        "id": "actionable-2026-08-04-QLYS",
+        "placed_ts": "2026-08-04T07:42:42+08:00",
+        "ticker": "QLYS",
+        "name": "Qualys, Inc.",
+        "side": "buy",
+        "budget_twd": 85000,
+        "limit": 148.69,
+        "stop": 131.32,
+        "stop_rule": "ta",
+        "group": "Systems Software",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
+          "date": "2026-08-04",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "QLYS",
+            "name": "Qualys, Inc.",
+            "yf": "QLYS",
+            "group": "Systems Software",
+            "px": 154.89,
+            "ma20": 148.69,
+            "ma50": 128.86,
+            "ma200_gap": 30.2,
+            "rs63": 69.8,
+            "atr20_pct": 5.6,
+            "setup": "A回檔MA20",
+            "limit": 148.69,
+            "stop": 131.32,
+            "stop_pct": -11.7,
+            "budget": 85000
+          }
+        },
+        "target_session": "2026-08-04"
+      },
+      {
+        "id": "actionable-2026-08-04-IART",
+        "placed_ts": "2026-08-04T07:42:42+08:00",
+        "ticker": "IART",
+        "name": "Integra LifeSciences Holdings Corporation",
+        "side": "buy",
+        "budget_twd": 83000,
+        "limit": 17.65,
+        "stop": 15.53,
+        "stop_rule": "ta",
+        "group": "Health Care Equipment",
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
+        "pipeline_source": {
+          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
+          "date": "2026-08-04",
+          "kind": "actionable",
+          "candidate": {
+            "sid": "IART",
+            "name": "Integra LifeSciences Holdings Corporation",
+            "yf": "IART",
+            "group": "Health Care Equipment",
+            "px": 17.88,
+            "ma20": 18.46,
+            "ma50": 17.65,
+            "ma200_gap": 34.0,
+            "rs63": 58.2,
+            "atr20_pct": 6.3,
+            "setup": "A回檔MA50",
+            "limit": 17.65,
+            "stop": 15.53,
+            "stop_pct": -12.0,
+            "budget": 83000
+          }
+        },
+        "target_session": "2026-08-04"
+      }
+    ],
+    "pending_sells": [
+      {
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "trigger": "stop_half",
+        "qty_rule": "half",
+        "reason": "日收 13.37 跌破認錯線 13.49（ta 機械停損，§5.1）",
+        "placed_ts": "2026-08-04T07:43:14+08:00"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -1156,6 +1238,6 @@
       "realized_pnl_twd": -34741.0
     }
   ],
-  "usdtwd": 32.39699935913086,
-  "generated_at": "2026-08-03T21:20:55.519930+00:00"
+  "usdtwd": 32.36399841308594,
+  "generated_at": "2026-08-04T01:50:20.934535+00:00"
 }
