@@ -22,15 +22,23 @@
         "cost_twd": 143726.0,
         "fill_ref_close": 277.420013,
         "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 250.3885,
-        "ratchet_asof": "2026-08-05",
+        "ratchet_armed": false,
         "px": 277.42,
         "px_date": "2026-08-04"
       }
     ],
     "pending_orders": [],
-    "pending_sells": [],
+    "pending_sells": [
+      {
+        "id": "sell-AMZN-2026-08-05-shutdown",
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -169,7 +177,17 @@
         "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json"
       },
       {
-        "ts": "2026-08-05T05:21:03+08:00",
+        "ts": "2026-08-05T10:53:56+08:00",
+        "order_id": "actionable-2026-08-05-ANET",
+        "ticker": "ANET",
+        "name": "Arista",
+        "action": "cancelled_by_principal",
+        "limit": 190.51,
+        "target_session": "2026-08-05",
+        "reason": "實驗結束（Adam 選項 B）；目標節 2026-08-05 美股尚未開盤 ⇒ 取消不涉事後行情。Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-05T10:54:49+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -497,6 +515,6 @@
       "realized_pnl_twd": -18546.0
     }
   ],
-  "usdtwd": 32.393001556396484,
-  "generated_at": "2026-08-04T21:21:05.487445+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-08-05T06:06:58.281569+00:00"
 }

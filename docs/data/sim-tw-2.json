@@ -22,11 +22,11 @@
         "cost_twd": 50948.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 54.255,
-        "ratchet_asof": "2026-08-04",
+        "ratchet_value": 54.33,
+        "ratchet_asof": "2026-08-05",
         "fill_ref_close": 63.700001,
-        "px": 63.9,
-        "px_date": "2026-08-03"
+        "px": 65.7,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2301.TW",
@@ -43,10 +43,10 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 204.3,
-        "ratchet_asof": "2026-08-04",
+        "ratchet_asof": "2026-08-05",
         "fill_ref_close": 212.5,
-        "px": 229.5,
-        "px_date": "2026-08-03"
+        "px": 249.0,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2465.TW",
@@ -64,9 +64,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 69.755,
-        "ratchet_asof": "2026-08-04",
-        "px": 75.5,
-        "px_date": "2026-08-03"
+        "ratchet_asof": "2026-08-05",
+        "px": 85.8,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2881.TW",
@@ -84,9 +84,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 117.625,
-        "ratchet_asof": "2026-08-04",
+        "ratchet_asof": "2026-08-05",
         "px": 129.5,
-        "px_date": "2026-08-03"
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2377.TW",
@@ -104,9 +104,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 134.675,
-        "ratchet_asof": "2026-08-04",
-        "px": 143.0,
-        "px_date": "2026-08-03"
+        "ratchet_asof": "2026-08-05",
+        "px": 151.0,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "3094.TW",
@@ -124,9 +124,9 @@
         "half_locked": false,
         "ratchet_armed": true,
         "ratchet_value": 29.665,
-        "ratchet_asof": "2026-08-04",
-        "px": 35.15,
-        "px_date": "2026-08-03"
+        "ratchet_asof": "2026-08-05",
+        "px": 36.05,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "3362.TWO",
@@ -143,10 +143,10 @@
         "fill_ref_close": 148.5,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 135.675,
-        "ratchet_asof": "2026-08-04",
-        "px": 180.0,
-        "px_date": "2026-08-03"
+        "ratchet_value": 135.75,
+        "ratchet_asof": "2026-08-05",
+        "px": 174.5,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2645.TW",
@@ -163,10 +163,10 @@
         "fill_ref_close": 215.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 169.85,
-        "ratchet_asof": "2026-08-04",
-        "px": 184.5,
-        "px_date": "2026-08-03"
+        "ratchet_value": 171.65,
+        "ratchet_asof": "2026-08-05",
+        "px": 196.5,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2885.TW",
@@ -183,10 +183,10 @@
         "fill_ref_close": 61.299999,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 61.02,
-        "ratchet_asof": "2026-08-04",
-        "px": 68.0,
-        "px_date": "2026-08-03"
+        "ratchet_value": 61.765,
+        "ratchet_asof": "2026-08-05",
+        "px": 69.4,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "1301.TW",
@@ -203,10 +203,10 @@
         "fill_ref_close": 61.700001,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 50.705,
-        "ratchet_asof": "2026-08-04",
-        "px": 53.8,
-        "px_date": "2026-08-03"
+        "ratchet_value": 50.93,
+        "ratchet_asof": "2026-08-05",
+        "px": 56.0,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "3576.TW",
@@ -223,10 +223,10 @@
         "fill_ref_close": 17.85,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 15.0075,
-        "ratchet_asof": "2026-08-04",
-        "px": 16.65,
-        "px_date": "2026-08-03"
+        "ratchet_value": 15.16,
+        "ratchet_asof": "2026-08-05",
+        "px": 18.25,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "1810.TW",
@@ -243,10 +243,10 @@
         "fill_ref_close": 24.85,
         "half_locked": false,
         "ratchet_armed": false,
-        "ratchet_value": 17.7,
-        "ratchet_asof": "2026-08-04",
-        "px": 23.85,
-        "px_date": "2026-08-03"
+        "ratchet_value": 17.8425,
+        "ratchet_asof": "2026-08-05",
+        "px": 24.9,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "2379.TW",
@@ -262,11 +262,11 @@
         "cost_twd": 40813.0,
         "fill_ref_close": 731.0,
         "half_locked": false,
-        "ratchet_armed": false,
+        "ratchet_armed": true,
         "ratchet_value": 606.45,
-        "ratchet_asof": "2026-08-04",
-        "px": 704.0,
-        "px_date": "2026-08-03"
+        "ratchet_asof": "2026-08-05",
+        "px": 751.0,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "1326.TW",
@@ -283,10 +283,10 @@
         "fill_ref_close": 56.400002,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 44.07,
-        "ratchet_asof": "2026-08-04",
-        "px": 56.3,
-        "px_date": "2026-08-03"
+        "ratchet_value": 44.695,
+        "ratchet_asof": "2026-08-05",
+        "px": 58.6,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "6505.TW",
@@ -304,9 +304,9 @@
         "half_locked": false,
         "ratchet_armed": false,
         "ratchet_value": 52.56,
-        "ratchet_asof": "2026-08-04",
-        "px": 67.7,
-        "px_date": "2026-08-03"
+        "ratchet_asof": "2026-08-05",
+        "px": 67.6,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "6409.TW",
@@ -323,10 +323,10 @@
         "fill_ref_close": 934.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 753.05,
-        "ratchet_asof": "2026-08-04",
-        "px": 934.0,
-        "px_date": "2026-08-03"
+        "ratchet_value": 791.25,
+        "ratchet_asof": "2026-08-05",
+        "px": 963.0,
+        "px_date": "2026-08-05"
       },
       {
         "ticker": "3702.TW",
@@ -343,51 +343,185 @@
         "fill_ref_close": 116.0,
         "half_locked": false,
         "ratchet_armed": true,
-        "ratchet_value": 98.825,
-        "ratchet_asof": "2026-08-04",
-        "px": 116.0,
-        "px_date": "2026-08-03"
+        "ratchet_value": 109.125,
+        "ratchet_asof": "2026-08-05",
+        "px": 129.0,
+        "px_date": "2026-08-05"
       }
     ],
-    "pending_orders": [
+    "pending_orders": [],
+    "pending_sells": [
       {
-        "id": "actionable-2026-08-04-2618.TW",
-        "placed_ts": "2026-08-04T15:34:10+08:00",
-        "ticker": "2618.TW",
-        "name": "長榮航",
-        "side": "buy",
-        "budget_twd": 68000,
-        "limit": 41.7,
-        "stop": 38.6,
-        "stop_rule": "ta",
-        "group": "ind-15",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-08-04.halfsize-2618.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-tw-2\\.ta-screen-2026-08-04.halfsize-2618.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "2618",
-            "name": "長榮航",
-            "yf": "2618.TW",
-            "group": "ind-15",
-            "px": 43.8,
-            "ma20": 41.73,
-            "ma50": 40.65,
-            "ma200_gap": 18.3,
-            "rs63": 22.3,
-            "atr20_pct": 3.5,
-            "setup": "A回檔MA20",
-            "limit": 41.7,
-            "stop": 38.6,
-            "stop_pct": -7.4,
-            "budget": 68000
-          }
-        },
-        "target_session": "2026-08-05"
+        "id": "sell-2356.TW-2026-08-05-shutdown",
+        "ticker": "2356.TW",
+        "name": "英業達",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2301.TW-2026-08-05-shutdown",
+        "ticker": "2301.TW",
+        "name": "光寶科",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2465.TW-2026-08-05-shutdown",
+        "ticker": "2465.TW",
+        "name": "麗臺",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2881.TW-2026-08-05-shutdown",
+        "ticker": "2881.TW",
+        "name": "富邦金",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2377.TW-2026-08-05-shutdown",
+        "ticker": "2377.TW",
+        "name": "微星",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-3094.TW-2026-08-05-shutdown",
+        "ticker": "3094.TW",
+        "name": "聯傑",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-3362.TWO-2026-08-05-shutdown",
+        "ticker": "3362.TWO",
+        "name": "先進光",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2645.TW-2026-08-05-shutdown",
+        "ticker": "2645.TW",
+        "name": "長榮航太",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2885.TW-2026-08-05-shutdown",
+        "ticker": "2885.TW",
+        "name": "元大金",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-1301.TW-2026-08-05-shutdown",
+        "ticker": "1301.TW",
+        "name": "台塑",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-3576.TW-2026-08-05-shutdown",
+        "ticker": "3576.TW",
+        "name": "聯合再生",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-1810.TW-2026-08-05-shutdown",
+        "ticker": "1810.TW",
+        "name": "和成",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-2379.TW-2026-08-05-shutdown",
+        "ticker": "2379.TW",
+        "name": "瑞昱",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-1326.TW-2026-08-05-shutdown",
+        "ticker": "1326.TW",
+        "name": "台化",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-6505.TW-2026-08-05-shutdown",
+        "ticker": "6505.TW",
+        "name": "台塑化",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-6409.TW-2026-08-05-shutdown",
+        "ticker": "6409.TW",
+        "name": "旭隼",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
+      },
+      {
+        "id": "sell-3702.TW-2026-08-05-shutdown",
+        "ticker": "3702.TW",
+        "name": "大聯大",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。",
+        "target_session": "2026-08-06"
       }
     ],
-    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -1440,7 +1574,18 @@
         "fill_mode": null
       },
       {
-        "ts": "2026-08-04T15:12:28+08:00",
+        "ts": "2026-08-05T14:05:49+08:00",
+        "order_id": "actionable-2026-08-04-2618.TW",
+        "ticker": "2618.TW",
+        "name": "長榮航",
+        "action": "expire_unfilled",
+        "open": 44.0,
+        "low": 43.54999923706055,
+        "limit": 41.7,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-08-05T14:06:44+08:00",
         "ticker": "2356.TW",
         "name": "英業達",
         "action": "dividend",
@@ -1454,7 +1599,7 @@
         "projection_cash_twd": 1610.0
       },
       {
-        "ts": "2026-08-04T15:12:28+08:00",
+        "ts": "2026-08-05T14:06:44+08:00",
         "ticker": "6719.TW",
         "name": "6719.TW",
         "action": "dividend",
@@ -2429,6 +2574,6 @@
       "realized_pnl_twd": -61923.0
     }
   ],
-  "usdtwd": 32.393001556396484,
-  "generated_at": "2026-08-04T21:21:05.480397+00:00"
+  "usdtwd": 32.25899887084961,
+  "generated_at": "2026-08-05T06:06:58.275062+00:00"
 }
