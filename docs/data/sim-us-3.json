@@ -5,40 +5,11 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 837797.0503012812,
-    "realized_pnl_twd": -18546.0,
-    "positions": [
-      {
-        "ticker": "AMZN",
-        "name": "Amazon",
-        "shares": 16,
-        "avg_price": 276.06,
-        "fill_date": "2026-08-04",
-        "fx_at_fill": 32.393001556396484,
-        "stop": 266.2,
-        "stop_rule": "ta",
-        "stop_asof": "2026-08-04",
-        "group": "雲端大型科技",
-        "cost_twd": 143726.0,
-        "fill_ref_close": 277.420013,
-        "half_locked": false,
-        "ratchet_armed": false,
-        "px": 277.42,
-        "px_date": "2026-08-04"
-      }
-    ],
+    "cash_twd": 982479.4033783221,
+    "realized_pnl_twd": -17590.0,
+    "positions": [],
     "pending_orders": [],
-    "pending_sells": [
-      {
-        "id": "sell-AMZN-2026-08-05-shutdown",
-        "ticker": "AMZN",
-        "name": "Amazon",
-        "qty_rule": "all",
-        "trigger": "adam_directed",
-        "placed_ts": "2026-08-05T10:53:56+08:00",
-        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
-      }
-    ],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -187,7 +158,25 @@
         "reason": "實驗結束（Adam 選項 B）；目標節 2026-08-05 美股尚未開盤 ⇒ 取消不涉事後行情。Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
       },
       {
-        "ts": "2026-08-05T10:54:49+08:00",
+        "ts": "2026-08-06T05:20:52+08:00",
+        "sell_id": "sell-AMZN-2026-08-05-shutdown",
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "action": "sell",
+        "shares": 16,
+        "price": 281.59,
+        "fee": 20.0,
+        "proceeds_twd": 144682.0,
+        "cost_basis_twd": 143726.0,
+        "fx": 32.256,
+        "pnl_twd": 956.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:59+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -240,28 +229,8 @@
       },
       "AMZN": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "AMZN",
-            "name": "Amazon",
-            "shares": 16,
-            "avg_price": 276.06,
-            "fill_date": "2026-08-04",
-            "fx_at_fill": 32.393001556396484,
-            "stop": 266.2,
-            "stop_rule": "ta",
-            "stop_asof": "2026-08-04",
-            "group": "雲端大型科技",
-            "cost_twd": 143726.0,
-            "fill_ref_close": 277.4200134277344,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-08-04",
-              "value": 266.2
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -513,8 +482,20 @@
         "SPY": 3.22
       },
       "realized_pnl_twd": -18546.0
+    },
+    {
+      "ts": "2026-08-06T05:20:56+08:00",
+      "nav_twd": 982479.0,
+      "return_pct": -1.75,
+      "cash_twd": 982479.0,
+      "n_positions": 0,
+      "usdtwd": 32.256,
+      "bench_return_pct": {
+        "SPY": 2.58
+      },
+      "realized_pnl_twd": -17590.0
     }
   ],
-  "usdtwd": 32.25899887084961,
-  "generated_at": "2026-08-05T06:06:58.281569+00:00"
+  "usdtwd": 32.25600051879883,
+  "generated_at": "2026-08-05T21:21:00.476858+00:00"
 }
