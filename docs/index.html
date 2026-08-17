@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abraham Portfolio Dashboard</title>
-<link rel="stylesheet" href="css/style.css?v=20260723c">
+<link rel="stylesheet" href="css/style.css?v=20260817a">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
 </head>
@@ -42,6 +42,12 @@
   <button class="market-tab" data-tab="idx">📊 指數 <span class="tab-count" id="tab-count-idx">–</span></button>
   <button class="market-tab" data-tab="pos">🎯 即時持倉 <span class="tab-count" id="tab-count-pos">–</span></button>
   <button class="market-tab" data-tab="sim">🧪 模擬倉 <span class="tab-count" id="tab-count-sim">–</span></button>
+  <button class="market-tab" data-tab="report">📰 日報 <span class="tab-count" id="tab-count-report">–</span></button>
+</nav>
+<!-- 日報七天子分頁 — 只在日報大項 active 時顯示。日期由「前端自己的台北時鐘」算出來，不是讀
+     JSON 的 days[]；否則過了午夜、後端又還沒跑，今天的分頁根本不會存在（R5-3）。 -->
+<nav class="report-subtabs" id="report-subtabs">
+  <!-- rendered by app.js: renderReportSubtabs() -->
 </nav>
 <!-- 模擬倉六本子分頁 — 只在模擬倉大項 active 時顯示; 記住上次看的那本 (abraham.simBook) -->
 <nav class="sim-subtabs" id="sim-subtabs">
@@ -290,6 +296,20 @@
   <div class="sim-block">
     <div class="sim-block-title">📜 交易紀錄 <span class="section-count" id="sim-us-3-trade-count">–</span></div>
     <div class="sim-table-wrap" id="sim-us-3-trades"><div class="loading">Loading…</div></div>
+  </div>
+</section>
+
+<!-- 📰 日報 (Adam 2026-08-17) — 每天三班的白話摘要，保留七天。
+     資料 = docs/data/daily-report.json，由 scripts/build_daily_report.py 從本機紀錄產生。
+     「今天是哪天」與「哪一班遲到了」都由前端自己的時鐘算，不依賴後端有沒有在跑。 -->
+<section class="tab-panel" id="panel-report">
+  <div class="section-header report-header">
+    <span class="section-count" id="report-count">–</span>
+    <span class="pos-method-note">📰 每天三班的重點都在這裡 · 保留最近七天 · 有新東西會自己更新，不必重整</span>
+  </div>
+  <div class="report-health" id="report-health"></div>
+  <div class="report-body" id="report-body">
+    <div class="loading">Loading…</div>
   </div>
 </section>
 

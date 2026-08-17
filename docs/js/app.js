@@ -624,6 +624,8 @@ document.addEventListener("click", (e) => {
   if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
   const simBtn = e.target.closest(".sim-subtab");
   if (simBtn) { activateSimBook(simBtn.dataset.simbook); return; }
+  const repBtn = e.target.closest(".report-subtab");
+  if (repBtn) { activateReportDay(repBtn.dataset.reportday); return; }
   // 進場區內 / 回檔排行榜 rows + search results → jump to that card (Adam 2026-07-22).
   const jr = e.target.closest(".jump-row");
   if (jr && jr.dataset.jumpTab && jr.dataset.jumpId) {
@@ -1791,16 +1793,19 @@ function activateTab(which, doResize = true) {
   document.querySelectorAll(".market-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === which));
   const subRow = document.getElementById("sim-subtabs");
   if (subRow) subRow.classList.toggle("open", which === "sim");
+  const repRow = document.getElementById("report-subtabs");
+  if (repRow) repRow.classList.toggle("open", which === "report");
   if (which === "sim") {
     activateSimBook(lsGet("abraham.simBook", "sim-tw-1"), doResize);
   } else {
     document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
   }
+  if (which === "report") ensureReportLoaded();
   lsSet("abraham.activeTab", which);
   // Adam 2026-07-24: 即時持倉(pos)/模擬倉(sim) 兩分頁隱藏排行榜/進場區總覽卡列（那兩頁有自己的內容）;
   // 回 台股/美股/指數 再顯示。切分頁時 renderSummary 仍會更新 innerHTML，但元素維持 display:none 不露出。
   const summaryEl = document.getElementById("portfolio-summary");
-  if (summaryEl) summaryEl.style.display = (which === "pos" || which === "sim") ? "none" : "";
+  if (summaryEl) summaryEl.style.display = (which === "pos" || which === "sim" || which === "report") ? "none" : "";
   // Summary cards (進場區內/回檔排行) follow the market tab; sim/pos keep the last market view.
   if (which === "tw" || which === "us" || which === "idx") {
     applySort(which);  // 切分頁 = 重排白名單時機 (Adam 2026-07-23: 自動更新凍結順序, 切分頁時套最新排序)
@@ -2969,3 +2974,268 @@ let _lastSnapshotLoad = Date.now();  // boot's loadAndRender() just ran
     scheduleRefresh();  // re-evaluate cadence for the next tick
   }, activeAtSchedule ? LIVE_FAST_MS : LIVE_IDLE_MS);
 })();
+
+/* ============================================================================
+ * 日報 (Adam 2026-08-17) — 每天三班的白話摘要，保留七天。
+ *
+ * Two rules drive this whole module, both learned the hard way in review:
+ *
+ *  1. ANYTHING DERIVED FROM THE CURRENT TIME IS COMPUTED HERE, NOT BY THE BUILDER.
+ *     The builder only runs when there is something to write. If it owned "today"
+ *     or "which shift is late", a dead backend would freeze the page on a
+ *     stale-but-healthy-looking view, and past midnight there would be no tab for
+ *     today at all. So the browser derives its own 7 Taipei dates and its own
+ *     overdue verdicts from the published schedule. This page still tells the
+ *     truth with every backend process dead.
+ *
+ *  2. NEVER LOOK FINE WHEN WE ARE NOT FINE. A missing shift says so, loudly.
+ * ==========================================================================*/
+
+const REPORT_URL = "./data/daily-report.json";
+const REPORT_REFRESH_MS = 5 * 60 * 1000;   // page must show new content without a manual reload
+const REPORT_DAYS = 7;
+
+let REPORT_DATA = null;
+let REPORT_DAY = null;      // session-only on purpose: a fresh load always opens today.
+let REPORT_LOADING = false;
+
+/* -- Taipei clock helpers (correct regardless of the viewer own timezone) --- */
+
+function taipeiNowParts() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Taipei", year: "numeric", month: "2-digit", day: "2-digit",
+    hour: "2-digit", minute: "2-digit", hour12: false,
+  }).formatToParts(new Date());
+  const g = (t) => (parts.find((p) => p.type === t) || {}).value;
+  const hour = g("hour") === "24" ? "00" : g("hour");   // some engines emit 24 for midnight
+  return { date: g("year") + "-" + g("month") + "-" + g("day"), minutes: +hour * 60 + +g("minute") };
+}
+
+function reportDates() {
+  const today = taipeiNowParts().date;
+  const base = new Date(today + "T12:00:00Z");   // noon UTC: immune to DST and rounding
+  const out = [];
+  for (let i = 0; i < REPORT_DAYS; i++) {
+    out.push(new Date(base.getTime() - i * 86400000).toISOString().slice(0, 10));
+  }
+  return out;
+}
+
+function reportDayLabel(date) {
+  const wd = "日一二三四五六"[new Date(date + "T12:00:00Z").getUTCDay()];
+  const p = date.split("-");
+  return (+p[1]) + "/" + (+p[2]) + " " + wd;
+}
+
+function hhmmToMin(s) { const p = String(s).split(":"); return +p[0] * 60 + +p[1]; }
+
+const REPORT_DOW = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+
+function shiftScheduledOn(shiftDef, date, schedule) {
+  if ((schedule.skip_dates || []).indexOf(date) >= 0) return false;
+  const spec = shiftDef.days || "mon-sun";
+  if (spec === "mon-sun") return true;
+  const dow = REPORT_DOW[new Date(date + "T12:00:00Z").getUTCDay()];
+  if (spec === "mon-fri") return dow !== "sat" && dow !== "sun";
+  return spec.split(",").indexOf(dow) >= 0;
+}
+
+/* -- status, computed here so it is right even with no backend running ----- */
+
+function reportShiftStatus(date, shiftDef, dayBlob, now) {
+  if (!shiftScheduledOn(shiftDef, date, REPORT_DATA.schedule)) return { key: "not-scheduled", label: "無班次" };
+  const rec = (dayBlob.shifts || []).find((s) => s.shift === shiftDef.id);
+  if (rec && rec.outcome === "complete") return { key: "complete", label: "已更新", rec: rec };
+  if (rec && rec.outcome === "no-output") return { key: "no-output", label: "這班沒事", rec: rec };
+  if (rec && rec.outcome === "failed") return { key: "failed", label: "這班出錯", rec: rec };
+
+  // Not delivered. Late, or merely not due yet? The boundary is due + grace, not due.
+  const deadline = hhmmToMin(shiftDef.due) + (shiftDef.grace_min || 0);
+  if (date > now.date) return { key: "pending", label: "還沒到" };
+  if (date === now.date) {
+    if (now.minutes < deadline) {
+      return { key: "pending", label: now.minutes < hhmmToMin(shiftDef.due) ? "還沒到" : "快到了" };
+    }
+    return { key: "failed", label: "遲到了，沒收到" };
+  }
+  return { key: "failed", label: "當天沒收到" };
+}
+
+function reportDayStatus(date, dayBlob, now, hasAnyContentBefore) {
+  const scheduled = REPORT_DATA.schedule.shifts.filter((s) => shiftScheduledOn(s, date, REPORT_DATA.schedule));
+  if (!scheduled.length) return "not-scheduled";
+  // Days from before this feature existed have no records; that is not a fault.
+  const empty = !(dayBlob.shifts || []).length && !(dayBlob.events || []).length;
+  if (empty && !hasAnyContentBefore) return "nodata";
+  const statuses = scheduled.map((s) => reportShiftStatus(date, s, dayBlob, now).key);
+  if (statuses.indexOf("failed") >= 0) return "failed";
+  if (statuses.indexOf("pending") >= 0) return "pending";
+  if (statuses.indexOf("complete") >= 0) return "complete";
+  return "no-output";
+}
+
+/* -- rendering -------------------------------------------------------------- */
+
+const REPORT_DOT = {
+  complete: "🟢", "no-output": "⚪", pending: "🕒",
+  failed: "🔴", "not-scheduled": "⚪", nodata: "⚪",
+};
+
+function reportDayBlob(date) {
+  const days = (REPORT_DATA && REPORT_DATA.days) || [];
+  const d = days.find((x) => x.date === date);
+  return d || { date: date, top: [], shifts: [], events: [] };
+}
+
+function earliestContentDate() {
+  const days = (REPORT_DATA && REPORT_DATA.days) || [];
+  const withContent = days
+    .filter((d) => (d.shifts || []).length || (d.events || []).length)
+    .map((d) => d.date).sort();
+  return withContent[0] || null;
+}
+
+function renderReportSubtabs() {
+  const row = document.getElementById("report-subtabs");
+  if (!row) return;
+  const now = taipeiNowParts();
+  const dates = reportDates();
+  if (!REPORT_DAY || dates.indexOf(REPORT_DAY) < 0) REPORT_DAY = dates[0];
+  const earliest = earliestContentDate();
+  row.innerHTML = dates.map((d) => {
+    const st = REPORT_DATA ? reportDayStatus(d, reportDayBlob(d), now, !!(earliest && earliest < d)) : "nodata";
+    return '<button class="report-subtab' + (d === REPORT_DAY ? " active" : "") + '" data-reportday="' + d + '">'
+      + (REPORT_DOT[st] || "⚪") + " " + escapeHtml(reportDayLabel(d)) + "</button>";
+  }).join("");
+}
+
+function reportItemHtml(it) {
+  const tone = it.s === "positive" ? "up" : it.s === "negative" ? "down" : "flat";
+  const tags = (it.tickers || []).map((t) => '<span class="report-tk">' + escapeHtml(t) + "</span>").join("");
+  const mine = it.onlist ? '<span class="report-mine" title="在你的關注清單上">★ 你的清單</span>' : "";
+  return '<li class="report-item report-' + tone + '">'
+    + '<div class="report-item-head"><span class="report-item-t">' + escapeHtml(it.t || "") + "</span>" + mine + "</div>"
+    + (it.body ? '<div class="report-item-body">' + escapeHtml(it.body) + "</div>" : "")
+    + '<div class="report-item-meta">' + tags
+    + (it.src ? '<span class="report-src">' + escapeHtml(it.src) + "</span>" : "") + "</div>"
+    + "</li>";
+}
+
+function renderReportHealth(now) {
+  const el = document.getElementById("report-health");
+  if (!el) return;
+  if (!REPORT_DATA) { el.innerHTML = ""; return; }
+  const problems = [];
+  REPORT_DATA.schedule.shifts.forEach((sd) => {
+    const h = (REPORT_DATA.health || {})[sd.id] || {};
+    // An error counts only while it has not been superseded by a later delivery.
+    if (h.last_error && (!h.last_delivery_at || h.last_error.at > h.last_delivery_at)) {
+      problems.push(sd.name + "出錯了：" + (h.last_error.message || "沒有說明"));
+    }
+    const st = reportShiftStatus(now.date, sd, reportDayBlob(now.date), now);
+    if (st.key === "failed") problems.push("今天的" + sd.name + "到現在還沒進來");
+  });
+  const stamp = REPORT_DATA._updated ? String(REPORT_DATA._updated).replace("T", " ").slice(0, 16) : "不明";
+  el.innerHTML = problems.length
+    ? '<div class="report-alert">⚠️ ' + problems.map(escapeHtml).join("；")
+      + '<div class="report-stamp">資料時間 ' + escapeHtml(stamp) + "</div></div>"
+    : '<div class="report-stamp ok">資料時間 ' + escapeHtml(stamp) + "</div>";
+}
+
+function renderDailyReport() {
+  const body = document.getElementById("report-body");
+  if (!body) return;
+  const now = taipeiNowParts();
+  renderReportSubtabs();
+  renderReportHealth(now);
+  if (!REPORT_DATA) { body.innerHTML = '<div class="loading">Loading…</div>'; return; }
+
+  const date = REPORT_DAY;
+  const blob = reportDayBlob(date);
+  const earliest = earliestContentDate();
+  const dayStatus = reportDayStatus(date, blob, now, !!(earliest && earliest < date));
+
+  const cnt = (blob.shifts || []).reduce((n, s) => n + (s.items || []).length, 0) + (blob.events || []).length;
+  const cEl = document.getElementById("report-count"); if (cEl) cEl.textContent = cnt + " 則";
+  const tEl = document.getElementById("tab-count-report"); if (tEl) tEl.textContent = cnt || "–";
+
+  if (dayStatus === "nodata") {
+    body.innerHTML = '<div class="report-empty">這一天還沒有紀錄（日報從 2026-08-17 開始）。</div>';
+    return;
+  }
+
+  const top = (blob.top || []).filter(Boolean);
+  let html = "";
+  if (top.length) {
+    html += '<div class="report-top"><div class="report-top-h">今天的重點</div><ul>'
+      + top.map((t) => "<li>" + escapeHtml(t) + "</li>").join("") + "</ul></div>";
+  }
+
+  REPORT_DATA.schedule.shifts.forEach((sd) => {
+    const st = reportShiftStatus(date, sd, blob, now);
+    if (st.key === "not-scheduled") return;
+    html += '<section class="report-shift report-st-' + st.key + '">'
+      + '<div class="report-shift-h"><span class="report-shift-name">' + REPORT_DOT[st.key] + " " + escapeHtml(sd.name) + "</span>"
+      + '<span class="report-shift-due">' + escapeHtml(sd.due) + "</span>"
+      + '<span class="report-shift-badge">' + escapeHtml(st.label) + "</span></div>";
+    if (st.rec && st.rec.outcome === "failed") {
+      html += '<div class="report-alert">⚠️ ' + escapeHtml(st.rec.error || "沒有說明") + "</div>";
+    } else if (st.rec && st.rec.summary) {
+      html += '<div class="report-summary">' + escapeHtml(st.rec.summary) + "</div>";
+    }
+    const items = (st.rec && st.rec.items) || [];
+    if (items.length) html += '<ul class="report-items">' + items.map(reportItemHtml).join("") + "</ul>";
+    html += "</section>";
+  });
+
+  const evs = blob.events || [];
+  if (evs.length) {
+    html += '<section class="report-shift report-st-complete"><div class="report-shift-h">'
+      + '<span class="report-shift-name">⚡ 臨時事件</span></div><ul class="report-items">'
+      + evs.map((e) => {
+        const t = String(e.occurred_at || "").slice(11, 16);
+        const merged = Object.assign({}, e, { t: (t ? t + " " : "") + (e.t || "") });
+        return reportItemHtml(merged);
+      }).join("") + "</ul></section>";
+  }
+
+  body.innerHTML = html || '<div class="report-empty">這一天沒有需要記的事。</div>';
+}
+
+function activateReportDay(date) {
+  if (!date) return;
+  REPORT_DAY = date;      // deliberately NOT persisted: see the module header
+  renderDailyReport();
+}
+
+async function loadDailyReport() {
+  if (REPORT_LOADING) return;
+  REPORT_LOADING = true;
+  try {
+    const res = await fetch(REPORT_URL + "?t=" + Date.now(), { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+    REPORT_DATA = await res.json();
+  } catch (err) {
+    console.error("daily report load failed:", err);
+    if (!REPORT_DATA) {
+      const body = document.getElementById("report-body");
+      if (body) body.innerHTML = '<div class="loading">日報載入失敗<br><small>' + escapeHtml(err.message) + "</small></div>";
+    }
+  } finally {
+    REPORT_LOADING = false;
+    renderDailyReport();
+  }
+}
+
+function ensureReportLoaded() {
+  if (REPORT_DATA) { renderDailyReport(); return; }
+  loadDailyReport();
+}
+
+// Re-fetch on a timer. Verifying that the SERVER has new data is not the same as the
+// owner SEEING it: a tab left open would otherwise sit on its first load forever.
+setInterval(function () {
+  if (document.hidden) return;
+  const panel = document.getElementById("panel-report");
+  if (panel && panel.classList.contains("active")) loadDailyReport();
+}, REPORT_REFRESH_MS);
