@@ -79,8 +79,8 @@ console.log("== 7-day window is derived from the browser clock, not the JSON =="
 console.log("");
 console.log("== overdue is computed client-side, so it works with the backend dead ==");
 {
-  // Taipei 2026-08-17 23:30 — all three shifts long past their deadline; only two delivered.
-  const ctx = makeCtx("2026-08-17T15:30:00Z");
+  // Taipei 2026-08-17 23:45 — all three shifts past deadline (evening deadline is 23:40); only two delivered.
+  const ctx = makeCtx("2026-08-17T15:45:00Z");
   ctx.setData(data);
   const now = ctx.taipeiNowParts();
   const blob = ctx.reportDayBlob("2026-08-17");
@@ -97,8 +97,8 @@ console.log("== overdue is computed client-side, so it works with the backend de
 console.log("");
 console.log("== no false alarm before the deadline (grace window) ==");
 {
-  // Taipei 2026-08-17 21:30 — evening due 21:00, grace 120 → deadline 23:00. Late but inside grace.
-  const ctx = makeCtx("2026-08-17T13:30:00Z");
+  // Taipei 2026-08-17 22:30 — evening due 22:10, grace 90 → deadline 23:40. Late but inside grace.
+  const ctx = makeCtx("2026-08-17T14:30:00Z");
   ctx.setData(data);
   const now = ctx.taipeiNowParts();
   const blob = ctx.reportDayBlob("2026-08-17");
@@ -108,7 +108,7 @@ console.log("== no false alarm before the deadline (grace window) ==");
   check("T14b label says it is due", st.label === "快到了", st.label);
 }
 {
-  // Taipei 2026-08-17 20:00 — before due at all.
+  // Taipei 2026-08-17 20:00 — before due at all (due is 22:10).
   const ctx = makeCtx("2026-08-17T12:00:00Z");
   ctx.setData(data);
   const now = ctx.taipeiNowParts();
@@ -119,7 +119,7 @@ console.log("== no false alarm before the deadline (grace window) ==");
 }
 {
   // One minute past the deadline → must flip to failed.
-  const ctx = makeCtx("2026-08-17T15:01:00Z");   // Taipei 23:01, deadline 23:00
+  const ctx = makeCtx("2026-08-17T15:41:00Z");   // Taipei 23:41, deadline 23:40
   ctx.setData(data);
   const now = ctx.taipeiNowParts();
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
@@ -186,7 +186,7 @@ console.log("== rendering the day produces the expected content ==");
   check("highlights block rendered", html.indexOf("今天的重點") >= 0);
   check("morning shift rendered", html.indexOf("早班") >= 0);
   check("midday shift rendered", html.indexOf("午班") >= 0);
-  // 18:00 Taipei: evening is due at 21:00, so "not yet" is the CORRECT render here.
+  // 18:00 Taipei: evening is due at 22:10, so "not yet" is the CORRECT render here.
   // (First version of this test asserted "late" and failed — the test was wrong, not the code.)
   check("evening correctly shown as not-yet-due at 18:00", html.indexOf("還沒到") >= 0);
   check("no false alarm banner at 18:00", ctx._nodes["report-health"].innerHTML.indexOf("還沒進來") < 0);
@@ -195,7 +195,7 @@ console.log("== rendering the day produces the expected content ==");
 console.log("");
 console.log("== late evening DOES render as missing, and raises the banner ==");
 {
-  const ctx = makeCtx("2026-08-17T15:30:00Z");   // Taipei 23:30, past deadline 23:00
+  const ctx = makeCtx("2026-08-17T15:45:00Z");   // Taipei 23:45, past deadline 23:40
   ctx.setData(data);
   ctx.setDay("2026-08-17");
   ctx.renderDailyReport();

@@ -54,11 +54,42 @@ SCHEDULE = {
     "shifts": [
         {"id": "morning", "name": "早班", "due": "06:10", "grace_min": 120, "days": "mon-sun"},
         {"id": "midday",  "name": "午班", "due": "14:10", "grace_min": 120, "days": "mon-sun"},
-        {"id": "evening", "name": "晚班", "due": "21:00", "grace_min": 120, "days": "mon-sun"},
+        # 22:10, NOT 21:00. The three deep-read schtasks are 06:10 / 14:10 / 22:10 (see
+        # ~/Abraham/deploy-deep-read-schtasks.ps1, "10 min after AbrahamNewsFetch_0600/1400/2200").
+        # Shipped 2026-08-17 with 21:00 by mistake, which would have raised a false
+        # 「晚班沒收到」at 23:00 every night while the real shift was still running.
+        # The 21:00 job is a DIFFERENT thing (the five-part nightly checks), not this shift.
+        # grace 90 (not 120) on purpose: 22:10 + 120 = 00:10, which is PAST midnight.
+        # The page compares minutes-since-midnight within a single date, so a deadline
+        # over 1440 can never be reached on the day itself and then trips instantly at
+        # 00:00 on the next — wrong in both directions. _assert_schedule_sane() below
+        # makes that unrepresentable rather than relying on whoever edits this next.
+        {"id": "evening", "name": "晚班", "due": "22:10", "grace_min": 90, "days": "mon-sun"},
     ],
     "skip_dates": [],
 }
 SHIFT_IDS = [s["id"] for s in SCHEDULE["shifts"]]
+
+
+def _assert_schedule_sane(schedule=SCHEDULE):
+    """due + grace must land inside the same calendar day.
+
+    The page derives lateness from minutes-since-midnight against one date. A deadline
+    past 1440 is therefore unreachable on the day itself and fires at 00:00 the next —
+    a silent, direction-confused false alarm rather than a crash. Fail at import instead.
+    """
+    for s in schedule["shifts"]:
+        hh, mm = (int(x) for x in s["due"].split(":"))
+        end = hh * 60 + mm + int(s.get("grace_min", 0))
+        if end > 24 * 60:
+            raise ValueError(
+                "shift %r: due %s + grace %s = %02d:%02d next day; the page cannot "
+                "represent a deadline past midnight (see reportShiftStatus)"
+                % (s["id"], s["due"], s.get("grace_min"), (end // 60) % 24, end % 60)
+            )
+
+
+_assert_schedule_sane()
 
 VALID_SENTIMENT = {"positive", "negative", "neutral"}
 VALID_NOTIFY = {"watchlist_event", "new_opportunity", "none"}

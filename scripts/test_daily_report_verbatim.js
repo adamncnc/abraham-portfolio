@@ -65,7 +65,7 @@ const SCHEDULE = {
   shifts: [
     { id: "morning", name: "早班", due: "06:10", grace_min: 120, days: "mon-sun" },
     { id: "midday", name: "午班", due: "14:10", grace_min: 120, days: "mon-sun" },
-    { id: "evening", name: "晚班", due: "21:00", grace_min: 120, days: "mon-sun" },
+    { id: "evening", name: "晚班", due: "22:10", grace_min: 120, days: "mon-sun" },
   ],
   skip_dates: [],
 };
