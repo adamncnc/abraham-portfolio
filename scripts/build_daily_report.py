@@ -322,7 +322,29 @@ def _atomic_write(path, text):
         raise
 
 
-def publish(conn, out_path=DEFAULT_OUT, now_tpe=None, max_passes=10):
+ZONE_GATE = REPO / "scripts" / "check_daily_report_zones.js"
+
+
+def zone_gate(out_path):
+    """Run the entry-zone validator over what we are about to publish.
+
+    The report is published advice, so it must clear the same gate a Discord message
+    clears. FAILS CLOSED: if the gate cannot run at all, that is a refusal, not a pass.
+    A check that silently skips reads exactly like a check that passed.
+    """
+    import subprocess
+    if not ZONE_GATE.exists():
+        raise RuntimeError(f"zone gate missing at {ZONE_GATE} — refusing to publish unchecked")
+    proc = subprocess.run(["node", str(ZONE_GATE), str(out_path)],
+                          capture_output=True, text=True, encoding="utf-8", errors="replace")
+    for line in (proc.stdout or "").splitlines():
+        print(line)
+    if proc.returncode != 0:
+        sys.stderr.write(proc.stderr or "")
+        raise RuntimeError(f"zone gate refused the publish (exit {proc.returncode}) — fix the wording, never the gate")
+
+
+def publish(conn, out_path=DEFAULT_OUT, now_tpe=None, max_passes=10, gate=True):
     """Drain loop: rebuild until the published revision matches the store's revision.
 
     A single build-then-check pass is a TOCTOU race — a write can land between the check
@@ -334,7 +356,20 @@ def publish(conn, out_path=DEFAULT_OUT, now_tpe=None, max_passes=10):
         passes += 1
         rev_before = _meta_int(conn, "revision")
         payload = build_payload(conn, now_tpe=now_tpe)
-        _atomic_write(out_path, json.dumps(payload, ensure_ascii=False, separators=(",", ":")))
+        text = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        if gate:
+            # Gate a STAGED copy, so a refusal never leaves the live file damaged.
+            stage = Path(out_path).with_name(Path(out_path).stem + ".staging.json")
+            try:
+                stage.parent.mkdir(parents=True, exist_ok=True)
+                stage.write_text(text, encoding="utf-8", newline="\n")
+                zone_gate(stage)
+            finally:
+                try:
+                    stage.unlink()
+                except OSError:
+                    pass
+        _atomic_write(out_path, text)
         rev_after = _meta_int(conn, "revision")
         if rev_after == rev_before:
             _meta_set(conn, "published_revision", rev_after)
@@ -402,7 +437,7 @@ def _selftest():
         add_record(conn, shift_rec("2026-08-17", "morning", highlights=["h1"],
                                    items=[{"t": "x", "s": "positive", "tickers": ["MU"],
                                            "body": "b", "notify_reason": "watchlist_event"}]))
-        res = publish(conn, out, now_tpe=now)
+        res = publish(conn, out, now_tpe=now, gate=False)
         data = json.loads(out.read_text(encoding="utf-8"))
         check("publishes 7 day slots", len(data["days"]) == 7, str(len(data["days"])))
         check("newest day first", data["days"][0]["date"] == "2026-08-17", data["days"][0]["date"])
@@ -411,7 +446,7 @@ def _selftest():
 
         # T7 — same id twice upserts in place.
         add_record(conn, shift_rec("2026-08-17", "morning", summary="revised", highlights=["h2"]))
-        publish(conn, out, now_tpe=now)
+        publish(conn, out, now_tpe=now, gate=False)
         data = json.loads(out.read_text(encoding="utf-8"))
         check("T7 same id upserts, no duplicate", len(data["days"][0]["shifts"]) == 1)
         check("T7 upsert replaces content", data["days"][0]["shifts"][0]["summary"] == "revised")
@@ -421,25 +456,25 @@ def _selftest():
                           "occurred_at": "2026-08-17T02:14:00+08:00", "t": "overnight",
                           "s": "negative", "tickers": [], "body": "b",
                           "notify_reason": "new_opportunity"})
-        publish(conn, out, now_tpe=now)
+        publish(conn, out, now_tpe=now, gate=False)
         data = json.loads(out.read_text(encoding="utf-8"))
         d17 = next(d for d in data["days"] if d["date"] == "2026-08-17")
         check("T8 02:00 Taipei event lands on that Taipei date", len(d17["events"]) == 1)
 
         # T5d — a failure followed by a later delivery must clear; an unsuperseded one must stay.
         add_record(conn, shift_rec("2026-08-16", "evening", outcome="failed", hhmm="21:05"))
-        publish(conn, out, now_tpe=now)
+        publish(conn, out, now_tpe=now, gate=False)
         h = json.loads(out.read_text(encoding="utf-8"))["health"]
         check("T5d unsuperseded failure is reported", h["evening"]["last_error"] is not None)
         add_record(conn, shift_rec("2026-08-17", "evening", outcome="no-output", hhmm="21:02"))
-        publish(conn, out, now_tpe=now)
+        publish(conn, out, now_tpe=now, gate=False)
         h = json.loads(out.read_text(encoding="utf-8"))["health"]
         check("T5d later no-output counts as delivery and clears the error", h["evening"]["last_error"] is None)
         check("T5d no-output records a delivery time", h["evening"]["last_delivery_at"] is not None)
 
         # T4 — trim is not a delete: the store keeps days that have left the JSON.
         add_record(conn, shift_rec("2026-08-01", "morning"))
-        publish(conn, out, now_tpe=now)
+        publish(conn, out, now_tpe=now, gate=False)
         data = json.loads(out.read_text(encoding="utf-8"))
         check("T4 old day is outside the 7-day window", all(d["date"] != "2026-08-01" for d in data["days"]))
         kept = conn.execute("SELECT COUNT(*) FROM records WHERE taipei_date='2026-08-01'").fetchone()[0]
@@ -451,7 +486,7 @@ def _selftest():
 
         # Publish is idempotent and records the revision it published.
         rev = _meta_int(conn, "revision")
-        r2 = publish(conn, out, now_tpe=now)
+        r2 = publish(conn, out, now_tpe=now, gate=False)
         check("publish converges in one pass when idle", r2["passes"] == 1, str(r2["passes"]))
         check("published_revision tracks revision", _meta_int(conn, "published_revision") == rev)
 
