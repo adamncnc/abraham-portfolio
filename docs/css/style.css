@@ -1013,22 +1013,22 @@ body {
 .report-sect-body { display: none; }
 .report-shift.open > .report-sect-body { display: block; }
 
-.report-item-body.clamped {
-  max-height: 6.8em;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 60%, transparent 100%);
+/* Item level of the two-level fold. Same fail-visible default as sections: the detail is
+   hidden unless .open is present, so a render that forgets the class shows a bare title
+   rather than silently leaving every article expanded. The old 420-char clamp is gone —
+   with one item open at a time there is no length problem left for it to solve, and it
+   only added a third click between Adam and the text. */
+.report-item-head[data-item-toggle] { cursor: pointer; user-select: none; }
+.report-item-head[data-item-toggle]:hover .report-item-t { color: #93c5fd; }
+.report-item-caret {
+  font-size: 11px;
+  color: var(--text-dim);
+  flex: 0 0 auto;
+  width: 12px;
 }
-.report-more {
-  font-size: 12px;
-  font-weight: 700;
-  color: #60a5fa;
-  background: none;
-  border: none;
-  padding: 4px 0 0;
-  cursor: pointer;
-}
-.report-more:hover { text-decoration: underline; }
+.report-item-detail { display: none; }
+.report-item.open > .report-item-detail { display: block; }
+.report-item.open > .report-item-head .report-item-t { color: #bfdbfe; }
 
 /* Verbatim body rendering: one <div> per source line, so blank lines and rules survive. */
 .report-item-body strong { color: var(--text); font-weight: 800; }

@@ -110,23 +110,122 @@ console.log("\n== Discord-flavoured text renders ==");
   check("empty body yields empty string", out === "", JSON.stringify(out));
 }
 
-// ── 3. long bodies clamp, short ones do not ─────────────────────────────────
-console.log("\n== long verbatim bodies clamp behind 展開全文 ==");
+// ── 3. items render collapsed to a bare title ───────────────────────────────
+console.log("\n== an item shows only its title until it is clicked ==");
 {
   const ctx = makeCtx("2026-08-17T12:00:00Z");
-  const clamp = ctx.call("REPORT_CLAMP_CHARS");
-  const short = ctx.call("reportItemHtml({t:'t',s:'neutral',tickers:[],body:'短'})");
-  check("short body not clamped", !short.includes("clamped"), short.slice(0, 100));
-  check("short body has no 展開 button", !short.includes("report-more"), short.slice(0, 100));
+  const it = ctx.call("reportItemHtml({t:'標題',s:'neutral',tickers:['2330.TW'],src:'來源',body:'內文'})");
+  check("item starts collapsed", !/class="report-item[^"]*\sopen"/.test(it), it.slice(0, 120));
+  check("head is the click target", it.includes("data-item-toggle"), it.slice(0, 160));
+  check("caret starts ▸", it.includes('report-item-caret">▸'), it.slice(0, 200));
+  // Ordering must not be expressed as a bare indexOf comparison: a MISSING marker yields
+  // -1, which compares as "earlier than everything", so deleting the wrapper entirely would
+  // make half of these pass. Require both markers to exist before comparing positions.
+  const before = (a, b) => { const ia = it.indexOf(a), ib = it.indexOf(b); return ia >= 0 && ib >= 0 && ia < ib; };
+  const DET = 'class="report-item-detail"';
+  check("collapsible wrapper exists at all", it.includes(DET), it);
+  check("title is outside the collapsible part", before("標題", DET), it);
+  check("body sits inside the collapsible part", before(DET, "內文"), it);
+  check("tickers are hidden until expanded (Adam: 初始只顯示標題)", before(DET, "2330.TW"), it);
+  check("source is hidden until expanded", before(DET, "來源"), it);
 
-  const longBody = "字".repeat(clamp + 50);
+  // The old 420-char clamp is gone: one-open-at-a-time already bounds page length, and the
+  // clamp would put a third click between Adam and the text he asked to see in full.
+  const longBody = "字".repeat(2000);
   const long = ctx.call("reportItemHtml({t:'t',s:'neutral',tickers:[],body:" + JSON.stringify(longBody) + "})");
-  check("long body clamped", long.includes("clamped"), long.slice(0, 120));
-  check("long body offers 展開全文", long.includes("report-more"), long.slice(0, 120));
-  check("button reports the real length", long.includes(String(clamp + 50) + " 字"), long.slice(0, 200));
-  check("full text is present in the DOM, not truncated",
-    long.includes("字".repeat(20)) && long.split("字").length - 1 >= clamp + 50,
-    "clamping must be visual only — the whole body must ship");
+  check("long body is not clamped", !long.includes("clamped"), long.slice(0, 140));
+  check("no 展開全文 button remains", !long.includes("report-more"), long.slice(0, 140));
+  check("full text ships in the DOM", long.split("字").length - 1 >= 2000, "body must not be truncated");
+
+  // A caret on an item that cannot open is a dead control.
+  const bare = ctx.call("reportItemHtml({t:'只有標題',s:'neutral',tickers:[]})");
+  check("item with no content is not clickable", !bare.includes("data-item-toggle"), bare);
+  check("item with no content has no caret", !bare.includes("report-item-caret"), bare);
+  check("item with no content is marked bare", bare.includes("report-item-bare"), bare);
+}
+
+// ── 3b. accordion behaviour, against a fake DOM ─────────────────────────────
+// Exercises the real functions. Asserting only on markup would leave every rule Adam
+// actually stated (one open per shift, reset on close, sections independent) unverified.
+console.log("\n== one item open per shift; shifts stay independent ==");
+{
+  const ctx = makeCtx("2026-08-17T12:00:00Z");
+
+  const mkEl = (cls) => {
+    const set = new Set(String(cls || "").split(/\s+/).filter(Boolean));
+    const node = { children: [], textContent: "", _classes: set };
+    node.classList = { contains: (c) => set.has(c), add: (c) => set.add(c), remove: (c) => set.delete(c) };
+    node.append = (...kids) => { node.children.push(...kids); return node; };
+    const all = (n, out) => { for (const c of n.children) { out.push(c); all(c, out); } return out; };
+    const hit = (n, sel) => sel.split(".").filter(Boolean).every((c) => n._classes.has(c));
+    node.querySelectorAll = (sel) => all(node, []).filter((n) => hit(n, sel));
+    node.querySelector = (sel) => node.querySelectorAll(sel)[0] || null;
+    return node;
+  };
+  const mkSection = (n) => {
+    const sect = mkEl("report-shift open");
+    const caret = mkEl("report-caret"); caret.textContent = "▾";
+    sect.append(mkEl("report-shift-h").append(caret));
+    const items = [];
+    for (let i = 0; i < n; i++) {
+      const ic = mkEl("report-item-caret"); ic.textContent = "▸";
+      const li = mkEl("report-item").append(mkEl("report-item-head").append(ic), mkEl("report-item-detail"));
+      sect.append(li); items.push(li);
+    }
+    return { sect, items, caret };
+  };
+  const openIdx = (b) => b.items.map((li, i) => (li.classList.contains("open") ? i : -1)).filter((i) => i >= 0);
+  const toggle = (b, i) => { ctx.__s = b.sect; ctx.__li = b.items[i]; ctx.call("reportToggleItem(__li, __s)"); };
+  const setSect = (b, open) => { ctx.__s = b.sect; ctx.__o = open; ctx.call("reportSetSectionOpen(__s, __o)"); };
+
+  const A = mkSection(3), B = mkSection(3);
+  check("everything starts collapsed", openIdx(A).length === 0 && openIdx(B).length === 0);
+
+  toggle(A, 1);
+  check("clicking an item opens it", JSON.stringify(openIdx(A)) === "[1]", JSON.stringify(openIdx(A)));
+  check("its caret flips to ▾", A.items[1].querySelector(".report-item-caret").textContent === "▾");
+
+  toggle(A, 2);
+  check("opening a second item closes the first", JSON.stringify(openIdx(A)) === "[2]", JSON.stringify(openIdx(A)));
+  check("the closed one's caret resets to ▸",
+    A.items[1].querySelector(".report-item-caret").textContent === "▸");
+
+  toggle(A, 2);
+  check("clicking the open item closes it", openIdx(A).length === 0, JSON.stringify(openIdx(A)));
+
+  toggle(A, 0); toggle(B, 2);
+  check("each shift keeps its own open item",
+    JSON.stringify(openIdx(A)) === "[0]" && JSON.stringify(openIdx(B)) === "[2]",
+    JSON.stringify(openIdx(A)) + " / " + JSON.stringify(openIdx(B)));
+
+  setSect(B, false);
+  check("closing a shift drops .open", !B.sect.classList.contains("open"));
+  check("closing a shift resets its items", openIdx(B).length === 0, JSON.stringify(openIdx(B)));
+  check("closing a shift flips its caret", B.caret.textContent === "▸");
+  check("the OTHER shift is untouched (Adam: 為獨立控制)",
+    JSON.stringify(openIdx(A)) === "[0]", JSON.stringify(openIdx(A)));
+
+  setSect(B, true);
+  check("re-opening a shift restores no item (Adam: 不需要記憶)", openIdx(B).length === 0, JSON.stringify(openIdx(B)));
+  check("re-opening a shift restores .open + ▾",
+    B.sect.classList.contains("open") && B.caret.textContent === "▾");
+}
+
+// ── 3c. the click listener must not re-render on a fold ─────────────────────
+// A rebuild collapses the item accordion in EVERY section, so re-rendering here would
+// silently undo 各區塊獨立控制 the moment a second shift was touched — and the markup would
+// still look correct, which is why this needs its own check. Asserted at source level:
+// the listener sits above the module slice this harness loads, so no fake DOM can reach it.
+console.log("\n== folding mutates the DOM instead of rebuilding ==");
+{
+  const from = src.indexOf("// 日報 folding (Adam 2026-08-17");
+  const to = src.indexOf("// 進場區內 / 回檔排行榜", from);
+  check("fold branches located in the listener", from > 0 && to > from, from + ".." + to);
+  const branch = src.slice(from, to);
+  check("section fold does not re-render", !branch.includes("renderDailyReport"), branch.slice(0, 400));
+  check("section fold calls the DOM helper", branch.includes("reportSetSectionOpen"), branch.slice(0, 400));
+  check("item clicks are routed to the accordion", branch.includes("reportToggleItem"), branch.slice(0, 400));
+  check("item click target matches the rendered attribute", branch.includes("data-item-toggle"), branch.slice(0, 400));
 }
 
 // ── 4. fold state ───────────────────────────────────────────────────────────

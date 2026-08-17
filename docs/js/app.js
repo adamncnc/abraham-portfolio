@@ -635,31 +635,33 @@ document.addEventListener("click", (e) => {
   if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
   const repBtn = e.target.closest(".report-subtab");
   if (repBtn) { activateReportDay(repBtn.dataset.reportday); return; }
-  // 日報 folding (Adam 2026-08-17). Toggling only rewrites REPORT_CLOSED + re-renders, so
-  // it never refetches and never disturbs which day is open.
-  const moreBtn = e.target.closest(".report-more");
-  if (moreBtn) {
-    const target = document.getElementById(moreBtn.dataset.more);
-    if (target) {
-      const nowClamped = target.classList.toggle("clamped");
-      moreBtn.textContent = nowClamped ? "▾ 展開全文" : "▴ 收起";
-    }
+  // 日報 folding (Adam 2026-08-17, two-level 2026-08-18). All three branches below mutate
+  // the DOM directly instead of re-rendering: a rebuild would wipe the item accordion in
+  // EVERY section, which would break "各區塊獨立控制" the moment you touched a second shift.
+  // REPORT_CLOSED is kept in step so a later full re-render reproduces the same fold state.
+  const itemHead = e.target.closest("#report-body [data-item-toggle]");
+  if (itemHead) {
+    const li = itemHead.closest(".report-item");
+    const sect = itemHead.closest(".report-shift");
+    if (li && sect) reportToggleItem(li, sect);
     return;
   }
   const foldAll = e.target.closest(".report-foldall");
   if (foldAll) {
+    const open = foldAll.dataset.fold !== "close";
     document.querySelectorAll("#report-body [data-sect]").forEach((s) => {
-      if (foldAll.dataset.fold === "close") REPORT_CLOSED.add(s.dataset.sect);
-      else REPORT_CLOSED.delete(s.dataset.sect);
+      if (open) REPORT_CLOSED.delete(s.dataset.sect); else REPORT_CLOSED.add(s.dataset.sect);
+      reportSetSectionOpen(s, open);
     });
-    renderDailyReport();
     return;
   }
   const foldHead = e.target.closest("#report-body [data-toggle]");
   if (foldHead) {
     const id = foldHead.dataset.toggle;
-    if (REPORT_CLOSED.has(id)) REPORT_CLOSED.delete(id); else REPORT_CLOSED.add(id);
-    renderDailyReport();
+    const opening = REPORT_CLOSED.has(id);
+    if (opening) REPORT_CLOSED.delete(id); else REPORT_CLOSED.add(id);
+    const sect = foldHead.closest(".report-shift");
+    if (sect) reportSetSectionOpen(sect, opening);
     return;
   }
   // 進場區內 / 回檔排行榜 rows + search results → jump to that card (Adam 2026-07-22).
@@ -3028,6 +3030,8 @@ let REPORT_LOADING = false;
 // Which fold-sections the user has closed, keyed "<date>.<shiftId>" / "<date>.stream.<name>".
 // Session-only, like REPORT_DAY: a fresh load always opens everything.
 const REPORT_CLOSED = new Set();
+// New data arrived but the rebuild was held back because the reader had an item expanded.
+let REPORT_PENDING = false;
 
 /* -- Taipei clock helpers (correct regardless of the viewer own timezone) --- */
 
@@ -3160,32 +3164,58 @@ function reportRichText(raw) {
   return out.join("");
 }
 
-// Anything past this many characters gets a fade + 展開 button rather than running forever.
-const REPORT_CLAMP_CHARS = 420;
-let REPORT_UID = 0;
+/* ── two-level fold (Adam 2026-08-18) ───────────────────────────────────────
+   Shifts are independent: any number may be open at once. Items INSIDE one shift are an
+   accordion — opening one closes its siblings in that shift only. Item state lives purely
+   in the DOM and is deliberately never remembered (Adam: 不需要記憶上次展開哪則); closing a
+   shift wipes it, so re-opening always starts with everything collapsed.
+
+   These are separate named functions rather than inline click-handler code so the accordion
+   invariants can actually be tested — logic buried in a listener is logic no test can reach. */
+
+function reportCollapseItems(root) {
+  root.querySelectorAll(".report-item.open").forEach((li) => {
+    li.classList.remove("open");
+    const c = li.querySelector(".report-item-caret");
+    if (c) c.textContent = "▸";
+  });
+}
+
+function reportToggleItem(li, sect) {
+  const wasOpen = li.classList.contains("open");
+  reportCollapseItems(sect);        // one open per shift; also handles "clicked the open one"
+  if (wasOpen) return;
+  li.classList.add("open");
+  const c = li.querySelector(".report-item-caret");
+  if (c) c.textContent = "▾";
+}
+
+function reportSetSectionOpen(sect, open) {
+  if (open) sect.classList.add("open"); else sect.classList.remove("open");
+  const caret = sect.querySelector(".report-caret");
+  if (caret) caret.textContent = open ? "▾" : "▸";
+  if (!open) reportCollapseItems(sect);   // reset on close, so re-opening starts clean
+}
 
 function reportItemHtml(it) {
   const tone = it.s === "positive" ? "up" : it.s === "negative" ? "down" : "flat";
   const tags = (it.tickers || []).map((t) => '<span class="report-tk">' + escapeHtml(t) + "</span>").join("");
   const mine = it.onlist ? '<span class="report-mine" title="在你的關注清單上">★ 你的清單</span>' : "";
   const body = String(it.body == null ? "" : it.body);
-  const long = body.length > REPORT_CLAMP_CHARS;
-  const id = "rpi" + (++REPORT_UID);
-  let bodyHtml = "";
-  if (body) {
-    bodyHtml = '<div class="report-item-body' + (long ? " clamped" : "") + '" id="' + id + '">'
-      + reportRichText(body) + "</div>"
-      + (long
-        ? '<button class="report-more" type="button" data-more="' + id + '">▾ 展開全文（'
-          + body.length + " 字）</button>"
-        : "");
+  const meta = tags + (it.src ? '<span class="report-src">' + escapeHtml(it.src) + "</span>" : "");
+  const detail = (body ? '<div class="report-item-body">' + reportRichText(body) + "</div>" : "")
+    + (meta ? '<div class="report-item-meta">' + meta + "</div>" : "");
+  const title = '<span class="report-item-t">' + escapeHtml(it.t || "") + "</span>" + mine;
+  // Nothing behind the title → render it flat. A caret on an item that cannot open is a
+  // dead control: the reader clicks, nothing happens, and the page looks broken.
+  if (!detail) {
+    return '<li class="report-item report-' + tone + ' report-item-bare">'
+      + '<div class="report-item-head">' + title + "</div></li>";
   }
   return '<li class="report-item report-' + tone + '">'
-    + '<div class="report-item-head"><span class="report-item-t">' + escapeHtml(it.t || "") + "</span>" + mine + "</div>"
-    + bodyHtml
-    + '<div class="report-item-meta">' + tags
-    + (it.src ? '<span class="report-src">' + escapeHtml(it.src) + "</span>" : "") + "</div>"
-    + "</li>";
+    + '<div class="report-item-head" data-item-toggle="1">'
+    + '<span class="report-item-caret">▸</span>' + title + "</div>"
+    + '<div class="report-item-detail">' + detail + "</div></li>";
 }
 
 function renderReportHealth(now) {
@@ -3212,6 +3242,7 @@ function renderReportHealth(now) {
 function renderDailyReport() {
   const body = document.getElementById("report-body");
   if (!body) return;
+  REPORT_PENDING = false;        // any full draw flushes a deferred refresh
   const now = taipeiNowParts();
   renderReportSubtabs();
   renderReportHealth(now);
@@ -3290,8 +3321,10 @@ function renderDailyReport() {
   }
 
   if (anyBody) {
-    html = '<div class="report-foldbar"><button type="button" class="report-foldall" data-fold="open">全部展開</button>'
-      + '<button type="button" class="report-foldall" data-fold="close">全部收合</button></div>' + html;
+    // Labels say 區塊 explicitly: with two levels, a bare 全部展開 would read as "open every
+    // article too", which is the opposite of what this tab is now for.
+    html = '<div class="report-foldbar"><button type="button" class="report-foldall" data-fold="open">全部區塊展開</button>'
+      + '<button type="button" class="report-foldall" data-fold="close">全部區塊收合</button></div>' + html;
   }
 
   body.innerHTML = html || '<div class="report-empty">這一天沒有需要記的事。</div>';
@@ -3309,7 +3342,13 @@ async function loadDailyReport() {
   try {
     const res = await fetch(REPORT_URL + "?t=" + Date.now(), { cache: "no-store" });
     if (!res.ok) throw new Error("HTTP " + res.status);
-    REPORT_DATA = await res.json();
+    const next = await res.json();
+    // Only a genuine change is worth a redraw. Unconditional redrawing every 5 minutes
+    // would collapse the item the reader is part-way through — repeatedly, and for nothing.
+    if (!REPORT_DATA || next.revision !== REPORT_DATA.revision || next._updated !== REPORT_DATA._updated) {
+      REPORT_PENDING = true;
+    }
+    REPORT_DATA = next;
   } catch (err) {
     console.error("daily report load failed:", err);
     if (!REPORT_DATA) {
@@ -3318,7 +3357,12 @@ async function loadDailyReport() {
     }
   } finally {
     REPORT_LOADING = false;
-    renderDailyReport();
+    // Hold the rebuild while an item is expanded, but keep refreshing the health banner —
+    // it is a separate element, and it carries the "今天這一班還沒進來" warning. Parking that
+    // behind "only when something changed" would mean a stale-shift alert that can never
+    // fire on an idle backend, which is precisely the failure it exists to catch.
+    if (REPORT_PENDING && !document.querySelector("#report-body .report-item.open")) renderDailyReport();
+    else renderReportHealth(taipeiNowParts());
   }
 }
 
