@@ -276,7 +276,12 @@ def build_payload(conn, now_tpe=None):
             }
             by_day[tdate]["top"].extend(rec.get("highlights", []))
         else:
-            ev = {k: rec.get(k) for k in ("id", "t", "s", "tickers", "body", "src", "notify_reason")}
+            # NOTE: this is an explicit whitelist, so any field not named here is dropped
+            # SILENTLY. `stream` was added 2026-08-17 to label non-shift sources (KOL digest,
+            # press-wire radar, smart money…) so the page can group them. If you add a field
+            # to the input contract, add it here too or it will vanish with no error.
+            ev = {k: rec.get(k) for k in
+                  ("id", "t", "s", "tickers", "body", "src", "notify_reason", "stream")}
             ev["occurred_at"] = occurred_at
             by_day[tdate]["events"].append(ev)
 
@@ -494,6 +499,22 @@ def _selftest():
         data = json.loads(out.read_text(encoding="utf-8"))
         check("schedule is published for client-side overdue calc", data["schedule"]["timezone"] == "Asia/Taipei")
         check("all shifts present in health", set(data["health"]) == set(SHIFT_IDS))
+
+        # `stream` must survive build_payload's explicit event whitelist. This is guarding a
+        # silent-drop failure: before 2026-08-17 an unlisted field vanished with no error and
+        # no log line, so the page simply rendered the group as 臨時事件 and looked plausible.
+        add_record(conn, {
+            "schema": SCHEMA, "kind": "event", "id": "selftest-stream",
+            "occurred_at": "2026-08-17T07:00:00+08:00",
+            "t": "串流標籤測試", "s": "neutral", "tickers": [], "body": "x",
+            "notify_reason": "none", "stream": "網紅摘要",
+        })
+        publish(conn, out, now_tpe=datetime(2026, 8, 17, 22, 0, tzinfo=TAIPEI), gate=False)
+        data = json.loads(out.read_text(encoding="utf-8"))
+        day = next((d for d in data["days"] if d["date"] == "2026-08-17"), None)
+        ev = next((e for e in (day or {}).get("events", []) if e["id"] == "selftest-stream"), None)
+        check("event survives the round trip", ev is not None)
+        check("stream label is not dropped by the whitelist", (ev or {}).get("stream") == "網紅摘要")
 
         # Atomic write leaves no temp files behind.
         check("no temp files left behind", not list(out.parent.glob(".tmp-*")))
