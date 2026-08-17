@@ -218,9 +218,16 @@ console.log("== late evening DOES render as missing, and raises the banner ==");
     .flatMap((s) => s.items || [])
     .map((i) => i.body)
     .find((b) => b && b.length > 12);
+  // Bodies are Discord-flavoured text: ** becomes <strong>, ## becomes a heading div, and
+  // & < > are escaped. A raw prefix slice therefore stops matching the moment the slice
+  // lands on markup — which it now does, because restored bodies lead with a bold label.
+  // Compare against a run of plain characters so this tests "bodies render" rather than
+  // "bodies happen to start with undecorated text".
+  const plainRun = (s) => (String(s).split(/[\n*#━─—=<>&]+/).find((x) => x.trim().length >= 12) || "").trim();
+  const needle = plainRun(firstBody).slice(0, 12);
   check("fixture actually has an item body to render", !!firstBody);
-  check("item body rendered", !!firstBody && html.indexOf(firstBody.slice(0, 12)) >= 0,
-        firstBody ? firstBody.slice(0, 12) : "no body in fixture");
+  check("fixture body yields a markup-free run to look for", needle.length === 12, JSON.stringify(needle));
+  check("item body rendered", !!needle && html.indexOf(needle) >= 0, needle || "no body in fixture");
   check("subtabs rendered 7 buttons",
         (ctx._nodes["report-subtabs"].innerHTML.match(/report-subtab/g) || []).length === 7);
   check("today is selected by default", ctx.getDay() === "2026-08-17");
