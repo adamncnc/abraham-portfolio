@@ -61,6 +61,13 @@ function makeCtx(nowISO) {
 
 const data = JSON.parse(fs.readFileSync(DATA, "utf8"));
 
+// Assertions about an UNDELIVERED shift must not depend on the live file happening to
+// lack one. The evening shift actually ran at 2026-08-17 22:11 and every such test
+// flipped from PASS to FAIL — they were testing the data, not the logic. Derive an
+// explicit 'evening missing' fixture instead so they hold whatever the live file says.
+const dataNoEvening = JSON.parse(JSON.stringify(data));
+for (const d of dataNoEvening.days) d.shifts = (d.shifts || []).filter((s) => s.shift !== "evening");
+
 console.log("== 7-day window is derived from the browser clock, not the JSON ==");
 {
   // Taipei 2026-08-20 00:30 = UTC 2026-08-19T16:30Z. The JSON still ends at 08-17.
@@ -81,7 +88,7 @@ console.log("== overdue is computed client-side, so it works with the backend de
 {
   // Taipei 2026-08-17 23:45 — all three shifts past deadline (evening deadline is 23:40); only two delivered.
   const ctx = makeCtx("2026-08-17T15:45:00Z");
-  ctx.setData(data);
+  ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
   const blob = ctx.reportDayBlob("2026-08-17");
   const sched = data.schedule.shifts;
@@ -99,7 +106,7 @@ console.log("== no false alarm before the deadline (grace window) ==");
 {
   // Taipei 2026-08-17 22:30 — evening due 22:10, grace 90 → deadline 23:40. Late but inside grace.
   const ctx = makeCtx("2026-08-17T14:30:00Z");
-  ctx.setData(data);
+  ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
   const blob = ctx.reportDayBlob("2026-08-17");
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
@@ -110,7 +117,7 @@ console.log("== no false alarm before the deadline (grace window) ==");
 {
   // Taipei 2026-08-17 20:00 — before due at all (due is 22:10).
   const ctx = makeCtx("2026-08-17T12:00:00Z");
-  ctx.setData(data);
+  ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
   const st = ctx.reportShiftStatus("2026-08-17", ev, ctx.reportDayBlob("2026-08-17"), now);
@@ -120,7 +127,7 @@ console.log("== no false alarm before the deadline (grace window) ==");
 {
   // One minute past the deadline → must flip to failed.
   const ctx = makeCtx("2026-08-17T15:41:00Z");   // Taipei 23:41, deadline 23:40
-  ctx.setData(data);
+  ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
   check("T14b one minute past deadline = failed",
@@ -179,7 +186,7 @@ console.log("");
 console.log("== rendering the day produces the expected content ==");
 {
   const ctx = makeCtx("2026-08-17T10:00:00Z");
-  ctx.setData(data);
+  ctx.setData(dataNoEvening);   // this block asserts evening is not-yet-due
   ctx.setDay("2026-08-17");
   ctx.renderDailyReport();
   const html = ctx._nodes["report-body"].innerHTML;
@@ -196,7 +203,7 @@ console.log("");
 console.log("== late evening DOES render as missing, and raises the banner ==");
 {
   const ctx = makeCtx("2026-08-17T15:45:00Z");   // Taipei 23:45, past deadline 23:40
-  ctx.setData(data);
+  ctx.setData(dataNoEvening);
   ctx.setDay("2026-08-17");
   ctx.renderDailyReport();
   const html = ctx._nodes["report-body"].innerHTML;
