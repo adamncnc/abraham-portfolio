@@ -635,6 +635,33 @@ document.addEventListener("click", (e) => {
   if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
   const repBtn = e.target.closest(".report-subtab");
   if (repBtn) { activateReportDay(repBtn.dataset.reportday); return; }
+  // 日報 folding (Adam 2026-08-17). Toggling only rewrites REPORT_CLOSED + re-renders, so
+  // it never refetches and never disturbs which day is open.
+  const moreBtn = e.target.closest(".report-more");
+  if (moreBtn) {
+    const target = document.getElementById(moreBtn.dataset.more);
+    if (target) {
+      const nowClamped = target.classList.toggle("clamped");
+      moreBtn.textContent = nowClamped ? "▾ 展開全文" : "▴ 收起";
+    }
+    return;
+  }
+  const foldAll = e.target.closest(".report-foldall");
+  if (foldAll) {
+    document.querySelectorAll("#report-body [data-sect]").forEach((s) => {
+      if (foldAll.dataset.fold === "close") REPORT_CLOSED.add(s.dataset.sect);
+      else REPORT_CLOSED.delete(s.dataset.sect);
+    });
+    renderDailyReport();
+    return;
+  }
+  const foldHead = e.target.closest("#report-body [data-toggle]");
+  if (foldHead) {
+    const id = foldHead.dataset.toggle;
+    if (REPORT_CLOSED.has(id)) REPORT_CLOSED.delete(id); else REPORT_CLOSED.add(id);
+    renderDailyReport();
+    return;
+  }
   // 進場區內 / 回檔排行榜 rows + search results → jump to that card (Adam 2026-07-22).
   const jr = e.target.closest(".jump-row");
   if (jr && jr.dataset.jumpTab && jr.dataset.jumpId) {
@@ -2998,6 +3025,9 @@ const REPORT_DAYS = 7;
 let REPORT_DATA = null;
 let REPORT_DAY = null;      // session-only on purpose: a fresh load always opens today.
 let REPORT_LOADING = false;
+// Which fold-sections the user has closed, keyed "<date>.<shiftId>" / "<date>.stream.<name>".
+// Session-only, like REPORT_DAY: a fresh load always opens everything.
+const REPORT_CLOSED = new Set();
 
 /* -- Taipei clock helpers (correct regardless of the viewer own timezone) --- */
 
@@ -3109,13 +3139,50 @@ function renderReportSubtabs() {
   }).join("");
 }
 
+// Bodies hold the shift report VERBATIM (Adam 2026-08-17: "一字不刪"), so they arrive as
+// multi-line Discord-flavoured text. Escape FIRST, then decorate — every regex below only
+// touches * ━ #, none of which escaping can produce, so no escaped entity can be re-parsed
+// back into markup. Never reorder those two steps.
+function reportRichText(raw) {
+  const text = String(raw == null ? "" : raw);
+  if (text === "") return "";      // "".split() is [""], which would emit a phantom gap
+  const lines = escapeHtml(text).split(/\r?\n/);
+  const out = [];
+  for (const ln of lines) {
+    const t = ln.trim();
+    if (/^(?:━{3,}|─{3,}|—{3,}|-{3,}|={3,})$/.test(t)) { out.push('<hr class="report-rule">'); continue; }
+    if (t === "") { out.push('<div class="report-gap"></div>'); continue; }
+    const bolded = ln.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    const h = /^\s*(#{1,4})\s+(.*)$/.exec(bolded);
+    if (h) { out.push('<div class="report-h' + h[1].length + '">' + h[2] + "</div>"); continue; }
+    out.push("<div>" + bolded + "</div>");
+  }
+  return out.join("");
+}
+
+// Anything past this many characters gets a fade + 展開 button rather than running forever.
+const REPORT_CLAMP_CHARS = 420;
+let REPORT_UID = 0;
+
 function reportItemHtml(it) {
   const tone = it.s === "positive" ? "up" : it.s === "negative" ? "down" : "flat";
   const tags = (it.tickers || []).map((t) => '<span class="report-tk">' + escapeHtml(t) + "</span>").join("");
   const mine = it.onlist ? '<span class="report-mine" title="在你的關注清單上">★ 你的清單</span>' : "";
+  const body = String(it.body == null ? "" : it.body);
+  const long = body.length > REPORT_CLAMP_CHARS;
+  const id = "rpi" + (++REPORT_UID);
+  let bodyHtml = "";
+  if (body) {
+    bodyHtml = '<div class="report-item-body' + (long ? " clamped" : "") + '" id="' + id + '">'
+      + reportRichText(body) + "</div>"
+      + (long
+        ? '<button class="report-more" type="button" data-more="' + id + '">▾ 展開全文（'
+          + body.length + " 字）</button>"
+        : "");
+  }
   return '<li class="report-item report-' + tone + '">'
     + '<div class="report-item-head"><span class="report-item-t">' + escapeHtml(it.t || "") + "</span>" + mine + "</div>"
-    + (it.body ? '<div class="report-item-body">' + escapeHtml(it.body) + "</div>" : "")
+    + bodyHtml
     + '<div class="report-item-meta">' + tags
     + (it.src ? '<span class="report-src">' + escapeHtml(it.src) + "</span>" : "") + "</div>"
     + "</li>";
@@ -3171,32 +3238,60 @@ function renderDailyReport() {
       + top.map((t) => "<li>" + escapeHtml(t) + "</li>").join("") + "</ul></div>";
   }
 
+  // Sections default to OPEN: the whole point of the tab is that a day reads in full
+  // without scrolling back through Discord. The 7 day-tabs already bound the length, so
+  // collapsing by default would just recreate the thinness Adam objected to. 全部收合 is
+  // one click away, and REPORT_CLOSED remembers per-section choices for this render pass.
+  const sect = (key, id, headHtml, innerHtml) => {
+    const closed = REPORT_CLOSED.has(id);
+    return '<section class="report-shift report-st-' + key + (closed ? "" : " open") + '" data-sect="' + id + '">'
+      + '<div class="report-shift-h" data-toggle="' + id + '">' + headHtml
+      + '<span class="report-caret">' + (closed ? "▸" : "▾") + "</span></div>"
+      + '<div class="report-sect-body">' + innerHtml + "</div></section>";
+  };
+
+  let anyBody = false;
+
   REPORT_DATA.schedule.shifts.forEach((sd) => {
     const st = reportShiftStatus(date, sd, blob, now);
     if (st.key === "not-scheduled") return;
-    html += '<section class="report-shift report-st-' + st.key + '">'
-      + '<div class="report-shift-h"><span class="report-shift-name">' + REPORT_DOT[st.key] + " " + escapeHtml(sd.name) + "</span>"
+    const head = '<span class="report-shift-name">' + REPORT_DOT[st.key] + " " + escapeHtml(sd.name) + "</span>"
       + '<span class="report-shift-due">' + escapeHtml(sd.due) + "</span>"
-      + '<span class="report-shift-badge">' + escapeHtml(st.label) + "</span></div>";
+      + '<span class="report-shift-badge">' + escapeHtml(st.label) + "</span>";
+    let inner = "";
     if (st.rec && st.rec.outcome === "failed") {
-      html += '<div class="report-alert">⚠️ ' + escapeHtml(st.rec.error || "沒有說明") + "</div>";
+      inner += '<div class="report-alert">⚠️ ' + escapeHtml(st.rec.error || "沒有說明") + "</div>";
     } else if (st.rec && st.rec.summary) {
-      html += '<div class="report-summary">' + escapeHtml(st.rec.summary) + "</div>";
+      inner += '<div class="report-summary">' + escapeHtml(st.rec.summary) + "</div>";
     }
     const items = (st.rec && st.rec.items) || [];
-    if (items.length) html += '<ul class="report-items">' + items.map(reportItemHtml).join("") + "</ul>";
-    html += "</section>";
+    if (items.length) { inner += '<ul class="report-items">' + items.map(reportItemHtml).join("") + "</ul>"; anyBody = true; }
+    html += sect(st.key, date + "." + sd.id, head, inner);
   });
 
-  const evs = blob.events || [];
-  if (evs.length) {
-    html += '<section class="report-shift report-st-complete"><div class="report-shift-h">'
-      + '<span class="report-shift-name">⚡ 臨時事件</span></div><ul class="report-items">'
-      + evs.map((e) => {
-        const t = String(e.occurred_at || "").slice(11, 16);
-        const merged = Object.assign({}, e, { t: (t ? t + " " : "") + (e.t || "") });
-        return reportItemHtml(merged);
-      }).join("") + "</ul></section>";
+  // Non-shift sources (KOL digest, press-wire radar, smart money, supply chain…) arrive as
+  // events carrying a `stream` label. Group each stream into its own foldable block rather
+  // than dumping them all under one 臨時事件 heading (Adam 2026-08-17: 不只三班，其他的也要).
+  const groups = new Map();
+  for (const e of (blob.events || [])) {
+    const key = (e.stream && String(e.stream).trim()) || "⚡ 臨時事件";
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  }
+  for (const [name, list] of groups) {
+    const inner = '<ul class="report-items">' + list.map((e) => {
+      const hhmm = String(e.occurred_at || "").slice(11, 16);
+      return reportItemHtml(Object.assign({}, e, { t: (hhmm ? hhmm + " " : "") + (e.t || "") }));
+    }).join("") + "</ul>";
+    anyBody = true;
+    html += sect("complete", date + ".stream." + name,
+      '<span class="report-shift-name">' + escapeHtml(name) + "</span>"
+      + '<span class="report-shift-badge">' + list.length + " 則</span>", inner);
+  }
+
+  if (anyBody) {
+    html = '<div class="report-foldbar"><button type="button" class="report-foldall" data-fold="open">全部展開</button>'
+      + '<button type="button" class="report-foldall" data-fold="close">全部收合</button></div>' + html;
   }
 
   body.innerHTML = html || '<div class="report-empty">這一天沒有需要記的事。</div>';
