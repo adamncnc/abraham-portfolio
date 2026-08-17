@@ -698,6 +698,12 @@ function freshnessBadge(item) {
     if (item._session === "closed") {
       return `<span class="freshness snap" title="今日收盤價（證交所）；市場已收盤，非即時">🕒 收盤 ${hhmm(qts)}</span>`;
     }
+    // Relay got zero intraday bars → there IS no extended-hours price for this symbol;
+    // what shows is the last regular close. Say that outright — never dress a total
+    // fetch miss up as a merely-delayed quote. (Adam 2026-08-06)
+    if (item._noBars === true) {
+      return `<span class="freshness stale" title="報價來源這一輪沒有回傳任何K棒，拿不到即時價；顯示的是最近一次正規盤收盤價">⚠️ 無即時資料·顯示收盤 ${hhmm(qts)}</span>`;
+    }
     // 隔夜 = Blue Ocean ATS 20:00–04:00 ET — a real third session, not pre and not post.
     // Its 慢N分 is meaningful and often LARGE: liquidity is thin, so a name can go hours
     // between prints (NVMI/TLN/POWI: 255 min, measured 2026-08-04). Never smooth that over.
@@ -2476,6 +2482,7 @@ async function liveRefresh() {
           trackVolTick(item.id, next._quoteTs, q.dayVolume, q.price);  // 突波 tick 差分 (2026-07-23)
         }
         next._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
+        next._noBars = q.barsOk === false;       // relay got no bars → badge says 無即時資料, not 慢N分
         delete next.data.stale;   // a fresh quote supersedes any carried-forward stale flag
       } else {
         next._live = false;       // showing snapshot close → amber "未即時" per-card badge
@@ -2537,6 +2544,7 @@ async function refreshOneCard(section, id, symbol, btn) {
     item._liveTs = Date.now();
     item._quoteTs = q.asOf ? q.asOf * 1000 : null;  // the price's own time (Adam 2026-07-06)
     item._session = q.session || "regular";  // "pre"/"post" → badge shows 盤前/盤後
+    item._noBars = q.barsOk === false;       // relay got no bars → badge says 無即時資料, not 慢N分
     if (item.data) delete item.data.stale;  // a fresh quote supersedes any carried-forward stale data
     const node = document.querySelector('[data-card="' + CSS.escape(section + "-" + id) + '"]');
     if (node) {

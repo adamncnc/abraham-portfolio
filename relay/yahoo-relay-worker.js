@@ -161,7 +161,12 @@ async function fetchOne(symbol) {
         for (const vv of barVols) { if (vv != null && Number.isFinite(vv)) { sum += vv; seen = true; } }
         dayVolume = seen ? sum : null;
       }
-      return { ok: true, price, prevClose: prev, change, changePct, session, asOf: session === "regular" ? rmt : lastBarT, intraday, dayVolume };
+      // barsOk=false → Yahoo returned META but ZERO usable intraday bars for this symbol.
+      // We then have NO extended-hours price and silently fall back to the regular close.
+      // Surfacing it is the point: a silent fallback looks identical to a healthy quote,
+      // which is exactly how this hid (Adam 2026-08-06: 「拿不到資料的時候會裝作有資料」).
+      const barsOk = intraday.length > 0;
+      return { ok: true, price, prevClose: prev, change, changePct, session, asOf: session === "regular" ? rmt : lastBarT, intraday, dayVolume, barsOk };
     } catch (e) {
       lastErr = String(e);
     }
