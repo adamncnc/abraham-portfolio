@@ -48,7 +48,13 @@ for (const day of report.days || []) {
   }
   for (const e of day.events || []) chunks.push(e.t || "", e.body || "", e.src || "");
 }
-const text = chunks.filter(Boolean).join("\n");
+// Join with a BLANK line, not a single newline. hunt-zone-lib decides "is this zone
+// reference talking about this ticker?" by paragraph, and it splits paragraphs on "\n\n".
+// With "\n" every chunk boundary was invisible, so two unrelated entries merged into one
+// paragraph and a zone word from item A got attributed to a ticker named in item B.
+// That produced a real false BLOCK on 2026-08-17 (台積電's 進場區 blamed on 聯亞).
+// This makes attribution match the library's actual unit; it removes no check.
+const text = chunks.filter(Boolean).join("\n\n");
 
 let blocked = 0, touched = 0;
 for (const e of hunt) {
