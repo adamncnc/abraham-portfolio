@@ -203,7 +203,17 @@ console.log("== late evening DOES render as missing, and raises the banner ==");
   check("T5a late evening rendered as missing", html.indexOf("沒收到") >= 0);
   check("T5a banner names the missing shift",
         ctx._nodes["report-health"].innerHTML.indexOf("還沒進來") >= 0);
-  check("item body rendered", html.indexOf("SanDisk") >= 0);
+  // Derive the expectation from the data instead of hardcoding a phrase out of that
+  // day's copy. The old version asserted "SanDisk" and broke the moment the editorial
+  // content changed — it was testing today's wording, not that bodies render at all.
+  const firstBody = (data.days || [])
+    .flatMap((d) => d.shifts || [])
+    .flatMap((s) => s.items || [])
+    .map((i) => i.body)
+    .find((b) => b && b.length > 12);
+  check("fixture actually has an item body to render", !!firstBody);
+  check("item body rendered", !!firstBody && html.indexOf(firstBody.slice(0, 12)) >= 0,
+        firstBody ? firstBody.slice(0, 12) : "no body in fixture");
   check("subtabs rendered 7 buttons",
         (ctx._nodes["report-subtabs"].innerHTML.match(/report-subtab/g) || []).length === 7);
   check("today is selected by default", ctx.getDay() === "2026-08-17");
