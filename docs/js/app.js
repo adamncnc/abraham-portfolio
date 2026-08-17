@@ -14,6 +14,17 @@ const HOLDINGS_URL = "./data/holdings.json";
 // 策略1=我看好的名單 × 進場帶紀律；策略2=全市場 × 純技術；策略3=我看好的名單 × 純技術。
 // 台股/美股拆開的理由：相對強度是「贏過自己市場」，兩市場指數強弱不同 → 不可同榜排序。
 // key 同時是 DOM id 前綴 (panel-sim3 / sim3-positions / chart-sim3-nav / tab-count-sim3).
+//
+// 🛑 DORMANT since 2026-08-17 — Adam: 「模擬倉 從看盤網頁刪掉」.
+// The tab, the six sub-tabs and the six panels are gone from index.html, and every CALL
+// SITE below has been removed (loadSim() on page load, the renderSim loop in liveRefresh,
+// the sub-tab click handler, and the activateTab branch). Nothing reaches this code now.
+// It is left in place, not deleted, because the removal is a display decision:
+//   * the six ledgers under ~/Abraham/sim-*/ still exist and were NOT touched
+//   * docs/data/sim-*.json still exist and are still refreshed by the sync script
+// To bring the tab back: restore the markup in index.html, re-add the loadSim() call in
+// loadAndRender, the SIM_BOOKS loop in liveRefresh, the .sim-subtab click handler, and
+// drop the sim→tw fold in activateTab. Nothing else here needs changing.
 const SIM_BOOKS = [
   { key: "sim-tw-1", url: "./data/sim-tw-1.json" },
   { key: "sim-tw-2", url: "./data/sim-tw-2.json" },
@@ -622,8 +633,6 @@ function initializeCharts(items, section) {
 document.addEventListener("click", (e) => {
   const tabBtn = e.target.closest(".market-tab");
   if (tabBtn) { activateTab(tabBtn.dataset.tab); return; }
-  const simBtn = e.target.closest(".sim-subtab");
-  if (simBtn) { activateSimBook(simBtn.dataset.simbook); return; }
   const repBtn = e.target.closest(".report-subtab");
   if (repBtn) { activateReportDay(repBtn.dataset.reportday); return; }
   // 進場區內 / 回檔排行榜 rows + search results → jump to that card (Adam 2026-07-22).
@@ -1787,25 +1796,20 @@ function bucketSnapshot(snapshot) {
 // 模擬倉 active 時才顯示六本子分頁, 並記住上次看的那本 (abraham.simBook, prefs-synced).
 function activateTab(which, doResize = true) {
   if (!which) return;
-  // Legacy migration: a saved activeTab like "sim-tw-2" (pre-2026-07-22 flat tabs, may
-  // still live in cloud prefs) folds into the 模擬倉 group with that book selected.
-  if (which.startsWith("sim-")) { lsSet("abraham.simBook", which); which = "sim"; }
+  // 模擬倉 removed from the page 2026-08-17 (Adam). A saved pref of "sim"/"sim-tw-2"
+  // still lives in cloud prefs and on his other devices, and would otherwise activate a
+  // tab that no longer exists — leaving a blank page. Fold any of them back to 台股.
+  if (which === "sim" || which.startsWith("sim-")) which = "tw";
   document.querySelectorAll(".market-tab").forEach((t) => t.classList.toggle("active", t.dataset.tab === which));
-  const subRow = document.getElementById("sim-subtabs");
-  if (subRow) subRow.classList.toggle("open", which === "sim");
   const repRow = document.getElementById("report-subtabs");
   if (repRow) repRow.classList.toggle("open", which === "report");
-  if (which === "sim") {
-    activateSimBook(lsGet("abraham.simBook", "sim-tw-1"), doResize);
-  } else {
-    document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
-  }
+  document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
   if (which === "report") ensureReportLoaded();
   lsSet("abraham.activeTab", which);
   // Adam 2026-07-24: 即時持倉(pos)/模擬倉(sim) 兩分頁隱藏排行榜/進場區總覽卡列（那兩頁有自己的內容）;
   // 回 台股/美股/指數 再顯示。切分頁時 renderSummary 仍會更新 innerHTML，但元素維持 display:none 不露出。
   const summaryEl = document.getElementById("portfolio-summary");
-  if (summaryEl) summaryEl.style.display = (which === "pos" || which === "sim" || which === "report") ? "none" : "";
+  if (summaryEl) summaryEl.style.display = (which === "pos" || which === "report") ? "none" : "";
   // Summary cards (進場區內/回檔排行) follow the market tab; sim/pos keep the last market view.
   if (which === "tw" || which === "us" || which === "idx") {
     applySort(which);  // 切分頁 = 重排白名單時機 (Adam 2026-07-23: 自動更新凍結順序, 切分頁時套最新排序)
@@ -1960,7 +1964,6 @@ async function loadAndRender(opts = {}) {
     CURRENT_SNAPSHOT = snapshot;
     renderSnapshot(snapshot, opts.keepOrder ? { keepOrder: true } : {});
     loadHoldings();  // 即時持倉分頁 — independent fetch, own error handling
-    loadSim();       // 模擬倉分頁 — independent fetch, own error handling
   } catch (err) {
     console.error("Failed to load data:", err);
     document.getElementById("timestamp").textContent = `❌ 載入失敗：${err.message}`;
@@ -2508,9 +2511,6 @@ async function liveRefresh() {
     CURRENT_SNAPSHOT = live;  // adopt merged snapshot so per-card refresh + ordering read live buckets
     renderSnapshot(live, { live: true, note, keepOrder: true });  // 自動/手動抓即時都不跳位 (Adam 2026-07-23)
     applyLiveToHoldings(quotes, liveTs);   // 即時持倉分頁: 距停損隨這批即時價重算
-    SIM_BOOKS.forEach(({ key }) => {       // 模擬倉分頁: 現價 join 吃這批即時價 + 重建被 renderSnapshot 銷毀的淨值圖
-      if (SIM_SNAPS[key]) renderSim(SIM_SNAPS[key], key);
-    });
     LIVE_MODE = true;
   } catch (err) {
     console.error("Live refresh failed:", err);
