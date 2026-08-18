@@ -267,6 +267,40 @@ console.log("\n== sections default open, and honour REPORT_CLOSED ==");
   check("body still in DOM (CSS hides it, JS does not drop content)", html.includes("內文"), html.slice(0, 300));
 }
 
+// ── 4b. editorial dressing (2026-08-18 美化) ────────────────────────────────
+// The skin adds masthead/tone/seal/stagger markup. These checks pin the NEW markup so a
+// refactor cannot silently drop it, while every older section above pins that the skin
+// changed no behaviour.
+console.log("\n== masthead, tone accents and stagger decorate without changing behaviour ==");
+{
+  const ctx = makeCtx("2026-08-17T12:00:00Z");   // Taipei 2026-08-17 20:00 → selected day IS today
+  ctx.setData(dataWith([{
+    date: "2026-08-17", top: ["重點一"],
+    shifts: [{ id: "s1", shift: "morning", outcome: "complete", delivered_at: "2026-08-17T06:10:00+08:00",
+      summary: "摘要", error: null, items: [{ t: "標題", s: "neutral", tickers: [], body: "內文" }] }],
+    events: [{ id: "e1", t: "🧠 我的看法", s: "neutral", tickers: [], body: "b", stream: "網紅摘要", occurred_at: "2026-08-17T07:00:00+08:00" }],
+  }]));
+  ctx.setDay("2026-08-17");
+  ctx.call("renderDailyReport()");
+  const html = ctx._nodes["report-body"].innerHTML;
+  check("masthead renders the dateline", html.includes("report-mast") && html.includes("8 月 17 日"), html.slice(0, 200));
+  check("今天 chip shows when the selected day is today", html.includes("report-mast-today"), html.slice(0, 300));
+  check("shift section carries its tone class", /class="report-shift[^"]*report-tone-morning[^"]*"/.test(html), html.slice(0, 500));
+  check("stream section carries a tone class", html.includes("report-tone-kol"), html.slice(0, 500));
+  check("shift header shows the seal glyph", html.includes('report-sig">早'), html.slice(0, 500));
+  check("stream header shows the seal glyph", html.includes('report-sig">網'), html.slice(0, 500));
+  check("shift header shows an item count", html.includes('report-shift-count">1 則'), html.slice(0, 600));
+  check("items carry a stagger index", html.includes('style="--i:0"'), html.slice(0, 600));
+  check("🧠 titles are marked as my own read", html.includes("report-brain"), html.slice(0, 600));
+
+  // The hh:mm prefix a stream event gets must not defeat the 🧠 marker.
+  const withTime = ctx.call("reportItemHtml({t:'07:00 🧠 x',s:'neutral',tickers:[],body:'y'})");
+  check("hh:mm prefix still marks 🧠", withTime.includes("report-brain"), withTime.slice(0, 140));
+  // And a plain news title must NOT be marked as mine.
+  const plain = ctx.call("reportItemHtml({t:'台積電漲',s:'positive',tickers:[],body:'y'})");
+  check("plain title is not marked as mine", !plain.includes("report-brain"), plain.slice(0, 140));
+}
+
 // ── 5. non-shift streams group by name ──────────────────────────────────────
 console.log("\n== other sources group into their own foldable blocks ==");
 {
@@ -278,6 +312,7 @@ console.log("\n== other sources group into their own foldable blocks ==");
       { id: "e2", t: "B", s: "neutral", tickers: [], body: "b2", stream: "網紅摘要", occurred_at: "2026-08-17T15:00:00+08:00" },
       { id: "e3", t: "C", s: "neutral", tickers: [], body: "b3", stream: "新聞雷達", occurred_at: "2026-08-17T20:50:00+08:00" },
       { id: "e4", t: "D", s: "neutral", tickers: [], body: "b4", occurred_at: "2026-08-17T21:30:00+08:00" },
+      { id: "e5", t: "22:00 已帶時間", s: "neutral", tickers: [], body: "b5", stream: "新聞雷達", occurred_at: "2026-08-17T22:00:00+08:00" },
     ],
   }]));
   ctx.setDay("2026-08-17");
@@ -287,8 +322,10 @@ console.log("\n== other sources group into their own foldable blocks ==");
   check("新聞雷達 group exists", html.includes("新聞雷達"), html.slice(0, 200));
   check("stream with 2 items shows 2 則", html.includes("2 則"), html.slice(0, 400));
   check("unlabelled event falls back to 臨時事件", html.includes("臨時事件"), html.slice(0, 400));
-  check("all four bodies present", ["b1", "b2", "b3", "b4"].every((b) => html.includes(b)), html.slice(0, 400));
-  check("event time prefixes the title", html.includes("20:50"), html.slice(0, 600));
+  check("all five bodies present", ["b1", "b2", "b3", "b4", "b5"].every((b) => html.includes(b)), html.slice(0, 400));
+  check("event time prefixes the title", html.includes("20:50 C"), html.slice(0, 600));
+  check("time is NOT doubled when the title already carries it", !html.includes("22:00 22:00"), html.slice(0, 800));
+  check("self-timed title still renders once", html.includes("22:00 已帶時間"), html.slice(0, 800));
 }
 
 // ── 6. the count in the header includes stream items ────────────────────────

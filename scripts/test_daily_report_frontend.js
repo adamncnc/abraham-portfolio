@@ -68,6 +68,21 @@ const data = JSON.parse(fs.readFileSync(DATA, "utf8"));
 const dataNoEvening = JSON.parse(JSON.stringify(data));
 for (const d of dataNoEvening.days) d.shifts = (d.shifts || []).filter((s) => s.shift !== "evening");
 
+// The day these blocks render must come from the data, not a hardcoded calendar date.
+// The file keeps a rolling 7-day window: a literal "2026-08-17" dies the day it rolls
+// out, and it already half-died the morning 2026-08-18 grew a morning-only record (the
+// body-needle started resolving to a day the test does not render). Newest day whose
+// morning AND midday both completed = safe on any future file.
+const DAY = (data.days || [])
+  .filter((d) => ["morning", "midday"].every((id) => (d.shifts || []).some((s) => s.shift === id && s.outcome === "complete")))
+  .map((d) => d.date).sort().pop();
+if (!DAY) { console.error("FATAL: live file has no day with morning+midday complete"); process.exit(2); }
+// Taipei wall-clock HH:MM on DAY → the UTC instant the fake clock should freeze at.
+const dayAt = (hhmm) => {
+  const [h, m] = hhmm.split(":").map(Number);
+  return new Date(Date.parse(DAY + "T00:00:00+08:00") + (h * 60 + m) * 60000).toISOString();
+};
+
 console.log("== 7-day window is derived from the browser clock, not the JSON ==");
 {
   // Taipei 2026-08-20 00:30 = UTC 2026-08-19T16:30Z. The JSON still ends at 08-17.
@@ -86,52 +101,52 @@ console.log("== 7-day window is derived from the browser clock, not the JSON =="
 console.log("");
 console.log("== overdue is computed client-side, so it works with the backend dead ==");
 {
-  // Taipei 2026-08-17 23:45 — all three shifts past deadline (evening deadline is 23:40); only two delivered.
-  const ctx = makeCtx("2026-08-17T15:45:00Z");
+  // Taipei DAY 23:45 — all three shifts past deadline (evening deadline is 23:40); only two delivered.
+  const ctx = makeCtx(dayAt("23:45"));
   ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
-  const blob = ctx.reportDayBlob("2026-08-17");
+  const blob = ctx.reportDayBlob(DAY);
   const sched = data.schedule.shifts;
-  const st = (id) => ctx.reportShiftStatus("2026-08-17", sched.find((s) => s.id === id), blob, now);
+  const st = (id) => ctx.reportShiftStatus(DAY, sched.find((s) => s.id === id), blob, now);
   check("delivered morning reads complete", st("morning").key === "complete", st("morning").key);
   check("delivered midday reads complete", st("midday").key === "complete", st("midday").key);
   check("T5a undelivered evening past deadline reads FAILED (backend dead)",
         st("evening").key === "failed", st("evening").key);
   check("day status is failed when a shift is missing",
-        ctx.reportDayStatus("2026-08-17", blob, now, true) === "failed");
+        ctx.reportDayStatus(DAY, blob, now, true) === "failed");
 }
 
 console.log("");
 console.log("== no false alarm before the deadline (grace window) ==");
 {
-  // Taipei 2026-08-17 22:30 — evening due 22:10, grace 90 → deadline 23:40. Late but inside grace.
-  const ctx = makeCtx("2026-08-17T14:30:00Z");
+  // Taipei DAY 22:30 — evening due 22:10, grace 90 → deadline 23:40. Late but inside grace.
+  const ctx = makeCtx(dayAt("22:30"));
   ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
-  const blob = ctx.reportDayBlob("2026-08-17");
+  const blob = ctx.reportDayBlob(DAY);
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
-  const st = ctx.reportShiftStatus("2026-08-17", ev, blob, now);
+  const st = ctx.reportShiftStatus(DAY, ev, blob, now);
   check("T14b inside grace = pending, not failed", st.key === "pending", st.key);
   check("T14b label says it is due", st.label === "快到了", st.label);
 }
 {
-  // Taipei 2026-08-17 20:00 — before due at all (due is 22:10).
-  const ctx = makeCtx("2026-08-17T12:00:00Z");
+  // Taipei DAY 20:00 — before due at all (due is 22:10).
+  const ctx = makeCtx(dayAt("20:00"));
   ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
-  const st = ctx.reportShiftStatus("2026-08-17", ev, ctx.reportDayBlob("2026-08-17"), now);
+  const st = ctx.reportShiftStatus(DAY, ev, ctx.reportDayBlob(DAY), now);
   check("T14b before due = pending", st.key === "pending", st.key);
   check("T14b label says not yet", st.label === "還沒到", st.label);
 }
 {
   // One minute past the deadline → must flip to failed.
-  const ctx = makeCtx("2026-08-17T15:41:00Z");   // Taipei 23:41, deadline 23:40
+  const ctx = makeCtx(dayAt("23:41"));   // deadline is 23:40
   ctx.setData(dataNoEvening);
   const now = ctx.taipeiNowParts();
   const ev = data.schedule.shifts.find((s) => s.id === "evening");
   check("T14b one minute past deadline = failed",
-        ctx.reportShiftStatus("2026-08-17", ev, ctx.reportDayBlob("2026-08-17"), now).key === "failed");
+        ctx.reportShiftStatus(DAY, ev, ctx.reportDayBlob(DAY), now).key === "failed");
 }
 
 console.log("");
@@ -185,9 +200,9 @@ console.log("== the data timestamp is always printed ==");
 console.log("");
 console.log("== rendering the day produces the expected content ==");
 {
-  const ctx = makeCtx("2026-08-17T10:00:00Z");
+  const ctx = makeCtx(dayAt("18:00"));
   ctx.setData(dataNoEvening);   // this block asserts evening is not-yet-due
-  ctx.setDay("2026-08-17");
+  ctx.setDay(DAY);
   ctx.renderDailyReport();
   const html = ctx._nodes["report-body"].innerHTML;
   check("highlights block rendered", html.indexOf("今天的重點") >= 0);
@@ -202,9 +217,9 @@ console.log("== rendering the day produces the expected content ==");
 console.log("");
 console.log("== late evening DOES render as missing, and raises the banner ==");
 {
-  const ctx = makeCtx("2026-08-17T15:45:00Z");   // Taipei 23:45, past deadline 23:40
+  const ctx = makeCtx(dayAt("23:45"));   // past the 23:40 deadline
   ctx.setData(dataNoEvening);
-  ctx.setDay("2026-08-17");
+  ctx.setDay(DAY);
   ctx.renderDailyReport();
   const html = ctx._nodes["report-body"].innerHTML;
   check("T5a late evening rendered as missing", html.indexOf("沒收到") >= 0);
@@ -213,8 +228,10 @@ console.log("== late evening DOES render as missing, and raises the banner ==");
   // Derive the expectation from the data instead of hardcoding a phrase out of that
   // day's copy. The old version asserted "SanDisk" and broke the moment the editorial
   // content changed — it was testing today's wording, not that bodies render at all.
-  const firstBody = (data.days || [])
-    .flatMap((d) => d.shifts || [])
+  // Derive it from the day actually being RENDERED (and from the fixture with evening
+  // stripped): taking the first body anywhere in the file broke the morning 2026-08-18
+  // grew records while this block still rendered 08-17.
+  const firstBody = (((dataNoEvening.days || []).find((d) => d.date === DAY) || {}).shifts || [])
     .flatMap((s) => s.items || [])
     .map((i) => i.body)
     .find((b) => b && b.length > 12);
@@ -230,7 +247,7 @@ console.log("== late evening DOES render as missing, and raises the banner ==");
   check("item body rendered", !!needle && html.indexOf(needle) >= 0, needle || "no body in fixture");
   check("subtabs rendered 7 buttons",
         (ctx._nodes["report-subtabs"].innerHTML.match(/report-subtab/g) || []).length === 7);
-  check("today is selected by default", ctx.getDay() === "2026-08-17");
+  check("today is selected by default", ctx.getDay() === DAY);
 }
 
 console.log("");

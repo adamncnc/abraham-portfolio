@@ -1823,7 +1823,7 @@ function bucketSnapshot(snapshot) {
 // render at 0×0, so resize this tab's charts once it becomes visible.
 // Two-level nav (Adam 2026-07-22): 最外層 台股/美股/指數/即時持倉/模擬倉 五大項;
 // 模擬倉 active 時才顯示六本子分頁, 並記住上次看的那本 (abraham.simBook, prefs-synced).
-function activateTab(which, doResize = true) {
+function activateTab(which, doResize = true, persist = true) {
   if (!which) return;
   // 模擬倉 removed from the page 2026-08-17 (Adam). A saved pref of "sim"/"sim-tw-2"
   // still lives in cloud prefs and on his other devices, and would otherwise activate a
@@ -1834,7 +1834,9 @@ function activateTab(which, doResize = true) {
   if (repRow) repRow.classList.toggle("open", which === "report");
   document.querySelectorAll(".tab-panel").forEach((p) => p.classList.toggle("active", p.id === "panel-" + which));
   if (which === "report") ensureReportLoaded();
-  lsSet("abraham.activeTab", which);
+  // persist=false for URL deep-links (?tab=report): a shared link must not overwrite the
+  // cloud-synced "last tab" that his other devices restore from.
+  if (persist) lsSet("abraham.activeTab", which);
   // Adam 2026-07-24: 即時持倉(pos)/模擬倉(sim) 兩分頁隱藏排行榜/進場區總覽卡列（那兩頁有自己的內容）;
   // 回 台股/美股/指數 再顯示。切分頁時 renderSummary 仍會更新 innerHTML，但元素維持 display:none 不露出。
   const summaryEl = document.getElementById("portfolio-summary");
@@ -2943,7 +2945,13 @@ function searchMatches(qStr) {
 (async () => {
   await pullPrefs();
   // Restore last-viewed market tab BEFORE the first render so its charts size correctly.
-  activateTab(lsGet("abraham.activeTab", "tw"), false);
+  // ?tab=xxx deep-links override the saved tab for THIS load only (persist=false), so a
+  // bookmarked ?tab=report never rewrites the cross-device "last tab" preference.
+  const urlTabRaw = new URLSearchParams(location.search).get("tab");
+  // Garbage ?tab= values would deactivate every panel (blank page) — only accept a tab
+  // whose panel actually exists in the document.
+  const urlTab = urlTabRaw && document.getElementById("panel-" + urlTabRaw) ? urlTabRaw : null;
+  activateTab(urlTab || lsGet("abraham.activeTab", "tw"), false, !urlTab);
   // Render saved snapshot immediately (fast), then upgrade to live quotes.
   await loadAndRender();
   PREFS_SYNCING = false;   // boot done — user edits from here on sync up to the cloud
@@ -3197,8 +3205,14 @@ function reportSetSectionOpen(sect, open) {
   if (!open) reportCollapseItems(sect);   // reset on close, so re-opening starts clean
 }
 
-function reportItemHtml(it) {
+function reportItemHtml(it, idx) {
   const tone = it.s === "positive" ? "up" : it.s === "negative" ? "down" : "flat";
+  // 🧠-titled entries are my own read, not reported news. Mark them so the CSS can keep
+  // the two visually distinct — the title may carry an HH:MM prefix on stream events.
+  const brain = /^\s*(?:\d{1,2}:\d{2}\s*)?🧠/.test(String(it.t || "")) ? " report-brain" : "";
+  // Entrance stagger index. Optional: the tests call this with one argument, and a bare
+  // render without an index must not emit style="--i:undefined".
+  const stag = Number.isInteger(idx) ? ' style="--i:' + idx + '"' : "";
   const tags = (it.tickers || []).map((t) => '<span class="report-tk">' + escapeHtml(t) + "</span>").join("");
   const mine = it.onlist ? '<span class="report-mine" title="在你的關注清單上">★ 你的清單</span>' : "";
   const body = String(it.body == null ? "" : it.body);
@@ -3209,13 +3223,48 @@ function reportItemHtml(it) {
   // Nothing behind the title → render it flat. A caret on an item that cannot open is a
   // dead control: the reader clicks, nothing happens, and the page looks broken.
   if (!detail) {
-    return '<li class="report-item report-' + tone + ' report-item-bare">'
+    return '<li class="report-item report-' + tone + brain + ' report-item-bare"' + stag + ">"
       + '<div class="report-item-head">' + title + "</div></li>";
   }
-  return '<li class="report-item report-' + tone + '">'
+  return '<li class="report-item report-' + tone + brain + '"' + stag + ">"
     + '<div class="report-item-head" data-item-toggle="1">'
     + '<span class="report-item-caret">▸</span>' + title + "</div>"
     + '<div class="report-item-detail">' + detail + "</div></li>";
+}
+
+/* ── 版面裝飾 helpers（純呈現，不含任何判斷邏輯）─────────────────────────── */
+
+// Masthead: the selected day rendered like a paper's dateline. Every value shown is
+// derived from arguments the caller already computed — no clock reads of its own.
+function reportMastheadHtml(date, now) {
+  const p = date.split("-");
+  const wd = "日一二三四五六"[new Date(date + "T12:00:00Z").getUTCDay()];
+  const today = date === now.date ? '<span class="report-mast-today">今天</span>' : "";
+  return '<div class="report-mast">'
+    + '<div class="report-mast-l">'
+    + '<div class="report-mast-date">' + (+p[1]) + " 月 " + (+p[2]) + " 日"
+    + '<span class="report-mast-wd">星期' + wd + "</span>" + today + "</div>"
+    + '<div class="report-mast-sub">三班深讀 × 各路情報來源 · 保留七天</div></div>'
+    + '<div class="report-mast-brand"><span class="report-mast-title">亞伯拉罕日報</span><span class="report-mast-seal">亞</span></div>'
+    + "</div>";
+}
+
+// Section accent class for non-shift streams, keyed off words in the stream name.
+// Purely cosmetic: an unknown name falls back to the neutral accent.
+function reportToneClass(name) {
+  const n = String(name);
+  if (n.indexOf("網紅") >= 0) return "report-tone-kol";
+  if (n.indexOf("聰明錢") >= 0) return "report-tone-smart";
+  if (n.indexOf("雷達") >= 0 || n.indexOf("新聞稿") >= 0) return "report-tone-wire";
+  if (n.indexOf("法說") >= 0 || n.indexOf("逐字稿") >= 0) return "report-tone-call";
+  return "report-tone-misc";
+}
+
+// The seal glyph in a section header: first Han character of the name (skipping any
+// leading emoji), so 早班→早, 網紅摘要→網 with no hand-kept mapping to drift.
+function reportSigGlyph(name) {
+  const m = /[一-鿿]/.exec(String(name || ""));
+  return m ? m[0] : (Array.from(String(name || "•"))[0] || "•");
 }
 
 function renderReportHealth(now) {
@@ -3257,13 +3306,15 @@ function renderDailyReport() {
   const cEl = document.getElementById("report-count"); if (cEl) cEl.textContent = cnt + " 則";
   const tEl = document.getElementById("tab-count-report"); if (tEl) tEl.textContent = cnt || "–";
 
+  const mast = reportMastheadHtml(date, now);
+
   if (dayStatus === "nodata") {
-    body.innerHTML = '<div class="report-empty">這一天還沒有紀錄（日報從 2026-08-17 開始）。</div>';
+    body.innerHTML = mast + '<div class="report-empty">這一天還沒有紀錄（日報從 2026-08-17 開始）。</div>';
     return;
   }
 
   const top = (blob.top || []).filter(Boolean);
-  let html = "";
+  let html = mast;
   if (top.length) {
     html += '<div class="report-top"><div class="report-top-h">今天的重點</div><ul>'
       + top.map((t) => "<li>" + escapeHtml(t) + "</li>").join("") + "</ul></div>";
@@ -3273,31 +3324,35 @@ function renderDailyReport() {
   // without scrolling back through Discord. The 7 day-tabs already bound the length, so
   // collapsing by default would just recreate the thinness Adam objected to. 全部收合 is
   // one click away, and REPORT_CLOSED remembers per-section choices for this render pass.
-  const sect = (key, id, headHtml, innerHtml) => {
+  // NOTE the attribute order class → data-sect is load-bearing: the test harness keys on it.
+  const sect = (key, id, tone, headHtml, innerHtml) => {
     const closed = REPORT_CLOSED.has(id);
-    return '<section class="report-shift report-st-' + key + (closed ? "" : " open") + '" data-sect="' + id + '">'
+    return '<section class="report-shift report-st-' + key + " " + tone + (closed ? "" : " open") + '" data-sect="' + id + '">'
       + '<div class="report-shift-h" data-toggle="' + id + '">' + headHtml
       + '<span class="report-caret">' + (closed ? "▸" : "▾") + "</span></div>"
       + '<div class="report-sect-body">' + innerHtml + "</div></section>";
   };
 
+  let sections = "";
   let anyBody = false;
 
   REPORT_DATA.schedule.shifts.forEach((sd) => {
     const st = reportShiftStatus(date, sd, blob, now);
     if (st.key === "not-scheduled") return;
-    const head = '<span class="report-shift-name">' + REPORT_DOT[st.key] + " " + escapeHtml(sd.name) + "</span>"
+    const items = (st.rec && st.rec.items) || [];
+    const head = '<span class="report-sig">' + escapeHtml(reportSigGlyph(sd.name)) + "</span>"
+      + '<span class="report-shift-name">' + escapeHtml(sd.name) + "</span>"
       + '<span class="report-shift-due">' + escapeHtml(sd.due) + "</span>"
-      + '<span class="report-shift-badge">' + escapeHtml(st.label) + "</span>";
+      + (items.length ? '<span class="report-shift-count">' + items.length + " 則</span>" : "")
+      + '<span class="report-shift-badge">' + REPORT_DOT[st.key] + " " + escapeHtml(st.label) + "</span>";
     let inner = "";
     if (st.rec && st.rec.outcome === "failed") {
       inner += '<div class="report-alert">⚠️ ' + escapeHtml(st.rec.error || "沒有說明") + "</div>";
     } else if (st.rec && st.rec.summary) {
       inner += '<div class="report-summary">' + escapeHtml(st.rec.summary) + "</div>";
     }
-    const items = (st.rec && st.rec.items) || [];
     if (items.length) { inner += '<ul class="report-items">' + items.map(reportItemHtml).join("") + "</ul>"; anyBody = true; }
-    html += sect(st.key, date + "." + sd.id, head, inner);
+    sections += sect(st.key, date + "." + sd.id, "report-tone-" + sd.id, head, inner);
   });
 
   // Non-shift sources (KOL digest, press-wire radar, smart money, supply chain…) arrive as
@@ -3310,24 +3365,28 @@ function renderDailyReport() {
     groups.get(key).push(e);
   }
   for (const [name, list] of groups) {
-    const inner = '<ul class="report-items">' + list.map((e) => {
+    const inner = '<ul class="report-items">' + list.map((e, i) => {
       const hhmm = String(e.occurred_at || "").slice(11, 16);
-      return reportItemHtml(Object.assign({}, e, { t: (hhmm ? hhmm + " " : "") + (e.t || "") }));
+      // Some stored titles already lead with their own HH:MM — don't print "09:00 09:00".
+      const pre = hhmm && String(e.t || "").slice(0, 5) !== hhmm ? hhmm + " " : "";
+      return reportItemHtml(Object.assign({}, e, { t: pre + (e.t || "") }), i);
     }).join("") + "</ul>";
     anyBody = true;
-    html += sect("complete", date + ".stream." + name,
-      '<span class="report-shift-name">' + escapeHtml(name) + "</span>"
-      + '<span class="report-shift-badge">' + list.length + " 則</span>", inner);
+    sections += sect("complete", date + ".stream." + name, reportToneClass(name),
+      '<span class="report-sig">' + escapeHtml(reportSigGlyph(name)) + "</span>"
+      + '<span class="report-shift-name">' + escapeHtml(name) + "</span>"
+      + '<span class="report-shift-count">' + list.length + " 則</span>", inner);
   }
 
   if (anyBody) {
     // Labels say 區塊 explicitly: with two levels, a bare 全部展開 would read as "open every
     // article too", which is the opposite of what this tab is now for.
-    html = '<div class="report-foldbar"><button type="button" class="report-foldall" data-fold="open">全部區塊展開</button>'
-      + '<button type="button" class="report-foldall" data-fold="close">全部區塊收合</button></div>' + html;
+    html += '<div class="report-foldbar"><button type="button" class="report-foldall" data-fold="open">全部區塊展開</button>'
+      + '<button type="button" class="report-foldall" data-fold="close">全部區塊收合</button></div>';
   }
+  html += sections;
 
-  body.innerHTML = html || '<div class="report-empty">這一天沒有需要記的事。</div>';
+  body.innerHTML = (sections || top.length) ? html : html + '<div class="report-empty">這一天沒有需要記的事。</div>';
 }
 
 function activateReportDay(date) {
