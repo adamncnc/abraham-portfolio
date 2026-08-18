@@ -578,8 +578,8 @@
       "currency": "TWD",
       "theme": "800G 交換器/CPO 組裝(AI 網通核心)",
       "notes": "800G 交換器/CPO 組裝(AI 網通核心); 狙擊名單 6/11 原始成員(#3), 盯價一直在跑但漏加 focus-list→dashboard 沒卡片(2026-07-03 audit P1-4 補正); 進場區 1850-2050 / 認錯 1430(破200日); 北美雲端 capex 是主風險",
-      "entry_zone_lo": 1865.0,
-      "entry_zone_hi": 2065.0
+      "entry_zone_lo": 1865,
+      "entry_zone_hi": 2065
     },
     {
       "id": "3081",
@@ -622,8 +622,8 @@
       "currency": "TWD",
       "theme": "重電/電網變壓器龍頭(美國電網受惠最純台廠 Fortun",
       "notes": "重電/電網變壓器龍頭(美國電網受惠最純台廠 Fortune Electric, TWSE); 7/7 Adam「華城 士電 兩檔加入清單」明示加入(源自美國電網吃緊→台廠訂單熱潮深挖). 台灣首張Stargate變壓器單~NT$20億+累計AI/美國單>NT$120億+外銷占比今年~50%→2027拚55%+訂單能見度2028. 體質好=毛利42%/beta0.97低波動/低負債D/E30. ⚠️月營收減速(2026 1月+6/3月+3/4月+6/5月-9.3%轉負; 專案型",
-      "entry_zone_lo": 680,
-      "entry_zone_hi": 750
+      "entry_zone_lo": 608.18,
+      "entry_zone_hi": 671.82
     },
     {
       "id": "1503",
@@ -633,8 +633,8 @@
       "currency": "TWD",
       "theme": "重電/變壓器+多角化集團(士林電機 Shihlin El",
       "notes": "重電/變壓器+多角化集團(士林電機 Shihlin Electric, TWSE; 汽車零件/EV動力/機車/開關/工控/家電+重電變壓器); 7/7 Adam「華城 士電 兩檔加入清單」明示加入. 北美AI資料中心變壓器訂單確認+過UL認證+3月起新單漲價15-20%(需求強能漲價)+能見度2029-30. ⚠️多角化集團=重電變壓器只是其中一段, 美國變壓器是成長引擎非全部; 體質中等(毛利21%/ROE9.5%比華城低)+僅2分析師cover(薄). 月營收比華城健康(",
-      "entry_zone_lo": 195.0,
-      "entry_zone_hi": 215.0
+      "entry_zone_lo": 195,
+      "entry_zone_hi": 215
     },
     {
       "id": "avgo",
@@ -774,6 +774,72 @@
       "currency": "USD",
       "theme": "Palantir Technologies — 企業/政",
       "notes": "Palantir Technologies — 企業/政府 AI 作業平台(Gotham 國防・Foundry 商用・AIP). NasdaqGS USD. Adam 2026-08-04 明示加入觀察清單(msg 1534010646126133489), 當日深調. 一手源=SEC 8-K 0001321655-26-000039 附件 99.1(非媒體轉述). Q2 FY26(截 6/30, 8/3 美股盤後公布): 營收 $1,935.5M(YoY +92.8%/Qo",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "2360",
+      "type": "tw_stock",
+      "symbol": "2360.TW",
+      "name": "致茂",
+      "currency": "TWD",
+      "theme": "AI 測試設備 SLT/電源/CPO",
+      "notes": "AI 測試設備 SLT/電源/CPO; ⭐Adam 2026-08-07 明示加入（同日深調）。AI 測試設備：①SLT 系統級測試——輝達／超微／Google 三大 AI/HPC 客戶全數導入，超微拉長 cycle time 並增單 ②AI 伺服器電源測試（含 800V HVDC）＋儲能 ③CPO 光通訊封裝測試 ④先進封裝量測。**同時踩中早期主題雷達 #3(800V 供電) 與 #4(光學 I/O 進封裝) 兩格**。月營收(FinMind 自抓)年增加速：25/12 ",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "net",
+      "type": "us_stock",
+      "symbol": "NET",
+      "name": "Cloudflare",
+      "currency": "USD",
+      "theme": "AI 代理人基礎設施／邊緣雲＋資安",
+      "notes": "AI 代理人基礎設施／邊緣雲＋資安; ⭐Adam 2026-08-07 指示加入（同日深調）。全球約 1/5 網站流量經其網路；本業 CDN＋資安，近年延伸到邊緣運算，主打 AI 代理人的身分驗證／流量控管／就近推論／支付（已推 AI 代理人穩定幣錢包）。2026Q2（SEC 10-Q 案號 0001477333-26-000054）：營收 6.9606 億美金／年增 35.9%，毛利率 71.8%。全年財測上調至營收 28.64~28.70 億、調整後每股 1.25~1.2",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "6274",
+      "type": "tw_stock",
+      "symbol": "6274.TWO",
+      "name": "台燿",
+      "currency": "TWD",
+      "theme": "高速CCL 銅箔基板（AI 伺服器低損耗板材）",
+      "notes": "高速CCL 銅箔基板（AI 伺服器低損耗板材）; ⭐Adam 2026-08-07 指示加入（同日申調）。與清單內台光電 2383 同族群（高速CCL），屬同一風險桶。2026Q2：營收 143.0 億、季增 42%／年增 110%，單季每股 8.02（去年同期 2.36）；上半年每股 12.4 已超過 2025 全年 12.13；營業利益率 23.5%。7 月營收 59.08 億／年增 121.5%（單月新高）。7/29~7/31 法說會＋Q2 財報後連四天近漲停。董事會通",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "2486",
+      "type": "tw_stock",
+      "symbol": "2486.TW",
+      "name": "一詮",
+      "currency": "TWD",
+      "theme": "AI 先進封裝散熱（均熱蓋/Metal TIM）＋CPO",
+      "notes": "AI 先進封裝散熱（均熱蓋/Metal TIM）＋CPO 光通訊散熱; ⭐Adam 2026-08-10 明示加入（同日深調）。**已非原本的 LED 導線架公司**：主體轉向 AI 晶片級散熱——銦基均熱片（已量產）、Metal TIM、VC Lid、Micro Channel Lid，另有陶瓷電路板與 CPO 光通訊散熱。🔍 轉型是真的、有硬證據：**毛利率 Q2'25 12.5% → Q2'26 21.0%**；營益率 3.8%→8.9%；Q2'26 由虧轉盈（歸母淨利",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "spcx",
+      "type": "us_stock",
+      "symbol": "SPCX",
+      "name": "SpaceX",
+      "currency": "USD",
+      "theme": "太空發射＋衛星寬頻 Starlink",
+      "notes": "太空發射＋衛星寬頻 Starlink; ⭐Adam 2026-08-18 指示加入。2026-06-12 於 Nasdaq 掛牌（代號 SPCX，Yahoo longName＝Space Exploration Technologies Corp.），發行價 135 美元、募資 857 億美元＝史上最大 IPO，掛牌市值約 1.77 兆美元；首日開 150、收 161.11（+19%），6/16 盤中衝到 225.64 後連三日下跌，8/14 收 140.00（離掛牌後高點 ",
+      "entry_zone_lo": null,
+      "entry_zone_hi": null
+    },
+    {
+      "id": "tsla",
+      "type": "us_stock",
+      "symbol": "TSLA",
+      "name": "特斯拉",
+      "currency": "USD",
+      "theme": "電動車＋儲能＋自駕/人形機器人",
+      "notes": "電動車＋儲能＋自駕/人形機器人; ⭐Adam 2026-08-18 指示加入。代號已驗（Yahoo longName＝Tesla, Inc.／NasdaqGS／USD／EQUITY）。8/14 收 342.27 美元；近六個月高點 453.40、低點 297.38（離高點 −24.5%）。⚠️ 本次只完成代號驗證與清單去重，**尚未深調基本面**，也未跑七問流程 ⇒ 不設進場區與認錯線。⚠️ 待查：2026 Q2 實際財報數字、車輛交付量與毛利率趨勢、儲能業務佔比、FSD／R",
       "entry_zone_lo": null,
       "entry_zone_hi": null
     }

@@ -25,8 +25,8 @@
         "ratchet_value": 186.225,
         "ratchet_asof": "2026-07-29",
         "fill_ref_close": 205,
-        "px": 194.5,
-        "px_date": "2026-08-04"
+        "px": 199.5,
+        "px_date": "2026-08-18"
       },
       {
         "ticker": "2449.TW",
@@ -45,8 +45,8 @@
         "ratchet_armed": false,
         "ratchet_value": 216.6667,
         "ratchet_asof": "2026-07-29",
-        "px": 230.5,
-        "px_date": "2026-08-04"
+        "px": 234.0,
+        "px_date": "2026-08-18"
       },
       {
         "ticker": "2330.TW",
@@ -65,8 +65,8 @@
         "ratchet_armed": false,
         "ratchet_value": 2208.5,
         "ratchet_asof": "2026-07-29",
-        "px": 2325.0,
-        "px_date": "2026-08-04"
+        "px": 2380.0,
+        "px_date": "2026-08-18"
       },
       {
         "ticker": "2455.TW",
@@ -85,8 +85,8 @@
         "ratchet_armed": false,
         "ratchet_value": 255.825,
         "ratchet_asof": "2026-07-29",
-        "px": 353.0,
-        "px_date": "2026-08-04"
+        "px": 417.5,
+        "px_date": "2026-08-18"
       }
     ],
     "pending_orders": [
@@ -133,7 +133,44 @@
         "target_session": "2026-07-28"
       }
     ],
-    "pending_sells": [],
+    "pending_sells": [
+      {
+        "id": "sell-1503.TW-2026-08-05-shutdown",
+        "ticker": "1503.TW",
+        "name": "士電",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "id": "sell-2449.TW-2026-08-05-shutdown",
+        "ticker": "2449.TW",
+        "name": "京元電KYEC",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "id": "sell-2330.TW-2026-08-05-shutdown",
+        "ticker": "2330.TW",
+        "name": "台積電",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "id": "sell-2455.TW-2026-08-05-shutdown",
+        "ticker": "2455.TW",
+        "name": "全新",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "placed_ts": "2026-08-05T10:53:56+08:00",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      }
+    ],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -604,6 +641,6 @@
       "realized_pnl_twd": 0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.926503+00:00"
+  "usdtwd": 31.849000930786133,
+  "generated_at": "2026-08-18T05:32:15.792390+00:00"
 }

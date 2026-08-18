@@ -5,47 +5,10 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 981523.5012215985,
-    "realized_pnl_twd": -18546.0,
+    "cash_twd": 982479.4033783221,
+    "realized_pnl_twd": -17590.0,
     "positions": [],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-08-04-AMZN",
-        "placed_ts": "2026-08-04T07:42:53+08:00",
-        "ticker": "AMZN",
-        "name": "Amazon",
-        "side": "buy",
-        "budget_twd": 150000,
-        "limit": 284.02,
-        "stop": 266.2,
-        "stop_rule": "ta",
-        "group": "雲端大型科技",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "AMZN",
-            "name": "Amazon",
-            "yf": "AMZN",
-            "group": "雲端大型科技",
-            "px": 284.02,
-            "ma20": 245.85,
-            "ma50": 247.01,
-            "ma200_gap": 20.7,
-            "rs63": 0.8,
-            "atr20_pct": 3.1,
-            "setup": "B突破",
-            "limit": 284.02,
-            "stop": 266.2,
-            "stop_pct": -6.3,
-            "budget": 150000
-          }
-        },
-        "target_session": "2026-08-04"
-      }
-    ],
+    "pending_orders": [],
     "pending_sells": [],
     "trades": [
       {
@@ -169,7 +132,51 @@
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
       },
       {
-        "ts": "2026-08-04T07:32:30+08:00",
+        "ts": "2026-08-05T05:20:51+08:00",
+        "order_id": "actionable-2026-08-04-AMZN",
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "action": "buy",
+        "shares": 16,
+        "price": 276.06,
+        "fee": 20.0,
+        "cost_twd": 143726.0,
+        "fill_date": "2026-08-04",
+        "fill_how": "開盤",
+        "stop": 266.2,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-3\\.ta-screen-2026-08-04.json"
+      },
+      {
+        "ts": "2026-08-05T10:53:56+08:00",
+        "order_id": "actionable-2026-08-05-ANET",
+        "ticker": "ANET",
+        "name": "Arista",
+        "action": "cancelled_by_principal",
+        "limit": 190.51,
+        "target_session": "2026-08-05",
+        "reason": "實驗結束（Adam 選項 B）；目標節 2026-08-05 美股尚未開盤 ⇒ 取消不涉事後行情。Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:52+08:00",
+        "sell_id": "sell-AMZN-2026-08-05-shutdown",
+        "ticker": "AMZN",
+        "name": "Amazon",
+        "action": "sell",
+        "shares": 16,
+        "price": 281.59,
+        "fee": 20.0,
+        "proceeds_twd": 144682.0,
+        "cost_basis_twd": 143726.0,
+        "fx": 32.256,
+        "pnl_twd": 956.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:59+08:00",
         "ticker": "ASML",
         "name": "ASML",
         "action": "dividend",
@@ -211,6 +218,16 @@
         ]
       },
       "KLAC": {
+        "projection_origin_v2": {
+          "position": null,
+          "stop_facts": []
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "AMZN": {
         "projection_origin_v2": {
           "position": null,
           "stop_facts": []
@@ -453,8 +470,32 @@
         "SPY": 1.4
       },
       "realized_pnl_twd": -18546.0
+    },
+    {
+      "ts": "2026-08-05T05:21:00+08:00",
+      "nav_twd": 981581.0,
+      "return_pct": -1.84,
+      "cash_twd": 837797.0,
+      "n_positions": 1,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": 3.22
+      },
+      "realized_pnl_twd": -18546.0
+    },
+    {
+      "ts": "2026-08-06T05:20:56+08:00",
+      "nav_twd": 982479.0,
+      "return_pct": -1.75,
+      "cash_twd": 982479.0,
+      "n_positions": 0,
+      "usdtwd": 32.256,
+      "bench_return_pct": {
+        "SPY": 2.58
+      },
+      "realized_pnl_twd": -17590.0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.936538+00:00"
+  "usdtwd": 31.849000930786133,
+  "generated_at": "2026-08-18T05:32:15.801897+00:00"
 }

@@ -5,50 +5,9 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 743845.8102065114,
-    "realized_pnl_twd": -56718.0,
-    "positions": [
-      {
-        "ticker": "CEG",
-        "name": "Constellation",
-        "shares": 12,
-        "avg_price": 257.25,
-        "fill_date": "2026-07-14",
-        "fx_at_fill": 32.1619987487793,
-        "stop": 215.0,
-        "stop_rule": "daily_all",
-        "stop_asof": "2026-07-14",
-        "group": "電力IPP",
-        "cost_twd": 99927.0,
-        "fill_ref_close": 256.429993,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 249.7523,
-        "ratchet_asof": "2026-08-04",
-        "px": 273.71,
-        "px_date": "2026-08-03"
-      },
-      {
-        "ticker": "POWI",
-        "name": "Power Integrations",
-        "shares": 43,
-        "avg_price": 71.18,
-        "fill_date": "2026-07-23",
-        "fx_at_fill": 32.29999923706055,
-        "stop": 55.0,
-        "stop_rule": "daily_all",
-        "stop_asof": "2026-07-23",
-        "group": "IC設計電源",
-        "cost_twd": 99508.0,
-        "fill_ref_close": 70.870003,
-        "half_locked": false,
-        "ratchet_armed": false,
-        "ratchet_value": 58.3225,
-        "ratchet_asof": "2026-08-04",
-        "px": 60.4,
-        "px_date": "2026-08-03"
-      }
-    ],
+    "cash_twd": 934945.8410066871,
+    "realized_pnl_twd": -65053.0,
+    "positions": [],
     "pending_orders": [],
     "pending_sells": [],
     "trades": [
@@ -225,6 +184,42 @@
         "qty_rule": "all",
         "trigger": "stop_all",
         "reason": "日收 170.19 跌破認錯線 180.0 → 全數出清；2026-07-30 07:3x check 機械判定，已 DM Adam"
+      },
+      {
+        "ts": "2026-08-06T05:20:13+08:00",
+        "sell_id": "sell-CEG-2026-08-05-shutdown",
+        "ticker": "CEG",
+        "name": "Constellation",
+        "action": "sell",
+        "shares": 12,
+        "price": 270.0,
+        "fee": 20.0,
+        "proceeds_twd": 103864.0,
+        "cost_basis_twd": 99927.0,
+        "fx": 32.256,
+        "pnl_twd": 3937.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:13+08:00",
+        "sell_id": "sell-POWI-2026-08-05-shutdown",
+        "ticker": "POWI",
+        "name": "Power Integrations",
+        "action": "sell",
+        "shares": 43,
+        "price": 63.36,
+        "fee": 20.0,
+        "proceeds_twd": 87236.0,
+        "cost_basis_twd": 99508.0,
+        "fx": 32.256,
+        "pnl_twd": -12272.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
       }
     ],
     "benchmark_spec": {
@@ -246,60 +241,11 @@
       },
       "CEG": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "CEG",
-            "name": "Constellation",
-            "shares": 12,
-            "avg_price": 257.25,
-            "fill_date": "2026-07-14",
-            "fx_at_fill": 32.1619987487793,
-            "stop": 215,
-            "stop_rule": "daily_all",
-            "stop_asof": "2026-07-14",
-            "group": "電力IPP",
-            "cost_twd": 99927,
-            "fill_ref_close": 256.42999267578125,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-14",
-              "value": 215
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-08-18",
-            "kind": "div",
-            "amount": 0.388,
-            "source_count": 1,
-            "key": "div:2025-08-18"
-          },
-          {
-            "date": "2025-11-17",
-            "kind": "div",
-            "amount": 0.388,
-            "source_count": 1,
-            "key": "div:2025-11-17"
-          },
-          {
-            "date": "2026-03-09",
-            "kind": "div",
-            "amount": 0.427,
-            "source_count": 1,
-            "key": "div:2026-03-09"
-          },
-          {
-            "date": "2026-05-15",
-            "kind": "div",
-            "amount": 0.427,
-            "source_count": 1,
-            "key": "div:2026-05-15"
-          }
-        ],
+        "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
       },
@@ -325,60 +271,11 @@
       },
       "POWI": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "POWI",
-            "name": "Power Integrations",
-            "shares": 43,
-            "avg_price": 71.18,
-            "fill_date": "2026-07-23",
-            "fx_at_fill": 32.29999923706055,
-            "stop": 55.0,
-            "stop_rule": "daily_all",
-            "stop_asof": "2026-07-23",
-            "group": "IC設計電源",
-            "cost_twd": 99508.0,
-            "fill_ref_close": 70.87000274658203,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-23",
-              "value": 55.0
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-08-29",
-            "kind": "div",
-            "amount": 0.21,
-            "source_count": 1,
-            "key": "div:2025-08-29"
-          },
-          {
-            "date": "2025-11-28",
-            "kind": "div",
-            "amount": 0.21,
-            "source_count": 1,
-            "key": "div:2025-11-28"
-          },
-          {
-            "date": "2026-02-27",
-            "kind": "div",
-            "amount": 0.215,
-            "source_count": 1,
-            "key": "div:2026-02-27"
-          },
-          {
-            "date": "2026-05-29",
-            "kind": "div",
-            "amount": 0.215,
-            "source_count": 1,
-            "key": "div:2026-05-29"
-          }
-        ],
+        "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
       }
@@ -615,8 +512,32 @@
         "SPY": 1.4
       },
       "realized_pnl_twd": -56718.0
+    },
+    {
+      "ts": "2026-08-05T05:20:17+08:00",
+      "nav_twd": 937670.0,
+      "return_pct": -6.23,
+      "cash_twd": 743846.0,
+      "n_positions": 2,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": 3.22
+      },
+      "realized_pnl_twd": -56718.0
+    },
+    {
+      "ts": "2026-08-06T05:20:19+08:00",
+      "nav_twd": 934946.0,
+      "return_pct": -6.51,
+      "cash_twd": 934946.0,
+      "n_positions": 0,
+      "usdtwd": 32.256,
+      "bench_return_pct": {
+        "SPY": 2.58
+      },
+      "realized_pnl_twd": -65053.0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.932529+00:00"
+  "usdtwd": 31.849000930786133,
+  "generated_at": "2026-08-18T05:32:15.797897+00:00"
 }

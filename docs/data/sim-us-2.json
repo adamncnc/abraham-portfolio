@@ -5,214 +5,11 @@
     "base_currency": "TWD",
     "inception_ts": "2026-07-13T22:22:17+08:00",
     "initial_capital_twd": 1000000,
-    "cash_twd": 392410.1991664725,
-    "realized_pnl_twd": -34741.0,
-    "positions": [
-      {
-        "ticker": "RAL",
-        "name": "Ralliant Corporation Common Stock",
-        "shares": 58,
-        "avg_price": 68.48,
-        "fill_date": "2026-07-13",
-        "fx_at_fill": 32.2239990234375,
-        "stop": 64.14,
-        "stop_rule": "ta",
-        "group": "Electronic Equipment & Instruments",
-        "cost_twd": 128638.0,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 63.4664,
-        "ratchet_asof": "2026-08-04",
-        "fill_ref_close": 67.050003,
-        "stop_asof": "2026-07-13",
-        "px": 65.15,
-        "px_date": "2026-08-03"
-      },
-      {
-        "ticker": "NTAP",
-        "name": "NetApp, Inc.",
-        "shares": 20,
-        "avg_price": 160.54,
-        "fill_date": "2026-07-16",
-        "fx_at_fill": 32.24700164794922,
-        "stop": 145.3,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-16",
-        "group": "Technology Hardware, Storage & Peripherals",
-        "cost_twd": 104184.0,
-        "fill_ref_close": 159.690002,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 160.8543,
-        "ratchet_asof": "2026-08-04",
-        "px": 182.92,
-        "px_date": "2026-08-03"
-      },
-      {
-        "ticker": "BRKR",
-        "name": "Bruker Corporation",
-        "shares": 61,
-        "avg_price": 57.96,
-        "fill_date": "2026-07-16",
-        "fx_at_fill": 32.24700164794922,
-        "stop": 53.76,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-16",
-        "group": "Health Care Equipment",
-        "cost_twd": 114656.0,
-        "fill_ref_close": 59.25,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 55.733,
-        "ratchet_asof": "2026-08-04",
-        "px": 64.31,
-        "px_date": "2026-08-03"
-      },
-      {
-        "ticker": "BHVN",
-        "name": "Biohaven Ltd. Common Shares",
-        "shares": 85,
-        "avg_price": 14.99,
-        "fill_date": "2026-07-20",
-        "fx_at_fill": 32.28099822998047,
-        "stop": 13.49,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-20",
-        "group": "Biotechnology",
-        "cost_twd": 41468.0,
-        "fill_ref_close": 14.86,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 12.6935,
-        "ratchet_asof": "2026-08-04",
-        "px": 13.37,
-        "px_date": "2026-08-03"
-      },
-      {
-        "ticker": "NEO",
-        "name": "NeoGenomics, Inc.",
-        "shares": 222,
-        "avg_price": 14.09,
-        "fill_date": "2026-07-21",
-        "fx_at_fill": 32.32899856567383,
-        "stop": 12.71,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-21",
-        "group": "Health Care Services",
-        "cost_twd": 101771.0,
-        "fill_ref_close": 14.45,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 13.414,
-        "ratchet_asof": "2026-08-04",
-        "px": 15.84,
-        "px_date": "2026-08-03"
-      },
-      {
-        "ticker": "TENB",
-        "name": "Tenable Holdings, Inc.",
-        "shares": 90,
-        "avg_price": 27.95,
-        "fill_date": "2026-07-30",
-        "fx_at_fill": 32.393001556396484,
-        "stop": 27.69,
-        "stop_rule": "ta",
-        "stop_asof": "2026-07-30",
-        "group": "Software - Infrastructure",
-        "cost_twd": 82132.0,
-        "fill_ref_close": 32.549999,
-        "half_locked": false,
-        "ratchet_armed": true,
-        "ratchet_value": 26.789,
-        "ratchet_asof": "2026-08-04",
-        "px": 34.97,
-        "px_date": "2026-08-03"
-      }
-    ],
-    "pending_orders": [
-      {
-        "id": "actionable-2026-08-04-QLYS",
-        "placed_ts": "2026-08-04T07:42:42+08:00",
-        "ticker": "QLYS",
-        "name": "Qualys, Inc.",
-        "side": "buy",
-        "budget_twd": 85000,
-        "limit": 148.69,
-        "stop": 131.32,
-        "stop_rule": "ta",
-        "group": "Systems Software",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "QLYS",
-            "name": "Qualys, Inc.",
-            "yf": "QLYS",
-            "group": "Systems Software",
-            "px": 154.89,
-            "ma20": 148.69,
-            "ma50": 128.86,
-            "ma200_gap": 30.2,
-            "rs63": 69.8,
-            "atr20_pct": 5.6,
-            "setup": "A回檔MA20",
-            "limit": 148.69,
-            "stop": 131.32,
-            "stop_pct": -11.7,
-            "budget": 85000
-          }
-        },
-        "target_session": "2026-08-04"
-      },
-      {
-        "id": "actionable-2026-08-04-IART",
-        "placed_ts": "2026-08-04T07:42:42+08:00",
-        "ticker": "IART",
-        "name": "Integra LifeSciences Holdings Corporation",
-        "side": "buy",
-        "budget_twd": 83000,
-        "limit": 17.65,
-        "stop": 15.53,
-        "stop_rule": "ta",
-        "group": "Health Care Equipment",
-        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-        "pipeline_source": {
-          "file": "C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json",
-          "date": "2026-08-04",
-          "kind": "actionable",
-          "candidate": {
-            "sid": "IART",
-            "name": "Integra LifeSciences Holdings Corporation",
-            "yf": "IART",
-            "group": "Health Care Equipment",
-            "px": 17.88,
-            "ma20": 18.46,
-            "ma50": 17.65,
-            "ma200_gap": 34.0,
-            "rs63": 58.2,
-            "atr20_pct": 6.3,
-            "setup": "A回檔MA50",
-            "limit": 17.65,
-            "stop": 15.53,
-            "stop_pct": -12.0,
-            "budget": 83000
-          }
-        },
-        "target_session": "2026-08-04"
-      }
-    ],
-    "pending_sells": [
-      {
-        "ticker": "BHVN",
-        "name": "Biohaven Ltd. Common Shares",
-        "trigger": "stop_half",
-        "qty_rule": "half",
-        "reason": "日收 13.37 跌破認錯線 13.49（ta 機械停損，§5.1）",
-        "placed_ts": "2026-08-04T07:43:14+08:00"
-      }
-    ],
+    "cash_twd": 992392.030768037,
+    "realized_pnl_twd": -7607.0,
+    "positions": [],
+    "pending_orders": [],
+    "pending_sells": [],
     "trades": [
       {
         "ts": "2026-07-13T22:22:17+08:00",
@@ -706,6 +503,187 @@
         "qty_rule": "all",
         "trigger": "stop_all",
         "reason": "週收 2026-07-31(五) 收盤跌破認錯線 → 規格書 §5.1 倉2/3 `ta` 規則：週五收盤破 = 全數出清。由 `check` 機械判定，已 DM Adam（1533670983741735005）。"
+      },
+      {
+        "ts": "2026-08-05T05:20:28+08:00",
+        "order_id": "actionable-2026-08-04-QLYS",
+        "ticker": "QLYS",
+        "name": "Qualys, Inc.",
+        "action": "expire_unfilled",
+        "open": 152.25999450683594,
+        "low": 151.77499389648438,
+        "limit": 148.69,
+        "fill_mode": null
+      },
+      {
+        "ts": "2026-08-05T05:20:29+08:00",
+        "order_id": "actionable-2026-08-04-IART",
+        "ticker": "IART",
+        "name": "Integra LifeSciences Holdings Corporation",
+        "action": "buy",
+        "shares": 144,
+        "price": 17.65,
+        "fee": 20.0,
+        "cost_twd": 82978.0,
+        "fill_date": "2026-08-04",
+        "fill_how": "盤中觸限價",
+        "stop": 15.53,
+        "opened": true,
+        "reason": "pipeline actionable；來源 C:\\Users\\Adam\\Abraham\\sim-us-2\\.ta-screen-2026-08-04.json"
+      },
+      {
+        "ts": "2026-08-05T05:20:35+08:00",
+        "sell_id": "BHVN-2026-08-04T07:43:14+08:00-stop_half",
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "action": "sell",
+        "shares": 42,
+        "price": 13.66,
+        "fee": 20.0,
+        "proceeds_twd": 17937.0,
+        "cost_basis_twd": 20490.0,
+        "fx": 32.393,
+        "pnl_twd": -2553.0,
+        "sell_date": "2026-08-04",
+        "qty_rule": "half",
+        "trigger": "stop_half",
+        "reason": "日收 13.37 跌破認錯線 13.49（ta 機械停損，§5.1）"
+      },
+      {
+        "ts": "2026-08-05T10:53:56+08:00",
+        "order_id": "actionable-2026-08-05-COMP",
+        "ticker": "COMP",
+        "name": "Compass, Inc. Class A Common Stock",
+        "action": "cancelled_by_principal",
+        "limit": 11.66,
+        "target_session": "2026-08-05",
+        "reason": "實驗結束（Adam 選項 B）；目標節 2026-08-05 美股尚未開盤 ⇒ 取消不涉事後行情。Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-BRKR-2026-08-05",
+        "ticker": "BRKR",
+        "name": "Bruker Corporation",
+        "action": "sell",
+        "shares": 61,
+        "price": 49.81,
+        "fee": 20.0,
+        "proceeds_twd": 97372.0,
+        "cost_basis_twd": 114656.0,
+        "fx": 32.256,
+        "pnl_twd": -17284.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "lock_all",
+        "reason": "2026-08-04 日收 50.30 跌破 ATR 移動停利棘輪線 55.70（棘輪 > 認錯線 53.76 故取代之，§5.2）→ 全數出清、停利不減半；股數由引擎於成交當下重算（§6 賣單只記意圖）；DM 1534344961204551741 先發後寫（§1.6-5）"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-RAL-2026-08-05-shutdown",
+        "ticker": "RAL",
+        "name": "Ralliant Corporation Common Stock",
+        "action": "sell",
+        "shares": 58,
+        "price": 66.66,
+        "fee": 20.0,
+        "proceeds_twd": 124066.0,
+        "cost_basis_twd": 128638.0,
+        "fx": 32.256,
+        "pnl_twd": -4572.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-NTAP-2026-08-05-shutdown",
+        "ticker": "NTAP",
+        "name": "NetApp, Inc.",
+        "action": "sell",
+        "shares": 20,
+        "price": 189.45,
+        "fee": 20.0,
+        "proceeds_twd": 121573.0,
+        "cost_basis_twd": 104184.0,
+        "fx": 32.256,
+        "pnl_twd": 17389.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-BHVN-2026-08-05-shutdown",
+        "ticker": "BHVN",
+        "name": "Biohaven Ltd. Common Shares",
+        "action": "sell",
+        "shares": 43,
+        "price": 13.82,
+        "fee": 20.0,
+        "proceeds_twd": 18523.0,
+        "cost_basis_twd": 20978.0,
+        "fx": 32.256,
+        "pnl_twd": -2455.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-NEO-2026-08-05-shutdown",
+        "ticker": "NEO",
+        "name": "NeoGenomics, Inc.",
+        "action": "sell",
+        "shares": 222,
+        "price": 16.24,
+        "fee": 20.0,
+        "proceeds_twd": 115647.0,
+        "cost_basis_twd": 101771.0,
+        "fx": 32.256,
+        "pnl_twd": 13876.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-TENB-2026-08-05-shutdown",
+        "ticker": "TENB",
+        "name": "Tenable Holdings, Inc.",
+        "action": "sell",
+        "shares": 90,
+        "price": 36.75,
+        "fee": 20.0,
+        "proceeds_twd": 106042.0,
+        "cost_basis_twd": 82132.0,
+        "fx": 32.256,
+        "pnl_twd": 23910.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
+      },
+      {
+        "ts": "2026-08-06T05:20:34+08:00",
+        "sell_id": "sell-IART-2026-08-05-shutdown",
+        "ticker": "IART",
+        "name": "Integra LifeSciences Holdings Corporation",
+        "action": "sell",
+        "shares": 144,
+        "price": 17.75,
+        "fee": 20.0,
+        "proceeds_twd": 81801.0,
+        "cost_basis_twd": 82978.0,
+        "fx": 32.256,
+        "pnl_twd": -1177.0,
+        "sell_date": "2026-08-05",
+        "qty_rule": "all",
+        "trigger": "adam_directed",
+        "reason": "Adam 2026-08-05 msg 1534392681013182576 選項 B：六本模擬倉實驗結束、全部平倉結清。依 §5.5『Adam 說賣 → 賣，但記錄為 Adam 指示，不計入方法績效』；股數由引擎於成交當下重算（§6）。DM 1534393856693633165 先發後寫（§1.6-5）。"
       }
     ],
     "benchmark_spec": {
@@ -719,177 +697,29 @@
         "splits_applied": [],
         "divs_credited": [],
         "projection_origin_v2": {
-          "position": {
-            "ticker": "RAL",
-            "name": "Ralliant Corporation Common Stock",
-            "shares": 58,
-            "avg_price": 68.48,
-            "fill_date": "2026-07-13",
-            "fx_at_fill": 32.2239990234375,
-            "stop": 64.14,
-            "stop_rule": "ta",
-            "group": "Electronic Equipment & Instruments",
-            "cost_twd": 128638,
-            "half_locked": false,
-            "ratchet_armed": false,
-            "ratchet_value": 59.184,
-            "ratchet_asof": "2026-07-14",
-            "fill_ref_close": 67.05000305175781
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-13",
-              "value": 64.14
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-09-08",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2025-09-08"
-          },
-          {
-            "date": "2025-12-08",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2025-12-08"
-          },
-          {
-            "date": "2026-03-09",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2026-03-09"
-          },
-          {
-            "date": "2026-06-08",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2026-06-08"
-          }
-        ]
+        "corporate_actions": []
       },
       "NTAP": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "NTAP",
-            "name": "NetApp, Inc.",
-            "shares": 20,
-            "avg_price": 160.54,
-            "fill_date": "2026-07-16",
-            "fx_at_fill": 32.24700164794922,
-            "stop": 145.3,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-16",
-            "group": "Technology Hardware, Storage & Peripherals",
-            "cost_twd": 104184,
-            "fill_ref_close": 159.69000244140625,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-16",
-              "value": 145.3
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-10-03",
-            "kind": "div",
-            "amount": 0.52,
-            "source_count": 1,
-            "key": "div:2025-10-03"
-          },
-          {
-            "date": "2026-01-02",
-            "kind": "div",
-            "amount": 0.52,
-            "source_count": 1,
-            "key": "div:2026-01-02"
-          },
-          {
-            "date": "2026-04-02",
-            "kind": "div",
-            "amount": 0.52,
-            "source_count": 1,
-            "key": "div:2026-04-02"
-          },
-          {
-            "date": "2026-07-10",
-            "kind": "div",
-            "amount": 0.52,
-            "source_count": 1,
-            "key": "div:2026-07-10"
-          }
-        ],
+        "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
       },
       "BRKR": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "BRKR",
-            "name": "Bruker Corporation",
-            "shares": 61,
-            "avg_price": 57.96,
-            "fill_date": "2026-07-16",
-            "fx_at_fill": 32.24700164794922,
-            "stop": 53.76,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-16",
-            "group": "Health Care Equipment",
-            "cost_twd": 114656,
-            "fill_ref_close": 59.25,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-16",
-              "value": 53.76
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
-        "corporate_actions": [
-          {
-            "date": "2025-09-23",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2025-09-23"
-          },
-          {
-            "date": "2025-12-08",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2025-12-08"
-          },
-          {
-            "date": "2026-03-23",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2026-03-23"
-          },
-          {
-            "date": "2026-06-22",
-            "kind": "div",
-            "amount": 0.05,
-            "source_count": 1,
-            "key": "div:2026-06-22"
-          }
-        ],
+        "corporate_actions": [],
         "splits_applied": [],
         "divs_credited": []
       },
@@ -905,28 +735,8 @@
       },
       "BHVN": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "BHVN",
-            "name": "Biohaven Ltd. Common Shares",
-            "shares": 170,
-            "avg_price": 14.99,
-            "fill_date": "2026-07-20",
-            "fx_at_fill": 32.28099822998047,
-            "stop": 13.49,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-20",
-            "group": "Biotechnology",
-            "cost_twd": 82935,
-            "fill_ref_close": 14.859999656677246,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-20",
-              "value": 13.49
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -945,28 +755,8 @@
       },
       "NEO": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "NEO",
-            "name": "NeoGenomics, Inc.",
-            "shares": 222,
-            "avg_price": 14.09,
-            "fill_date": "2026-07-21",
-            "fx_at_fill": 32.32899856567383,
-            "stop": 12.71,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-21",
-            "group": "Health Care Services",
-            "cost_twd": 101771,
-            "fill_ref_close": 14.449999809265137,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-21",
-              "value": 12.71
-            }
-          ]
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -975,28 +765,18 @@
       },
       "TENB": {
         "projection_origin_v2": {
-          "position": {
-            "ticker": "TENB",
-            "name": "Tenable Holdings, Inc.",
-            "shares": 90,
-            "avg_price": 27.95,
-            "fill_date": "2026-07-30",
-            "fx_at_fill": 32.393001556396484,
-            "stop": 27.69,
-            "stop_rule": "ta",
-            "stop_asof": "2026-07-30",
-            "group": "Software - Infrastructure",
-            "cost_twd": 82132.0,
-            "fill_ref_close": 32.54999923706055,
-            "half_locked": false,
-            "ratchet_armed": false
-          },
-          "stop_facts": [
-            {
-              "asof": "2026-07-30",
-              "value": 27.69
-            }
-          ]
+          "position": null,
+          "stop_facts": []
+        },
+        "corporate_action_projection_version": 2,
+        "corporate_actions": [],
+        "splits_applied": [],
+        "divs_credited": []
+      },
+      "IART": {
+        "projection_origin_v2": {
+          "position": null,
+          "stop_facts": []
         },
         "corporate_action_projection_version": 2,
         "corporate_actions": [],
@@ -1236,8 +1016,32 @@
         "SPY": 1.4
       },
       "realized_pnl_twd": -34741.0
+    },
+    {
+      "ts": "2026-08-05T05:20:42+08:00",
+      "nav_twd": 1000416.0,
+      "return_pct": 0.04,
+      "cash_twd": 327369.0,
+      "n_positions": 7,
+      "usdtwd": 32.393,
+      "bench_return_pct": {
+        "SPY": 3.22
+      },
+      "realized_pnl_twd": -37294.0
+    },
+    {
+      "ts": "2026-08-06T05:20:40+08:00",
+      "nav_twd": 992392.0,
+      "return_pct": -0.76,
+      "cash_twd": 992392.0,
+      "n_positions": 0,
+      "usdtwd": 32.256,
+      "bench_return_pct": {
+        "SPY": 2.58
+      },
+      "realized_pnl_twd": -7607.0
     }
   ],
-  "usdtwd": 32.36399841308594,
-  "generated_at": "2026-08-04T01:50:20.934535+00:00"
+  "usdtwd": 31.849000930786133,
+  "generated_at": "2026-08-18T05:32:15.799897+00:00"
 }
