@@ -37,6 +37,14 @@ HEAD = re.compile(r"^###\s*(.+?)\s*$")
 ART = re.compile(r"^Article\s*\d+\s*")
 
 
+def glob_outbox():
+    """Every delivered shift transcript on disk. Used by sync_report_streams.py so the
+    archive location is defined in exactly one place."""
+    import glob as _g
+    return _g.glob(os.path.join(os.path.expanduser("~"), "Abraham",
+                                ".deep-read-outbox.md.consumed-*.md"))
+
+
 def shift_for(minutes):
     for sid, due in SHIFTS:
         if due <= minutes <= due + GRACE_MIN:
