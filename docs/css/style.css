@@ -1171,7 +1171,11 @@ body {
 /* Item level of the two-level fold. Same fail-visible default as sections: the detail is
    hidden unless .open is present, so a render that forgets the class shows a bare title
    rather than silently leaving every article expanded. */
-.report-item-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+/* nowrap + flexible title: a long title must wrap INSIDE its own box. With wrap, the
+   title jumped to a new line below the caret and the caret sat alone (seen on mobile). */
+.report-item-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: nowrap; }
+.report-item-t { flex: 1 1 auto; min-width: 0; }
+.report-mine { flex: 0 0 auto; }
 .report-item-head[data-item-toggle] { cursor: pointer; user-select: none; }
 .report-item-head[data-item-toggle]:hover .report-item-t { color: #cfe3ff; color: color-mix(in srgb, var(--sa) 45%, var(--text)); }
 .report-item-caret {
