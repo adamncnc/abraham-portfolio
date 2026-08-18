@@ -198,8 +198,50 @@ def c_gooptions(have):
                                                               re.sub(r"^📰\s*", "", first)[:70]))
 
 
+def c_transcript(have):
+    return _text_stream(have, ".transcript-watch-last.txt", "%Y-%m-%d.transcript",
+                        "法說逐字稿偵測",
+                        lambda first, w: "逐字稿掃描：" + first[:70])
+
+
+def c_stream_outbox(have):
+    """Anything dropped in ~/Abraham/.stream-outbox/.
+
+    The streams whose DM text I compose live (EDGAR smart-money, supply-chain, weekly
+    synthesis, ad-hoc alerts) archive nothing, so a collector cannot reach them -- and
+    inventing their content from a state file would be fabrication. This is the general fix:
+    when I send one of those DMs I also drop the same text here, and it reaches the page on
+    the next tick. One drop-box beats a bespoke collector per stream, and it covers streams
+    that do not exist yet.
+
+    Filename: <YYYYMMDD>T<HHMM>__<stream>__<slug>.md   (first line = title, rest = body)
+    """
+    out = []
+    d = os.path.join(AB, ".stream-outbox")
+    if not os.path.isdir(d):
+        return out
+    for f in sorted(os.listdir(d)):
+        m = re.match(r"(\d{8})T(\d{4})__([^_]+)__(.+)\.md$", f)
+        if not m:
+            continue
+        ymd, hm, stream, slug = m.groups()
+        when = datetime(int(ymd[:4]), int(ymd[4:6]), int(ymd[6:]),
+                        int(hm[:2]), int(hm[2:]), tzinfo=TAIPEI)
+        rid = "%s-%s-%s.out.%s.%s" % (ymd[:4], ymd[4:6], ymd[6:], re.sub(r"\W+", "", stream)[:20], hm)
+        if rid in have:
+            continue
+        body = io.open(os.path.join(d, f), encoding="utf-8", errors="replace").read().strip()
+        if not body:
+            continue
+        lines = [l for l in body.split("\n") if l.strip()]
+        title = re.sub(r"^[#*\s📰🔴🟠⭐🆕]+", "", lines[0])[:90] if lines else slug
+        out.append(ev(rid, when, stream, title, body))
+    return out
+
+
 COLLECTORS = [("deepread", c_deepread), ("kol", c_kol),
-              ("presswire", c_presswire), ("gooptions", c_gooptions)]
+              ("presswire", c_presswire), ("gooptions", c_gooptions),
+              ("transcript", c_transcript), ("stream-outbox", c_stream_outbox)]
 
 
 # ---------------------------------------------------------------- gate + publish
