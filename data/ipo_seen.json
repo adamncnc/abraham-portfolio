@@ -88,6 +88,11 @@
       "name": "和運租車",
       "notified_at": "2026-07-24",
       "subscription_period": "2026/07/30-2026/08/03"
+    },
+    "7825": {
+      "name": "和亞智慧",
+      "notified_at": "2026-08-25",
+      "subscription_period": "2026/08/31-2026/09/02"
     }
   }
 }
