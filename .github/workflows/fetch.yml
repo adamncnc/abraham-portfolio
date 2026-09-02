@@ -1,14 +1,17 @@
 name: Fetch Portfolio Prices
 
 on:
-  schedule:
-    # Close-of-day snapshots only. Intraday LIVE prices come from the client-side relay
-    # (docs/js/app.js → abraham-quotes Worker, 30s during market hours) — not from
-    # committing to git every N min (that bloated the repo). Adam 2026-07-03.
-    # Taiwan market close + 1.5h buffer — Mon-Fri 15:00 Taipei = 07:00 UTC
-    - cron: "0 7 * * 1-5"
-    # US market close + 2h buffer — Tue-Sat 06:00 Taipei = 22:00 UTC (prev day)
-    - cron: "0 22 * * 1-5"
+  # ---- SCHEDULE PAUSED 2026-09-02 by Adam's instruction ("停止此 agent 的一切排程,
+  # 直到我另行通知為止"). Uncomment the schedule block below to resume. Nothing else
+  # was changed — workflow_dispatch and the push trigger still work. ----
+  # schedule:
+  #   # Close-of-day snapshots only. Intraday LIVE prices come from the client-side relay
+  #   # (docs/js/app.js → abraham-quotes Worker, 30s during market hours) — not from
+  #   # committing to git every N min (that bloated the repo). Adam 2026-07-03.
+  #   # Taiwan market close + 1.5h buffer — Mon-Fri 15:00 Taipei = 07:00 UTC
+  #   - cron: "0 7 * * 1-5"
+  #   # US market close + 2h buffer — Tue-Sat 06:00 Taipei = 22:00 UTC (prev day)
+  #   - cron: "0 22 * * 1-5"
   workflow_dispatch:  # Manual trigger button in Actions tab
   push:
     branches: [main]
