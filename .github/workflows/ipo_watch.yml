@@ -1,11 +1,9 @@
 name: IPO Watch
 
 on:
-  # ---- SCHEDULE PAUSED 2026-09-02 by Adam's instruction ("停止此 agent 的一切排程,
-  # 直到我另行通知為止"). Uncomment the schedule block below to resume. ----
-  # schedule:
-  #   # Daily 08:30 Taipei = 00:30 UTC, Mon-Fri
-  #   - cron: "30 0 * * 1-5"
+  schedule:
+    # Daily 08:30 Taipei = 00:30 UTC, Mon-Fri
+    - cron: "30 0 * * 1-5"
   workflow_dispatch:  # Manual trigger button in Actions tab
 
 permissions:
