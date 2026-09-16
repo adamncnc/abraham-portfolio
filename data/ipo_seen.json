@@ -103,6 +103,11 @@
       "name": "漢測",
       "notified_at": "2026-09-04",
       "subscription_period": "2026/09/10-2026/09/14"
+    },
+    "6604": {
+      "name": "儒億",
+      "notified_at": "2026-09-16",
+      "subscription_period": "2026/09/22-2026/09/24"
     }
   }
 }
