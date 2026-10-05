@@ -123,6 +123,16 @@
       "name": "湧盛",
       "notified_at": "2026-10-02",
       "subscription_period": "2026/10/12-2026/10/14"
+    },
+    "6898": {
+      "name": "程曦資訊",
+      "notified_at": "2026-10-05",
+      "subscription_period": "2026/10/13-2026/10/15"
+    },
+    "6938": {
+      "name": "藍新資訊",
+      "notified_at": "2026-10-05",
+      "subscription_period": "2026/10/13-2026/10/15"
     }
   }
 }
