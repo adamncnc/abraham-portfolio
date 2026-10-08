@@ -138,6 +138,16 @@
       "name": "東擎科技",
       "notified_at": "2026-10-06",
       "subscription_period": "2026/10/14-2026/10/16"
+    },
+    "6825": {
+      "name": "和暢科技",
+      "notified_at": "2026-10-08",
+      "subscription_period": "2026/10/16-2026/10/20"
+    },
+    "7867": {
+      "name": "特力屋",
+      "notified_at": "2026-10-08",
+      "subscription_period": "2026/10/16-2026/10/20"
     }
   }
 }
